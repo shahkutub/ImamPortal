@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/shadow"
+    >
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_margin="@dimen/_3sdp"
+        >
+
+
+
+        <LinearLayout
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/reple_effect_round"
+            android:layout_marginRight="@dimen/_10sdp"
+            >
+            <ImageView
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                app:srcCompat="@drawable/ic_quran"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/alquran"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="#fff"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/reple_effect_round"
+            android:layout_marginRight="@dimen/_10sdp"
+            >
+            <ImageView
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                app:srcCompat="@drawable/alhadith"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/alhadith"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="#fff"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/reple_effect_round"
+            >
+            <ImageView
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                app:srcCompat="@drawable/shantir_bani"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/santirbani"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="#fff"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_margin="@dimen/_3sdp"
+        >
+
+        <LinearLayout
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/reple_effect_round"
+            android:layout_marginRight="@dimen/_10sdp"
+            >
+            <ImageView
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                app:srcCompat="@drawable/ic_blogg"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/blog"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="#fff"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/reple_effect_round"
+            android:layout_marginRight="@dimen/_10sdp"
+            >
+            <ImageView
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                app:srcCompat="@drawable/ic_content"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/masayel"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="#fff"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/reple_effect_round"
+            >
+            <ImageView
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                app:srcCompat="@drawable/question"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/prosnokorun"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="#fff"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_margin="@dimen/_3sdp"
+        >
+
+        <LinearLayout
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/reple_effect_round"
+            android:layout_marginRight="@dimen/_10sdp"
+            >
+            <ImageView
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                app:srcCompat="@drawable/ic_ask"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/prosneruttor"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="#fff"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/reple_effect_round"
+            android:layout_marginRight="@dimen/_10sdp"
+            >
+            <ImageView
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                app:srcCompat="@drawable/ic_suggestion"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ajkerprosno"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="#fff"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/reple_effect_round"
+            >
+            <ImageView
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                app:srcCompat="@drawable/quiz"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/quize"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="#fff"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

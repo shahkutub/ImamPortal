@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:padding="@dimen/_5sdp"
+    android:gravity="center_vertical"
+    android:id="@+id/linMainView"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="@dimen/_10sdp"
+        android:layout_height="@dimen/_10sdp"
+        android:background="@drawable/bolet_bg"
+        />
+
+    <TextView
+        android:id="@+id/tvQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="somethimg"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:textSize="@dimen/_15sdp"
+        android:textColor="#658FB2"
+        />
+
+</LinearLayout>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:background="#8CC63E"
+        >
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_back"
+            android:padding="@dimen/_5sdp"
+            android:layout_height="@dimen/_30sdp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/apnarjiggasa"
+            android:textColor="#fff"
+            android:textSize="@dimen/_15sdp"
+            android:layout_centerInParent="true"
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        >
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="#F15A24"
+            android:layout_margin="@dimen/_5sdp">
+            <EditText android:id="@+id/etNmae"
+                android:layout_width="match_parent"
+                android:padding="@dimen/_5sdp"
+                android:layout_height="match_parent"
+                android:inputType="textCapWords"
+                android:background="@drawable/edit_bg"
+                android:textColor="#000"
+                android:hint="*আপনার নামঃ" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="#F15A24"
+            android:layout_margin="@dimen/_3sdp">
+            <EditText android:id="@+id/etMobile"
+                android:layout_width="match_parent"
+                android:padding="@dimen/_5sdp"
+                android:layout_height="match_parent"
+                android:inputType="phone"
+                android:background="@drawable/edit_bg"
+                android:textColor="#000"
+                android:hint="*মোবাইল নাম্বারঃ" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="#F15A24"
+            android:layout_margin="@dimen/_3sdp">
+            <EditText android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:padding="@dimen/_5sdp"
+                android:layout_height="match_parent"
+                android:inputType="phone"
+                android:background="@drawable/edit_bg"
+                android:textColor="#000"
+                android:hint="আপনার ইমেইলঃ" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="#F15A24"
+            android:layout_margin="@dimen/_3sdp">
+            <EditText android:id="@+id/etSubject"
+                android:layout_width="match_parent"
+                android:padding="@dimen/_5sdp"
+                android:layout_height="match_parent"
+                android:inputType="phone"
+                android:background="@drawable/edit_bg"
+                android:textColor="#000"
+                android:hint="*বিষয়ঃ" />
+        </android.support.design.widget.TextInputLayout>
+
+<android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="#F15A24"
+            android:layout_margin="@dimen/_3sdp">
+            <EditText android:id="@+id/etAsk"
+                android:layout_width="match_parent"
+                android:padding="@dimen/_5sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:inputType="textMultiLine"
+                android:background="@drawable/edit_bg"
+                android:gravity="top|left"
+                android:textColor="#000"
+                android:hint="*আপনার জিজ্ঞাসাঃ" />
+        </android.support.design.widget.TextInputLayout>
+
+
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:layout_width="wrap_content"
+            android:background="@drawable/button_bg"
+            android:text="@string/save"
+            android:textColor="#fff"
+            android:paddingRight="@dimen/_35sdp"
+            android:paddingLeft="@dimen/_35sdp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/fabLayoutChat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/_16sdp"
+        android:padding="@dimen/_12sdp"
+
+        android:clipToPadding="false"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="@dimen/_16sdp"
+        android:layout_gravity="top|end"
+        android:visibility="gone">
+        <!--    if you are not using Snackbar with this activity then remove below line from every place of the file:
+
+            app:layout_behavior="com.ajaysinghdewari.floatingactionbuttonmenu.activities.utils.MoveUpwardBehavior"
+
+            the above line enables the view to Scrolls up with the snackbar as, the FAB do automaticaly scrolls up
+            when the snackbar appear, so if snackbar is not used please remove the above line from every view present in the xml-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="FabTitle1"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabChat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            app:srcCompat="@android:drawable/ic_dialog_email"
+            app:fabSize="mini"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fabLayoutGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_12sdp"
+        android:clipToPadding="false"
+        android:layout_marginRight="@dimen/_16sdp"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="@dimen/_16sdp"
+        android:layout_gravity="top|end"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:visibility="gone"
+            android:text="FabTitle2"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            app:srcCompat="@drawable/ic_camera"
+            app:fabSize="mini"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/fabLayoutPoramorso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_12sdp"
+        android:clipToPadding="false"
+        android:layout_marginRight="@dimen/_16sdp"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="@dimen/_16sdp"
+        android:layout_gravity="top|end"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="নামাজের সময়সূচী"
+            android:textColor="#FE538E"
+            android:visibility="gone"
+            />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabPoramorso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            app:srcCompat="@drawable/ic_namaz"
+            android:scaleType="fitXY"
+            app:fabSize="mini"/>
+    </LinearLayout>
+
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginRight="@dimen/fab_margin"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:clipToPadding="false"-->
+        <!--app:layout_behavior="com.imamportal.utils.MoveUpwardBehavior"-->
+        <!--android:padding="@dimen/_12sdp"-->
+        <!--android:layout_marginBottom="@dimen/fab_margin"-->
+        <!--android:layout_gravity="top|end">-->
+
+
+        <!--<android.support.design.widget.FloatingActionButton-->
+            <!--android:id="@+id/fabMsg"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="bottom|end"-->
+            <!--android:gravity="center_vertical"-->
+            <!--app:srcCompat="@drawable/ic_toys"-->
+            <!--app:fabSize="normal"/>-->
+    <!--</LinearLayout>-->
+
+
+</android.support.design.widget.CoordinatorLayout>

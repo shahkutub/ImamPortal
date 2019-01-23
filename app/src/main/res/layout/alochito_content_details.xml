@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:background="#8CC63E"
+        >
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_back"
+            android:padding="@dimen/_5sdp"
+            android:layout_height="@dimen/_30sdp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="আলোচিত কন্টেন্ট"
+            android:textColor="#fff"
+            android:textSize="@dimen/_15sdp"
+            android:layout_centerInParent="true"
+            />
+
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/tvContentTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_3sdp"
+        android:text="তাওহীদ ও ঈমান"
+        android:textColor="#000"
+        android:textSize="@dimen/_15sdp"
+        android:scrollbars = "vertical"
+        android:gravity="center"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+    <TextView
+        android:id="@+id/tvContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_5sdp"
+        android:text=""
+        android:textColor="#000"
+        android:textSize="@dimen/_13sdp"
+        android:scrollbars = "vertical"
+        android:gravity="left"
+        />
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="#F15A24"
+            android:layout_margin="@dimen/_3sdp">
+            <EditText android:id="@+id/etJobDescription"
+                android:layout_width="match_parent"
+                android:padding="@dimen/_5sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:inputType="textMultiLine"
+                android:background="@drawable/edit_bg"
+                android:gravity="top|left"
+                android:textColor="#000"
+                android:hint="*চাকুরীর বিবরণী" />
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,195 @@
+<resources>
+    <string name="app_name">ImamPortal</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="one">ONE</string>
+    <string name="eight">EIGHT</string>
+    <string name="five">FIVE</string>
+    <string name="four">FOUR</string>
+    <string name="nine">NINE</string>
+    <string name="seven">SEVEN</string>
+    <string name="six">SIX</string>
+    <string name="ten">TEN</string>
+    <string name="three">THREE</string>
+    <string name="two">TWO</string>
+    <string name="title_activity_scrollable_tabs">Scrollable Tabs</string>
+    <string name="title_activity_simple_tabs">Simple Tabs</string>
+    <string name="btn_simple_tabs">Simple Tabs</string>
+    <string name="btn_scrollable_tabs">Scrollable Tabs</string>
+    <string name="btn_icon_text_tabs">Icon &amp; Text Tabs</string>
+    <string name="btn_icon_tabs">Only Icon Tabs</string>
+    <string name="btn_pinned_top_tabs">Pinned To Top Tabs</string>
+    <string name="title_activity_icon_text_tabs">Icon and Text Tabs</string>
+    <string name="title_activity_icon_tabs">Icon Tabs</string>
+    <string name="btn_custom_icon_tabs">Custom View Icon &amp; Text</string>
+    <string name="title_activity_custom_view_icon_text_tabs">Custom View Icon &amp; Text</string>
+    <string name="title_activity_pinned_top_tabs">Pin Top Tabs</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="openDrawer">Open</string>
+    <string name="closeDrawer">close</string>
+
+
+    <string-array name="query_suggestions">
+        <item>Android</item>
+        <item>iOS</item>
+        <item>SCALA</item>
+        <item>Ruby</item>
+        <item>JavaScript</item>
+    </string-array>
+
+
+    <string name="red">RED</string>
+    <string name="blue">BLUE</string>
+    <string name="green">GREEN</string>
+    <string name="title_activity_quize">QuizeActivity</string>
+    <string name="title_activity_quiz_bijoyee">QuizBijoyeeActivity</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_title_social_recommendations">Enable social recommendations</string>
+    <string name="pref_description_social_recommendations">Recommendations for people to contact
+        based on your message history
+    </string>
+
+    <string name="pref_title_display_name">Display name</string>
+    <string name="pref_default_display_name">John Smith</string>
+
+    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Example settings for Data & Sync -->
+    <string name="pref_header_data_sync">Data &amp; sync</string>
+
+    <string name="pref_title_sync_frequency">Sync frequency</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+
+    <string-array name="list_preference_entries">
+        <item>Entry 1</item>
+        <item>Entry 2</item>
+        <item>Entry 3</item>
+    </string-array>
+
+    <string-array name="list_preference_entry_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="multi_select_list_preference_default_value" />
+
+    <string name="pref_title_system_sync_settings">System sync settings</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">Notifications</string>
+
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_ringtone_silent">Silent</string>
+
+    <string name="pref_title_vibrate">Vibrate</string>
+    <string name="login">الدخول</string>
+    <string name="logout">تسجيل الخروج</string>
+    <string name="registration">تسجيل\الانتساب</string>
+    <string name="amarpata">صفحتي</string>
+    <string name="upload">تحميل</string>
+    <string name="member">عض</string>
+    <string name="helpline">خط المساعدة</string>
+    <string name="islam">الإسلام</string>
+    <string name="sompadokio">الافتتاحية/التحريرية</string>
+    <string name="onnodhara">الموضوع الآخر</string>
+    <string name="sisukisur">للاطفال و الشباب</string>
+    <string name="narikornar"> للمرأة</string>
+    <string name="dokhotargolpo">قصة مهارات</string>
+    <string name="kitab">الكتاب</string>
+    <string name="photogalari">معرض الصور</string>
+    <string name="audio">سمعي</string>
+    <string name="video">فيديو</string>
+    <string name="alquran">القران</string>
+    <string name="alhadith">الحديث</string>
+    <string name="santirbani">كلام السلام</string>
+    <string name="blog">بلوق</string>
+    <string name="masayel">مسائل</string>
+    <string name="prosnokorun">سوالك</string>
+    <string name="prosneruttor">الجواب على الأسئلة</string>
+    <string name="ajkerprosno">سؤال اليوم</string>
+    <string name="quize">مسابقة</string>
+    <string name="poygam">الرسالة</string>
+    <string name="namajsomoy">جدول الرواتب</string>
+    <string name="oakto">وقت</string>
+    <string name="time">وقت</string>
+    <string name="fojor">فجر</string>
+    <string name="zuhr">ظهر</string>
+    <string name="asor">العصر</string>
+    <string name="magrib">المغرب</string>
+    <string name="isa">العشاء</string>
+    <string name="islamicain">الشريعة الاسلامية</string>
+    <string name="islamiceconomy">الاقتصاد الاسلامي</string>
+    <string name="dawah">دعوة</string>
+    <string name="familysocity">الأسرة والمجتمع</string>
+    <string name="imanakida">الإيمان والعقيدة</string>
+    <string name="character">خلق</string>
+    <string name="other">آخر</string>
+    <string name="familylaw">القاعدة الأسرة</string>
+    <string name="criminallaw">القانون الجنائي</string>
+    <string name="seracontent">أفضل متبرع لهذا الأسبوع</string>
+    <string name="content">تهانينا ، لقد أنشأت محتوى عالي الجودة</string>
+    <string name="quizebijoyee">الفائزالمسابقة في هذا الأسبوع</string>
+    <string name="samprotiksompadokio">الافتتاحية الأخيرة</string>
+    <string name="recentsompadokio">الافتتاحية الأخيرة</string>
+    <string name="previoussompadokio">الافتتاحية السابقة</string>
+    <string name="fikahgrontho">كتب الفقه</string>
+    <string name="islamichistory">كتب التاريخ الإسلامية</string>
+    <string name="biography">السيرة</string>
+    <string name="islamicstory">القصص الاسلامية</string>
+    <string name="islamic_philosophy">الفلسفة الإسلامية</string>
+    <string name="rules_of_quiz">قواعد المسابقة</string>
+    <string name="qiuze_rule1">#سيكون للاختبار خمسة أسئلة وسيكون هناك أربعة خيارات مع كل سؤال ؛ عليك أن تختار الإجابة الصحيحة.سيكون للاختبار خمسة أسئلة وسيكون هناك أربعة خيارات مع كل سؤال ؛ عليك أن تختار الإجابة الصحيحة.
+</string>
+    <string name="quize_rule2">#أجب عن سؤالين في دقيقتين</string>
+    <string name="cancel">الالغاء</string>
+    <string name="getstarted">ابدأ</string>
+    <string name="ajkerproshno">سؤال اليوم</string>
+    <string name="submit">ادخل</string>
+    <string name="apnarjiggasa">سوالك</string>
+    <string name="save">حفظ</string>
+    <string name="nextprayer">تبقي من وقت الصلوة القادم</string>
+    <string name="juma_khutba">الخطبة لصلاة الجمعة</string>
+    <string name="cildren">للاطفال و الشباب</string>
+    <string name="gopnionitimala">سياسة السرية</string>
+    <string name="beboherSorto">شروط الاستخدام</string>
+    <string name="sochorchorjiggasa">كثيرا ما يطلب</string>
+    <string name="sarbiksohojogita">সার্বিক সহযোগিতায়</string>
+
+</resources>

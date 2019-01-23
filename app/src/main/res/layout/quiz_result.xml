@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:visibility="visible"
+    android:layout_height="wrap_content">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+    <LinearLayout
+        android:id="@+id/linRules"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="কুইজের নিয়মাবলি:"
+            android:textColor="#4E2D68"
+            android:textSize="@dimen/_15sdp"
+            android:layout_centerInParent="true"
+            android:padding="@dimen/_5sdp"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="* কুইজে মোট পাঁচটি প্রশ্ন থাকবে এবং প্রতিটা প্রশ্নের সাথে চারটি করে অপশন থাকবে; আপনাকে সঠিক উত্তরটি সিলেক্ট করতে হবে।"
+            android:textColor="#B05351"
+            android:textSize="@dimen/_15sdp"
+            android:layout_centerInParent="true"
+            android:padding="@dimen/_5sdp"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="* ২ মিনেটের মধ্যে আপনাকে প্রশ্নগুলির উত্তর দিতে।"
+            android:textColor="#B05351"
+            android:textSize="@dimen/_15sdp"
+            android:layout_centerInParent="true"
+            android:padding="@dimen/_5sdp"
+            />
+
+
+        <TextView
+            android:id="@+id/tvStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="কুইজ আরম্ভ করুন"
+            android:textColor="#fff"
+            android:textSize="@dimen/_15sdp"
+            android:padding="@dimen/_15sdp"
+            android:background="@drawable/shadow_search"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linResSumary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:orientation="vertical"
+        >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="কুইজের ফলাফল"
+        android:textSize="@dimen/_15sdp"
+        android:textColor="#000"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:textSize="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:background="#A8A8A8"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_30sdp"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/_2sdp"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text=" সঠিক উত্তর - ২ "
+            android:textSize="@dimen/_10sdp"
+            android:textColor="#000"
+            android:gravity="center"
+            android:background="#DFF0D8"
+            android:layout_marginRight="@dimen/_3sdp"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="ভুল উত্তর - ৩"
+            android:textSize="@dimen/_10sdp"
+            android:textColor="#000"
+            android:gravity="center"
+            android:background="#F2DEDE"
+            android:layout_marginRight="@dimen/_3sdp"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text=" মোট নাম্বার - ৪০ "
+            android:textSize="@dimen/_10sdp"
+            android:textColor="#000"
+            android:gravity="center"
+            android:background="#F2DEDE"
+            />
+
+    </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linQues1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:orientation="vertical"
+        >
+
+    <TextView
+        android:id="@+id/tvQuiz1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="প্রশ্ন ১: পরীক্ষামুলক প্রশ্ন "
+        android:textSize="@dimen/_15sdp"
+        android:layout_marginLeft="@dimen/_3sdp"
+        android:textColor="#000"
+        android:layout_marginTop="@dimen/_5sdp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:textSize="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:background="#A8A8A8"
+        />
+    <RadioGroup
+        android:id="@+id/radioGroupAns1"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_height="wrap_content" >
+
+        <RadioButton
+            android:id="@+id/ans1option1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_15sdp"
+            android:text="প্রথম অপশন"
+            />
+
+        <RadioButton
+            android:id="@+id/ans1option2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textSize="@dimen/_15sdp"
+            android:text="দ্বিতীয় অপশন" />
+
+        <RadioButton
+            android:id="@+id/ans1option3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textSize="@dimen/_15sdp"
+            android:text="তৃতীয় অপশন" />
+
+        <RadioButton
+            android:id="@+id/ans1option4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textSize="@dimen/_15sdp"
+            android:text="চতুর্থ অপশন " />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/tvAns1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="আপনার উত্তর: আপনি এই প্রশ্নের উত্তর দেন নাই।"
+        android:textSize="@dimen/_13sdp"
+        android:layout_marginLeft="@dimen/_3sdp"
+        android:textColor="#000"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:visibility="gone"
+        />
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linQues2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:textSize="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:background="#A8A8A8"
+            />
+    <TextView
+        android:id="@+id/tvQuiz2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="প্রশ্ন 2: পরীক্ষামুলক প্রশ্ন"
+        android:textSize="@dimen/_15sdp"
+        android:layout_marginLeft="@dimen/_3sdp"
+        android:textColor="#000"
+        android:layout_marginTop="@dimen/_5sdp"
+        />
+
+
+    <RadioGroup
+        android:id="@+id/radioGroupAns2"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_height="wrap_content" >
+
+        <RadioButton
+            android:id="@+id/ans2option1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_15sdp"
+            android:text="প্রথম অপশন"
+            />
+
+        <RadioButton
+            android:id="@+id/ans2option2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textSize="@dimen/_15sdp"
+            android:text="দ্বিতীয় অপশন" />
+
+        <RadioButton
+            android:id="@+id/ans2option3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textSize="@dimen/_15sdp"
+            android:text="তৃতীয় অপশন" />
+
+        <RadioButton
+            android:id="@+id/ans2option4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textSize="@dimen/_15sdp"
+            android:text="চতুর্থ অপশন" />
+
+    </RadioGroup>
+
+        <TextView
+            android:id="@+id/tvAns2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="আপনার উত্তর: আপনি এই প্রশ্নের উত্তর দেন নাই।"
+            android:textSize="@dimen/_13sdp"
+            android:layout_marginLeft="@dimen/_3sdp"
+            android:textColor="#000"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/_5sdp"
+            />
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/linQues3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:textSize="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:background="#A8A8A8"
+            />
+            <TextView
+                android:id="@+id/tvQuiz3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="প্রশ্ন 3: পরীক্ষামুলক প্রশ্ন"
+                android:textSize="@dimen/_15sdp"
+                android:layout_marginLeft="@dimen/_3sdp"
+                android:textColor="#000"
+                android:layout_marginTop="@dimen/_5sdp"
+                />
+
+
+            <RadioGroup
+                android:id="@+id/radioGroupAns3"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_height="wrap_content" >
+
+                <RadioButton
+                    android:id="@+id/ans3option1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_15sdp"
+                    android:text="প্রথম অপশন"
+                    />
+
+                <RadioButton
+                    android:id="@+id/ans3option2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textSize="@dimen/_15sdp"
+                    android:text="দ্বিতীয় অপশন" />
+
+                <RadioButton
+                    android:id="@+id/ans3option3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textSize="@dimen/_15sdp"
+                    android:text="তৃতীয় অপশন" />
+
+                <RadioButton
+                    android:id="@+id/ans3option4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textSize="@dimen/_15sdp"
+                    android:text="চতুর্থ অপশন" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/tvAns3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="আপনার উত্তর: আপনি এই প্রশ্নের উত্তর দেন নাই।"
+                android:textSize="@dimen/_13sdp"
+                android:layout_marginLeft="@dimen/_3sdp"
+                android:textColor="#000"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/_5sdp"
+                />
+        </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linQues4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:textSize="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:background="#A8A8A8"
+            />
+            <TextView
+                android:id="@+id/tvQuiz4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="প্রশ্ন 4: পরীক্ষামুলক প্রশ্ন"
+                android:textSize="@dimen/_15sdp"
+                android:layout_marginLeft="@dimen/_3sdp"
+                android:textColor="#000"
+                android:layout_marginTop="@dimen/_5sdp"
+                />
+
+
+            <RadioGroup
+                android:id="@+id/radioGroupAns4"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_height="wrap_content" >
+
+                <RadioButton
+                    android:id="@+id/ans4option1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_15sdp"
+                    android:text="প্রথম অপশন"
+                    />
+
+                <RadioButton
+                    android:id="@+id/ans4option2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textSize="@dimen/_15sdp"
+                    android:text="দ্বিতীয় অপশন" />
+
+                <RadioButton
+                    android:id="@+id/ans4option3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textSize="@dimen/_15sdp"
+                    android:text="তৃতীয় অপশন" />
+
+                <RadioButton
+                    android:id="@+id/ans4option4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textSize="@dimen/_15sdp"
+                    android:text="চতুর্থ অপশন" />
+
+            </RadioGroup>
+
+        <TextView
+            android:id="@+id/tvAns4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="আপনার উত্তর: আপনি এই প্রশ্নের উত্তর দেন নাই।"
+            android:textSize="@dimen/_13sdp"
+            android:layout_marginLeft="@dimen/_3sdp"
+            android:textColor="#000"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/_5sdp"
+            />
+
+      </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linQues5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:textSize="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:background="#A8A8A8"
+            />
+            <TextView
+                android:id="@+id/tvQuiz5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="প্রশ্ন 5: পরীক্ষামুলক প্রশ্ন"
+                android:textSize="@dimen/_15sdp"
+                android:layout_marginLeft="@dimen/_3sdp"
+                android:textColor="#000"
+                android:layout_marginTop="@dimen/_5sdp"
+                />
+
+
+            <RadioGroup
+                android:id="@+id/radioGroupAns5"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:layout_height="wrap_content" >
+
+                <RadioButton
+                    android:id="@+id/ans5option1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_15sdp"
+                    android:text="প্রথম অপশন"
+                    />
+
+                <RadioButton
+                    android:id="@+id/ans5option2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textSize="@dimen/_15sdp"
+                    android:text="দ্বিতীয় অপশন" />
+
+                <RadioButton
+                    android:id="@+id/ans5option3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textSize="@dimen/_15sdp"
+                    android:text="তৃতীয় অপশন" />
+
+                <RadioButton
+                    android:id="@+id/ans5option4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textSize="@dimen/_15sdp"
+                    android:text="চতুর্থ অপশন" />
+
+            </RadioGroup>
+
+
+        <TextView
+            android:id="@+id/tvAns5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="আপনার উত্তর: আপনি এই প্রশ্নের উত্তর দেন নাই।"
+            android:textSize="@dimen/_13sdp"
+            android:layout_marginLeft="@dimen/_3sdp"
+            android:textColor="#000"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:visibility="gone"
+            />
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:padding="@dimen/_10sdp"
+        android:layout_height="wrap_content"
+        >
+
+        <LinearLayout
+            android:id="@+id/linTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            >
+
+            <TextView
+                android:id="@+id/tvShowMin"
+                android:layout_width="wrap_content"
+                android:text="02M:"
+                android:textSize="@dimen/_15sdp"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:layout_marginRight="@dimen/_5sdp"/>
+
+            <TextView
+                android:id="@+id/tvScnd"
+                android:layout_width="wrap_content"
+                android:text="01s"
+                android:textSize="@dimen/_15sdp"
+                android:textColor="#000"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            >
+
+            <Button
+                android:id="@+id/btnSubmit"
+                android:layout_width="wrap_content"
+                android:text="দাখিল করুন"
+                android:background="@drawable/reple_effect_rectangle"
+                android:textColor="#fff"
+                android:visibility="gone"
+                android:padding="@dimen/_10sdp"
+                android:textSize="@dimen/_15sdp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </RelativeLayout>
+    </LinearLayout>
+</ScrollView>

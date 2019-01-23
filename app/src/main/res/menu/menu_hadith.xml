@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/paribarikAin"
+        android:title="জামে তিরমিযী"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/foujdariAin"
+        android:title="বোখারী শরীফ"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/ulumulkuran"
+        android:title="মুসলিম শরীফ"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+
+    <item android:id="@+id/abudaud"
+        android:title="সুনানে আবু দাউদ"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+     <item android:id="@+id/nasai"
+        android:title="সুনানুন নাসায়ী"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+<item android:id="@+id/ibnemaj"
+        android:title="সুনানে ইবনে মাযা"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+
+
+</menu>

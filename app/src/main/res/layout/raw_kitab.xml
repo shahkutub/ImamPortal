@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_3sdp"
+    android:gravity="center"
+
+    >
+
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="@dimen/_80sdp"-->
+            <!--android:layout_height="@dimen/_80sdp"-->
+            <!--android:orientation="vertical"-->
+            <!--android:gravity="center"-->
+            <!--android:background="@drawable/shadow_namaj"-->
+            <!--&gt;-->
+                <!--<ImageView-->
+                    <!--android:id="@+id/imgKitab"-->
+                    <!--android:layout_width="@dimen/_50sdp"-->
+                    <!--android:layout_height="@dimen/_50sdp"-->
+                    <!--android:src="@drawable/ktab"-->
+                    <!--android:layout_marginTop="@dimen/_3sdp"-->
+                    <!--/>-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tvNameKitab"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="ebne nasai"-->
+                    <!--android:padding="@dimen/_5sdp"-->
+                    <!--android:textSize="@dimen/_8sdp"-->
+                    <!--android:textColor="#fff"-->
+                    <!--/>-->
+
+        <!--</LinearLayout>-->
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/rectange_kitab_bg"
+            >
+                <ImageView
+                    android:id="@+id/imgKitab"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_70sdp"
+                    android:src="@drawable/ktab"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    />
+
+                <TextView
+                    android:id="@+id/tvNameKitab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="মিশকাতুল মাসাবীহ"
+                    android:textSize="@dimen/_13sdp"
+                    android:textColor="#fff"
+                    android:gravity="center"
+                    android:layout_margin="@dimen/_3sdp"
+                    />
+
+        </LinearLayout>
+
+
+</LinearLayout>

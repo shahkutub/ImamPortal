@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/paribarikAin"
+        android:title="পবিত্রতা"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/foujdariAin"
+        android:title="সালাত"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/ulumulkuran"
+        android:title="জানাযা ও কবর সংক্রান্ত"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+
+    <item android:id="@+id/abudaud"
+        android:title="সিয়াম"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+     <item android:id="@+id/nasai"
+        android:title="ইতেকাফ"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/ibnemaj"
+            android:title="হজ ও ওমরা"
+            android:orderInCategory="100"
+            app:showAsAction="never" />
+
+    <item android:id="@+id/jakat"
+        android:title="যাকাত ও সাদকা"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+<item android:id="@+id/kurbani"
+        android:title="কুরবানি"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+
+<item android:id="@+id/poribar"
+        android:title="পারিবারিক মাসায়েল"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+
+<item android:id="@+id/onnano"
+        android:title="অন্যান্য"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+
+
+</menu>

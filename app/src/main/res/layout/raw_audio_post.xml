@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shadow_santirbani"
+    android:orientation="vertical"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_margin="@dimen/_2sdp"
+        >
+        <ImageView
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
+            app:srcCompat="@drawable/imam"
+            android:scaleType="fitXY"
+            android:layout_above="@+id/tvname"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_80sdp"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/_3sdp"
+            >
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ssdfd"
+                android:textColor="#487CA2"
+                android:textSize="@dimen/_15sdp"
+                android:maxLines="1"
+                android:layout_alignParentTop="true"
+                />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tvShortDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lorem ipsum dolor sit  jjkk h jjj jjj jjj amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolor
+            e magna aliqua. Ut enim ad minim veniam, quis jhjsd hhhdhdh dhdh hddh  hhh"
+                android:textColor="#000"
+                android:textSize="@dimen/_10sdp"
+                android:layout_toLeftOf="@+id/imgVidcam"
+                android:layout_marginRight="@dimen/_3sdp"
+                />
+
+                <ImageView
+                    android:id="@+id/imgVidcam"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    app:srcCompat="@drawable/ic_audio_ash"
+                    android:layout_height="@dimen/_50sdp" />
+            </RelativeLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_marginLeft="@dimen/_4sdp"
+            app:srcCompat="@drawable/ic_mansmall" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_2sdp"
+            android:text="super admin"
+            android:textColor="#4D236B"
+            android:textSize="@dimen/_8sdp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_3sdp"
+            android:text="প্রকাশঃ Sat,05/12/2018-08:02"
+            android:textColor="#4D236B"
+            android:textSize="@dimen/_8sdp" />
+
+        <ImageView
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_marginLeft="@dimen/_4sdp"
+            app:srcCompat="@drawable/ic_eye" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_2sdp"
+            android:text="16"
+            android:textColor="#4D236B"
+            android:textSize="@dimen/_8sdp" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_marginLeft="@dimen/_3sdp"
+            app:srcCompat="@drawable/ic_comment" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_2sdp"
+            android:text="40"
+            android:textColor="#4D236B"
+            android:textSize="@dimen/_8sdp" />
+
+    </LinearLayout>
+
+    <!--<RelativeLayout-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="@dimen/_90sdp"-->
+    <!--&gt;-->
+
+    <!--<ImageView-->
+    <!--android:layout_width="@dimen/_70sdp"-->
+    <!--android:layout_height="@dimen/_80sdp"-->
+    <!--app:srcCompat="@drawable/imam"-->
+    <!--android:scaleType="fitXY"-->
+    <!--android:layout_above="@+id/tvname"-->
+    <!--/>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/tvname"-->
+    <!--android:layout_width="@dimen/_70sdp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Mostafijurssdsdsdsdsdd"-->
+    <!--android:textColor="#4D236B"-->
+    <!--android:gravity="center"-->
+    <!--android:singleLine="true"-->
+    <!--android:maxLines="1"-->
+    <!--android:textSize="@dimen/_10sdp"-->
+    <!--android:layout_marginLeft="@dimen/_2sdp"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--/>-->
+
+    <!--</RelativeLayout>-->
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/_90sdp"-->
+    <!--android:layout_marginLeft="@dimen/_1sdp"-->
+    <!--android:orientation="vertical"-->
+    <!--&gt;-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/tvTitle"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="ssdfd"-->
+    <!--android:textColor="#487CA2"-->
+    <!--android:textSize="@dimen/_15sdp"-->
+    <!--android:layout_marginLeft="@dimen/_5sdp"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--/>-->
+
+
+    <!--<TextView-->
+    <!--android:id="@+id/tvShortDescription"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolor-->
+    <!--e magna aliqua. Ut enim ad minim veniam, quis"-->
+    <!--android:textColor="#000"-->
+    <!--android:textSize="@dimen/_15sdp"-->
+    <!--android:maxLines="3"-->
+    <!--android:layout_below="@+id/tvTitle"-->
+    <!--/>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:layout_marginTop="@dimen/_2sdp"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--&gt;-->
+
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="প্রকাশঃ Sat,05/12/2018-08:02"-->
+    <!--android:textColor="#4D236B"-->
+    <!--android:textSize="@dimen/_10sdp"-->
+    <!--android:layout_marginLeft="@dimen/_3sdp"-->
+    <!--/>-->
+
+    <!--<ImageView-->
+    <!--android:layout_width="@dimen/_15sdp"-->
+    <!--android:layout_height="@dimen/_15sdp"-->
+    <!--app:srcCompat="@drawable/ic_eye"-->
+    <!--android:layout_marginLeft="@dimen/_4sdp"-->
+    <!--/>-->
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="16"-->
+    <!--android:textColor="#4D236B"-->
+    <!--android:textSize="@dimen/_10sdp"-->
+    <!--android:layout_marginLeft="@dimen/_2sdp"-->
+    <!--/>-->
+
+
+
+
+    <!--<ImageView-->
+    <!--android:layout_width="@dimen/_15sdp"-->
+    <!--android:layout_height="@dimen/_15sdp"-->
+    <!--app:srcCompat="@drawable/ic_comment"-->
+    <!--android:layout_marginLeft="@dimen/_3sdp"-->
+    <!--/>-->
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="40"-->
+    <!--android:textColor="#4D236B"-->
+    <!--android:textSize="@dimen/_10sdp"-->
+    <!--android:layout_marginLeft="@dimen/_2sdp"-->
+    <!--/>-->
+
+    <!--</LinearLayout>-->
+
+    <!--</RelativeLayout>-->
+
+
+
+</LinearLayout>

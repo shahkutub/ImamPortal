@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/paribarikAin"
+        android:title="হিফজুল কোরান"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/foujdariAin"
+        android:title="আল-কোরানের সরল অনুবাদ"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/ulumulkuran"
+        android:title="উলুমুল কোরান"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+ <item android:id="@+id/tafsirulkuran"
+        android:title="তাফসীরুল কোরান"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+
+
+</menu>

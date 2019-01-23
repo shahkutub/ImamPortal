@@ -1,0 +1,200 @@
+<resources>
+    <string name="app_name">ImamPortal</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="one">ONE</string>
+    <string name="eight">EIGHT</string>
+    <string name="five">FIVE</string>
+    <string name="four">FOUR</string>
+    <string name="nine">NINE</string>
+    <string name="seven">SEVEN</string>
+    <string name="six">SIX</string>
+    <string name="ten">TEN</string>
+    <string name="three">THREE</string>
+    <string name="two">TWO</string>
+    <string name="title_activity_scrollable_tabs">Scrollable Tabs</string>
+    <string name="title_activity_simple_tabs">Simple Tabs</string>
+    <string name="btn_simple_tabs">Simple Tabs</string>
+    <string name="btn_scrollable_tabs">Scrollable Tabs</string>
+    <string name="btn_icon_text_tabs">Icon &amp; Text Tabs</string>
+    <string name="btn_icon_tabs">Only Icon Tabs</string>
+    <string name="btn_pinned_top_tabs">Pinned To Top Tabs</string>
+    <string name="title_activity_icon_text_tabs">Icon and Text Tabs</string>
+    <string name="title_activity_icon_tabs">Icon Tabs</string>
+    <string name="btn_custom_icon_tabs">Custom View Icon &amp; Text</string>
+    <string name="title_activity_custom_view_icon_text_tabs">Custom View Icon &amp; Text</string>
+    <string name="title_activity_pinned_top_tabs">Pin Top Tabs</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="openDrawer">Open</string>
+    <string name="closeDrawer">close</string>
+
+
+    <string-array name="query_suggestions">
+        <item>Android</item>
+        <item>iOS</item>
+        <item>SCALA</item>
+        <item>Ruby</item>
+        <item>JavaScript</item>
+    </string-array>
+
+
+    <string name="red">RED</string>
+    <string name="blue">BLUE</string>
+    <string name="green">GREEN</string>
+    <string name="title_activity_quize">QuizeActivity</string>
+    <string name="title_activity_quiz_bijoyee">QuizBijoyeeActivity</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_title_social_recommendations">Enable social recommendations</string>
+    <string name="pref_description_social_recommendations">Recommendations for people to contact
+        based on your message history
+    </string>
+
+    <string name="pref_title_display_name">Display name</string>
+    <string name="pref_default_display_name">John Smith</string>
+
+    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Example settings for Data & Sync -->
+    <string name="pref_header_data_sync">Data &amp; sync</string>
+
+    <string name="pref_title_sync_frequency">Sync frequency</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+
+    <string-array name="list_preference_entries">
+        <item>Entry 1</item>
+        <item>Entry 2</item>
+        <item>Entry 3</item>
+    </string-array>
+
+    <string-array name="list_preference_entry_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="multi_select_list_preference_default_value" />
+
+    <string name="pref_title_system_sync_settings">System sync settings</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">Notifications</string>
+
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_ringtone_silent">Silent</string>
+
+    <string name="pref_title_vibrate">Vibrate</string>
+    <string name="login">লগইন</string>
+    <string name="logout">লগ আউট</string>
+    <string name="registration">নিবন্ধন</string>
+    <string name="amarpata">আমার পাতা</string>
+    <string name="upload">আপলোড</string>
+    <string name="member">সদস্য ৪</string>
+    <string name="helpline">হেল্পলাইন</string>
+    <string name="title_activity_home">Home</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="islam">ইসলাম</string>
+    <string name="sompadokio">সম্পাদকীয়</string>
+    <string name="onnodhara">অন্যধারা</string>
+    <string name="sisukisur">শিশু কিশোর কর্নার</string>
+    <string name="narikornar">নারী কর্নার</string>
+    <string name="dokhotargolpo">দক্ষতার গল্প</string>
+    <string name="kitab">কিতাব</string>
+    <string name="photogalari">ফটো গ্যালারী</string>
+    <string name="audio">অডিও</string>
+    <string name="video">ভিডিও</string>
+    <string name="alquran">আল কুরআন</string>
+    <string name="alhadith">আল হাদিস</string>
+    <string name="santirbani">শান্তির বাণী</string>
+    <string name="blog">ব্লগ</string>
+    <string name="masayel">মাসায়েল</string>
+    <string name="prosnokorun">প্রশ্ন করুন</string>
+    <string name="prosneruttor">প্রশ্নের উত্তর</string>
+    <string name="ajkerprosno">আজকের প্রশ্ন</string>
+    <string name="quize">কুইজ</string>
+    <string name="poygam">পয়গাম :</string>
+    <string name="namajsomoy">নামাজের সময়সূচী</string>
+    <string name="oakto">ওয়াক্ত</string>
+    <string name="time">সময়</string>
+    <string name="fojor">ফজর</string>
+    <string name="zuhr">জোহর</string>
+    <string name="asor">আসর</string>
+    <string name="magrib">মাগরিব</string>
+    <string name="isa">ইশা</string>
+    <string name="islamicain">ইসলামিক আইন</string>
+    <string name="islamiceconomy">ইসলামী অর্থনীতি</string>
+    <string name="dawah">Dawah</string>
+    <string name="familysocity">পরিবার ও সমাজ</string>
+    <string name="imanakida">ঈমান ও আকীদাহ</string>
+    <string name="character">চরিত্র</string>
+    <string name="other">Other</string>
+    <string name="familylaw">পারিবারিক আইন</string>
+    <string name="criminallaw">ফৌজদারি আইন</string>
+    <string name="seracontent">এই সপ্তাহের সেরা কনটেন্ট দাতা</string>
+    <string name="content">অভিনন্দন আপনি মানসম্মত কনটেন্ট তৈরি করেছেন</string>
+    <string name="quizebijoyee">এই সপ্তাহের কুইজ বিজয়ী</string>
+    <string name="samprotiksompadokio">সাম্প্রতিক সম্পাদকীয়</string>
+    <string name="recentsompadokio">সর্বশেষ সম্পাদকীয়</string>
+    <string name="previoussompadokio">পূর্বের সম্পাদকীয়</string>
+    <string name="fikahgrontho">ফিকাহর গ্রন্থাবলী</string>
+    <string name="islamichistory">ইসলামের ইতিহাসের গ্রন্থাবলী</string>
+    <string name="biography">জীবনী</string>
+    <string name="islamicstory">ইসলামী গল্প</string>
+    <string name="islamic_philosophy">Islamic Philosophy</string>
+    <string name="rules_of_quiz">Rules of Quiz</string>
+    <string name="qiuze_rule1">#কুইজে মোট পাঁচটি প্রশ্ন থাকবে এবং প্রতিটা প্রশ্নের সাথে চারটি করে অপশন থাকবে; আপনাকে সঠিক উত্তরটি সিলেক্ট করতে হবে।</string>
+    <string name="quize_rule2"># ২ মিনেটের মধ্যে আপনাকে প্রশ্নগুলির উত্তর দিতে হবে।</string>
+    <string name="cancel">বাতিল</string>
+    <string name="getstarted">শুরু করুন</string>
+    <string name="ajkerproshno">আজকের প্রশ্ন</string>
+    <string name="submit">দাখিল করুন</string>
+    <string name="apnarjiggasa">আপনার জিজ্ঞাসা</string>
+    <string name="save">সংরক্ষণ করুন</string>
+    <string name="nextprayer">পরবর্তী নামাজের সময় বাকি</string>
+    <string name="juma_khutba">জুমার খুতবা</string>
+    <string name="cildren">শিশু কিশোর কর্নার</string>
+    <string name="gopnionitimala">গোপনীয় নীতিমালা</string>
+    <string name="beboherSorto">ব্যবহারের শর্তাবলী</string>
+    <string name="sochorchorjiggasa">সচরাচর জিজ্ঞাসা</string>
+    <string name="sarbiksohojogita">সার্বিক সহযোগিতায়</string>
+
+</resources>

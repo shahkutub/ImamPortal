@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.imamportal">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/MyMaterialTheme">
+        <activity
+            android:name=".SplashActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ToolbarSearchActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyMaterialTheme" />
+        <activity
+            android:name=".RegistrationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".QuizeActivity"
+            android:label="@string/title_activity_quize"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyMaterialTheme" />
+        <activity
+            android:name=".QuizBijoyeeActivity"
+            android:label="@string/title_activity_quiz_bijoyee"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyMaterialTheme" />
+        <activity
+            android:name=".JobCirculerActivity"
+            android:label="@string/title_activity_quiz_bijoyee"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyMaterialTheme" />
+        <activity
+            android:name=".AjkerQuestionActivity"
+            android:label="@string/title_activity_quiz_bijoyee"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyMaterialTheme" />
+        <activity
+            android:name=".QuestionAnswerActivity"
+            android:label="@string/title_activity_quiz_bijoyee"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyMaterialTheme" />
+        <activity
+            android:name=".ApnarGiggasaActivity"
+            android:label="@string/title_activity_quiz_bijoyee"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyMaterialTheme" />
+        <activity
+            android:name=".SeraContentActivity"
+            android:label="@string/title_activity_quiz_bijoyee"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyMaterialTheme" />
+        <activity
+            android:name=".AllCommonPostActivity"
+            android:label="@string/title_activity_quiz_bijoyee"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyMaterialTheme" />
+        <activity
+            android:name=".LanguageActivity"
+            android:label="@string/title_activity_quiz_bijoyee"
+            android:screenOrientation="portrait"
+             />
+        <activity
+            android:name=".ProfileListActivity"
+            android:label="@string/title_activity_quiz_bijoyee"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyMaterialTheme" />
+        <activity
+            android:name=".AlochitoContentActivity"
+            android:label="@string/title_activity_quiz_bijoyee"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyMaterialTheme" />
+        <activity
+            android:name=".NamjTimeActivity"
+            android:label="@string/title_activity_quiz_bijoyee"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AlQuranActivity"
+            android:label="@string/title_activity_quiz_bijoyee"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AlHadithActivity"
+            android:label="@string/title_activity_quiz_bijoyee"
+            android:screenOrientation="portrait" />
+
+
+         <activity
+            android:name=".SompadokioActivity"
+            android:label="@string/title_activity_quiz_bijoyee"
+            android:screenOrientation="portrait" />
+
+
+            <activity
+                android:name=".ApnarPoramorsoActivity"
+                android:label="@string/title_activity_quiz_bijoyee"
+                android:screenOrientation="portrait" />
+
+                <activity
+                android:name=".ChatAppActivity"
+                android:label="@string/title_activity_quiz_bijoyee"
+                android:screenOrientation="portrait" />
+
+                <activity
+                android:name=".ChatUserListActivity"
+                android:screenOrientation="portrait" />
+
+                <activity
+                android:name=".ChatSearchActivity"
+                android:screenOrientation="portrait" />
+
+                <activity
+                android:name=".ChatCreateGroupActivity"
+                android:screenOrientation="portrait" />
+
+         <activity
+                android:name=".ActivityGoponiyoNitimala"
+                android:screenOrientation="portrait" />
+
+        <activity
+                android:name=".ActivitySochorachorJiggsa"
+                android:screenOrientation="portrait" />
+
+
+ <activity
+                android:name=".ActivityBeboherSorto"
+                android:screenOrientation="portrait" />
+
+
+        <activity
+            android:name=".ChatNewChatActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+                    android:name=".VideoPostActivity"
+                    android:screenOrientation="portrait" />
+
+        <activity
+                            android:name=".AudioPostActivity"
+                            android:screenOrientation="portrait" />
+
+
+        <service
+            android:name=".fcm.MyFirebaseInstanceIDService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".fcm.MyFirebaseMessagingService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+
+    </application>
+
+
+
+
+</manifest>

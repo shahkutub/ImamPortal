@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/shadow"
+
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/_2sdp"
+        >
+
+        <LinearLayout
+            android:id="@+id/linQuizBijoyee"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_90sdp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/shadow_button">
+        <ImageView
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:src="@drawable/ic_crown"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="কুইজ বিজয়ী"
+            android:padding="@dimen/_5sdp"
+            android:textSize="@dimen/_12sdp"
+            android:textColor="#fff"
+            />
+
+    </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linQuiz"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/shadow_button"
+            android:layout_marginLeft="@dimen/_3sdp"
+            >
+            <ImageView
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:src="@drawable/quiz"
+                android:layout_marginTop="@dimen/_3sdp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="কুইজ"
+                android:padding="@dimen/_5sdp"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="#fff"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linJobCirculer"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/shadow_button"
+            android:layout_marginLeft="@dimen/_3sdp"
+            >
+            <ImageView
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:src="@drawable/ic_job_search"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="চাকুরীর বিজ্ঞপ্তি"
+                android:padding="@dimen/_5sdp"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="#fff"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/_3sdp"
+        >
+
+        <LinearLayout
+            android:id="@+id/ajkerQuestion"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/shadow_button"
+            >
+            <ImageView
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:src="@drawable/question"
+                android:layout_marginTop="@dimen/_3sdp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="আজকের প্রশ্ন"
+                android:padding="@dimen/_5sdp"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="#fff"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linQuesAns"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/shadow_button"
+            android:layout_marginLeft="@dimen/_3sdp"
+            >
+            <ImageView
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:src="@drawable/ic_conversation"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="প্রশ্ন উত্তর"
+                android:padding="@dimen/_5sdp"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="#fff"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/shadow_button"
+            android:layout_marginLeft="@dimen/_3sdp"
+            >
+            <ImageView
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:src="@drawable/mobile"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="মোবাইল এপস"
+                android:padding="@dimen/_5sdp"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="#fff"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/_3sdp"
+        >
+
+        <LinearLayout
+            android:id="@+id/linApnarGiggasa"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/shadow_button"
+            >
+            <ImageView
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:src="@drawable/ic_ask"
+                android:layout_marginTop="@dimen/_2sdp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="আপনার জিজ্ঞাসা"
+                android:padding="@dimen/_5sdp"
+                android:textSize="@dimen/_11sdp"
+                android:textColor="#fff"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linSeraContant"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/shadow_button"
+            android:layout_marginLeft="@dimen/_3sdp"
+            >
+            <ImageView
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:src="@drawable/ic_content"
+                android:layout_marginTop="@dimen/_3sdp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="সেরা কনটেন্ট দাতা"
+                android:padding="@dimen/_5sdp"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="#fff"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/shadow_button"
+            android:layout_marginLeft="@dimen/_3sdp"
+            >
+            <ImageView
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:src="@drawable/alquran"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="কুরআন তেলাওয়াত"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="#fff"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:layout_marginBottom="@dimen/_3sdp"
+        >
+
+
+
+        <LinearLayout
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/shadow_button"
+            >
+            <ImageView
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:src="@drawable/ic_boyan"
+                android:layout_marginTop="@dimen/_3sdp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="বয়ান"
+                android:padding="@dimen/_5sdp"
+                android:textSize="@dimen/_13sdp"
+                android:textColor="#fff"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/shadow_button"
+            android:layout_marginLeft="@dimen/_3sdp"
+            >
+            <ImageView
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:src="@drawable/hamdnat"
+                android:layout_marginTop="@dimen/_3sdp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="হামদ-নাত"
+                android:padding="@dimen/_5sdp"
+                android:textSize="@dimen/_13sdp"
+                android:textColor="#fff"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/shadow_button"
+            android:layout_marginLeft="@dimen/_3sdp"
+            >
+            <ImageView
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:src="@drawable/ic_documentary"
+                android:layout_marginTop="@dimen/_3sdp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ডকুমেন্টারি"
+                android:padding="@dimen/_5sdp"
+                android:textSize="@dimen/_13sdp"
+                android:textColor="#fff"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

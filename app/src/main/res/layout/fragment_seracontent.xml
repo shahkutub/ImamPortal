@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:gravity="center_horizontal"
+    android:background="@drawable/gradient_userbg"
+    android:layout_height="@dimen/_160sdp">
+
+    <TextView
+        android:id="@+id/tvReqCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:gravity="center"
+        android:text="@string/seracontent"
+        android:textSize="@dimen/_12sdp" />
+
+    <ImageView
+        android:id="@+id/imgBijoyee"
+        android:layout_width="@dimen/_95sdp"
+        android:layout_height="@dimen/_95sdp"
+        android:src="@drawable/imam"
+        android:scaleType="fitXY"
+        />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Shah Kutub"
+        android:textSize="@dimen/_13sdp"
+        android:textStyle="normal"
+        android:textColor="#fff"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/content"
+        android:textSize="@dimen/_10sdp"
+        android:textColor="#fff"
+        android:gravity="center"
+        />
+
+</LinearLayout>

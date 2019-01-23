@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_5sdp"
+    android:gravity="center_vertical"
+    android:background="#E4DFD9"
+    android:id="@+id/linMianView"
+    android:layout_marginRight="@dimen/_3sdp"
+
+    >
+
+    <LinearLayout
+        android:id="@+id/linFondamental"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+    <ImageView
+        android:id="@+id/imgKitab"
+        android:layout_below="@+id/tvNameKitab"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:src="@drawable/ic_mosque"
+        android:layout_centerHorizontal="true"
+        />
+
+        <TextView
+            android:id="@+id/tvNameKitab"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="adfghj"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:textColor="#000"
+            android:padding="@dimen/_2sdp"
+            android:textSize="@dimen/_15sdp"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

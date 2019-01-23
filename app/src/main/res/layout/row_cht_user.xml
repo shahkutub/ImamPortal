@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_5sdp"
+    android:gravity="center|left"
+    android:orientation="horizontal"
+    android:id="@+id/linFullItem"
+    android:layout_marginTop="@dimen/_2sdp"
+    android:background="@drawable/reple_effect"
+    >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/imgPicChat"
+        android:layout_width="@dimen/_45sdp"
+        android:layout_height="@dimen/_45sdp"
+        android:src="@drawable/imam"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#00AFFE"
+        tools:ignore="VectorDrawableCompat" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:gravity="center|left"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center|left"
+            >
+        <TextView
+            android:id="@+id/tvNameChat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sadi"
+            android:textStyle="normal"
+            android:textSize="@dimen/_15sdp"
+            android:textColor="#000"
+            />
+
+            <TextView
+                android:id="@+id/tvChatDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="07,07,2018"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:textStyle="normal"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="#000"
+                />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tvChatMsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sadi   dsd fdf sdsf csdsf sdsd sds
+             sdsd sdsdsdsd assdsdsd sdsdsd sdsd fdfdf dfdf hhhh"
+            android:textStyle="normal"
+            android:textSize="@dimen/_13sdp"
+            android:textColor="#000"
+            android:maxLines="2"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

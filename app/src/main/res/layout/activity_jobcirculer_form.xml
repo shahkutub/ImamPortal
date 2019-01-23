@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/linJobCirForm"
+    android:visibility="visible"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        >
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="#F15A24"
+            android:layout_margin="@dimen/_5sdp">
+            <EditText android:id="@+id/etJobNmae"
+                android:layout_width="match_parent"
+                android:padding="@dimen/_5sdp"
+                android:layout_height="match_parent"
+                android:inputType="textCapSentences"
+                android:background="@drawable/edit_bg"
+                android:textColor="#000"
+                android:hint="*চাকুরীর শিরোনামঃ" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="#F15A24"
+            android:layout_margin="@dimen/_3sdp">
+            <EditText android:id="@+id/etJobDesignation"
+                android:layout_width="match_parent"
+                android:padding="@dimen/_5sdp"
+                android:layout_height="match_parent"
+                android:inputType="textCapSentences"
+                android:background="@drawable/edit_bg"
+                android:textColor="#000"
+                android:hint="চাকুরীর পদবীঃ" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="#F15A24"
+            android:layout_margin="@dimen/_3sdp">
+            <EditText android:id="@+id/etPlace"
+                android:layout_width="match_parent"
+                android:padding="@dimen/_5sdp"
+                android:layout_height="match_parent"
+                android:inputType="textCapSentences"
+                android:background="@drawable/edit_bg"
+                android:textColor="#000"
+                android:hint="চাকুরীর স্থানঃ" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="#F15A24"
+            android:layout_margin="@dimen/_3sdp">
+            <EditText android:id="@+id/etSalary"
+                android:layout_width="match_parent"
+                android:padding="@dimen/_5sdp"
+                android:layout_height="match_parent"
+                android:inputType="number"
+                android:background="@drawable/edit_bg"
+                android:textColor="#000"
+                android:hint="বেতন পরিসীমাঃ" />
+        </android.support.design.widget.TextInputLayout>
+
+<android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="#F15A24"
+            android:layout_margin="@dimen/_3sdp">
+            <EditText android:id="@+id/etJobDescription"
+                android:layout_width="match_parent"
+                android:padding="@dimen/_5sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:inputType="textMultiLine"
+                android:background="@drawable/edit_bg"
+                android:gravity="top|left"
+                android:textColor="#000"
+                android:hint="*চাকুরীর বিবরণী" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="@dimen/_10sdp"
+            >
+
+            <Button
+                android:id="@+id/btnChoseFile"
+                android:layout_width="wrap_content"
+                android:background="#808080"
+                android:text="Chose file"
+                android:textColor="#fff"
+                android:textSize="@dimen/_15sdp"
+                android:paddingRight="@dimen/_15sdp"
+                android:paddingLeft="@dimen/_15sdp"
+                android:layout_height="@dimen/_30sdp" />
+
+
+            <TextView
+                android:id="@+id/tvFileName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No file chosed"
+                android:layout_marginLeft="@dimen/_15sdp"
+                />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_width="wrap_content"
+            android:background="@drawable/button_bg"
+            android:text="@string/save"
+            android:textColor="#fff"
+            android:textSize="@dimen/_15sdp"
+            android:paddingRight="@dimen/_35sdp"
+            android:paddingLeft="@dimen/_35sdp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/lang_bg"
+    android:id="@+id/linBg"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/pori"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_150sdp"
+        android:text="পরিকল্পনা ও বাস্তবায়নে"
+        android:textColor="#5E397A"
+        android:gravity="center"
+        android:textSize="@dimen/_22sdp"
+        />
+
+    <LinearLayout
+        android:id="@+id/a2i"
+        android:layout_below="@+id/pori"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/reple_effect"
+        >
+        <ImageView
+            android:id="@+id/imgA2i"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_80sdp"
+            android:src="@drawable/ic_a21logo"
+            tools:ignore="VectorDrawableCompat" />
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/imgNext"
+        android:layout_width="@dimen/_60sdp"
+        android:src="@drawable/ic_fd"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/a2i"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        tools:ignore="VectorDrawableCompat" />
+
+
+
+</RelativeLayout>

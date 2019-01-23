@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:orientation="vertical"
+    tools:showIn="@layout/activity_main">
+
+
+    <LinearLayout
+        android:id="@+id/linGroupName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/_5sdp"
+        >
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="#00AFFE"
+            app:hintTextAppearance="@style/TextLabel"
+            android:minHeight="30dp"
+            android:layout_margin="@dimen/_3sdp">
+            <EditText android:id="@+id/input_village"
+                android:layout_width="match_parent"
+                android:padding="@dimen/_5sdp"
+                android:layout_height="match_parent"
+                android:inputType="textCapSentences"
+                android:background="@drawable/edit_bg"
+                android:textSize="@dimen/_15sdp"
+                android:textColor="#000"
+                android:hint="Enter Group Name" />
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="@dimen/_5sdp"
+        >
+
+        <LinearLayout
+            android:id="@+id/linNewChat"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
+            android:gravity="center|left"
+            android:orientation="horizontal"
+            android:background="@drawable/reple_effect_chat"
+            android:layout_marginRight="@dimen/_5sdp"
+            >
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:src="@drawable/ic_single_chat"
+                app:civ_border_width="0dp"
+                app:civ_border_color="#00AFFE"
+                tools:ignore="VectorDrawableCompat" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Chat"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:textStyle="normal"
+                android:textSize="@dimen/_15sdp"
+                android:textColor="#4E2D68"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linCreateGroup"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
+            android:gravity="center|left"
+            android:orientation="horizontal"
+            android:background="@drawable/reple_effect_chat"
+            >
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:src="@drawable/ic_create_group"
+                app:civ_border_width="2dp"
+                app:civ_border_color="#00AFFE"
+                tools:ignore="VectorDrawableCompat" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Group"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:textStyle="normal"
+                android:textSize="@dimen/_15sdp"
+                android:textColor="#4E2D68"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical" />
+
+</LinearLayout>

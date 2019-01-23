@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:background="#8CC63E"
+        >
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/ic_back"
+            android:padding="@dimen/_5sdp"
+            android:layout_height="@dimen/_30sdp" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gopnionitimala"
+            android:textColor="#fff"
+            android:textSize="@dimen/_15sdp"
+            android:layout_centerInParent="true"
+            />
+
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/tvtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_10sdp"
+        android:background="#E7FAE4"
+        android:scrollbars = "vertical"
+        android:textSize="@dimen/_15sdp"
+        android:text="এটুআই প্রোগ্রাম আপনার ব্যক্তিগত তথ্যাবলীর গোপনীয়তা বজায় রাখবে। ইমাম বাতায়নে আপনি আপনার ব্যক্তিগত তথ্যাবলী প্রদানের মাধ্যমে নিবন্ধন করে পারস্পরিক যোগাযোগের পাশাপাশি নিয়মিত মাসলা-মাসায়েল ও ফতোয়া, সাপ্তাহিক খুতবা, সন্ত্রাস ও জঙিবাদ বিরোধী প্রচারণা, কিতাব, সাম্প্রতিক বিষয়াদিসহ দক্ষতা উন্নয়ন বিষয়ক কনটেন্ট শেয়ার করতে পারবেন। সেক্ষেত্রে যেসব তথ্যাবলী সংগ্রহ করা হবে তা শুধুমাত্র দাপ্তরিক উদ্দেশ্যে, আভ্যন্তরীণ পর্যালোচনা, ওয়েবসাইটের কনটেন্টের মানোন্নয়নের ক্ষেত্রে ব্যবহৃত হবে। বাণিজ্যিক উদ্দেশ্যে আপনার তথ্যাবলী ব্যবহার করা হবে না।"
+        />
+
+</LinearLayout>

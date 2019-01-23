@@ -1,0 +1,90 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:fab="http://schemas.android.com/tools">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+
+
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:visibility="visible"
+                android:layout_height="?attr/actionBarSize"
+                android:background="#EBEBEB"
+                app:layout_collapseMode="pin"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:src="@drawable/logo_tollbar"
+                        android:layout_alignParentLeft="true"
+                        android:scaleType="fitXY"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/relNotification"
+                        android:layout_height="wrap_content" />
+
+
+
+                    <RelativeLayout
+                        android:id="@+id/relNotification"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_alignParentRight="true"
+                        android:gravity="center"
+                        android:layout_centerVertical="true"
+                        android:layout_height="match_parent">
+
+
+                        <ImageView
+                            android:layout_width="@dimen/_30sdp"
+                            app:srcCompat="@drawable/ic_bell"
+                            android:scaleType="fitXY"
+                            android:layout_centerVertical="true"
+                            android:layout_height="@dimen/_30sdp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#fff"
+                            android:text="334"
+                            android:textSize="@dimen/_10sdp"
+                            android:layout_marginLeft="@dimen/_20sdp"
+                            android:background="@drawable/reqcountbg"
+                            android:padding="@dimen/_2sdp"
+                            />
+
+
+                    </RelativeLayout>
+                </RelativeLayout>
+
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+
+
+
+
+
+</android.support.design.widget.CoordinatorLayout>

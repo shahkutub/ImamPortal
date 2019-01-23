@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@drawable/lang_bg"
+    android:id="@+id/linBg"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="আপনার ভাষা পছন্দ করুন"
+        android:gravity="center"
+        android:textSize="@dimen/_20sdp"
+        android:textColor="@color/colorPrimary"
+
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+
+
+        <LinearLayout
+            android:id="@+id/linBang"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/reple_effect"
+            >
+
+            <TextView
+                android:id="@+id/btnBangla"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:textColor="#fff"
+                android:text="বাংলা"
+                android:gravity="center"
+                android:textSize="@dimen/_15sdp"
+                android:background="@drawable/shadow_search"
+                />
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/linEng"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/reple_effect"
+            >
+            <TextView
+                android:id="@+id/btnEng"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:textColor="#fff"
+                android:text="ENGLISH"
+                android:textSize="@dimen/_15sdp"
+                android:gravity="center"
+                android:background="@drawable/shadow_search"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linAr"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/reple_effect"
+            >
+            <TextView
+                android:id="@+id/btnAr"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:textColor="#fff"
+                android:text="ARABIC"
+                android:textSize="@dimen/_15sdp"
+                android:gravity="center"
+                android:background="@drawable/shadow_search"
+                />
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
