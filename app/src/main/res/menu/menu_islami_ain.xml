@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/paribarikAin"
-        android:title="@string/familylaw"
+        android:title="পারিবারিক আইন"
         android:orderInCategory="100"
         app:showAsAction="never" />
     <item android:id="@+id/foujdariAin"
-        android:title="@string/criminallaw"
+        android:title="ফৌজদারি আইন"
         android:orderInCategory="100"
         app:showAsAction="never" />
 </menu>

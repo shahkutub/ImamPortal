@@ -1,8 +1,13 @@
 package com.imamportal.utils;
 
 
+import com.imamportal.model.AllBlogpostModel;
+import com.imamportal.model.AlquranAlhadits;
+import com.imamportal.model.AudioModel;
+import com.imamportal.model.Catagories;
 import com.imamportal.model.NoticeResponse;
 import com.imamportal.model.SeraContentData;
+import com.imamportal.model.VideoModel;
 
 import java.util.List;
 
@@ -23,7 +28,7 @@ public interface Api {
     String BASE_URL = "http://192.168.0.119/imamportal/";
 
     //Live
-    //String BASE_URL = "http://sechseba.gov.bd/";
+    //String BASE_URL = "http://nanosoftbd.com/imamportal/";
 
 
 //
@@ -35,11 +40,37 @@ public interface Api {
 //    );
 
 
+    @GET("api/categorys")
+    public Call<List<Catagories>> categorys();
+
+
     @GET("api/notices")
     public Call<List<NoticeResponse>> notices();
 
+
+
     @GET("api/best-imam")
     public Call<List<SeraContentData>> seraContent();
+
+    @GET("api/al-quran-hadiths")
+    public Call<List<AlquranAlhadits>> alquranAllhadits();
+
+    @GET("api/audios")
+    public Call<List<AudioModel>> audios();
+
+
+    @GET("api/videos")
+    public Call<List<VideoModel>> videos();
+
+
+    @GET("api/blog_post")
+    public Call<List<AllBlogpostModel>> blog_post();
+
+
+    @GET("api/skill")
+    public Call<List<AllBlogpostModel>> skill();
+
+
 
 //
 //

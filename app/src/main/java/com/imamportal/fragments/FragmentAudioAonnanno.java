@@ -6,34 +6,27 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.imamportal.Adapter.AdapterQuranPath;
-import com.imamportal.Adapter.AllCommonPostAdapter;
 import com.imamportal.Adapter.AlquranAldadithPostAdapter;
+import com.imamportal.Adapter.AudioAdapter;
 import com.imamportal.R;
 import com.imamportal.model.AlquranAlhadits;
-import com.imamportal.model.SantirbaniInfo;
+import com.imamportal.model.AudioModel;
 import com.imamportal.utils.AppConstant;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class FragmentQuranPath extends Fragment {
+public class FragmentAudioAonnanno extends Fragment {
 
     private RecyclerView recyclSantirBani;
     private TextView tvTotalBani,tvName;
     Context context;
-
-    public FragmentQuranPath() {
-
-
-    }
 
 
     @Override
@@ -85,24 +78,26 @@ public class FragmentQuranPath extends Fragment {
         tvTotalBani = (TextView) getView().findViewById(R.id.tvTotalBani);
         recyclSantirBani = (RecyclerView) getView().findViewById(R.id.recyclSantirBani);
 
-        List<AlquranAlhadits> dataListList = new ArrayList<>();
+        List<AudioModel> dataListList = new ArrayList<>();
 
-        for (int i = 0; i < AppConstant.listAlqranAlhadith.size(); i++) {
+        for (int i = 0; i < AppConstant.listAudio.size(); i++) {
 
-                if(AppConstant.listAlqranAlhadith.get(i).getCategory_id().equalsIgnoreCase("41")){
-                    dataListList.add(AppConstant.listAlqranAlhadith.get(i));
-                }
+            if(AppConstant.listAudio.get(i).getCategory_id()==null){
+                dataListList.add(AppConstant.listAudio.get(i));
+
+            }
 
         }
 
         int size = dataListList.size();
         tvTotalBani.setText("সর্বমোট "+AppConstant.activitiname+size+" টি");
 
-        AlquranAldadithPostAdapter questionAnsAdapter = new AlquranAldadithPostAdapter(dataListList,context);
+        AudioAdapter questionAnsAdapter = new AudioAdapter(dataListList,context);
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(context,
                 LinearLayoutManager.VERTICAL, false);
         recyclSantirBani.setLayoutManager(horizontalLayoutManager);
         recyclSantirBani.setAdapter(questionAnsAdapter);
+
     }
 
 }

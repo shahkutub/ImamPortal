@@ -1,6 +1,8 @@
 package com.imamportal.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,22 +11,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.imamportal.R;
-import com.imamportal.model.AllBlogpostModel;
 import com.imamportal.model.AlquranAlhadits;
-import com.imamportal.model.SantirbaniInfo;
+import com.imamportal.model.AudioModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllCommonPostAdapter extends RecyclerView.Adapter<AllCommonPostAdapter.MyViewHolder> {
+public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.MyViewHolder> {
 
 
-    List<AllBlogpostModel> santirBaniList = new ArrayList<>();
+    List<AudioModel> dataList = new ArrayList<>();
     Context context;
 
 
-    public AllCommonPostAdapter(List<AllBlogpostModel> santirBaniList, Context context) {
-        this.santirBaniList = santirBaniList;
+    public AudioAdapter(List<AudioModel> santirBaniList, Context context) {
+        this.dataList = santirBaniList;
         this.context = context;
     }
 
@@ -48,7 +49,7 @@ public class AllCommonPostAdapter extends RecyclerView.Adapter<AllCommonPostAdap
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.raw_video, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.raw_audio, parent, false);
 
         return new MyViewHolder(itemView);
     }
@@ -56,20 +57,31 @@ public class AllCommonPostAdapter extends RecyclerView.Adapter<AllCommonPostAdap
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-        AllBlogpostModel data = santirBaniList.get(position);
+        final AudioModel data = dataList.get(position);
+
         holder.tvPublishDate.setText(data.getCreated_at());
         holder.tvPublisher.setText(data.getUser_detail().getName());
         holder.tvTitle.setText(data.getTitle());
         holder.tvShortDescription.setText(data.getDescription());
         holder.tvViewCount.setText(data.getView_count());
 
+        if(data.getAudio()!=null){
+            holder.imgFile.setVisibility(View.VISIBLE);
+        }
+
+        holder.imgFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://192.168.0.119/imamportal/public/al-quran_hadith/"+data.getAudio())));
+            }
+        });
     }
 
 
     @Override
     public int getItemCount()
     {
-        return santirBaniList.size();
+        return dataList.size();
     }
 }
 

@@ -13,13 +13,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.imamportal.fragments.FragmentBisoyHadith;
-import com.imamportal.fragments.FragmentDorseQuran;
-import com.imamportal.fragments.FragmentOnnannoQuran;
-import com.imamportal.fragments.FragmentQuranPath;
-import com.imamportal.fragments.FragmentTAfsirQuran;
-import com.imamportal.model.AlquranAlhadits;
-import com.imamportal.model.Catagories;
+import com.imamportal.fragments.FragmentAudioAonnanno;
+import com.imamportal.fragments.FragmentAudioBoyan;
+import com.imamportal.fragments.FragmentAudioQuran;
+import com.imamportal.fragments.FragmentAudiohamdnat;
+import com.imamportal.fragments.FragmentVideoAonnanno;
+import com.imamportal.fragments.FragmentVideoBoyan;
+import com.imamportal.fragments.FragmentVideoQuran;
+import com.imamportal.fragments.FragmentVideohamdnat;
+import com.imamportal.model.AudioModel;
+import com.imamportal.model.VideoModel;
 import com.imamportal.utils.AlertMessage;
 import com.imamportal.utils.Api;
 import com.imamportal.utils.AppConstant;
@@ -34,23 +37,23 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class AlQuranActivity extends AppCompatActivity {
+public class VideoActivity extends AppCompatActivity {
 
     Context context;
     private TabLayout tabLayout;
     public ViewPager viewPager;
     private ImageView imgBack;
-    List<AlquranAlhadits>  listAlquranAlhadit = new ArrayList<>();
+    List<VideoModel>  listAlquranAlhadit = new ArrayList<>();
 
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.al_quran);
+        setContentView(R.layout.video);
         context=this;
         overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
-        getAllQuranAlldadith();
+        videos();
 
     }
 
@@ -89,11 +92,10 @@ public class AlQuranActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new FragmentQuranPath(), "কুরআন পাঠ");
-        adapter.addFragment(new FragmentDorseQuran(), "দরসে কুরআন");
-        adapter.addFragment(new FragmentTAfsirQuran(), "তাফসীরুল কুরআন");
-        adapter.addFragment(new FragmentBisoyHadith(), "বিষয়ভিত্তিক হাদিস");
-        adapter.addFragment(new FragmentOnnannoQuran(), "অন্যান্য");
+        adapter.addFragment(new FragmentVideoQuran(), "আল কুরআন");
+        adapter.addFragment(new FragmentVideoBoyan(), "বয়ান");
+        adapter.addFragment(new FragmentVideohamdnat(), "হামদ-নাত");
+        adapter.addFragment(new FragmentVideoAonnanno(), "অন্যান্য");
         viewPager.setAdapter(adapter);
     }
 
@@ -130,7 +132,7 @@ public class AlQuranActivity extends AppCompatActivity {
 
     }
 
-    private void getAllQuranAlldadith() {
+    private void videos() {
 
         if(!NetInfo.isOnline(context)){
             AlertMessage.showMessage(context,"Alert!","No internet connection!");
@@ -147,10 +149,10 @@ public class AlQuranActivity extends AppCompatActivity {
                 .build();
 
         Api api = retrofit.create(Api.class);
-        Call<List<AlquranAlhadits>> userCall = api.alquranAllhadits();
-        userCall.enqueue(new Callback<List<AlquranAlhadits>>() {
+        Call<List<VideoModel>> userCall = api.videos();
+        userCall.enqueue(new Callback<List<VideoModel>>() {
             @Override
-            public void onResponse(Call<List<AlquranAlhadits>> call, Response<List<AlquranAlhadits>> response) {
+            public void onResponse(Call<List<VideoModel>> call, Response<List<VideoModel>> response) {
                 pd.dismiss();
 
                 listAlquranAlhadit = response.body();
@@ -158,14 +160,14 @@ public class AlQuranActivity extends AppCompatActivity {
                 Log.e("listAlquranAlhadit",""+listAlquranAlhadit.size());
 
                 if(listAlquranAlhadit.size()>0){
-                    AppConstant.listAlqranAlhadith = listAlquranAlhadit;
+                    AppConstant.listVideo = listAlquranAlhadit;
 
                 }
                 initUi();
             }
 
             @Override
-            public void onFailure(Call<List<AlquranAlhadits>> call, Throwable t) {
+            public void onFailure(Call<List<VideoModel>> call, Throwable t) {
                 pd.dismiss();
             }
         });

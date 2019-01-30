@@ -136,7 +136,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvLogin,tvLogOut;
 
     List<NoticeResponse> listNotice = new ArrayList<>();
-    List<SeraContentData> listSeraContentData = new ArrayList<>();
     private String seraContentdataName;
 
     @Override
@@ -146,7 +145,6 @@ public class MainActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
         context = this;
         updateworkdone();
-        seraContent();
         ApplicationStarter.initialize(this, true);
         getBangladate();
         hijriDate();
@@ -714,45 +712,24 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        prayerNamesHighlite(pryname);
+        if(pryname.equalsIgnoreCase("ফজর")){
+            linFojor.setBackgroundColor(Color.parseColor("#EBBF2B"));
+        }else if(pryname.equalsIgnoreCase("জোহর")){
+            linJohor.setBackgroundColor(Color.parseColor("#EBBF2B"));
+        }else if(pryname.equalsIgnoreCase("আসর")){
+            linAsor.setBackgroundColor(Color.parseColor("#EBBF2B"));
+        }else if(pryname.equalsIgnoreCase("মাগরিব")){
+            linMagrib.setBackgroundColor(Color.parseColor("#EBBF2B"));
+        }else if(pryname.equalsIgnoreCase("ইশা")){
+            linIsha.setBackgroundColor(Color.parseColor("#EBBF2B"));
+        }
 
         return nextPreyerTime;
     }
 
-    private void prayerNamesHighlite(String name) {
+    private void prayerNamesHighlite() {
 
-        if(pryname.equalsIgnoreCase("ফজর")){
-            linFojor.setBackgroundColor(Color.parseColor("#EBBF2B"));
-//            linJohor.setBackgroundColor(Color.parseColor("#8CC63E"));
-//            linAsor.setBackgroundColor(Color.parseColor("#8CC63E"));
-//            linMagrib.setBackgroundColor(Color.parseColor("#8CC63E"));
-//            linIsha.setBackgroundColor(Color.parseColor("#8CC63E"));
 
-        }else if(pryname.equalsIgnoreCase("জোহর")){
-            //linFojor.setBackgroundColor(Color.parseColor("#8CC63E"));
-            linJohor.setBackgroundColor(Color.parseColor("#EBBF2B"));
-//            linAsor.setBackgroundColor(Color.parseColor("#8CC63E"));
-//            linMagrib.setBackgroundColor(Color.parseColor("#8CC63E"));
-//            linIsha.setBackgroundColor(Color.parseColor("#8CC63E"));
-        }else if(pryname.equalsIgnoreCase("আসর")){
-//            linFojor.setBackgroundColor(Color.parseColor("#8CC63E"));
-//            linJohor.setBackgroundColor(Color.parseColor("#8CC63E"));
-            linAsor.setBackgroundColor(Color.parseColor("#EBBF2B"));
-//            linMagrib.setBackgroundColor(Color.parseColor("#8CC63E"));
-//            linIsha.setBackgroundColor(Color.parseColor("#8CC63E"));
-        }else if(pryname.equalsIgnoreCase("মাগরিব")){
-//            linFojor.setBackgroundColor(Color.parseColor("#8CC63E"));
-//            linJohor.setBackgroundColor(Color.parseColor("#8CC63E"));
-//            linAsor.setBackgroundColor(Color.parseColor("#8CC63E"));
-            linMagrib.setBackgroundColor(Color.parseColor("#EBBF2B"));
-            //linIsha.setBackgroundColor(Color.parseColor("#8CC63E"));
-        }else if(pryname.equalsIgnoreCase("ইশা")){
-//            linFojor.setBackgroundColor(Color.parseColor("#8CC63E"));
-//            linJohor.setBackgroundColor(Color.parseColor("#8CC63E"));
-//            linAsor.setBackgroundColor(Color.parseColor("#8CC63E"));
-//            linMagrib.setBackgroundColor(Color.parseColor("#8CC63E"));
-            linIsha.setBackgroundColor(Color.parseColor("#EBBF2B"));
-        }
     }
 
 
@@ -895,6 +872,28 @@ public class MainActivity extends AppCompatActivity {
         linAskQues = (LinearLayout)findViewById(R.id.linAskQues);
         linQuesAns = (LinearLayout)findViewById(R.id.linQuesAns);
 
+
+        linBlog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                PopupMenu popup = new PopupMenu(context,v);
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+
+                        String value = menuItem.getTitle().toString();
+                        AppConstant.activitiname=value;
+                        startActivity(new Intent(context,AllCommonPostActivity.class));
+                        return true;
+                    }
+                });
+                MenuInflater inflater = popup.getMenuInflater();
+                inflater.inflate(R.menu.menu_blog, popup.getMenu());
+                popup.show();
+            }
+        });
+
         linQuesAns.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -982,6 +981,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 AppConstant.activitiname = getString(R.string.santirbani);
+                AppConstant.bolgpostName = "শান্তির বাণী";
                 startActivity(new Intent(context,AllCommonPostActivity.class));
             }
         });
@@ -1013,14 +1013,15 @@ public class MainActivity extends AppCompatActivity {
         relOnndhra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?time_continue=1031&v=zfZZlb0Q_V4")));
+                //startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?time_continue=1031&v=zfZZlb0Q_V4")));
             }
         });
 
         linNarikornar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AppConstant.activitiname = "সাম্প্রতিক বিষয়াদি ";
+                AppConstant.activitiname = getString(R.string.narikornar);
+                AppConstant.bolgpostName = "নারী কর্নার";
                 startActivity(new Intent(context,AllCommonPostActivity.class));
             }
         });
@@ -1029,7 +1030,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AppConstant.activitiname = "ভিডিও ";
-                startActivity(new Intent(context,VideoPostActivity.class));
+                startActivity(new Intent(context,VideoActivity.class));
             }
         });
 
@@ -1037,7 +1038,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AppConstant.activitiname = "অডিও ";
-                startActivity(new Intent(context,AudioPostActivity.class));
+                startActivity(new Intent(context,AudioActivity.class));
             }
         });
 
@@ -1045,6 +1046,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AppConstant.activitiname = "দক্ষতার গল্প ";
+                AppConstant.bolgpostName = "দক্ষতার গল্প";
                 startActivity(new Intent(context,AllCommonPostActivity.class));
             }
         });
@@ -1079,6 +1081,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AppConstant.activitiname = getString(R.string.sisukisur);
+                AppConstant.bolgpostName = "শিশু কিশোর কর্নার";
                 startActivity(new Intent(context,AllCommonPostActivity.class));
             }
         });
@@ -1275,6 +1278,7 @@ public class MainActivity extends AppCompatActivity {
 
                 String value = menuItem.getTitle().toString();
                 AppConstant.activitiname=value;
+                AppConstant.bolgpostName=value;
                 startActivity(new Intent(context,AllCommonPostActivity.class));
                 return true;
             }
@@ -1357,6 +1361,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AppConstant.activitiname = getString(R.string.islamiceconomy);
+                AppConstant.bolgpostName = "ইসলামিক অর্থনীত";
                 startActivity(new Intent(context,AllCommonPostActivity.class));
             }
         });
@@ -1366,6 +1371,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AppConstant.activitiname = getString(R.string.dawah);
+                AppConstant.bolgpostName = "দাওয়াত";
                 startActivity(new Intent(context,AllCommonPostActivity.class));
             }
         });
@@ -1376,6 +1382,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AppConstant.activitiname = getString(R.string.familysocity);
+                AppConstant.bolgpostName = "পরিবার ও সমাজ";
                 startActivity(new Intent(context,AllCommonPostActivity.class));
             }
         });
@@ -1385,6 +1392,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AppConstant.activitiname = getString(R.string.imanakida);
+                AppConstant.bolgpostName = "ঈমান ও আকীদাহ";
                 startActivity(new Intent(context,AllCommonPostActivity.class));
             }
         });
@@ -1394,6 +1402,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AppConstant.activitiname = getString(R.string.character);
+                AppConstant.bolgpostName = "চরিত্র";
                 startActivity(new Intent(context,AllCommonPostActivity.class));
             }
         });
@@ -1403,6 +1412,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AppConstant.activitiname = getString(R.string.other);
+                AppConstant.bolgpostName = "অন্যান্য";
                 startActivity(new Intent(context,AllCommonPostActivity.class));
             }
         });
@@ -1540,8 +1550,8 @@ public class MainActivity extends AppCompatActivity {
 
         dialog.show();
         dialog.getWindow().setAttributes(lp);
-        getPrayerTime();
 
+        getPrayerTime();
     }
 
 //    private void alochitocontant() {
@@ -1868,30 +1878,30 @@ public class MainActivity extends AppCompatActivity {
         setupViewPager(launchViewpager);
 
 
-        launchViewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int i, float v, int i1) {
-
-            }
-
-            @Override
-            public void onPageSelected(int i) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int i) {
-                if (i == ViewPager.SCROLL_STATE_DRAGGING) {
-                    isTimerRunning = false;
-                    swipeTimer.cancel();
-                } else {
-                    if (!isTimerRunning) {
-                        // createSwipeTimer();
-                        isTimerRunning = true;
-                    }
-                }
-            }
-        });
+//        launchViewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int i, float v, int i1) {
+//
+//            }
+//
+//            @Override
+//            public void onPageSelected(int i) {
+//
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int i) {
+//                if (i == ViewPager.SCROLL_STATE_DRAGGING) {
+//                    isTimerRunning = false;
+//                    swipeTimer.cancel();
+//                } else {
+//                    if (!isTimerRunning) {
+//                        // createSwipeTimer();
+//                        isTimerRunning = true;
+//                    }
+//                }
+//            }
+//        });
 
 
         viewpagerDate = (ViewPager) findViewById(R.id.viewpagerDate);
@@ -1927,19 +1937,19 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        updateSlider = new Runnable() {
-            @Override
-            public void run() {
-
-                    int currentImg = launchViewpager.getCurrentItem();
-                    currentImg++;
-                if (currentImg == 3) {
-                    currentImg = 0;
-                }
-                    launchViewpager.setCurrentItem(currentImg, true);
-
-            }
-        };
+//        updateSlider = new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                    int currentImg = launchViewpager.getCurrentItem();
+//                    currentImg++;
+//                if (currentImg == 3) {
+//                    currentImg = 0;
+//                }
+//                    launchViewpager.setCurrentItem(currentImg, true);
+//
+//            }
+//        };
 
         Update = new Runnable() {
             @Override
@@ -1975,10 +1985,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupViewPager(ViewPager viewPager) {
+        FragmentSeraContent fragmentSeraContent = new FragmentSeraContent();
         SlidingViewPagerAdapter adapter = new SlidingViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new FragmentPhoto(), "উসুলে হাদিস");
         adapter.addFragment(new FragmentQuizBizoyee(), "হাদিসে কুদসি");
-        adapter.addFragment(new FragmentSeraContent(seraContentdataName), "বিষয়ভিত্তিক হাদিস");
+        adapter.addFragment(new FragmentSeraContent(), "বিষয়ভিত্তিক হাদিস");
         viewPager.setAdapter(adapter);
     }
 
@@ -2037,50 +2048,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void seraContent() {
 
-
-        if(!NetInfo.isOnline(context)){
-            AlertMessage.showMessage(context,"Alert!","No internet connection!");
-        }
-
-        final ProgressDialog pd = new ProgressDialog(context);
-        pd.setMessage("Loading....");
-        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pd.show();
-
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Api.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        Api api = retrofit.create(Api.class);
-        Call<List<SeraContentData>> userCall = api.seraContent();
-        userCall.enqueue(new Callback<List<SeraContentData>>() {
-            @Override
-            public void onResponse(Call<List<SeraContentData>> call, Response<List<SeraContentData>> response) {
-                pd.dismiss();
-
-                listSeraContentData = response.body();
-
-                if(listSeraContentData!=null){
-                    seraContentdataName= listSeraContentData.get(0).getUser_details().getName();
-                    Toast.makeText(context, ""+listSeraContentData.get(0).getUser_details().getName(), Toast.LENGTH_SHORT).show();
-                }
-                Toast.makeText(context, ""+listSeraContentData.get(0).getUser_details().getName(), Toast.LENGTH_SHORT).show();
-
-
-            }
-
-            @Override
-            public void onFailure(Call<List<SeraContentData>> call, Throwable t) {
-                pd.dismiss();
-            }
-        });
-
-
-    }
 
 
 }

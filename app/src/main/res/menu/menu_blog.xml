@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/paribarikAin"
+        android:title="ব্লগ"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/foujdariAin"
+        android:title="অন্যধরা"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/ulumulkuran"
+        android:title="শিশু-কিশোর কর্নার"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/tafsirulkuran"
+        android:title="নারীর কর্নার"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+
+
+</menu>

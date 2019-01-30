@@ -20,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.imamportal.Adapter.AllCommonPostAdapter;
+import com.imamportal.model.AllBlogpostModel;
+import com.imamportal.model.AlquranAlhadits;
 import com.imamportal.model.SantirbaniInfo;
 import com.imamportal.utils.AlertMessage;
 
@@ -131,8 +133,8 @@ public class JobCirculerActivity extends AppCompatActivity {
 
         recyclSantirBani = (RecyclerView) findViewById(R.id.recyclSantirBani);
 
-        List<SantirbaniInfo> questionAnsInfoList = new ArrayList<>();
-        SantirbaniInfo questionAnsInfo = new SantirbaniInfo();
+        List<AllBlogpostModel> questionAnsInfoList = new ArrayList<>();
+        AllBlogpostModel questionAnsInfo = new AllBlogpostModel();
         for (int i = 0; i < 10; i++) {
             questionAnsInfoList.add(i, questionAnsInfo);
         }

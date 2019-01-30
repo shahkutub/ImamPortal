@@ -16,7 +16,17 @@ import android.graphics.RectF;
 import android.util.Base64;
 
 
+import com.google.gson.Gson;
+import com.imamportal.model.AlquranAlhadits;
+import com.imamportal.model.AudioModel;
+import com.imamportal.model.Catagories;
+import com.imamportal.model.VideoModel;
+
+import org.json.JSONArray;
+
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 
 import static android.content.Context.MODE_PRIVATE;
@@ -57,6 +67,10 @@ public class AppConstant {
     public static String activitiname="";
     public static String chatActivityName;
     public static String fcm_token = "fcm_token";
+    public static List<AlquranAlhadits> listAlqranAlhadith = new ArrayList<>();
+    public static List<AudioModel> listAudio = new ArrayList<>();
+    public static List<VideoModel> listVideo = new ArrayList<>();
+    public static String bolgpostName;
 
     public static String BitMapToString(Bitmap bitmap){
         ByteArrayOutputStream baos=new ByteArrayOutputStream();
@@ -191,28 +205,64 @@ public class AppConstant {
 //        return loginData;
 //    }
 //
-//
-//
-//    public static void saveLocationdat(Context con, List<LocationInfo> locationInfos) {
-//        SharedPreferences mPrefs = con.getSharedPreferences("location",MODE_PRIVATE);
-//        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-//        Gson gson = new Gson();
-//        String json = gson.toJson(locationInfos);
-//        prefsEditor.putString("location", json);
-//        prefsEditor.commit();
-//
-//    }
-//
-//
-//    public static List<LocationInfo> getLocationList(Context con){
-//        SharedPreferences mPrefs = con.getSharedPreferences("location",MODE_PRIVATE);
-//        List<LocationInfo> locationInfos = new ArrayList<>();
-//        Gson gson = new Gson();
-//        String json = mPrefs.getString("location", "");
-//        locationInfos = (List<LocationInfo>) gson.fromJson(json, LocationInfo.class);
-//        return locationInfos;
-//    }
-//
+
+
+    //Catagory save
+    public static void saveCatagories(Context con, List<Catagories> locationInfos) {
+        SharedPreferences mPrefs = con.getSharedPreferences("catagory",MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(locationInfos);
+        prefsEditor.putString("catagory", json);
+        prefsEditor.commit();
+
+    }
+
+    //catagory get
+    public static List<Catagories> getCatagories(Context con){
+        SharedPreferences mPrefs = con.getSharedPreferences("catagory",MODE_PRIVATE);
+        List<Catagories> locationInfos = new ArrayList<>();
+        Gson gson = new Gson();
+        String json = mPrefs.getString("catagory", "");
+        locationInfos = (List<Catagories>) gson.fromJson(json, Catagories.class);
+        return locationInfos;
+    }
+
+
+
+    //savelistAlquranAlhadit
+    public static void saveAlQuranAldaithList(Context context, List<AlquranAlhadits> listAlquranAlhadit) {
+        SharedPreferences mPrefs = context.getSharedPreferences("listAlquranAlhadit",MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(listAlquranAlhadit);
+        prefsEditor.putString("listAlquranAlhadit", json);
+        prefsEditor.commit();
+
+    }
+
+    //getlistAlquranAlhadit
+
+    public static List<AlquranAlhadits> getlistAlquranAlhadit(Context con){
+        SharedPreferences mPrefs = con.getSharedPreferences("listAlquranAlhadit",MODE_PRIVATE);
+        List<AlquranAlhadits> locationInfos = new ArrayList<>();
+        Gson gson = new Gson();
+        String json = mPrefs.getString("listAlquranAlhadit", "");
+        locationInfos = (List<AlquranAlhadits>) gson.fromJson(json, AlquranAlhadits.class);
+        return locationInfos;
+    }
+
+
+    public static JSONArray getlistAlquranAlhaditson(Context con){
+        SharedPreferences mPrefs = con.getSharedPreferences("listAlquranAlhadit",MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = mPrefs.getString("listAlquranAlhadit", "");
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.put(json);
+        return jsonArray;
+    }
+
+
 //    private void getImageReto(){
 //
 //        OkHttpClient client = new OkHttpClient();

@@ -1,6 +1,7 @@
 package com.imamportal;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,11 +17,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.imamportal.model.Catagories;
+import com.imamportal.utils.AlertMessage;
+import com.imamportal.utils.Api;
+import com.imamportal.utils.AppConstant;
 import com.imamportal.utils.LocationMgr;
+import com.imamportal.utils.NetInfo;
 
+import java.util.List;
 import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -31,9 +45,9 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class LanguageActivity extends AppCompatActivity {
     private TextView btnBangla,btnEng,btnAr;
-    private static final int PERMISSION_REQUEST_CODE = 200;
-    LocationMgr mgr;
+
     private LinearLayout linBang,linEng,linAr;
+    private RelativeLayout relBg;
     Context context;
     Locale myLocale;
     @Override
@@ -49,6 +63,17 @@ public class LanguageActivity extends AppCompatActivity {
         linBang = (LinearLayout)findViewById(R.id.linBang);
         linEng = (LinearLayout)findViewById(R.id.linEng);
         linAr = (LinearLayout)findViewById(R.id.linAr);
+        relBg = (RelativeLayout) findViewById(R.id.relBg);
+
+
+        relBg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setLocale("bn");
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                finish();
+            }
+        });
 
         linAr.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,11 +104,8 @@ public class LanguageActivity extends AppCompatActivity {
         });
 
 
-        if(!checkPermission()){
-            requestPermission();
-        }
+        //getCatagories();
 
-        statusCheck();
     }
 
 
@@ -99,107 +121,50 @@ public class LanguageActivity extends AppCompatActivity {
         startActivity(refresh);
     }
 
-    public void statusCheck() {
 
-        mgr = new LocationMgr(context);
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkPermission()) {
-                if (mgr.mGoogleApiClient == null) {
-                    mgr.buildGoogleApiClient();
+
+
+    private void getCatagories() {
+
+        if(!NetInfo.isOnline(context)){
+            AlertMessage.showMessage(context,"Alert!","No internet connection!");
+        }
+
+        final ProgressDialog pd = new ProgressDialog(context);
+        pd.setMessage("Loading....");
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.show();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Api api = retrofit.create(Api.class);
+        Call<List<Catagories>> userCall = api.categorys();
+        userCall.enqueue(new Callback<List<Catagories>>() {
+            @Override
+            public void onResponse(Call<List<Catagories>> call, Response<List<Catagories>> response) {
+                pd.dismiss();
+
+                List<Catagories>  listCatagories = response.body();
+
+                if(listCatagories!=null){
+                    AppConstant.saveCatagories(context,listCatagories);
+
                 }
 
-//                Intent intent = new Intent(getApplicationContext(), GoogleService.class);
-//                startService(intent);
             }
-        } else {
 
-            requestPermission();
-//            if (mgr.mGoogleApiClient == null) {
-//                mgr.buildGoogleApiClient();
-//            }
-        }
-
-    }
-
-    private boolean checkPermission() {
-        int result = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_FINE_LOCATION);
-        int result1 = ContextCompat.checkSelfPermission(getApplicationContext(), CAMERA);
-        int result2 = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_COARSE_LOCATION);
-        int result3 = ContextCompat.checkSelfPermission(getApplicationContext(), READ_EXTERNAL_STORAGE);
-        int result4 = ContextCompat.checkSelfPermission(getApplicationContext(), WRITE_EXTERNAL_STORAGE);
-
-        return result == PackageManager.PERMISSION_GRANTED
-                && result1 == PackageManager.PERMISSION_GRANTED
-                && result2 == PackageManager.PERMISSION_GRANTED
-                && result3 == PackageManager.PERMISSION_GRANTED
-                && result4 == PackageManager.PERMISSION_GRANTED;
-
-    }
+            @Override
+            public void onFailure(Call<List<Catagories>> call, Throwable t) {
 
 
-    private void requestPermission() {
-
-        ActivityCompat.requestPermissions(this, new String[]{ACCESS_FINE_LOCATION, CAMERA,
-                        ACCESS_COARSE_LOCATION,READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE},
-                PERMISSION_REQUEST_CODE);
-
-    }
+                pd.dismiss();
+            }
+        });
 
 
-    @SuppressLint("MissingPermission")
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case PERMISSION_REQUEST_CODE:
-                if (grantResults.length > 0) {
-
-                    boolean locationAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                    boolean cameraAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
-                    boolean readPhoneAccepted = grantResults[2] == PackageManager.PERMISSION_GRANTED;
-
-                    //  Toast.makeText(con, ""+imei, Toast.LENGTH_SHORT).show();
-
-                    if (locationAccepted && cameraAccepted && readPhoneAccepted) {
-                        // Snackbar.make(view, "Permission Granted, Now you can access location data and camera.", Snackbar.LENGTH_LONG).show();
-                        if (mgr.mGoogleApiClient == null) {
-                            mgr.buildGoogleApiClient();
-                        }
-                    } else {
-
-                        //Snackbar.make(view, "Permission Denied, You cannot access location data and camera.", Snackbar.LENGTH_LONG).show();
-
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            if (shouldShowRequestPermissionRationale(CAMERA)) {
-                                showMessageOKCancel("You need to allow access to both the permissions",
-                                        new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                                    requestPermissions(new String[]{ACCESS_FINE_LOCATION, CAMERA, READ_PHONE_STATE},
-                                                            PERMISSION_REQUEST_CODE);
-                                                }
-                                            }
-                                        });
-                                return;
-                            }
-                        }
-
-                    }
-                }
-
-
-                break;
-        }
-    }
-
-
-    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
-        new AlertDialog.Builder(getApplicationContext())
-                .setMessage(message)
-                .setPositiveButton("OK", okListener)
-                .setNegativeButton("Cancel", null)
-                .create()
-                .show();
     }
 
 }

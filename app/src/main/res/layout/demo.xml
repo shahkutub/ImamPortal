@@ -108,7 +108,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linBlog"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -116,6 +116,7 @@
         >
 
         <LinearLayout
+            android:id="@+id/linBlog"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="@dimen/_95sdp"
@@ -127,7 +128,7 @@
             <ImageView
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="@dimen/_50sdp"
-                app:srcCompat="@drawable/ic_blogg"
+                app:srcCompat="@drawable/blogger"
                 />
 
             <TextView

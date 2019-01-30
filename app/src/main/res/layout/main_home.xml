@@ -217,7 +217,7 @@
                 />
 
             <TextView
-                android:text="হে ইমানদারগণ, তোমরা শান্তির পথ ইসলামে প্রবেশ করো। [সূরা বাকারা-আয়াত ২০৮]"
+                android:text=""
                 android:id="@+id/MarqueeText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -258,6 +258,7 @@
                     android:background="@drawable/shadow"
                     android:layout_below="@+id/linNoticeview"
                    android:layout_marginTop="@dimen/_2sdp"
+                    android:visibility="gone"
 
                     />
 

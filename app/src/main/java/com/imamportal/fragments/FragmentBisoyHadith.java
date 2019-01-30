@@ -12,28 +12,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.imamportal.Adapter.AdapterQuranPath;
-import com.imamportal.Adapter.AllCommonPostAdapter;
 import com.imamportal.Adapter.AlquranAldadithPostAdapter;
 import com.imamportal.R;
 import com.imamportal.model.AlquranAlhadits;
-import com.imamportal.model.SantirbaniInfo;
 import com.imamportal.utils.AppConstant;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class FragmentQuranPath extends Fragment {
+public class FragmentBisoyHadith extends Fragment {
 
     private RecyclerView recyclSantirBani;
     private TextView tvTotalBani,tvName;
     Context context;
-
-    public FragmentQuranPath() {
-
-
-    }
 
 
     @Override
@@ -89,9 +81,10 @@ public class FragmentQuranPath extends Fragment {
 
         for (int i = 0; i < AppConstant.listAlqranAlhadith.size(); i++) {
 
-                if(AppConstant.listAlqranAlhadith.get(i).getCategory_id().equalsIgnoreCase("41")){
+                if(AppConstant.listAlqranAlhadith.get(i).getCategory_id().equalsIgnoreCase("44")){
                     dataListList.add(AppConstant.listAlqranAlhadith.get(i));
-                }
+
+            }
 
         }
 
@@ -103,6 +96,7 @@ public class FragmentQuranPath extends Fragment {
                 LinearLayoutManager.VERTICAL, false);
         recyclSantirBani.setLayoutManager(horizontalLayoutManager);
         recyclSantirBani.setAdapter(questionAnsAdapter);
+
     }
 
 }
