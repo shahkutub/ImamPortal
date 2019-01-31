@@ -116,6 +116,14 @@
             android:screenOrientation="portrait" />
 
 
+         <activity
+            android:name=".BlogActivity"
+            android:label="@string/title_activity_quiz_bijoyee"
+            android:screenOrientation="portrait" />
+
+
+
+
             <activity
                 android:name=".ApnarPoramorsoActivity"
                 android:label="@string/title_activity_quiz_bijoyee"

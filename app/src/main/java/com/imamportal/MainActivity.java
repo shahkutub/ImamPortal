@@ -877,20 +877,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                PopupMenu popup = new PopupMenu(context,v);
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem menuItem) {
+                startActivity(new Intent(context,BlogActivity.class));
 
-                        String value = menuItem.getTitle().toString();
-                        AppConstant.activitiname=value;
-                        startActivity(new Intent(context,AllCommonPostActivity.class));
-                        return true;
-                    }
-                });
-                MenuInflater inflater = popup.getMenuInflater();
-                inflater.inflate(R.menu.menu_blog, popup.getMenu());
-                popup.show();
+//                PopupMenu popup = new PopupMenu(context,v);
+//                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+//                    @Override
+//                    public boolean onMenuItemClick(MenuItem menuItem) {
+//
+//                        String value = menuItem.getTitle().toString();
+//                        AppConstant.activitiname=value;
+//                        startActivity(new Intent(context,AllCommonPostActivity.class));
+//                        return true;
+//                    }
+//                });
+//                MenuInflater inflater = popup.getMenuInflater();
+//                inflater.inflate(R.menu.menu_blog, popup.getMenu());
+//                popup.show();
             }
         });
 

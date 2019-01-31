@@ -29,14 +29,14 @@
     <item>
         <shape>
             <padding android:top="@dimen/_1sdp" android:right="@dimen/_1sdp" android:bottom="@dimen/_1sdp" android:left="@dimen/_1sdp" />
-            <solid android:color="#50CCCCCC" />
+            <solid android:color="#fff" />
         </shape>
     </item>
 
     <!-- Background -->
     <item>
         <shape>
-            <solid android:color="#352855" />
+            <solid android:color="#1A1B1B" />
             <corners android:radius="3dp" />
         </shape>
     </item>

@@ -195,7 +195,7 @@
 
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/linQuesAns"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -203,6 +203,7 @@
         >
 
         <LinearLayout
+            android:id="@+id/linQuesAns"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="@dimen/_95sdp"
@@ -236,6 +237,7 @@
             android:background="@drawable/shadow"
             android:orientation="vertical"
             android:gravity="center"
+            android:visibility="gone"
 
             >
 
