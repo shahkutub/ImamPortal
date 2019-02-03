@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.imamportal.fragments.Fragment333Giggasa;
 import com.imamportal.fragments.FragmentBataoneJiggasa;
 import com.imamportal.fragments.FragmentBisoyHadith;
 import com.imamportal.fragments.FragmentHadiseQudsi;
@@ -67,12 +68,12 @@ public class ApnarGiggasaActivity extends AppCompatActivity {
 
         TextView tabOne = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
         tabOne.setText("বাতায়নে জিজ্ঞাসা");
-        tabOne.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_nari, 0, 0);
+        //tabOne.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_nari, 0, 0);
         tabLayout.getTabAt(0).setCustomView(tabOne);
 
         TextView tabTwo = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
         tabTwo.setText("৩৩৩ - তে জিজ্ঞাসা");
-        tabTwo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_children, 0, 0);
+        //tabTwo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_children, 0, 0);
         tabLayout.getTabAt(1).setCustomView(tabTwo);
 
     }
@@ -80,7 +81,7 @@ public class ApnarGiggasaActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new FragmentBataoneJiggasa(), "বাতায়নে জিজ্ঞাসা");
-        adapter.addFragment(new FragmentBataoneJiggasa(), "৩৩৩ - তে জিজ্ঞাসা");
+        adapter.addFragment(new Fragment333Giggasa(), "৩৩৩ - তে জিজ্ঞাসা");
         //adapter.addFragment(new FragmentBisoyHadith(), getString(R.string.onnodhara));
         //adapter.addFragment(new FragmentOnnanoHadith(), "অন্যান্য");
         viewPager.setAdapter(adapter);

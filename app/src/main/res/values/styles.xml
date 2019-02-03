@@ -79,7 +79,12 @@
         <item name="actionMenuTextColor">#519606</item>
 
         <item name="android:textColorSecondary">#fff</item>
-
-
     </style>
+
+
+    <style name="Theme_Dialog" parent="android:Theme.Holo.Dialog">
+        <item name="android:windowMinWidthMajor">100%</item>
+        <item name="android:windowMinWidthMinor">100%</item>
+    </style>
+
 </resources>

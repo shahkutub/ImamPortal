@@ -7,7 +7,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/subhanallahbg"
     >
 
 
@@ -156,7 +155,7 @@
             <ImageView
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="@dimen/_50sdp"
-                app:srcCompat="@drawable/ic_content"
+                app:srcCompat="@drawable/ic_masala"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -230,26 +229,25 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linTodayQues"
+            android:id="@+id/linJobCirculer"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="@dimen/_95sdp"
             android:background="@drawable/shadow"
             android:orientation="vertical"
             android:gravity="center"
-            android:visibility="gone"
 
             >
 
             <ImageView
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="@dimen/_50sdp"
-                app:srcCompat="@drawable/ic_suggestion"
+                app:srcCompat="@drawable/ic_job_search"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/ajkerprosno"
+                android:text="চাকুরীর বিজ্ঞপ্তি"
                 android:textSize="@dimen/_10sdp"
                 android:textColor="#000"
                 android:gravity="center"

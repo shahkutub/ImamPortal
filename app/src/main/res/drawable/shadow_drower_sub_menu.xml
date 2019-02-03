@@ -2,24 +2,24 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Drop Shadow Stack -->
-    <item>
-        <shape>
-            <padding android:top="@dimen/_1sdp" android:right="@dimen/_1sdp" android:bottom="@dimen/_1sdp" android:left="@dimen/_1sdp" />
-            <solid android:color="#D4D4D4" />
-        </shape>
-    </item>
-    <item>
-        <shape>
-            <padding android:top="@dimen/_1sdp" android:right="@dimen/_1sdp" android:bottom="@dimen/_1sdp" android:left="@dimen/_1sdp" />
-            <solid android:color="#D1D1D1" />
-        </shape>
-    </item>
-    <item>
-        <shape>
-            <padding android:top="@dimen/_1sdp" android:right="@dimen/_1sdp" android:bottom="@dimen/_1sdp" android:left="@dimen/_1sdp" />
-            <solid android:color="#D2D2D2" />
-        </shape>
-    </item>
+    <!--<item>-->
+        <!--<shape>-->
+            <!--<padding android:top="@dimen/_1sdp" android:right="@dimen/_1sdp" android:bottom="@dimen/_1sdp" android:left="@dimen/_1sdp" />-->
+            <!--<solid android:color="#D4D4D4" />-->
+        <!--</shape>-->
+    <!--</item>-->
+    <!--<item>-->
+        <!--<shape>-->
+            <!--<padding android:top="@dimen/_1sdp" android:right="@dimen/_1sdp" android:bottom="@dimen/_1sdp" android:left="@dimen/_1sdp" />-->
+            <!--<solid android:color="#D1D1D1" />-->
+        <!--</shape>-->
+    <!--</item>-->
+    <!--<item>-->
+        <!--<shape>-->
+            <!--<padding android:top="@dimen/_1sdp" android:right="@dimen/_1sdp" android:bottom="@dimen/_1sdp" android:left="@dimen/_1sdp" />-->
+            <!--<solid android:color="#D2D2D2" />-->
+        <!--</shape>-->
+    <!--</item>-->
     <item>
         <shape>
             <padding android:top="@dimen/_1sdp" android:right="@dimen/_1sdp" android:bottom="@dimen/_1sdp" android:left="@dimen/_1sdp" />

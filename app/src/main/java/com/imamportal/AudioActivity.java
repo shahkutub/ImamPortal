@@ -54,11 +54,6 @@ public class AudioActivity extends AppCompatActivity {
         setContentView(R.layout.audio);
         context=this;
         overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
-        audios();
-
-    }
-
-    private void initUi() {
 
         imgBack = (ImageView)findViewById(R.id.imgBack);
         imgBack.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +62,13 @@ public class AudioActivity extends AppCompatActivity {
                 finish();
             }
         });
+        audios();
+
+    }
+
+    private void initUi() {
+
+
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 

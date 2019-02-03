@@ -1,6 +1,8 @@
 package com.imamportal.fragments;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.imamportal.R;
@@ -15,10 +18,10 @@ import com.imamportal.R;
 
 public class Fragment333Giggasa extends Fragment {
 
-    private RecyclerView recyclSantirBani;
-    private TextView tvTotalBani,tvName;
+
     Context context;
 
+    private ImageView imgCall;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,7 +34,7 @@ public class Fragment333Giggasa extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        return inflater.inflate(R.layout.activity_apnar_giggasa, container, false);
+        return inflater.inflate(R.layout.call_333, container, false);
 
     }
 
@@ -65,29 +68,17 @@ public class Fragment333Giggasa extends Fragment {
     }
 
     private void initUi() {
-//
-//        tvTotalBani = (TextView) getView().findViewById(R.id.tvTotalBani);
-//        recyclSantirBani = (RecyclerView) getView().findViewById(R.id.recyclSantirBani);
-//
-//        List<AudioModel> dataListList = new ArrayList<>();
-//
-//        for (int i = 0; i < AppConstant.listAudio.size(); i++) {
-//
-//            if(AppConstant.listAudio.get(i).getCategory_id()==null){
-//                dataListList.add(AppConstant.listAudio.get(i));
-//
-//            }
-//
-//        }
-//
-//        int size = dataListList.size();
-//        tvTotalBani.setText("সর্বমোট "+AppConstant.activitiname+size+" টি");
-//
-//        AudioAdapter questionAnsAdapter = new AudioAdapter(dataListList,context);
-//        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(context,
-//                LinearLayoutManager.VERTICAL, false);
-//        recyclSantirBani.setLayoutManager(horizontalLayoutManager);
-//        recyclSantirBani.setAdapter(questionAnsAdapter);
+
+        imgCall = (ImageView) getView().findViewById(R.id.imgCall);
+        imgCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:"+333));//change the number
+                startActivity(callIntent);
+            }
+        });
+
 
     }
 

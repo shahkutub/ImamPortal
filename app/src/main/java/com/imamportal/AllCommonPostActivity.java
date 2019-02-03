@@ -113,8 +113,10 @@ public class AllCommonPostActivity extends AppCompatActivity {
                     //পারিবারিক আইন
                     for (int i = 0; i < listAlblog.size(); i++) {
                         if(AppConstant.bolgpostName.equalsIgnoreCase("পারিবারিক আইন")){
-                            if(listAlblog.get(i).getCategory_id().equalsIgnoreCase("39")){
-                                listShowData.add(listAlblog.get(i));
+                            if(listAlblog.get(i).getCategory_id()!=null){
+                                if(listAlblog.get(i).getCategory_id().equalsIgnoreCase("39")){
+                                    listShowData.add(listAlblog.get(i));
+                                }
                             }
                         }
                     }
@@ -123,20 +125,26 @@ public class AllCommonPostActivity extends AppCompatActivity {
                     //পারিবারিক আইন
                     for (int i = 0; i < listAlblog.size(); i++) {
                         if(AppConstant.bolgpostName.equalsIgnoreCase("ফৌজদারি আইন")){
-                            if(listAlblog.get(i).getCategory_id().equalsIgnoreCase("40")){
-                                listShowData.add(listAlblog.get(i));
+                            if(listAlblog.get(i).getCategory_id()!=null){
+                                if(listAlblog.get(i).getCategory_id().equalsIgnoreCase("40")){
+                                    listShowData.add(listAlblog.get(i));
+                                }
                             }
+
                         }
                     }
 
 
 
-                    //পারিবারিক আইন
+                    //ইসলামিক অর্থনীত
                     for (int i = 0; i < listAlblog.size(); i++) {
                         if(AppConstant.bolgpostName.equalsIgnoreCase("ইসলামিক অর্থনীত")){
-                            if(listAlblog.get(i).getCategory_id().equalsIgnoreCase("32")){
-                                listShowData.add(listAlblog.get(i));
+                            if(listAlblog.get(i).getCategory_id()!=null){
+                                if(listAlblog.get(i).getCategory_id().equalsIgnoreCase("32")){
+                                    listShowData.add(listAlblog.get(i));
+                                }
                             }
+
                         }
                     }
 
@@ -144,9 +152,12 @@ public class AllCommonPostActivity extends AppCompatActivity {
                     //পারিবারিক আইন
                     for (int i = 0; i < listAlblog.size(); i++) {
                         if(AppConstant.bolgpostName.equalsIgnoreCase("দাওয়াত")){
-                            if(listAlblog.get(i).getCategory_id().equalsIgnoreCase("33")){
-                                listShowData.add(listAlblog.get(i));
+                            if(listAlblog.get(i).getCategory_id()!=null){
+                                if(listAlblog.get(i).getCategory_id().equalsIgnoreCase("33")){
+                                    listShowData.add(listAlblog.get(i));
+                                }
                             }
+
                         }
                     }
 
@@ -154,9 +165,12 @@ public class AllCommonPostActivity extends AppCompatActivity {
                     //পারিবারিক আইন
                     for (int i = 0; i < listAlblog.size(); i++) {
                         if(AppConstant.bolgpostName.equalsIgnoreCase("পরিবার ও সমাজ")){
-                            if(listAlblog.get(i).getCategory_id().equalsIgnoreCase("34")){
-                                listShowData.add(listAlblog.get(i));
+                            if(listAlblog.get(i).getCategory_id()!=null){
+                                if(listAlblog.get(i).getCategory_id().equalsIgnoreCase("34")){
+                                    listShowData.add(listAlblog.get(i));
+                                }
                             }
+
                         }
                     }
 
@@ -164,9 +178,12 @@ public class AllCommonPostActivity extends AppCompatActivity {
                     //ঈমান ও আকীদাহ
                     for (int i = 0; i < listAlblog.size(); i++) {
                         if(AppConstant.bolgpostName.equalsIgnoreCase("ঈমান ও আকীদাহ")){
-                            if(listAlblog.get(i).getCategory_id().equalsIgnoreCase("35")){
-                                listShowData.add(listAlblog.get(i));
+                            if(listAlblog.get(i).getCategory_id()!=null){
+                                if(listAlblog.get(i).getCategory_id().equalsIgnoreCase("35")){
+                                    listShowData.add(listAlblog.get(i));
+                                }
                             }
+
                         }
                     }
 
@@ -174,9 +191,149 @@ public class AllCommonPostActivity extends AppCompatActivity {
                     //চরিত্র
                     for (int i = 0; i < listAlblog.size(); i++) {
                         if(AppConstant.bolgpostName.equalsIgnoreCase("চরিত্র")){
-                            if(listAlblog.get(i).getCategory_id().equalsIgnoreCase("35")){
-                                listShowData.add(listAlblog.get(i));
+                            if(listAlblog.get(i).getCategory_id()!=null){
+                                if(listAlblog.get(i).getCategory_id().equalsIgnoreCase("35")){
+                                    listShowData.add(listAlblog.get(i));
+                                }
                             }
+
+                        }
+                    }
+
+
+                    //kitab
+                    // হিফজুল কোরান
+
+                    for (int i = 0; i < listAlblog.size(); i++) {
+                        if(AppConstant.bolgpostName.equalsIgnoreCase("হিফজুল কোরান")){
+                            if(listAlblog.get(i).getCategory_id()!=null){
+                                if(listAlblog.get(i).getCategory_id().equalsIgnoreCase("49")){
+                                    listShowData.add(listAlblog.get(i));
+                                }
+                            }
+
+                        }
+                    }
+
+                    // আল-কোরানের সরল অনুবাদ
+
+                    for (int i = 0; i < listAlblog.size(); i++) {
+                        if(AppConstant.bolgpostName.equalsIgnoreCase("আল-কোরানের সরল অনুবাদ")){
+                            if(listAlblog.get(i).getCategory_id()!=null){
+                                if(listAlblog.get(i).getCategory_id().equalsIgnoreCase("50")){
+                                    listShowData.add(listAlblog.get(i));
+                                }
+                            }
+
+                        }
+                    }
+
+
+
+                    //উলুমুল কোরান
+                    for (int i = 0; i < listAlblog.size(); i++) {
+                        if(AppConstant.bolgpostName.equalsIgnoreCase("উলুমুল কোরান")){
+                            if(listAlblog.get(i).getCategory_id()!=null){
+                                if(listAlblog.get(i).getCategory_id().equalsIgnoreCase("51")){
+                                    listShowData.add(listAlblog.get(i));
+                                }
+                            }
+
+                        }
+                    }
+
+
+
+                    //তাফসীরুল কোরান
+                    for (int i = 0; i < listAlblog.size(); i++) {
+                        if(AppConstant.bolgpostName.equalsIgnoreCase("তাফসীরুল কোরান")){
+                            if(listAlblog.get(i).getCategory_id()!=null){
+                                if(listAlblog.get(i).getCategory_id().equalsIgnoreCase("52")){
+                                    listShowData.add(listAlblog.get(i));
+                                }
+                            }
+
+                        }
+                    }
+
+
+                    //জামে তিরমিযী
+                    for (int i = 0; i < listAlblog.size(); i++) {
+                        if(AppConstant.bolgpostName.equalsIgnoreCase("জামে তিরমিযী")){
+                            if(listAlblog.get(i).getCategory_id()!=null){
+                                if(listAlblog.get(i).getCategory_id().equalsIgnoreCase("54")){
+                                    listShowData.add(listAlblog.get(i));
+                                }
+                            }
+
+                        }
+                    }
+
+
+                    //বোখারী শরীফ
+                    for (int i = 0; i < listAlblog.size(); i++) {
+                        if(AppConstant.bolgpostName.equalsIgnoreCase("বোখারী শরীফ")){
+                            if(listAlblog.get(i).getCategory_id()!=null){
+                                if(listAlblog.get(i).getCategory_id().equalsIgnoreCase("55")){
+                                    listShowData.add(listAlblog.get(i));
+                                }
+                            }
+
+                        }
+                    }
+
+
+                    //মুসলিম শরীফ
+                    for (int i = 0; i < listAlblog.size(); i++) {
+                        if(AppConstant.bolgpostName.equalsIgnoreCase("মুসলিম শরীফ")){
+                            if(listAlblog.get(i).getCategory_id()!=null){
+                                if(listAlblog.get(i).getCategory_id().equalsIgnoreCase("56")){
+                                    listShowData.add(listAlblog.get(i));
+                                }
+                            }
+
+                        }
+                    }
+
+
+
+                    //সুনানে আবু দাউদ
+                    for (int i = 0; i < listAlblog.size(); i++) {
+                        if(AppConstant.bolgpostName.equalsIgnoreCase("সুনানে আবু দাউদ")){
+                            if(listAlblog.get(i).getCategory_id()!=null){
+                                if(listAlblog.get(i).getCategory_id().equalsIgnoreCase("57")){
+                                    listShowData.add(listAlblog.get(i));
+                                }
+                            }
+
+                        }
+                    }
+
+
+
+                    //সুনানুন নাসায়ী
+                    for (int i = 0; i < listAlblog.size(); i++) {
+                        if(AppConstant.bolgpostName.equalsIgnoreCase("সুনানুন নাসায়ী")){
+                            if(listAlblog.get(i).getCategory_id()!=null){
+                                if(listAlblog.get(i).getCategory_id().equalsIgnoreCase("58")){
+                                    listShowData.add(listAlblog.get(i));
+                                }
+                            }
+
+                        }
+                    }
+
+
+
+                    //সুনানে ইবনে মাযা
+                    for (int i = 0; i < listAlblog.size(); i++) {
+                        if(AppConstant.bolgpostName.equalsIgnoreCase("সুনানে ইবনে মাযা")){
+                            if(listAlblog.get(i).getCategory_id()!=null){
+                                if(listAlblog.get(i).getCategory_id().equalsIgnoreCase("59")){
+                                    listShowData.add(listAlblog.get(i));
+                                }
+                            }
+
                         }
                     }
 

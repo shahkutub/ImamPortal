@@ -1,117 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:paddingBottom="@dimen/_5sdp"
-        android:paddingLeft="@dimen/_15sdp"
-        android:paddingRight="@dimen/_15sdp"
-        android:background="#614A7C"
-        >
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="@dimen/_90sdp"
-            android:layout_height="@dimen/_90sdp"
-            android:src="@drawable/imam"
-            android:layout_marginTop="@dimen/_25sdp"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="superadmin "
-            android:textSize="@dimen/_15sdp"
-            android:textColor="#fff"
-            />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_1sdp"
-            android:background="#fff"
-            android:visibility="gone"
-            android:layout_marginTop="@dimen/_3sdp"
-            />
+        android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/linLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:background="#614A7C"
             android:gravity="center"
-            android:padding="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_2sdp"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/_5sdp"
+            android:paddingLeft="@dimen/_15sdp"
+            android:paddingRight="@dimen/_15sdp">
 
-            >
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_90sdp"
+                android:layout_marginTop="@dimen/_25sdp"
+                android:src="@drawable/imam" />
 
-            <ImageView
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                app:srcCompat="@drawable/ic_loin"
-                android:visibility="gone"
-                />
             <TextView
-                android:id="@+id/tvLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/login"
-                android:textSize="@dimen/_15sdp"
-                android:visibility="gone"
-                android:textColor="#fff"/>
-
-            <TextView
-                android:id="@+id/tvLogOut"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:visibility="gone"
-                android:text="@string/logout"
-                android:textSize="@dimen/_15sdp"
+                android:text="superadmin "
                 android:textColor="#fff"
+                android:textSize="@dimen/_15sdp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:background="#fff"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/linLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/_5sdp"
+
+                >
+
+                <ImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/ic_loin" />
+
+                <TextView
+                    android:id="@+id/tvLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/login"
+                    android:textColor="#fff"
+                    android:textSize="@dimen/_15sdp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tvLogOut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/logout"
+                    android:textColor="#fff"
+                    android:textSize="@dimen/_15sdp"
+                    android:visibility="gone" />
                 />
-                />
+            </LinearLayout>
+
+
         </LinearLayout>
-
-
-    </LinearLayout>
-
-
 
 
         <LinearLayout
             android:id="@+id/linRegistration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:padding="@dimen/_5sdp"
-            android:background="@drawable/reple_effect_drower"
-            android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginLeft="@dimen/_5sdp"
             android:layout_marginRight="@dimen/_5sdp"
-            >
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/reple_effect_drower"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/_5sdp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/_1sdp"
                 android:gravity="center"
                 android:text="@string/registration"
-                android:textSize="@dimen/_15sdp"
                 android:textColor="#000"
-                android:layout_marginRight="@dimen/_1sdp"
-                />
+                android:textSize="@dimen/_15sdp" />
 
         </LinearLayout>
 
@@ -119,224 +111,213 @@
             android:id="@+id/linAmarPata"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:visibility="gone"
-            android:padding="@dimen/_5sdp"
-            android:background="@drawable/reple_effect_drower"
-            android:layout_marginTop="@dimen/_3sdp"
             android:layout_marginLeft="@dimen/_5sdp"
             android:layout_marginRight="@dimen/_5sdp"
-            >
+            android:layout_marginTop="@dimen/_3sdp"
+            android:background="@drawable/reple_effect_drower"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/_5sdp"
+            android:visibility="gone">
+
             <TextView
                 android:id="@+id/tvAmarpata"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/amarpata"
-                android:textSize="@dimen/_15sdp"
                 android:textColor="#000"
-                />
+                android:textSize="@dimen/_15sdp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:padding="@dimen/_3sdp"
-            android:background="@drawable/reple_effect_drower"
-            android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginLeft="@dimen/_5sdp"
             android:layout_marginRight="@dimen/_5sdp"
-            >
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/reple_effect_drower"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/_3sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/_1sdp"
+                android:gravity="center"
+                android:text="@string/member"
+                android:textColor="#000"
+                android:textSize="@dimen/_15sdp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:background="@drawable/reple_effect_drower"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/_5sdp"
+            android:visibility="gone">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="@string/member"
-                android:textSize="@dimen/_15sdp"
+                android:text="@string/helpline"
                 android:textColor="#000"
-                android:layout_marginRight="@dimen/_1sdp"
-                />
+                android:textSize="@dimen/_15sdp" />
 
         </LinearLayout>
 
-<LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:padding="@dimen/_5sdp"
-            android:background="@drawable/reple_effect_drower"
-            android:layout_marginTop="@dimen/_3sdp"
-            android:layout_marginLeft="@dimen/_5sdp"
-            android:layout_marginRight="@dimen/_5sdp"
-            >
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/helpline"
-        android:textSize="@dimen/_15sdp"
-        android:textColor="#000"
-        />
-
-</LinearLayout>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1sdp"
-            android:background="#000"
             android:layout_marginTop="@dimen/_10sdp"
-            />
+            android:background="#000" />
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:padding="@dimen/_3sdp"
-            android:background="@drawable/reple_effect_drower"
-            android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginLeft="@dimen/_5sdp"
             android:layout_marginRight="@dimen/_5sdp"
-            >
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/reple_effect_drower"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/_3sdp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/_1sdp"
                 android:gravity="center"
                 android:text="সর্বশেষ"
-                android:textSize="@dimen/_15sdp"
                 android:textColor="#000"
-                android:layout_marginRight="@dimen/_1sdp"
-                />
+                android:textSize="@dimen/_15sdp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:padding="@dimen/_5sdp"
-            android:background="@drawable/reple_effect_drower"
-            android:layout_marginTop="@dimen/_3sdp"
             android:layout_marginLeft="@dimen/_5sdp"
             android:layout_marginRight="@dimen/_5sdp"
-            >
+            android:layout_marginTop="@dimen/_3sdp"
+            android:background="@drawable/reple_effect_drower"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/_5sdp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="অনুসন্ধানের ইতিহাস"
-                android:textSize="@dimen/_15sdp"
                 android:textColor="#000"
-                />
+                android:textSize="@dimen/_15sdp" />
 
         </LinearLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1sdp"
-            android:background="#000"
             android:layout_marginTop="@dimen/_10sdp"
+            android:background="#000"
 
             />
 
 
         <LinearLayout
-            android:onClick="shareApp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:padding="@dimen/_3sdp"
-            android:background="@drawable/reple_effect_drower"
-            android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginLeft="@dimen/_5sdp"
             android:layout_marginRight="@dimen/_5sdp"
-            >
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/reple_effect_drower"
+            android:gravity="center_vertical"
+            android:onClick="shareApp"
+            android:orientation="horizontal"
+            android:padding="@dimen/_3sdp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/_1sdp"
                 android:gravity="center"
                 android:text="অ্যাপটি শেয়ার করুন"
-                android:textSize="@dimen/_15sdp"
                 android:textColor="#000"
-                android:layout_marginRight="@dimen/_1sdp"
-                />
+                android:textSize="@dimen/_15sdp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:padding="@dimen/_5sdp"
-            android:background="@drawable/reple_effect_drower"
-            android:layout_marginTop="@dimen/_3sdp"
             android:layout_marginLeft="@dimen/_5sdp"
             android:layout_marginRight="@dimen/_5sdp"
-            >
+            android:layout_marginTop="@dimen/_3sdp"
+            android:background="@drawable/reple_effect_drower"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/_5sdp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="সেটিংস"
-                android:textSize="@dimen/_15sdp"
                 android:textColor="#000"
-                />
+                android:textSize="@dimen/_15sdp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:padding="@dimen/_3sdp"
-            android:background="@drawable/reple_effect_drower"
-            android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginLeft="@dimen/_5sdp"
             android:layout_marginRight="@dimen/_5sdp"
-            >
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/reple_effect_drower"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/_3sdp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/_1sdp"
                 android:gravity="center"
                 android:text="প্রাইভেসী পলিসি"
-                android:textSize="@dimen/_15sdp"
                 android:textColor="#000"
-                android:layout_marginRight="@dimen/_1sdp"
-                />
+                android:textSize="@dimen/_15sdp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:padding="@dimen/_5sdp"
-            android:background="@drawable/reple_effect_drower"
-            android:layout_marginTop="@dimen/_3sdp"
             android:layout_marginLeft="@dimen/_5sdp"
             android:layout_marginRight="@dimen/_5sdp"
-            >
+            android:layout_marginTop="@dimen/_3sdp"
+            android:background="@drawable/reple_effect_drower"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/_5sdp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="অ্যাপ সম্পর্কে"
-                android:textSize="@dimen/_15sdp"
                 android:textColor="#000"
-                />
+                android:textSize="@dimen/_15sdp" />
 
         </LinearLayout>
 

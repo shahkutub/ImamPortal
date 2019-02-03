@@ -28,6 +28,7 @@ import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
@@ -85,55 +86,56 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
-    private TabLayout tabMoulikBisoy,tabSopmadokio;
-    private RelativeLayout relIslamMoulikBisoy,relTabSopmpadokio;
-    String moulikTitle,detailMoulik;
+    private TabLayout tabMoulikBisoy, tabSopmadokio;
+    private RelativeLayout relIslamMoulikBisoy, relTabSopmpadokio;
+    String moulikTitle, detailMoulik;
     //private PagerTabsIndicator tabsIndicator;
     private ViewPager viewPager;
     private NavigationView navigationView;
     private DrawerLayout drawer;
 
     //private SearchView searchView;
-    private ImageView imgSearch,imgCancel,imgGoSearch;
+    private ImageView imgSearch, imgCancel, imgGoSearch;
     private LinearLayout linSearch;
     //private MaterialSearchView search_view;
     AutoCompleteTextView autocoEditView;
 
-    LinearLayout linNoticeview,linFojor,linJohor,linAsor,linMagrib,linIsha,linMsgFloating,linKitabsomuho,linDokhotaSomuho,linIslamMenus,
-            linMasalaMenus,linAskQues,linBlog,linMasael,linQuesAns,linTodayQues,linQuize,
-            relSisukisur,relOnndhra,linIslam,linSompadokio,linNarikornar,linVideo,linAudio,linDokhotarGolpo,
-            linKitab,linphotogalary,linAlQran,linAHadith,linSantirbani;
+    LinearLayout linNoticeview, linFojor, linJohor, linAsor, linMagrib, linIsha, linMsgFloating, linKitabsomuho,
+            linDokhotaSomuho, linIslamMenus,
+            linMasalaMenus, linAskQues, linBlog, linMasael, linQuesAns, linJobCirculer, linQuize,
+            relSisukisur, relOnndhra, linIslam, linSompadokio, linNarikornar, linVideo, linAudio, linDokhotarGolpo,
+            linKitab, linphotogalary, linAlQran, linAHadith, linSantirbani;
     //relKitab,relDokhota,relIslam,relMasala,relIslamicAin,relAlKural,relHadithGrontho,relProfile,
-    RelativeLayout relSompadokio,relNotification,linAutoserch;
-    TextView tvFojorTime,tvJohorTime,tvAsorTime,tvMagribTime,tvIshaTime,tvReminder;
-    private ImageView imgKitabArow,imgDokhotaArow,imgIslamArow,imgMasala;
+    RelativeLayout relSompadokio, relNotification, linAutoserch;
+    TextView tvFojorTime, tvJohorTime, tvAsorTime, tvMagribTime, tvIshaTime, tvReminder;
+    private ImageView imgKitabArow, imgDokhotaArow, imgIslamArow, imgMasala;
     String fajor, johor, asor, magrib, isha;
-    private ViewPager launchViewpager,viewpagerDate;
-   // int[] imageRSC = {R.drawable.mosqu, R.drawable.sl1, R.drawable.sl2};
+    private ViewPager launchViewpager, viewpagerDate;
+    // int[] imageRSC = {R.drawable.mosqu, R.drawable.sl1, R.drawable.sl2};
     String[] names = {"sadi", "ALom", "Saroar"};
     String[] dates;
     Context context;
     private Timer swipeTimer;
     boolean isTimerRunning;
-    Runnable Update,updateSlider;
+    Runnable Update, updateSlider;
     Handler handler;
     RecyclerView recycleViewKitab;
     KitabAdapter horizontalAdapter;
     //IsFundamentalsAdapter isFundamentalsAdapter;
     private List<KitabInfo> data = new ArrayList<>();
     //private List<KitabInfo> data2 = new ArrayList<>();
-    String pryname,banglaDate;
+    String pryname, banglaDate;
 
-    TextView tvTabDescription,tvSompadokioDes,tvDate,MarqueeText;
+    TextView tvTabDescription, tvSompadokioDes, tvDate, MarqueeText;
 
-    FloatingActionButton fab, fabChatGroup, fabApnarPoramorso, fabNamaj,fabChat,fabGroup,fabPoramorso,fabMsg;
-    LinearLayout fabLayout1, fabLayout2, fabLayoutChatGroup,fabLayout3,fabLayoutChat,fabLayoutGroup,fabLayoutPoramorso;
+    FloatingActionButton fab, fabChatGroup, fabApnarPoramorso, fabNamaj, fabChat, fabGroup, fabPoramorso, fabMsg;
+    LinearLayout fabLayout1, fabLayout2, fabLayoutChatGroup, fabLayout3, fabLayoutChat, fabLayoutGroup, fabLayoutPoramorso;
     View fabBGLayout;
-    boolean isFABOpen=false;
-    boolean isFABmsgOpen=false;
+    boolean isFABOpen = false;
+    boolean isFABmsgOpen = false;
     private String searchStr;
-    private LinearLayout linAmarPata,linRegistration;
-    private TextView tvLogin,tvLogOut;
+    private LinearLayout linAmarPata, linRegistration;
+    private TextView tvLogin, tvLogOut;
 
     List<NoticeResponse> listNotice = new ArrayList<>();
     private String seraContentdataName;
@@ -167,20 +169,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goponioNitimala(View v) {
-        startActivity(new Intent(context,ActivityGoponiyoNitimala.class));
+        startActivity(new Intent(context, ActivityGoponiyoNitimala.class));
 
     }
 
     public void beboherSortaboli(View v) {
-            startActivity(new Intent(context,ActivityBeboherSorto.class));
+        startActivity(new Intent(context, ActivityBeboherSorto.class));
 
-        }
+    }
 
-     public void sochoracorjiggasa(View v) {
-                startActivity(new Intent(context,ActivitySochorachorJiggsa.class));
+    public void sochoracorjiggasa(View v) {
+        startActivity(new Intent(context, ActivitySochorachorJiggsa.class));
 
-            }
-
+    }
 
 
 //    private void fabmsgUi() {
@@ -226,18 +227,18 @@ public class MainActivity extends AppCompatActivity {
     private void fabinitUi() {
 
         //fabLayout1= (LinearLayout) findViewById(R.id.fabLayout1);
-        fabLayout2= (LinearLayout) findViewById(R.id.fabLayout2);
-        fabLayoutChatGroup= (LinearLayout) findViewById(R.id.fabLayoutChatGroup);
-        fabLayout3= (LinearLayout) findViewById(R.id.fabLayout3);
+        fabLayout2 = (LinearLayout) findViewById(R.id.fabLayout2);
+        fabLayoutChatGroup = (LinearLayout) findViewById(R.id.fabLayoutChatGroup);
+        fabLayout3 = (LinearLayout) findViewById(R.id.fabLayout3);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fabChatGroup = (FloatingActionButton) findViewById(R.id.fabChatGroup);
-        fabApnarPoramorso= (FloatingActionButton) findViewById(R.id.fabApnarPoramorso);
+        fabApnarPoramorso = (FloatingActionButton) findViewById(R.id.fabApnarPoramorso);
         fabNamaj = (FloatingActionButton) findViewById(R.id.fabNamaj);
 
         fabApnarPoramorso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(context,ApnarPoramorsoActivity.class));
+                startActivity(new Intent(context, ApnarPoramorsoActivity.class));
                 closeFABMenu();
             }
         });
@@ -245,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
         fabChatGroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(context,ChatSearchActivity.class));
+                startActivity(new Intent(context, ChatSearchActivity.class));
                 closeFABMenu();
             }
         });
@@ -260,13 +261,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!isFABOpen){
+                if (!isFABOpen) {
                     showFABMenu();
-                }else{
+                } else {
                     closeFABMenu();
                 }
             }
@@ -292,12 +292,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        if(!PersistentUser.isLogged(context)){
+        if (!PersistentUser.isLogged(context)) {
             relNotification.setVisibility(View.GONE);
             tvLogOut.setVisibility(View.GONE);
             tvLogin.setVisibility(View.VISIBLE);
             linAmarPata.setVisibility(View.GONE);
-        }else {
+        } else {
             relNotification.setVisibility(View.VISIBLE);
             tvLogOut.setVisibility(View.VISIBLE);
             tvLogin.setVisibility(View.GONE);
@@ -305,8 +305,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void showFABMenu(){
-        isFABOpen=true;
+    private void showFABMenu() {
+        isFABOpen = true;
         //fabLayout1.setVisibility(View.VISIBLE);
         fabLayout2.setVisibility(View.VISIBLE);
         fabLayout3.setVisibility(View.VISIBLE);
@@ -354,8 +354,8 @@ public class MainActivity extends AppCompatActivity {
 ////        });
 //    }
 
-    private void closeFABMenu(){
-        isFABOpen=false;
+    private void closeFABMenu() {
+        isFABOpen = false;
         fabBGLayout.setVisibility(View.GONE);
         fab.animate().rotationBy(-180);
         //fabLayout1.animate().translationY(0);
@@ -369,7 +369,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animator animator) {
-                if(!isFABOpen){
+                if (!isFABOpen) {
                     //fabLayout1.setVisibility(View.GONE);
                     fabLayout2.setVisibility(View.GONE);
                     fabLayout3.setVisibility(View.GONE);
@@ -441,8 +441,6 @@ public class MainActivity extends AppCompatActivity {
         String d = formatter.format(date);
 
 
-
-
         ChronoFormatter<HijriCalendar> hijriFormat =
                 ChronoFormatter.setUp(HijriCalendar.family(), Locale.ENGLISH)
                         .addEnglishOrdinal(HijriCalendar.DAY_OF_MONTH)
@@ -468,10 +466,10 @@ public class MainActivity extends AppCompatActivity {
                 ).toDate();
         //System.out.println(hijriFormat.format(todayExact));
 
-        String hd= hijriFormat.format(todayExact);
+        String hd = hijriFormat.format(todayExact);
 
 
-        dates= new String [] {"বাংলা: "+banglaDate,"ইংরেজি: "+d,"হিজরী:"+hd};
+        dates = new String[]{"বাংলা: " + banglaDate, "ইংরেজি: " + d, "হিজরী:" + hd};
 
 
     }
@@ -480,9 +478,9 @@ public class MainActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
 
         int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH)+1;
+        int month = calendar.get(Calendar.MONTH) + 1;
         int day = calendar.get(Calendar.DATE);
-        String bd = String.valueOf(BanglaDateUtils.getBanglaDate(year,month,day));
+        String bd = String.valueOf(BanglaDateUtils.getBanglaDate(year, month, day));
 
 
         String[] sp = bd.split("\\s+");
@@ -494,72 +492,68 @@ public class MainActivity extends AppCompatActivity {
         String yr = sp[2];
 
 
-        String currentMonth = "",currentDay = "",currentYr="";
+        String currentMonth = "", currentDay = "", currentYr = "";
 
-        if(mnth.equalsIgnoreCase("BOISHAKH")){
-            currentMonth="বৈশাখ";
-        }else  if(mnth.equalsIgnoreCase("JYOISHTHO")){
-            currentMonth="জ্যৈষ্ঠ";
-        }else  if(mnth.equalsIgnoreCase("ASHARH")){
-            currentMonth="আষাঢ়";
-        }else  if(mnth.equalsIgnoreCase("SHRABON")){
-            currentMonth="শ্রাবণ";
-        }else  if(mnth.equalsIgnoreCase("BHADRO")){
-            currentMonth="ভাদ্র";
-        }else  if(mnth.equalsIgnoreCase("ASHBIN")){
-            currentMonth="আশ্বিন";
-        }else  if(mnth.equalsIgnoreCase("KARTIK")){
-            currentMonth="কার্তিক";
-        }else  if(mnth.equalsIgnoreCase("OGROHAYON")){
-            currentMonth="অগ্রহায়ণ";
-        }else  if(mnth.equalsIgnoreCase("POUSH")){
-            currentMonth="পৌষ";
-        }else  if(mnth.equalsIgnoreCase("MAGH")){
-            currentMonth="মাঘ";
-        }else  if(mnth.equalsIgnoreCase("FALGUN")){
-            currentMonth="ফাল্গুন";
-        }else  if(mnth.equalsIgnoreCase("চৈত্র")){
-            currentMonth="চৈত্র";
+        if (mnth.equalsIgnoreCase("BOISHAKH")) {
+            currentMonth = "বৈশাখ";
+        } else if (mnth.equalsIgnoreCase("JYOISHTHO")) {
+            currentMonth = "জ্যৈষ্ঠ";
+        } else if (mnth.equalsIgnoreCase("ASHARH")) {
+            currentMonth = "আষাঢ়";
+        } else if (mnth.equalsIgnoreCase("SHRABON")) {
+            currentMonth = "শ্রাবণ";
+        } else if (mnth.equalsIgnoreCase("BHADRO")) {
+            currentMonth = "ভাদ্র";
+        } else if (mnth.equalsIgnoreCase("ASHBIN")) {
+            currentMonth = "আশ্বিন";
+        } else if (mnth.equalsIgnoreCase("KARTIK")) {
+            currentMonth = "কার্তিক";
+        } else if (mnth.equalsIgnoreCase("OGROHAYON")) {
+            currentMonth = "অগ্রহায়ণ";
+        } else if (mnth.equalsIgnoreCase("POUSH")) {
+            currentMonth = "পৌষ";
+        } else if (mnth.equalsIgnoreCase("MAGH")) {
+            currentMonth = "মাঘ";
+        } else if (mnth.equalsIgnoreCase("FALGUN")) {
+            currentMonth = "ফাল্গুন";
+        } else if (mnth.equalsIgnoreCase("চৈত্র")) {
+            currentMonth = "চৈত্র";
         }
 
 
-        String[] bnday ={"১","২","৩","৪","৫","৬","৭","৮","৯","১০","১১","১২","১৩","১৪","১৫","১৬","১৭","১৮","১৯","২০","২১",
-        "২২","২৩","২৪","২৫","২৬","২৭","২৮","২৯","৩০","৩১"};
+        String[] bnday = {"১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯", "১০", "১১", "১২", "১৩", "১৪", "১৫", "১৬", "১৭", "১৮", "১৯", "২০", "২১",
+                "২২", "২৩", "২৪", "২৫", "২৬", "২৭", "২৮", "২৯", "৩০", "৩১"};
 
-        String[] enday ={"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21",
-                "22","23","24","25","26","27","28","29","30","31"};
+        String[] enday = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21",
+                "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
 
-        for (int i = 0; i <enday.length ; i++) {
-            if(fiday.equalsIgnoreCase(enday[i])){
+        for (int i = 0; i < enday.length; i++) {
+            if (fiday.equalsIgnoreCase(enday[i])) {
                 currentDay = bnday[i];
                 break;
             }
         }
 
-        String[] enYr ={"1425","1426","1427","1428","1429","1430","1431","1432","1433","1434","1435","1436","1437","1438","1439","1440","1441","1442","1443","1444","1445",
-                "1446","1447","1448","1449","1450","1451","1452","1453","1454","1455"};
+        String[] enYr = {"1425", "1426", "1427", "1428", "1429", "1430", "1431", "1432", "1433", "1434", "1435", "1436", "1437", "1438", "1439", "1440", "1441", "1442", "1443", "1444", "1445",
+                "1446", "1447", "1448", "1449", "1450", "1451", "1452", "1453", "1454", "1455"};
 
-        String[] bnYr ={"১৪২৫","১৪২৬","১৪২৭","১৪২৮","১৪২৯","১৪৩০","১৪৩১","১৪৩২","১৪৩৩","১৪৩৪","১৪৩৫","১৪৩৬","১৪৩৭",
-                "১৪৩৮","১৪৩৯","১৪৪০","১৪৪১","১৪৪২","১৪৪৩","১৪৪৪","১৪৪৫",
-                        "১৪৪৬","১৪৪৭","১৪৪৮","১৪৪৯","১৪৫০","১৪৫১","১৪৫২","১৪৫৩","১৪৫৪","১৪৫৫"};
+        String[] bnYr = {"১৪২৫", "১৪২৬", "১৪২৭", "১৪২৮", "১৪২৯", "১৪৩০", "১৪৩১", "১৪৩২", "১৪৩৩", "১৪৩৪", "১৪৩৫", "১৪৩৬", "১৪৩৭",
+                "১৪৩৮", "১৪৩৯", "১৪৪০", "১৪৪১", "১৪৪২", "১৪৪৩", "১৪৪৪", "১৪৪৫",
+                "১৪৪৬", "১৪৪৭", "১৪৪৮", "১৪৪৯", "১৪৫০", "১৪৫১", "১৪৫২", "১৪৫৩", "১৪৫৪", "১৪৫৫"};
 
-        for (int i = 0; i <enYr.length ; i++) {
-            if(yr.equalsIgnoreCase(enYr[i])){
+        for (int i = 0; i < enYr.length; i++) {
+            if (yr.equalsIgnoreCase(enYr[i])) {
                 currentYr = bnYr[i];
                 break;
             }
         }
 
-        banglaDate = currentDay+" "+currentMonth+" "+""+currentYr;
+        banglaDate = currentDay + " " + currentMonth + " " + "" + currentYr;
 
-        Log.e("bangla date",""+currentDay+" "+currentMonth+" "+""+currentYr);
-
-
+        Log.e("bangla date", "" + currentDay + " " + currentMonth + " " + "" + currentYr);
 
 
     }
-
-
 
 
     @Override
@@ -570,13 +564,14 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<Date> prayerTimesDate;
     ArrayList<String> prayerNames;
+
     private void getPrayerTime() {
 
         double latitude = 23.8103;
         double longitude = 90.4125;
-        if(!TextUtils.isEmpty(AppConstant.lat)||!TextUtils.isEmpty(AppConstant.lng)){
-             latitude = Double.parseDouble(AppConstant.lat);
-             longitude = Double.parseDouble(AppConstant.lng);
+        if (!TextUtils.isEmpty(AppConstant.lat) || !TextUtils.isEmpty(AppConstant.lng)) {
+            latitude = Double.parseDouble(AppConstant.lat);
+            longitude = Double.parseDouble(AppConstant.lng);
         }
 
 
@@ -593,7 +588,7 @@ public class MainActivity extends AppCompatActivity {
 
         Date now = new Date();
         final Calendar cal = Calendar.getInstance();
-        int day=cal.get(Calendar.DATE);
+        int day = cal.get(Calendar.DATE);
         cal.setTime(now);
 
         ArrayList<String> prayerTimes = prayers.getPrayerTimes(cal,
@@ -668,15 +663,15 @@ public class MainActivity extends AppCompatActivity {
                     int mins = (int) ((mills / (1000 * 60)) % 60);
                     int secs = (int) ((mills / (1000)) % 60);
 
-                    final String diff = hours + ":" + mins+":"+secs;
-                    Log.e("diff",""+diff);
+                    final String diff = hours + ":" + mins + ":" + secs;
+                    Log.e("diff", "" + diff);
 
                     // updated value every1 second
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             // update TextView here!
-                            tvReminder.setText( pryname+":" + diff);
+                            tvReminder.setText(pryname + ":" + diff);
                         }
                     });
                 } catch (Exception e) {
@@ -687,10 +682,7 @@ public class MainActivity extends AppCompatActivity {
         }, 0, 1000); // here 1000 means 1000 mills i.e. 1 second
 
 
-
     }
-
-
 
 
     private Date getNextPrayer() {
@@ -701,26 +693,26 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < size - 1; i++) {
             if (prayerTimesDate.get(i).getTime() < now.getTime()) {
                 nextPreyerTime = prayerTimesDate.get(i + 1);
-                pryname=prayerNames.get(i + 1);
+                pryname = prayerNames.get(i + 1);
                 //prayerNamesHighlite(prayerNames.get(i));
             } else {
                 nextPreyerTime = prayerTimesDate.get(i);
-                pryname=prayerNames.get(i-1);
+                pryname = prayerNames.get(i - 1);
 
                 break;
             }
 
         }
 
-        if(pryname.equalsIgnoreCase("ফজর")){
+        if (pryname.equalsIgnoreCase("ফজর")) {
             linFojor.setBackgroundColor(Color.parseColor("#EBBF2B"));
-        }else if(pryname.equalsIgnoreCase("জোহর")){
+        } else if (pryname.equalsIgnoreCase("জোহর")) {
             linJohor.setBackgroundColor(Color.parseColor("#EBBF2B"));
-        }else if(pryname.equalsIgnoreCase("আসর")){
+        } else if (pryname.equalsIgnoreCase("আসর")) {
             linAsor.setBackgroundColor(Color.parseColor("#EBBF2B"));
-        }else if(pryname.equalsIgnoreCase("মাগরিব")){
+        } else if (pryname.equalsIgnoreCase("মাগরিব")) {
             linMagrib.setBackgroundColor(Color.parseColor("#EBBF2B"));
-        }else if(pryname.equalsIgnoreCase("ইশা")){
+        } else if (pryname.equalsIgnoreCase("ইশা")) {
             linIsha.setBackgroundColor(Color.parseColor("#EBBF2B"));
         }
 
@@ -731,8 +723,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
 
 
     private void initDrawer() {
@@ -767,20 +757,22 @@ public class MainActivity extends AppCompatActivity {
         //calling sync state is necessary or else your hamburger icon wont show up
         actionBarDrawerToggle.syncState();
     }
+
     boolean isRuning = true;
+
     private void initUi() {
 
-        tvLogin = (TextView)findViewById(R.id.tvLogin);
-        tvLogOut = (TextView)findViewById(R.id.tvLogOut);
+        tvLogin = (TextView) findViewById(R.id.tvLogin);
+        tvLogOut = (TextView) findViewById(R.id.tvLogOut);
         linAmarPata = (LinearLayout) findViewById(R.id.linAmarPata);
         linMsgFloating = (LinearLayout) findViewById(R.id.linMsgFloating);
-        relNotification = (RelativeLayout)findViewById(R.id.relNotification);
+        relNotification = (RelativeLayout) findViewById(R.id.relNotification);
         linRegistration = (LinearLayout) findViewById(R.id.linRegistration);
 
         linRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(context,RegistrationActivity.class));
+                startActivity(new Intent(context, RegistrationActivity.class));
             }
         });
 
@@ -788,7 +780,7 @@ public class MainActivity extends AppCompatActivity {
         tvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(context,LoginActivity.class));
+                startActivity(new Intent(context, LoginActivity.class));
                 PersistentUser.setLogin(context);
             }
         });
@@ -801,13 +793,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        if(!PersistentUser.isLogged(context)){
+        if (!PersistentUser.isLogged(context)) {
             relNotification.setVisibility(View.GONE);
             tvLogOut.setVisibility(View.GONE);
             tvLogin.setVisibility(View.VISIBLE);
             linAmarPata.setVisibility(View.GONE);
             linRegistration.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             relNotification.setVisibility(View.VISIBLE);
             tvLogOut.setVisibility(View.VISIBLE);
             tvLogin.setVisibility(View.GONE);
@@ -815,7 +807,7 @@ public class MainActivity extends AppCompatActivity {
             linAmarPata.setVisibility(View.VISIBLE);
         }
 
-        fabBGLayout=findViewById(R.id.fabBGLayout);
+        fabBGLayout = findViewById(R.id.fabBGLayout);
         fabBGLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -826,10 +818,10 @@ public class MainActivity extends AppCompatActivity {
         relNotification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(linMsgFloating.getVisibility()==View.GONE){
+                if (linMsgFloating.getVisibility() == View.GONE) {
                     fabBGLayout.setVisibility(View.VISIBLE);
                     linMsgFloating.setVisibility(View.VISIBLE);
-                }else if(linMsgFloating.getVisibility()==View.VISIBLE){
+                } else if (linMsgFloating.getVisibility() == View.VISIBLE) {
                     linMsgFloating.setVisibility(View.GONE);
                     fabBGLayout.setVisibility(View.GONE);
                 }
@@ -837,8 +829,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        tvDate = (TextView)findViewById(R.id.tvDate);
-
+        tvDate = (TextView) findViewById(R.id.tvDate);
 
 
 //        linNoticeview = (LinearLayout) findViewById(R.id.linNoticeview);
@@ -857,27 +848,23 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
 
+        linKitabsomuho = (LinearLayout) findViewById(R.id.linKitabsomuho);
+        linDokhotaSomuho = (LinearLayout) findViewById(R.id.linDokhotaSomuho);
+        linIslamMenus = (LinearLayout) findViewById(R.id.linIslamMenus);
+        linMasalaMenus = (LinearLayout) findViewById(R.id.linMasalaMenus);
 
 
-
-        linKitabsomuho = (LinearLayout)findViewById(R.id.linKitabsomuho);
-        linDokhotaSomuho = (LinearLayout)findViewById(R.id.linDokhotaSomuho);
-        linIslamMenus = (LinearLayout)findViewById(R.id.linIslamMenus);
-        linMasalaMenus = (LinearLayout)findViewById(R.id.linMasalaMenus);
-
-
-
-        linBlog = (LinearLayout)findViewById(R.id.linBlog);
-        linMasael = (LinearLayout)findViewById(R.id.linMasael);
-        linAskQues = (LinearLayout)findViewById(R.id.linAskQues);
-        linQuesAns = (LinearLayout)findViewById(R.id.linQuesAns);
+        linBlog = (LinearLayout) findViewById(R.id.linBlog);
+        linMasael = (LinearLayout) findViewById(R.id.linMasael);
+        linAskQues = (LinearLayout) findViewById(R.id.linAskQues);
+        linQuesAns = (LinearLayout) findViewById(R.id.linQuesAns);
 
 
         linBlog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(context,BlogActivity.class));
+                startActivity(new Intent(context, BlogActivity.class));
 
 //                PopupMenu popup = new PopupMenu(context,v);
 //                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -899,42 +886,41 @@ public class MainActivity extends AppCompatActivity {
         linQuesAns.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(context,QuestionAnswerActivity.class));
+                startActivity(new Intent(context, QuestionAnswerActivity.class));
             }
         });
 
         linMasael.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showMenuMasayel(view);
+                dialogeMasala();
             }
         });
 
         linAskQues.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(context,ApnarGiggasaActivity.class));
+                startActivity(new Intent(context, ApnarGiggasaActivity.class));
 
             }
         });
 
-        linTodayQues = (LinearLayout)findViewById(R.id.linTodayQues);
-        linTodayQues.setOnClickListener(new View.OnClickListener() {
+        linJobCirculer = (LinearLayout) findViewById(R.id.linJobCirculer);
+        linJobCirculer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(context,AjkerQuestionActivity.class));
+                startActivity(new Intent(context, JobCirculerActivity.class));
             }
         });
 
 
-        linQuize = (LinearLayout)findViewById(R.id.linQuize);
+        linQuize = (LinearLayout) findViewById(R.id.linQuize);
         linQuize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialogeQuiz();
             }
         });
-
 
 
 //        relKitab = (RelativeLayout)findViewById(R.id.relKitab);
@@ -958,7 +944,6 @@ public class MainActivity extends AppCompatActivity {
         relOnndhra = (LinearLayout) findViewById(R.id.relOnndhra);
 
 
-
         linIslam = (LinearLayout) findViewById(R.id.linIslam);
         linSompadokio = (LinearLayout) findViewById(R.id.linSompadokio);
         linNarikornar = (LinearLayout) findViewById(R.id.linNarikornar);
@@ -974,7 +959,7 @@ public class MainActivity extends AppCompatActivity {
         linAlQran.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(context,AlQuranActivity.class));
+                startActivity(new Intent(context, AlQuranActivity.class));
             }
         });
 
@@ -984,19 +969,17 @@ public class MainActivity extends AppCompatActivity {
 
                 AppConstant.activitiname = getString(R.string.santirbani);
                 AppConstant.bolgpostName = "শান্তির বাণী";
-                startActivity(new Intent(context,AllCommonPostActivity.class));
+                startActivity(new Intent(context, AllCommonPostActivity.class));
             }
         });
-
 
 
         linAHadith.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(context,AlHadithActivity.class));
+                startActivity(new Intent(context, AlHadithActivity.class));
             }
         });
-
 
 
         linphotogalary.setOnClickListener(new View.OnClickListener() {
@@ -1024,7 +1007,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 AppConstant.activitiname = getString(R.string.narikornar);
                 AppConstant.bolgpostName = "নারী কর্নার";
-                startActivity(new Intent(context,AllCommonPostActivity.class));
+                startActivity(new Intent(context, AllCommonPostActivity.class));
             }
         });
 
@@ -1032,7 +1015,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AppConstant.activitiname = "ভিডিও ";
-                startActivity(new Intent(context,VideoActivity.class));
+                startActivity(new Intent(context, VideoActivity.class));
             }
         });
 
@@ -1040,7 +1023,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AppConstant.activitiname = "অডিও ";
-                startActivity(new Intent(context,AudioActivity.class));
+                startActivity(new Intent(context, AudioActivity.class));
             }
         });
 
@@ -1049,12 +1032,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 AppConstant.activitiname = "দক্ষতার গল্প ";
                 AppConstant.bolgpostName = "দক্ষতার গল্প";
-                startActivity(new Intent(context,AllCommonPostActivity.class));
+                startActivity(new Intent(context, AllCommonPostActivity.class));
             }
         });
-
-
-
 
 
         linIslam.setOnClickListener(new View.OnClickListener() {
@@ -1068,15 +1048,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
         linSompadokio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AppConstant.activitiname = getString(R.string.sompadokio);
-                startActivity(new Intent(context,SompadokioActivity.class));
+                startActivity(new Intent(context, SompadokioActivity.class));
             }
         });
-
 
 
         relSisukisur.setOnClickListener(new View.OnClickListener() {
@@ -1084,7 +1062,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 AppConstant.activitiname = getString(R.string.sisukisur);
                 AppConstant.bolgpostName = "শিশু কিশোর কর্নার";
-                startActivity(new Intent(context,AllCommonPostActivity.class));
+                startActivity(new Intent(context, AllCommonPostActivity.class));
             }
         });
 
@@ -1171,26 +1149,21 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
 
-
-
-
-
-
         linAutoserch = (RelativeLayout) findViewById(R.id.linAutoserch);
 
 
         imgSearch = (ImageView) findViewById(R.id.imgSearch);
 
-        autocoEditView = (AutoCompleteTextView)findViewById(R.id.autocoEditView);
+        autocoEditView = (AutoCompleteTextView) findViewById(R.id.autocoEditView);
         imgCancel = (ImageView) findViewById(R.id.imgCancel);
         imgGoSearch = (ImageView) findViewById(R.id.imgGoSearch);
         imgGoSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 searchStr = autocoEditView.getText().toString();
-                if(searchStr.length()>0){
+                if (searchStr.length() > 0) {
                     linAutoserch.setVisibility(View.GONE);
-                    startActivity(new Intent(context,ToolbarSearchActivity.class));
+                    startActivity(new Intent(context, ToolbarSearchActivity.class));
                 }
             }
         });
@@ -1205,8 +1178,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         linSearch = (LinearLayout) findViewById(R.id.linSearch);
-        String[] ProgLanguages = { getString(R.string.imanakida), getString(R.string.character), getString(R.string.dawah),
-                getString(R.string.islam), getString(R.string.familysocity), getString(R.string.imanakida), "Objective-c", "Small-Talk", "C#", "Ruby", "ASP", "ASP .NET" };
+        String[] ProgLanguages = {getString(R.string.imanakida), getString(R.string.character), getString(R.string.dawah),
+                getString(R.string.islam), getString(R.string.familysocity), getString(R.string.imanakida), "Objective-c", "Small-Talk", "C#", "Ruby", "ASP", "ASP .NET"};
 
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
@@ -1234,9 +1207,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence str, int i, int i1, int i2) {
 
-                if(str.length()==0){
+                if (str.length() == 0) {
                     imgCancel.setVisibility(View.VISIBLE);
-                }else if(str.length()>0){
+                } else if (str.length() > 0) {
                     imgCancel.setVisibility(View.GONE);
                 }
             }
@@ -1270,18 +1243,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-    public void showMenu(View v)
-    {
-        PopupMenu popup = new PopupMenu(context,v);
+    public void showMenu(View v) {
+        PopupMenu popup = new PopupMenu(context, v);
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
 
                 String value = menuItem.getTitle().toString();
-                AppConstant.activitiname=value;
-                AppConstant.bolgpostName=value;
-                startActivity(new Intent(context,AllCommonPostActivity.class));
+                AppConstant.activitiname = value;
+                AppConstant.bolgpostName = value;
+                startActivity(new Intent(context, AllCommonPostActivity.class));
                 return true;
             }
         });
@@ -1291,15 +1262,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void showMenuAlquran(View v)
-    {
-        PopupMenu popup = new PopupMenu(context,v);
+    public void showMenuAlquran(View v) {
+        PopupMenu popup = new PopupMenu(context, v);
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
 
                 String value = menuItem.getTitle().toString();
-                Toast.makeText(context, ""+value, Toast.LENGTH_SHORT).show();
+                AppConstant.activitiname = value;
+                AppConstant.bolgpostName = value;
+                startActivity(new Intent(context, AllCommonPostActivity.class));
+
                 return true;
             }
         });
@@ -1308,15 +1281,14 @@ public class MainActivity extends AppCompatActivity {
         popup.show();
     }
 
-    public void showMenuMasayel(View v)
-    {
-        PopupMenu popup = new PopupMenu(context,v);
+    public void showMenuMasayel(View v) {
+        PopupMenu popup = new PopupMenu(context, v);
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
 
                 String value = menuItem.getTitle().toString();
-                Toast.makeText(context, ""+value, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "" + value, Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
@@ -1325,15 +1297,16 @@ public class MainActivity extends AppCompatActivity {
         popup.show();
     }
 
-    public void showMenuAlhadith(View v)
-    {
-        PopupMenu popup = new PopupMenu(context,v);
+    public void showMenuAlhadith(View v) {
+        PopupMenu popup = new PopupMenu(context, v);
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
 
                 String value = menuItem.getTitle().toString();
-                Toast.makeText(context, ""+value, Toast.LENGTH_SHORT).show();
+                AppConstant.activitiname = value;
+                AppConstant.bolgpostName = value;
+                startActivity(new Intent(context, AllCommonPostActivity.class));
                 return true;
             }
         });
@@ -1344,81 +1317,81 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void dialogeIslam() {
-        final Dialog dialog=new Dialog(context);
+        final Dialog dialog = new Dialog(context, R.style.Theme_Dialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialoge_islam);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
 
-        ImageView imgCross = (ImageView)dialog.findViewById(R.id.imgCross);
-        imgCross.setOnClickListener(new View.OnClickListener() {
+        ImageView imgBack = (ImageView) dialog.findViewById(R.id.imgBack);
+        imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
             }
         });
 
-       RelativeLayout relIslamicAin = (RelativeLayout)dialog.findViewById(R.id.relIslamicAin);
-       RelativeLayout relIslamicEconomy = (RelativeLayout)dialog.findViewById(R.id.relIslamicEconomy);
+        RelativeLayout relIslamicAin = (RelativeLayout) dialog.findViewById(R.id.relIslamicAin);
+        RelativeLayout relIslamicEconomy = (RelativeLayout) dialog.findViewById(R.id.relIslamicEconomy);
         relIslamicEconomy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AppConstant.activitiname = getString(R.string.islamiceconomy);
                 AppConstant.bolgpostName = "ইসলামিক অর্থনীত";
-                startActivity(new Intent(context,AllCommonPostActivity.class));
+                startActivity(new Intent(context, AllCommonPostActivity.class));
             }
         });
 
-       RelativeLayout relDawah = (RelativeLayout)dialog.findViewById(R.id.relDawah);
+        RelativeLayout relDawah = (RelativeLayout) dialog.findViewById(R.id.relDawah);
         relDawah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AppConstant.activitiname = getString(R.string.dawah);
                 AppConstant.bolgpostName = "দাওয়াত";
-                startActivity(new Intent(context,AllCommonPostActivity.class));
+                startActivity(new Intent(context, AllCommonPostActivity.class));
             }
         });
 
 
-       RelativeLayout relPoribarSomaj = (RelativeLayout)dialog.findViewById(R.id.relPoribarSomaj);
+        RelativeLayout relPoribarSomaj = (RelativeLayout) dialog.findViewById(R.id.relPoribarSomaj);
         relPoribarSomaj.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AppConstant.activitiname = getString(R.string.familysocity);
                 AppConstant.bolgpostName = "পরিবার ও সমাজ";
-                startActivity(new Intent(context,AllCommonPostActivity.class));
+                startActivity(new Intent(context, AllCommonPostActivity.class));
             }
         });
 
-       RelativeLayout relImanAkidha = (RelativeLayout)dialog.findViewById(R.id.relImanAkidha);
+        RelativeLayout relImanAkidha = (RelativeLayout) dialog.findViewById(R.id.relImanAkidha);
         relImanAkidha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AppConstant.activitiname = getString(R.string.imanakida);
                 AppConstant.bolgpostName = "ঈমান ও আকীদাহ";
-                startActivity(new Intent(context,AllCommonPostActivity.class));
+                startActivity(new Intent(context, AllCommonPostActivity.class));
             }
         });
 
-        RelativeLayout relChoritro = (RelativeLayout)dialog.findViewById(R.id.relChoritro);
+        RelativeLayout relChoritro = (RelativeLayout) dialog.findViewById(R.id.relChoritro);
         relChoritro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AppConstant.activitiname = getString(R.string.character);
                 AppConstant.bolgpostName = "চরিত্র";
-                startActivity(new Intent(context,AllCommonPostActivity.class));
+                startActivity(new Intent(context, AllCommonPostActivity.class));
             }
         });
 
-        RelativeLayout relOthers = (RelativeLayout)dialog.findViewById(R.id.relOthers);
+        RelativeLayout relOthers = (RelativeLayout) dialog.findViewById(R.id.relOthers);
         relOthers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AppConstant.activitiname = getString(R.string.other);
                 AppConstant.bolgpostName = "অন্যান্য";
-                startActivity(new Intent(context,AllCommonPostActivity.class));
+                startActivity(new Intent(context, AllCommonPostActivity.class));
             }
         });
-
 
 
         relIslamicAin.setOnClickListener(new View.OnClickListener() {
@@ -1437,29 +1410,27 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void dialogeKitab() {
-        final Dialog dialog=new Dialog(context);
+        final Dialog dialog = new Dialog(context, R.style.Theme_Dialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialoge_kitab);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
-
-        ImageView imgCross = (ImageView)dialog.findViewById(R.id.imgCross);
-        imgCross.setOnClickListener(new View.OnClickListener() {
+        ImageView imgBack = (ImageView) dialog.findViewById(R.id.imgBack);
+        imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
             }
         });
 
-        RelativeLayout relAlKural = (RelativeLayout)dialog.findViewById(R.id.relAlKural);
-        RelativeLayout relHadithGrontho = (RelativeLayout)dialog.findViewById(R.id.relHadithGrontho);
-
+        RelativeLayout relAlKural = (RelativeLayout) dialog.findViewById(R.id.relAlKural);
         relAlKural.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showMenuAlquran(view);
             }
         });
-
+        RelativeLayout relHadithGrontho = (RelativeLayout) dialog.findViewById(R.id.relHadithGrontho);
         relHadithGrontho.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -1467,6 +1438,60 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        RelativeLayout relFikh = (RelativeLayout) dialog.findViewById(R.id.relFikh);
+        relFikh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppConstant.activitiname = "ফিকাহর গ্রন্থাবলী";
+                AppConstant.bolgpostName = "ফিকাহর গ্রন্থাবলী";
+                startActivity(new Intent(context, AllCommonPostActivity.class));
+            }
+        });
+
+
+        RelativeLayout relHistoryBook = (RelativeLayout) dialog.findViewById(R.id.relHistoryBook);
+        relHistoryBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppConstant.activitiname = "ইসলামের ইতিহাসের গ্রন্থাবলী";
+                AppConstant.bolgpostName = "ইসলামের ইতিহাসের গ্রন্থাবলী";
+                startActivity(new Intent(context, AllCommonPostActivity.class));
+            }
+        });
+
+
+        RelativeLayout relBioBook = (RelativeLayout) dialog.findViewById(R.id.relBioBook);
+        relBioBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppConstant.activitiname = "জীবনী";
+                AppConstant.bolgpostName = "জীবনী";
+                startActivity(new Intent(context, AllCommonPostActivity.class));
+            }
+        });
+
+        RelativeLayout relStory = (RelativeLayout) dialog.findViewById(R.id.relStory);
+        relStory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppConstant.activitiname = "ইসলামী গল্প";
+                AppConstant.bolgpostName = "ইসলামী গল্প";
+                startActivity(new Intent(context, AllCommonPostActivity.class));
+            }
+        });
+
+
+        RelativeLayout relDorson = (RelativeLayout) dialog.findViewById(R.id.relDorson);
+
+        relDorson.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppConstant.activitiname = "ইসলামী দর্শন";
+                AppConstant.bolgpostName = "ইসলামী দর্শন";
+                startActivity(new Intent(context, AllCommonPostActivity.class));
+            }
+        });
 
 
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
@@ -1476,13 +1501,60 @@ public class MainActivity extends AppCompatActivity {
         dialog.getWindow().setAttributes(lp);
     }
 
+    private void dialogeMasala() {
+        final Dialog dialog = new Dialog(context, R.style.Theme_Dialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialoge_masala);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
+        ImageView imgBack = (ImageView) dialog.findViewById(R.id.imgBack);
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        RelativeLayout relPobitrota = (RelativeLayout) dialog.findViewById(R.id.relPobitrota);
+        RelativeLayout relSalat = (RelativeLayout) dialog.findViewById(R.id.relSalat);
+        RelativeLayout relSiam = (RelativeLayout) dialog.findViewById(R.id.relSiam);
+        RelativeLayout relItekaf = (RelativeLayout) dialog.findViewById(R.id.relItekaf);
+        RelativeLayout relHazOmra = (RelativeLayout) dialog.findViewById(R.id.relHazOmra);
+        RelativeLayout relZakat = (RelativeLayout) dialog.findViewById(R.id.relZakat);
+        RelativeLayout relkubani = (RelativeLayout) dialog.findViewById(R.id.relkubani);
+        RelativeLayout relParibarik = (RelativeLayout) dialog.findViewById(R.id.relParibarik);
+        RelativeLayout relOthers = (RelativeLayout) dialog.findViewById(R.id.relOthers);
+
+        relPobitrota.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //showMenuAlquran(view);
+            }
+        });
+
+//        relSalat.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                showMenuAlhadith(view);
+//            }
+//        });
+
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        dialog.show();
+        dialog.getWindow().setAttributes(lp);
+    }
+
+
     private void dialogeQuiz() {
-        final Dialog dialog=new Dialog(context);
+        final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialoge_quiz);
 
-        Button btnBatil = (Button)dialog.findViewById(R.id.btnBatil);
-        Button btnSuru = (Button)dialog.findViewById(R.id.btnSuru);
+        Button btnBatil = (Button) dialog.findViewById(R.id.btnBatil);
+        Button btnSuru = (Button) dialog.findViewById(R.id.btnSuru);
 
         btnBatil.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1494,7 +1566,7 @@ public class MainActivity extends AppCompatActivity {
         btnSuru.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(context,QuizeActivity.class));
+                startActivity(new Intent(context, QuizeActivity.class));
                 dialog.dismiss();
             }
         });
@@ -1509,11 +1581,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void dialogeNamajTime() {
 
-        final Dialog dialog=new Dialog(context);
+        final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialoge_namaj);
 
-        ImageView imgCross = (ImageView)dialog.findViewById(R.id.imgCross);
+        ImageView imgCross = (ImageView) dialog.findViewById(R.id.imgCross);
 
         imgCross.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1525,13 +1597,13 @@ public class MainActivity extends AppCompatActivity {
         tvReminder = (TextView) dialog.findViewById(R.id.tvReminder);
 
 
-        linFojor = (LinearLayout)  dialog.findViewById(R.id.linFojor);
-        linAsor = (LinearLayout)  dialog.findViewById(R.id.linAsor);
-        linIsha = (LinearLayout)  dialog.findViewById(R.id.linIsha);
-        linJohor = (LinearLayout)  dialog.findViewById(R.id.linJohor);
-        linMagrib = (LinearLayout)  dialog.findViewById(R.id.linMagrib);
+        linFojor = (LinearLayout) dialog.findViewById(R.id.linFojor);
+        linAsor = (LinearLayout) dialog.findViewById(R.id.linAsor);
+        linIsha = (LinearLayout) dialog.findViewById(R.id.linIsha);
+        linJohor = (LinearLayout) dialog.findViewById(R.id.linJohor);
+        linMagrib = (LinearLayout) dialog.findViewById(R.id.linMagrib);
 
-        LinearLayout linKutba = (LinearLayout)  dialog.findViewById(R.id.linKutba);
+        LinearLayout linKutba = (LinearLayout) dialog.findViewById(R.id.linKutba);
         linKutba.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -1596,7 +1668,6 @@ public class MainActivity extends AppCompatActivity {
 //        recyclerimpoLink.setLayoutManager(horizontalLayoutManager);
 //        recyclerimpoLink.setAdapter(questionAnsAdapter);
 //    }
-
 
 
 //    private void questionAnswer() {
@@ -1864,8 +1935,6 @@ public class MainActivity extends AppCompatActivity {
 //    }
 
 
-
-
     private void slideshow() {
 
         handler = new Handler();
@@ -1931,7 +2000,7 @@ public class MainActivity extends AppCompatActivity {
                     swipeTimer.cancel();
                 } else {
                     if (!isTimerRunning) {
-                       // createSwipeTimer();
+                        // createSwipeTimer();
                         isTimerRunning = true;
                     }
                 }
@@ -1999,8 +2068,8 @@ public class MainActivity extends AppCompatActivity {
     private void updateworkdone() {
 
 
-        if(!NetInfo.isOnline(context)){
-            AlertMessage.showMessage(context,"Alert!","No internet connection!");
+        if (!NetInfo.isOnline(context)) {
+            AlertMessage.showMessage(context, "Alert!", "No internet connection!");
         }
 
         final ProgressDialog pd = new ProgressDialog(context);
@@ -2023,14 +2092,14 @@ public class MainActivity extends AppCompatActivity {
 
                 listNotice = response.body();
 
-                String notice= "";
-                if(listNotice!=null){
-                    for (int i = 0; i <listNotice.size() ; i++) {
-                        notice+=" >>> "+listNotice.get(i).getNotice();
+                String notice = "";
+                if (listNotice != null) {
+                    for (int i = 0; i < listNotice.size(); i++) {
+                        notice += " >>> " + listNotice.get(i).getNotice();
 
                     }
                 }
-                MarqueeText = (TextView)findViewById(R.id.MarqueeText);
+                MarqueeText = (TextView) findViewById(R.id.MarqueeText);
                 MarqueeText.setText(notice);
                 MarqueeText.setSelected(true);
                 MarqueeText.setFocusable(true);
@@ -2048,9 +2117,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
-
 
 
 }

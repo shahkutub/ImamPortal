@@ -30,7 +30,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/islam"
+                android:text="@string/masayel"
                 android:textSize="@dimen/_15sdp"
                 android:textColor="#fff"
                 android:layout_centerInParent="true"
@@ -57,21 +57,21 @@
         >
 
         <RelativeLayout
-            android:id="@+id/relIslamicAin"
+            android:id="@+id/relPobitrota"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_10sdp"
-            android:background="@drawable/shadow_drower_sub_menu"
+            android:gravity="center"
             >
 
-            <TextView
-                android:layout_width="wrap_content"
+            <android.support.v7.widget.AppCompatButton
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/islamicain"
                 android:textColor="#fff"
+                android:gravity="center"
+                android:padding="@dimen/_10sdp"
                 android:textSize="@dimen/_15sdp"
-                android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_centerVertical="true"
+                android:text="পবিত্রতা"
                 />
 
             <ImageView
@@ -80,27 +80,27 @@
                 android:layout_alignParentRight="true"
                 app:srcCompat="@drawable/ic_downarrow"
                 android:layout_centerVertical="true"
+                android:visibility="gone"
                 />
 
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/relIslamicEconomy"
+            android:id="@+id/relSalat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_5sdp"
-            android:background="@drawable/shadow_drower_sub_menu"
-
+            android:gravity="center"
             >
 
-            <TextView
-                android:layout_width="wrap_content"
+            <android.support.v7.widget.AppCompatButton
+                android:text="সালাত"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/islamiceconomy"
                 android:textColor="#fff"
+                android:gravity="center"
+                android:padding="@dimen/_10sdp"
                 android:textSize="@dimen/_15sdp"
-                android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_centerVertical="true"
                 />
 
@@ -117,22 +117,22 @@
 
 
         <RelativeLayout
-            android:id="@+id/relDawah"
+            android:id="@+id/relSiam"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_10sdp"
+            android:gravity="center"
             android:layout_marginTop="@dimen/_5sdp"
-            android:background="@drawable/shadow_drower_sub_menu"
 
             >
 
-            <TextView
-                android:layout_width="wrap_content"
+            <android.support.v7.widget.AppCompatButton
+                android:text="সিয়াম"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/dawah"
                 android:textColor="#fff"
+                android:gravity="center"
+                android:padding="@dimen/_10sdp"
                 android:textSize="@dimen/_15sdp"
-                android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_centerVertical="true"
                 />
 
@@ -148,21 +148,21 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/relPoribarSomaj"
+            android:id="@+id/relItekaf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_5sdp"
-            android:background="@drawable/shadow_drower_sub_menu"
+            android:gravity="center"
             >
 
-            <TextView
-                android:layout_width="wrap_content"
+            <android.support.v7.widget.AppCompatButton
+                android:text="ইতেকাফ"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/familysocity"
                 android:textColor="#fff"
+                android:gravity="center"
+                android:padding="@dimen/_10sdp"
                 android:textSize="@dimen/_15sdp"
-                android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_centerVertical="true"
                 />
 
@@ -178,22 +178,21 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/relImanAkidha"
+            android:id="@+id/relHazOmra"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_5sdp"
-
-            android:background="@drawable/shadow_drower_sub_menu"
+            android:gravity="center"
             >
 
-            <TextView
-                android:layout_width="wrap_content"
+            <android.support.v7.widget.AppCompatButton
+                android:text="হজ ও ওমরা"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/imanakida"
                 android:textColor="#fff"
+                android:gravity="center"
+                android:padding="@dimen/_10sdp"
                 android:textSize="@dimen/_15sdp"
-                android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_centerVertical="true"
                 />
 
@@ -209,21 +208,82 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/relChoritro"
+            android:id="@+id/relZakat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_5sdp"
-            android:background="@drawable/shadow_drower_sub_menu"
+            android:gravity="center"
             >
 
-            <TextView
-                android:layout_width="wrap_content"
+            <android.support.v7.widget.AppCompatButton
+                android:text="যাকাত ও সাদকা"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/character"
                 android:textColor="#fff"
+                android:gravity="center"
+                android:padding="@dimen/_10sdp"
                 android:textSize="@dimen/_15sdp"
-                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_centerVertical="true"
+                />
+
+            <ImageView
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_alignParentRight="true"
+                app:srcCompat="@drawable/ic_downarrow"
+                android:visibility="gone"
+                android:layout_centerVertical="true"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relkubani"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:gravity="center"
+            >
+
+            <android.support.v7.widget.AppCompatButton
+                android:text="কুরবানি"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:gravity="center"
+                android:padding="@dimen/_10sdp"
+                android:textSize="@dimen/_15sdp"
+                android:layout_centerVertical="true"
+                />
+
+            <ImageView
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_alignParentRight="true"
+                app:srcCompat="@drawable/ic_downarrow"
+                android:visibility="gone"
+                android:layout_centerVertical="true"
+                />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/relParibarik"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:gravity="center"
+            >
+
+            <android.support.v7.widget.AppCompatButton
+                android:text="পারিবারিক মাসায়েল"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:gravity="center"
+                android:padding="@dimen/_10sdp"
+                android:textSize="@dimen/_15sdp"
                 android:layout_centerVertical="true"
                 />
 
@@ -242,18 +302,18 @@
             android:id="@+id/relOthers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_10sdp"
+            android:gravity="center"
             android:layout_marginTop="@dimen/_5sdp"
-            android:background="@drawable/shadow_drower_sub_menu"
             >
 
             <TextView
-                android:layout_width="wrap_content"
+                android:text="অন্যান্য"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/other"
                 android:textColor="#fff"
+                android:gravity="center"
+                android:padding="@dimen/_10sdp"
                 android:textSize="@dimen/_15sdp"
-                android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_centerVertical="true"
                 />
 

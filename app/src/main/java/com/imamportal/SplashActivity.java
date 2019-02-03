@@ -40,6 +40,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static android.Manifest.permission.CALL_PHONE;
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.READ_PHONE_STATE;
@@ -154,12 +155,14 @@ public class SplashActivity extends AppCompatActivity {
         int result2 = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_COARSE_LOCATION);
         int result3 = ContextCompat.checkSelfPermission(getApplicationContext(), READ_EXTERNAL_STORAGE);
         int result4 = ContextCompat.checkSelfPermission(getApplicationContext(), WRITE_EXTERNAL_STORAGE);
+        int result5 = ContextCompat.checkSelfPermission(getApplicationContext(), CALL_PHONE);
 
         return result == PackageManager.PERMISSION_GRANTED
                 && result1 == PackageManager.PERMISSION_GRANTED
                 && result2 == PackageManager.PERMISSION_GRANTED
                 && result3 == PackageManager.PERMISSION_GRANTED
-                && result4 == PackageManager.PERMISSION_GRANTED;
+                && result4 == PackageManager.PERMISSION_GRANTED
+                && result5 == PackageManager.PERMISSION_GRANTED;
 
     }
 
@@ -167,7 +170,7 @@ public class SplashActivity extends AppCompatActivity {
     private void requestPermission() {
 
         ActivityCompat.requestPermissions(this, new String[]{ACCESS_FINE_LOCATION, CAMERA,
-                        ACCESS_COARSE_LOCATION,READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE},
+                        ACCESS_COARSE_LOCATION,READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE,CALL_PHONE},
                 PERMISSION_REQUEST_CODE);
 
     }
