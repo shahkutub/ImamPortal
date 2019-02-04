@@ -503,7 +503,6 @@ public class RegistrationActivity extends AppCompatActivity {
                 PersistData.setStringData(context, AppConstant.localpic,path);
                 Glide.with(context)
                         .load(picture)
-                        .override(100,100)
                         .into(imgPic);
 
 
@@ -529,7 +528,6 @@ public class RegistrationActivity extends AppCompatActivity {
                 PersistData.setStringData(context,AppConstant.path,"");
                 Glide.with(context)
                         .load(picture)
-                        .override(100,100)
                         .into(imgPic);
 
             } catch (final Exception e) {

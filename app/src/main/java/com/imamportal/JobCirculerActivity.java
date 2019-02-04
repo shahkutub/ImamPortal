@@ -1,6 +1,7 @@
 package com.imamportal;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,7 +12,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -22,12 +25,22 @@ import android.widget.Toast;
 import com.imamportal.Adapter.AllCommonPostAdapter;
 import com.imamportal.model.AllBlogpostModel;
 import com.imamportal.model.AlquranAlhadits;
+import com.imamportal.model.JobPortalModel;
 import com.imamportal.model.SantirbaniInfo;
 import com.imamportal.utils.AlertMessage;
+import com.imamportal.utils.Api;
+import com.imamportal.utils.AppConstant;
+import com.imamportal.utils.NetInfo;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class JobCirculerActivity extends AppCompatActivity {
 
@@ -38,6 +51,8 @@ public class JobCirculerActivity extends AppCompatActivity {
     private LinearLayout linJobCirList,linJobCirForm;
     private EditText etJobNmae,etJobDesignation,etPlace,etSalary,etJobDescription;
     private Button btnSave,btnChoseFile;
+    private List<JobPortalModel> listjob = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,19 +91,19 @@ public class JobCirculerActivity extends AppCompatActivity {
                 String  jobDescript = etJobDescription.getText().toString();
 
                 if(TextUtils.isEmpty(jobName)){
-                    AlertMessage.showMessage(context,"Alert","");
+                    AlertMessage.showMessage(context,"Alert","চাকুরীর শিরোনাম লিখুন");
                     etJobNmae.requestFocus();
                 }else if(TextUtils.isEmpty(jobDesignation)){
-                    AlertMessage.showMessage(context,"Alert","");
+                    AlertMessage.showMessage(context,"Alert","চাকুরীর পদবী লিখুন");
                     etJobDesignation.requestFocus();
                 }else if(TextUtils.isEmpty(jobplace)){
-                    AlertMessage.showMessage(context,"Alert","");
+                    AlertMessage.showMessage(context,"Alert","চাকুরীর স্থান লিখুন");
                     etPlace.requestFocus();
                 }else if(TextUtils.isEmpty(salary)){
-                    AlertMessage.showMessage(context,"Alert","");
+                    AlertMessage.showMessage(context,"Alert","বেতন পরিসীমা লিখুন");
                     etSalary.requestFocus();
                 }else if(TextUtils.isEmpty(jobDescript)){
-                    AlertMessage.showMessage(context,"Alert","");
+                    AlertMessage.showMessage(context,"Alert","চাকুরীর বিবরণী লিখুন");
                     etJobDescription.requestFocus();
                 }else {
 
@@ -132,28 +147,14 @@ public class JobCirculerActivity extends AppCompatActivity {
         });
 
         recyclSantirBani = (RecyclerView) findViewById(R.id.recyclSantirBani);
-
-        List<AllBlogpostModel> questionAnsInfoList = new ArrayList<>();
-        AllBlogpostModel questionAnsInfo = new AllBlogpostModel();
-        for (int i = 0; i < 10; i++) {
-            questionAnsInfoList.add(i, questionAnsInfo);
-        }
-
-        int size = questionAnsInfoList.size();
-        tvTotalBani.setText("সর্বমোট "+"চাকুরীর বিজ্ঞপ্তি "+size+" টি");
-
-        AllCommonPostAdapter questionAnsAdapter = new AllCommonPostAdapter(questionAnsInfoList,context);
-        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(context,
-                LinearLayoutManager.VERTICAL, false);
-        recyclSantirBani.setLayoutManager(horizontalLayoutManager);
-        recyclSantirBani.setAdapter(questionAnsAdapter);
-
         btnChoseFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showFileChooser();
             }
         });
+
+        getJobPost();
 
     }
 
@@ -194,4 +195,122 @@ public class JobCirculerActivity extends AppCompatActivity {
         }
 
     }
+
+
+    private class JobpostAdapter extends RecyclerView.Adapter<JobpostAdapter.MyViewHolder> {
+
+
+        List<JobPortalModel> santirBaniList = new ArrayList<>();
+        Context context;
+
+
+        public JobpostAdapter(List<JobPortalModel> santirBaniList, Context context) {
+            this.santirBaniList = santirBaniList;
+            this.context = context;
+        }
+
+
+        public class MyViewHolder extends RecyclerView.ViewHolder {
+
+            TextView tvTitle,tvShortDescription,tvPublisher,tvPublishDate,tvViewCount;
+            ImageView imgFile;
+            public MyViewHolder(View view) {
+                super(view);
+                tvTitle=(TextView) view.findViewById(R.id.tvTitle);
+                tvShortDescription=(TextView) view.findViewById(R.id.tvShortDescription);
+                tvPublisher=(TextView) view.findViewById(R.id.tvPublisher);
+                tvPublishDate=(TextView) view.findViewById(R.id.tvPublishDate);
+                tvViewCount=(TextView) view.findViewById(R.id.tvViewCount);
+                imgFile=(ImageView) view.findViewById(R.id.imgFile);
+            }
+        }
+
+
+
+        @Override
+        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.raw_common_post, parent, false);
+
+            return new MyViewHolder(itemView);
+        }
+
+        @Override
+        public void onBindViewHolder(final MyViewHolder holder, final int position) {
+
+            final JobPortalModel data = santirBaniList.get(position);
+            holder.tvPublishDate.setText(data.getCreated_at());
+            if(data.getUser_detail()!=null){
+                holder.tvPublisher.setText(data.getUser_detail().getName());
+            }
+            holder.tvTitle.setText(data.getJob_title());
+            holder.tvShortDescription.setText(data.getJob_description());
+            //holder.tvViewCount.setText(data.getView_count());
+
+            if(!TextUtils.isEmpty(data.getFile())){
+                holder.imgFile.setVisibility(View.VISIBLE);
+            }
+
+            holder.imgFile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    context.startActivity(new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("http://192.168.0.119/imamportal/public/job_file/"+data.getFile())));
+                }
+            });
+
+        }
+
+
+        @Override
+        public int getItemCount()
+        {
+            return santirBaniList.size();
+        }
+    }
+
+    private void getJobPost() {
+
+        if(!NetInfo.isOnline(context)){
+            AlertMessage.showMessage(context,"Alert!","No internet connection!");
+        }
+
+        final ProgressDialog pd = new ProgressDialog(context);
+        pd.setMessage("Loading....");
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.show();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Api api = retrofit.create(Api.class);
+        Call<List<JobPortalModel>> userCall = api.jobportals();
+        userCall.enqueue(new Callback<List<JobPortalModel>>() {
+            @Override
+            public void onResponse(Call<List<JobPortalModel>> call, Response<List<JobPortalModel>> response) {
+                pd.dismiss();
+
+                listjob = response.body();
+                    if(listjob.size()>0){
+                        int size = listjob.size();
+                        tvTotalBani.setText("সর্বমোট "+AppConstant.activitiname+size+" টি");
+                        JobpostAdapter questionAnsAdapter = new JobpostAdapter(listjob,context);
+                        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(context,
+                                LinearLayoutManager.VERTICAL, false);
+                        recyclSantirBani.setLayoutManager(horizontalLayoutManager);
+                        recyclSantirBani.setAdapter(questionAnsAdapter);
+                    }
+            }
+
+            @Override
+            public void onFailure(Call<List<JobPortalModel>> call, Throwable t) {
+                pd.dismiss();
+            }
+        });
+
+
+    }
+
+
 }

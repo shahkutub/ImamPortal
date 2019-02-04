@@ -5,14 +5,132 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/relBg"
+
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/appbg6"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="@dimen/_30sdp"
+
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                >
+
+                <ImageView
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    app:srcCompat="@drawable/ic_a21logo"
+
+                    />
+
+
+                <ImageView
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    app:srcCompat="@drawable/ic_a21logo"
+                    android:layout_marginLeft="@dimen/_50sdp"
+
+                    />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:gravity="center"
+                >
+
+                <ImageView
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    app:srcCompat="@drawable/ic_a21logo"
+
+                    />
+
+
+                <ImageView
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    app:srcCompat="@drawable/ic_a21logo"
+                    android:layout_marginLeft="@dimen/_50sdp"
+
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_50sdp"
+                android:layout_alignParentBottom="true"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:textSize="@dimen/_15sdp"
+                    android:text="পরিকল্পনা ও বাস্তবায়নে"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="#FF0000"
+                        android:textSize="@dimen/_12sdp"
+                        android:text="এটুআই"
+                        android:textStyle="bold"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="#025939"
+                        android:textSize="@dimen/_12sdp"
+                        android:text=" -একসেস টু ইনফরমেশন"
+                        android:textStyle="bold"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/logo_tollbar"
         android:layout_alignParentTop="true"
         android:layout_margin="@dimen/_10sdp"
+        android:visibility="gone"
         />
 
     <TextView
@@ -102,79 +220,23 @@
 
 
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_centerInParent="true"
-        >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="center"
-        >
-
-        <ImageView
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="@dimen/_80sdp"
-            app:srcCompat="@drawable/ic_a21logo"
-
-            />
-
-
-        <ImageView
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="@dimen/_80sdp"
-            app:srcCompat="@drawable/ic_a21logo"
-            android:layout_marginLeft="@dimen/_50sdp"
-
-            />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:gravity="center"
-        >
-
-        <ImageView
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="@dimen/_80sdp"
-            app:srcCompat="@drawable/ic_a21logo"
-
-            />
-
-
-        <ImageView
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="@dimen/_80sdp"
-            app:srcCompat="@drawable/ic_a21logo"
-            android:layout_marginLeft="@dimen/_50sdp"
-
-            />
-    </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_50sdp"
         android:layout_alignParentBottom="true"
-        android:gravity="center"
-        android:layout_marginBottom="@dimen/_10sdp"
         >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textColor="#000000"
+            android:textColor="#000"
             android:textSize="@dimen/_15sdp"
             android:text="পরিকল্পনা ও বাস্তবায়নে"
-            android:textStyle="bold"
             />
 
         <LinearLayout
@@ -182,7 +244,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginTop="@dimen/_5sdp"
             >
 
             <TextView
@@ -190,7 +251,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="#FF0000"
-                android:textSize="@dimen/_15sdp"
+                android:textSize="@dimen/_12sdp"
                 android:text="এটুআই"
                 android:textStyle="bold"
                 />
@@ -198,13 +259,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="#008000"
-                android:textSize="@dimen/_15sdp"
+                android:textColor="#025939"
+                android:textSize="@dimen/_12sdp"
                 android:text=" -একসেস টু ইনফরমেশন"
                 android:textStyle="bold"
                 />
         </LinearLayout>
 
     </LinearLayout>
+
 
 </RelativeLayout>

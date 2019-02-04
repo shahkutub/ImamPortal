@@ -936,7 +936,7 @@ public class MainActivity extends AppCompatActivity {
 //        relProfile.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-//                startActivity(new Intent(context,ProfileListActivity.class));
+//                startActivity(new Intent(context,PhotoGallaryActivity.class));
 //            }
 //        });
 
@@ -985,7 +985,9 @@ public class MainActivity extends AppCompatActivity {
         linphotogalary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                AppConstant.activitiname = "ফটো গ্যালারী";
+               // AppConstant.bolgpostName = "ফটো গ্যালারী";
+                startActivity(new Intent(context, PhotoGallaryActivity.class));
             }
         });
         linKitab.setOnClickListener(new View.OnClickListener() {
@@ -1032,7 +1034,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 AppConstant.activitiname = "দক্ষতার গল্প ";
                 AppConstant.bolgpostName = "দক্ষতার গল্প";
-                startActivity(new Intent(context, AllCommonPostActivity.class));
+                startActivity(new Intent(context, DokkotarGolpoActivity.class));
             }
         });
 

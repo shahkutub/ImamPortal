@@ -5,7 +5,10 @@ import com.imamportal.model.AllBlogpostModel;
 import com.imamportal.model.AlquranAlhadits;
 import com.imamportal.model.AudioModel;
 import com.imamportal.model.Catagories;
+import com.imamportal.model.JobPortalModel;
 import com.imamportal.model.NoticeResponse;
+import com.imamportal.model.PhotoModel;
+import com.imamportal.model.QuestionAnswerModel;
 import com.imamportal.model.SeraContentData;
 import com.imamportal.model.VideoModel;
 
@@ -69,6 +72,23 @@ public interface Api {
 
     @GET("api/skill")
     public Call<List<AllBlogpostModel>> skill();
+
+    @GET("api/job-portals")
+    public Call<List<JobPortalModel>> jobportals();
+
+    @GET("api/querylist")
+    public Call<List<QuestionAnswerModel>> querylist();
+
+
+
+    @GET("api/333")
+    public Call<List<QuestionAnswerModel>> querylist333();
+
+
+
+    @GET("api/photo-gallery")
+    public Call<List<PhotoModel>> photo_gallery();
+
 
 
 

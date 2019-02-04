@@ -88,7 +88,7 @@
             android:screenOrientation="portrait"
              />
         <activity
-            android:name=".ProfileListActivity"
+            android:name=".PhotoGallaryActivity"
             android:label="@string/title_activity_quiz_bijoyee"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme" />
@@ -119,6 +119,12 @@
 
          <activity
             android:name=".BlogActivity"
+            android:label="@string/title_activity_quiz_bijoyee"
+            android:screenOrientation="portrait" />
+
+
+         <activity
+            android:name=".DokkotarGolpoActivity"
             android:label="@string/title_activity_quiz_bijoyee"
             android:screenOrientation="portrait" />
 
