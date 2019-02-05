@@ -1,141 +1,171 @@
 package com.imamportal;
 
-import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.imamportal.model.MoulicBisoy;
+import com.imamportal.fragments.FragmentBisoyHadith;
+import com.imamportal.fragments.FragmentHadiseQudsi;
+import com.imamportal.fragments.FragmentSompadokio;
+import com.imamportal.fragments.FragmentUsuleHadith;
+import com.imamportal.model.AllBlogpostModel;
+import com.imamportal.model.AlquranAlhadits;
+import com.imamportal.utils.AlertMessage;
+import com.imamportal.utils.Api;
+import com.imamportal.utils.AppConstant;
+import com.imamportal.utils.NetInfo;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class SompadokioActivity extends AppCompatActivity {
 
     Context context;
-    private TabLayout tabMoulikBisoy,tabSopmadokio;
-    private RelativeLayout relIslamMoulikBisoy,relTabSopmpadokio;
-    TextView tvTabDescription,tvSompadokioDes,tvDate,MarqueeText;
-    private ImageView imgback;
+    private TabLayout tabLayout;
+    public ViewPager viewPager;
+    private ImageView imgBack;
+    List<AlquranAlhadits>  listAlquranAlhadit = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sompadokio);
-        context =this;
-        tabSompadokio();
+        context=this;
+        overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
+        getblog_post();
+        initUi();
+        //getAllQuranAlldadith();
     }
 
+    private void initUi() {
 
-    String title,descript;
-    private void tabSompadokio() {
-        imgback = (ImageView)findViewById(R.id.imgback);
-        imgback.setOnClickListener(new View.OnClickListener() {
+        imgBack = (ImageView)findViewById(R.id.imgBack);
+        imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
-        relTabSopmpadokio = (RelativeLayout)findViewById(R.id.relTabSopmpadokio);
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
 
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
 
-        tabSopmadokio = (TabLayout) findViewById(R.id.tabSopmadokio);
-        tvSompadokioDes = (TextView) findViewById(R.id.tvSompadokioDes);
-        tabSopmadokio.setTabTextColors(Color.BLACK,Color.RED);
+        tabLayout.setTabMode(TabLayout.MODE_FIXED);
 
-        final List<MoulicBisoy> moulicBisoyList = new ArrayList<>();
+        createTabIcons();
+    }
 
-        MoulicBisoy mo = new MoulicBisoy();
-        mo.setTitle(getString(R.string.recentsompadokio));
-        mo.setDetails("");
-        moulicBisoyList.add(mo);
+    private void createTabIcons() {
 
-        MoulicBisoy mo1 = new MoulicBisoy();
-        mo1.setTitle(getString(R.string.previoussompadokio));
-        mo1.setDetails("");
-        moulicBisoyList.add(mo1);
+        TextView tabOne = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
+        tabOne.setText("পূর্বের সম্পাদকীয়");
+        //tabOne.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_nari, 0, 0);
+        tabLayout.getTabAt(0).setCustomView(tabOne);
 
+        TextView tabTwo = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
+        tabTwo.setText("সর্বশেষ সম্পাদকীয়");
+        //tabTwo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_children, 0, 0);
+        tabLayout.getTabAt(1).setCustomView(tabTwo);
 
-
-//        for (int i = 0; i <7 ; i++) {
-//            moulicBisoyList.add(i,mo);
-//        }
-
-        for (int i = 0; i < moulicBisoyList.size(); i++) {
-            tabSopmadokio.addTab(tabSopmadokio.newTab().setText(moulicBisoyList.get(i).getTitle()));
-        }
-
-        tvSompadokioDes.setText(moulicBisoyList.get(0).getDetails());
-        title = moulicBisoyList.get(0).getDetails();
-        descript = moulicBisoyList.get(0).getTitle();
-
-//        final String text = moulicBisoyList.get(0).getDetails()+"<font color='blue'>বিস্তারিত</font>";
-//        tvTabDescription.setText(Html.fromHtml(text), TextView.BufferType.SPANNABLE);
-
-        tabSopmadokio.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                tvSompadokioDes.setText(moulicBisoyList.get(tab.getPosition()).getDetails());
-                //tvTabDescription.setText(Html.fromHtml(text), TextView.BufferType.SPANNABLE);
-                descript = moulicBisoyList.get(tab.getPosition()).getDetails();
-                title = moulicBisoyList.get(tab.getPosition()).getTitle();
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-
-        relTabSopmpadokio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialogeMoulikBisoy(title,descript);
-            }
-        });
 
     }
 
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new FragmentSompadokio(), "পূর্বের সম্পাদকীয়");
+        adapter.addFragment(new FragmentSompadokio(), "সর্বশেষ সম্পাদকীয়");
+        //adapter.addFragment(new FragmentOnnanoHadith(), "অন্যান্য");
+        viewPager.setAdapter(adapter);
+    }
 
-    private void dialogeMoulikBisoy(String moulikTitle,String details) {
-        final Dialog dialog=new Dialog(context);
-        dialog.setContentView(R.layout.dialoge_moulik);
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
 
-        ImageView imgCross = (ImageView)dialog.findViewById(R.id.imgCross);
-        TextView tvBisoy = (TextView)dialog.findViewById(R.id.tvBisoy);
-        TextView tvBisoyDescription = (TextView)dialog.findViewById(R.id.tvBisoyDescription);
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
 
-        tvBisoy.setText(moulikTitle);
-        tvBisoyDescription.setText(details);
-        tvBisoyDescription.setMovementMethod(new ScrollingMovementMethod());
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
 
-        imgCross.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
+    }
+
+    private void getblog_post() {
+
+        if(!NetInfo.isOnline(context)){
+            AlertMessage.showMessage(context,"Alert!","No internet connection!");
+        }
+
+        final ProgressDialog pd = new ProgressDialog(context);
+        pd.setMessage("Loading....");
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.show();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Api api = retrofit.create(Api.class);
+        Call<List<AllBlogpostModel>> userCall = api.blog_post();
+        userCall.enqueue(new Callback<List<AllBlogpostModel>>() {
             @Override
-            public void onClick(View view) {
-                dialog.dismiss();
+            public void onResponse(Call<List<AllBlogpostModel>> call, Response<List<AllBlogpostModel>> response) {
+                pd.dismiss();
+
+                List<AllBlogpostModel> listAlblog = new ArrayList<>();
+                listAlblog = response.body();
+
+                Log.e("listAlquranAlhadit",""+listAlblog.size());
+
+                if(listAlblog.size()>0){
+                    AppConstant.listAllBlogPost = listAlblog;
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<AllBlogpostModel>> call, Throwable t) {
+                pd.dismiss();
             }
         });
 
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        lp.copyFrom(dialog.getWindow().getAttributes());
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
-        dialog.show();
-        dialog.getWindow().setAttributes(lp);
 
     }
 }

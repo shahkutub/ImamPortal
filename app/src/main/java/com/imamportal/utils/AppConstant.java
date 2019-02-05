@@ -17,6 +17,7 @@ import android.util.Base64;
 
 
 import com.google.gson.Gson;
+import com.imamportal.model.AllBlogpostModel;
 import com.imamportal.model.AlquranAlhadits;
 import com.imamportal.model.AudioModel;
 import com.imamportal.model.Catagories;
@@ -71,6 +72,7 @@ public class AppConstant {
     public static List<AudioModel> listAudio = new ArrayList<>();
     public static List<VideoModel> listVideo = new ArrayList<>();
     public static String bolgpostName;
+    public static List<AllBlogpostModel> listAllBlogPost = new ArrayList<>();
 
     public static String BitMapToString(Bitmap bitmap){
         ByteArrayOutputStream baos=new ByteArrayOutputStream();

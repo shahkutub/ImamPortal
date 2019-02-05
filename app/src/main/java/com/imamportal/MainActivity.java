@@ -19,6 +19,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -42,12 +43,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.imamportal.Adapter.AdapteDate;
+import com.imamportal.Adapter.AllCommonPostAdapter;
 import com.imamportal.Adapter.KitabAdapter;
 import com.imamportal.Adapter.SlidingViewPagerAdapter;
 import com.imamportal.converter.BanglaDateUtils;
 import com.imamportal.fragments.FragmentPhoto;
 import com.imamportal.fragments.FragmentQuizBizoyee;
 import com.imamportal.fragments.FragmentSeraContent;
+import com.imamportal.model.AllBlogpostModel;
 import com.imamportal.model.KitabInfo;
 import com.imamportal.model.NoticeResponse;
 import com.imamportal.model.SeraContentData;
@@ -1630,282 +1633,6 @@ public class MainActivity extends AppCompatActivity {
         getPrayerTime();
     }
 
-//    private void alochitocontant() {
-//        RecyclerView recycleContant = (RecyclerView)findViewById(R.id.recycleContant);
-//        List<QuestionAnsInfo> questionAnsInfoList = new ArrayList<>();
-//        QuestionAnsInfo questionAnsInfo = new QuestionAnsInfo( "Something");
-//        for (int i = 0; i < 10; i++) {
-//            questionAnsInfoList.add(i, questionAnsInfo);
-//        }
-//
-//        AlochitoContentAdapter questionAnsAdapter = new AlochitoContentAdapter(questionAnsInfoList,context);
-//        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(MainActivity.this,
-//                LinearLayoutManager.VERTICAL, false);
-//        recycleContant.setLayoutManager(horizontalLayoutManager);
-//        recycleContant.setAdapter(questionAnsAdapter);
-//    }
-
-//    private void importantLink() {
-//        RecyclerView recyclerimpoLink = (RecyclerView)findViewById(R.id.recyclerimpoLink);
-//        List<QuestionAnsInfo> questionAnsInfoList = new ArrayList<>();
-//        QuestionAnsInfo questionAnsInfo1 = new QuestionAnsInfo( "ধর্ম মন্ত্রনালয়");
-//        QuestionAnsInfo questionAnsInfo2 = new QuestionAnsInfo( "ইসলামিক ফাউন্ডেশন");
-//        QuestionAnsInfo questionAnsInfo3 = new QuestionAnsInfo( "বাংলাদেশ হজ্জ্ব মেনেজমেন্ট");
-//        QuestionAnsInfo questionAnsInfo4 = new QuestionAnsInfo( "বাংলাদেশ মাদরাসা শিক্ষা বোর্ড");
-//        QuestionAnsInfo questionAnsInfo5 = new QuestionAnsInfo( "মক্কা টিভি, লাইভ");
-//
-//        questionAnsInfoList.add(questionAnsInfo1);
-//        questionAnsInfoList.add(questionAnsInfo2);
-//        questionAnsInfoList.add(questionAnsInfo3);
-//        questionAnsInfoList.add(questionAnsInfo4);
-//        questionAnsInfoList.add(questionAnsInfo5);
-//
-////        for (int i = 0; i < 5; i++) {
-////            questionAnsInfoList.add(i, questionAnsInfo);
-////        }
-//
-//        ImportantLinkAdapter questionAnsAdapter = new ImportantLinkAdapter(questionAnsInfoList,context);
-//        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(MainActivity.this,
-//                LinearLayoutManager.HORIZONTAL, false);
-//        recyclerimpoLink.setLayoutManager(horizontalLayoutManager);
-//        recyclerimpoLink.setAdapter(questionAnsAdapter);
-//    }
-
-
-//    private void questionAnswer() {
-//        RecyclerView recycleViewQuestion = (RecyclerView) findViewById(R.id.recycleViewQuestion);
-//        List<QuestionAnsInfo> questionAnsInfoList = new ArrayList<>();
-//        QuestionAnsInfo questionAnsInfo = new QuestionAnsInfo( "Something");
-//        for (int i = 0; i < 10; i++) {
-//            questionAnsInfoList.add(i, questionAnsInfo);
-//        }
-//
-//        QuestionAnsAdapter questionAnsAdapter = new QuestionAnsAdapter(questionAnsInfoList,context);
-//        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(MainActivity.this,
-//                LinearLayoutManager.VERTICAL, false);
-//        recycleViewQuestion.setLayoutManager(horizontalLayoutManager);
-//        recycleViewQuestion.setAdapter(questionAnsAdapter);
-//
-//    }
-//
-//    private void kitabSomuho() {
-//        recycleViewKitab = (RecyclerView) findViewById(R.id.recycleViewKitab);
-//        KitabInfo kitabInfo = new KitabInfo(1, "সুনানু নাসাঈ শরীফ");
-//        for (int i = 0; i < 10; i++) {
-//            data.add(i, kitabInfo);
-//        }
-//
-//        KitabInfo kitabInfo2 = new KitabInfo(1, "তাওহীদ ও ঈমান");
-//
-//        for (int i = 0; i < 10; i++) {
-//            // data2.add(i, kitabInfo2);
-//        }
-//        horizontalAdapter = new KitabAdapter(data, context);
-//        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(MainActivity.this,
-//                LinearLayoutManager.HORIZONTAL, false);
-//        recycleViewKitab.setLayoutManager(horizontalLayoutManager);
-//        recycleViewKitab.setAdapter(horizontalAdapter);
-//    }
-//
-//
-//    private void tabMoulikBisoy() {
-//        final String details;
-//        relIslamMoulikBisoy = (RelativeLayout)findViewById(R.id.relIslamMoulikBisoy);
-//
-//
-//        tabMoulikBisoy = (TabLayout) findViewById(R.id.tabMoulikBisoy);
-//        tvTabDescription = (TextView) findViewById(R.id.tvTabDescription);
-//        tabMoulikBisoy.setTabTextColors(Color.BLACK,Color.RED);
-//
-//        final List<MoulicBisoy> moulicBisoyList = new ArrayList<>();
-//
-//        MoulicBisoy mo = new MoulicBisoy();
-//        mo.setTitle("তাওহীদ ও ঈমান");
-//        mo.setDetails("তাবলীগের কাজই হলো ঈমানের দিকে ডাকা। ঈমানকে পাকাপোক্ত করা। নিজের ও অন্যের একত্ববাদে বিশ্বাসকে দৃঢ় করা। তাই ঈমানের জন্য জরুরি হলো, এক দিকে যেমন তাওহীদের স্বীকৃতি দিতে হবে অন্য দিকে সব ধরনের শিরকের বিষয়ে নারাজীর ঘোষণাও দিতে হবে। কারো হৃদয়ে ঈমানের সাথে শিরকের সহাবস্থান সম্ভব নয়। তাইফের লোকেরা, যারা নবী সাল্লাল্লাহু আলাইহি ওয়া সাল্লামকে নির্মমভাবে নির্যাতন করে ফিরিয়ে দিয়েছিল তারা পরে নিজেদের ভুল বুঝতে পেরে নবীজী সাল্লাল্লাহু আলাইহি ওয়া সাল্লামের কাছে এসে বললো, হে রাসূল! আমরা তো ঈমান আনতে চাই তবে একটা শর্ত, বহু দিন থেকে দেবী মূর্তিগুলোর বিশেষ করে লাত দেবীর পূজা করে আসছি হঠাৎ করে তা ছেড়ে দিই কী করে? আমাদের তিন বছর সময় দিন আল্লাহরও ইবাদত করবো এবং লাতেরও পূজা দিব, ক্রমে মূর্তি পূজা ছেড়ে দেবো। নবী সাল্লাল্লাহু আলাইহি ওয়া সাল্লাম পরিষ্কার না করে দিলেন। তারা দুই বছর পরে এক বছরের অবকাশ প্রার্থনা করলো। রাসূল সাল্লাল্লাহু আলাইহি ওয়া সাল্লাম সে অবকাশ দিতেও অস্বীকৃতি জানালেন। শেষ পর্যন্ত তারা আরজ করলো অন্তত এক মাসের অবকাশ দিন। রাসূল সাল্লাল্লাহু আলাইহি ওয়া সাল্লাম এক দিনের জন্য, এক মুহূর্তের জন্যও ছাড় দিতে সম্মত হলেন না। ঈমান আনতে হলে এই মুহূর্তেই মূর্তিপূজা ত্যাগ করতে হবে।   \n" +
-//                "\n" +
-//                "\n" +
-//                "তাওহীদ ও ইসলামের কালিমাই হলো এ কথার সাক্ষ্য দেয়া যে ‘লা ইলাহা ইল্লাল্লাহু ওয়াহদাহু লা শারীকালাহ’ কোনো ইলাহ নেই আল্লাহ ছাড়া। তিনি এক, তাঁর কোনো শরীক নেই। শত বছরের এক কাট্টা কাফির মুশরিকও যদি মৃত্যুর আগ মুহূর্তেও দৃঢ়ভাবে আন্তরিকতার সাথে তাওহীদের সাক্ষী দেয় এবং শিরক থেকে নারাজী ঘোষণা করে, তবে সে জাহান্নামের কঠিন আযাব থেকে বেঁচে যাবে, জান্নাতের অনন্ত সুখ নেয়ামতের অধিকারী হয়ে যাবে।\n" +
-//                "\n" +
-//                "\n" +
-//                "আল্লাহর অস্তিত্ব ও তাঁর গুণাবলীর উপর, তাঁর যাত ও সিফাতের উপর ঈমানের সাথে সাথে অন্তরে দৃঢ়মূল করতে হবে তিনি সর্বক্ষেত্রে এক, কোনো ক্ষেত্রে তাঁর কোনো শরীক নেই। অনাদি অনন্ত অস্তিত্বেও তিনি একক, সিফাত ও গুণাবলীতেও তিনি একক। উলূহিয়্যাত ও মা’বুদ হওয়ার ক্ষেত্রেও কেউ তাঁর কোনো শরীক নেই, ইবাদতের মালিক তো একমাত্র তিনিই।\n" +
-//                "\n" +
-//                "\n" +
-//                "‘লা ইলাহা ইল্লাল্লাহ’ কোনো ইলাহ নেই আল্লাহ ছাড়া, কোনো মা’বূদ নেই আল্লাহ ছাড়া, কোনো আশ্রয় নেই আল্লাহ ছাড়া, কারো কোনো ক্ষমতা নেই আল্লাহ ছাড়া, আমাকে কেউ বাঁচাতে পারবে না আল্লাহ ছাড়া, আমাকে কেউ মারতেও পারবে না আল্লাহ ছাড়া, আমার মনো বাসনা কেউ পূরণ করতে পারবে না আল্লাহ ছাড়া, আমার ক্ষতি করতে পারবে না কেউ আল্লাহ ছাড়া, আমার উপকারও করতে পারবে না কেউ আল্লাহ ছাড়া, ইজ্জতের মালিক কেউ নেই তিনি ছাড়া, বেইজ্জতও কেউ করতে পারবে না তিনি ছাড়া, তিনি যার উপকার করতে চান কেউ তার কণামাত্র ক্ষতি করতে পারবে না, আর তিনি যদি কারো ক্ষতি করতে ইরাদা করেন তবে কেউ নেই যে তার উপকার করতে পারবে বিন্দুমাত্র। রিয্ক ও জীবিকা তাঁরই হাতে। এই আকাশ যদি তামা হয়ে যায় আর জমিন যদি পাথর হয়ে যায়, এক ফোঁটা বৃষ্টিও যদি আকাশ থেকে না পড়ে আর একটা দানাও যদি জমিন থেকে উদগত না হয় তবুও তিনি তাঁর কুদরতে সকল মাখলুককে তার সৃষ্টিকে আহার যুগিয়ে বাঁচিয়ে রাখার ক্ষমতা ধারণ করেন।\n" +
-//                "\n" +
-//                "\n" +
-//                "সব সৃষ্টি স্বীয় অস্তিত্বে, বর্ধনে, হেফাজতে, বেঁচে থাকা, সুস্থ থাকা সব ক্ষেত্রেই তাঁরই ইচ্ছা অনিচ্ছার মুখাপেক্ষী। তিনি কোনো ক্ষেত্রে কারো মুখাপেক্ষী নন। পীর ফকীর ওলী দরবেশ কারো কোনো নিজস্ব ক্ষমতা নেই। এমন কি নবী রাসূলগণও ততটুকুই পারেন যতটুকু আল্লাহ পাক তাঁদের দিয়েছেন। যেহেতু সব ক্ষমতার মালিক তিনিই, তাই যা চাওয়ার সবই চাইতে হবে তাঁরই কাছে। দুআ ও প্রার্থনা হবে একমাত্র তাঁরই। অন্য কারো মুখাপেক্ষী হওয়া তাওহীদের আকীদার পরিপন্থী।\n" +
-//                "\n" +
-//                "\n" +
-//                "বিধানদাতাও তিনি। সকল সৃষ্টির চলার পথও নির্ধারণ করে দিয়েছেন তিনিই। এই মানুষেরও জীবন পরিচালনার বিধিবিধান ঠিক করে দিয়েছেন তিনিই। তিনি সর্বশ্রোতা, সর্বদ্রষ্টা এবং সর্বজ্ঞ। তাঁর অগোচরে, তাঁর আওতার বাইরে কোনো কিছু হওয়ার, কোনো কিছু ঘটার কোনো জো নেই, কোনো উপায় নেই।\n" +
-//                "\n" +
-//                "\n" +
-//                "নিজের ঈমানকে তাজা করার জন্য অন্যকেও ঈমান তাজা করার প্রতি উৎসাহ, দাওয়াত ও আমন্ত্রণ জানাতে হবে। তাহলেও নিজের ঈমানও তাজা হবে। আল্লাহ তাআলা আমাদের তাওফিক দিন। আমীন।\n" +
-//                "লেখক : চেয়ারম্যান, বাংলাদেশ জমিয়তুল উলামা ও ঐতিহাসিক শোলাকিয়ার গ্র্যান্ড ইমাম");
-//        moulicBisoyList.add(mo);
-//
-//        MoulicBisoy mo1 = new MoulicBisoy();
-//        mo1.setTitle("ইবাদাতের রুহ");
-//        mo1.setDetails("আল্লাহ তাআলা আমাদেরকে তাঁর ইবাদতের জন্য বানিয়েছেন এবং মেহেরবানী করে প্রত্যেক ইবাদতের একটা সময় ও সুরত, একটা আঙ্গিক ");
-//        moulicBisoyList.add(mo1);
-//
-//        MoulicBisoy mo2 = new MoulicBisoy();
-//        mo2.setTitle("ইসলামের অর্থ দর্শন");
-//        mo2.setDetails("اَلْحَمْدُ لِلّٰهِ رَبِّ الْعَالَمِيْنَ وَالصَّلوٰةُ وَالسَّلَامُ عَلٰى سَيِّدِ الْاَنْبِيَاءِ وَالْمُرْسَلِيْنَ وَعَلٰى اٰلِه وَاَصْحَابِه اَجْمَعِيْنَ O স্বনামখ্যাত সাহাবী হযরত আবূ যর গিফারী রা.-এর জীব");
-//        moulicBisoyList.add(mo2);
-//
-//          MoulicBisoy mo3 = new MoulicBisoy();
-//        mo3.setTitle("মুআশারাত");
-//        mo3.setDetails("ইবাদাত ইবাদাত কি? 'ইসলামের হাকীকত' গ্রন্থের শেষ প্রবন্ধে" +
-//                " 'দ্বীন' ও 'শরীয়াত' এ শব্দ দু'টির প্রকৃত অর্থ এবং ব্যাখ্যা বর্ণনা করা হয়েছে। ");
-//        moulicBisoyList.add(mo3);
-//
-//  MoulicBisoy mo4 = new MoulicBisoy();
-//        mo4.setTitle("উসওয়াতুন হাসানাহ");
-//        mo4.setDetails("সকল হামদ ও প্রশংসা আল্লাহর। দরূদ ও সালাম নবীজী ‘পরে যার ‘উসওয়ায়ে হাসানায়’ অভিষিক্ত হয়ে হিদায়াতের আলোয় স্নাত হয়েছিল পৃথিবী, " +
-//                "পেয়েছিল শান্তির মহা সোপান। মানব জীবনের সার্র্বিক শান্তি কো ");
-//        moulicBisoyList.add(mo4);
-//
-//
-//
-////        for (int i = 0; i <7 ; i++) {
-////            moulicBisoyList.add(i,mo);
-////        }
-//
-//        for (int i = 0; i < moulicBisoyList.size(); i++) {
-//            tabMoulikBisoy.addTab(tabMoulikBisoy.newTab().setText(moulicBisoyList.get(i).getTitle()));
-//        }
-//
-//        tvTabDescription.setText(moulicBisoyList.get(0).getDetails());
-//        detailMoulik = moulicBisoyList.get(0).getDetails();
-//        moulikTitle = moulicBisoyList.get(0).getTitle();
-//
-////        final String text = moulicBisoyList.get(0).getDetails()+"<font color='blue'>বিস্তারিত</font>";
-////        tvTabDescription.setText(Html.fromHtml(text), TextView.BufferType.SPANNABLE);
-//
-//        tabMoulikBisoy.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-//            @Override
-//            public void onTabSelected(TabLayout.Tab tab) {
-//                tvTabDescription.setText(moulicBisoyList.get(tab.getPosition()).getDetails());
-//                //tvTabDescription.setText(Html.fromHtml(text), TextView.BufferType.SPANNABLE);
-//                detailMoulik = moulicBisoyList.get(tab.getPosition()).getDetails();
-//                moulikTitle = moulicBisoyList.get(tab.getPosition()).getTitle();
-//            }
-//
-//            @Override
-//            public void onTabUnselected(TabLayout.Tab tab) {
-//
-//            }
-//
-//            @Override
-//            public void onTabReselected(TabLayout.Tab tab) {
-//
-//            }
-//        });
-//
-//        relIslamMoulikBisoy.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                dialogeMoulikBisoy(moulikTitle,detailMoulik);
-//            }
-//        });
-//
-//    }
-//
-//     String title,descript;
-//    private void tabSompadokio() {
-//
-//        relTabSopmpadokio = (RelativeLayout)findViewById(R.id.relTabSopmpadokio);
-//
-//
-//        tabSopmadokio = (TabLayout) findViewById(R.id.tabSopmadokio);
-//        tvSompadokioDes = (TextView) findViewById(R.id.tvSompadokioDes);
-//        tabSopmadokio.setTabTextColors(Color.BLACK,Color.RED);
-//
-//        final List<MoulicBisoy> moulicBisoyList = new ArrayList<>();
-//
-//        MoulicBisoy mo = new MoulicBisoy();
-//        mo.setTitle("সর্বশেষ সম্পাদকীয়");
-//        mo.setDetails("");
-//        moulicBisoyList.add(mo);
-//
-//        MoulicBisoy mo1 = new MoulicBisoy();
-//        mo1.setTitle("গত সপ্তাহের সম্পাদকীয়");
-//        mo1.setDetails("");
-//        moulicBisoyList.add(mo1);
-//
-//
-//
-////        for (int i = 0; i <7 ; i++) {
-////            moulicBisoyList.add(i,mo);
-////        }
-//
-//        for (int i = 0; i < moulicBisoyList.size(); i++) {
-//            tabSopmadokio.addTab(tabSopmadokio.newTab().setText(moulicBisoyList.get(i).getTitle()));
-//        }
-//
-//        tvSompadokioDes.setText(moulicBisoyList.get(0).getDetails());
-//        title = moulicBisoyList.get(0).getDetails();
-//        descript = moulicBisoyList.get(0).getTitle();
-//
-////        final String text = moulicBisoyList.get(0).getDetails()+"<font color='blue'>বিস্তারিত</font>";
-////        tvTabDescription.setText(Html.fromHtml(text), TextView.BufferType.SPANNABLE);
-//
-//        tabSopmadokio.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-//            @Override
-//            public void onTabSelected(TabLayout.Tab tab) {
-//                tvSompadokioDes.setText(moulicBisoyList.get(tab.getPosition()).getDetails());
-//                //tvTabDescription.setText(Html.fromHtml(text), TextView.BufferType.SPANNABLE);
-//                descript = moulicBisoyList.get(tab.getPosition()).getDetails();
-//                title = moulicBisoyList.get(tab.getPosition()).getTitle();
-//            }
-//
-//            @Override
-//            public void onTabUnselected(TabLayout.Tab tab) {
-//
-//            }
-//
-//            @Override
-//            public void onTabReselected(TabLayout.Tab tab) {
-//
-//            }
-//        });
-//
-//        relTabSopmpadokio.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                dialogeMoulikBisoy(title,descript);
-//            }
-//        });
-//
-//    }
-//
-//    private void dialogeMoulikBisoy(String moulikTitle,String details) {
-//        final Dialog dialog=new Dialog(context);
-//        dialog.setContentView(R.layout.dialoge_moulik);
-//
-//        ImageView imgCross = (ImageView)dialog.findViewById(R.id.imgCross);
-//        TextView tvBisoy = (TextView)dialog.findViewById(R.id.tvBisoy);
-//        TextView tvBisoyDescription = (TextView)dialog.findViewById(R.id.tvBisoyDescription);
-//
-//        tvBisoy.setText(moulikTitle);
-//        tvBisoyDescription.setText(details);
-//        tvBisoyDescription.setMovementMethod(new ScrollingMovementMethod());
-//
-//        imgCross.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                dialog.dismiss();
-//            }
-//        });
-//
-//        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-//        lp.copyFrom(dialog.getWindow().getAttributes());
-//        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-//        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
-//        dialog.show();
-//        dialog.getWindow().setAttributes(lp);
-//
-//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -1924,19 +1651,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // ...
-//
-//        View menuItemView = findViewById(R.id.action_search); // SAME ID AS MENU ID
-//        PopupMenu popupMenu = new PopupMenu(this, menuItemView);
-//        popupMenu.inflate(R.menu.menu);
-//        // ...
-//        popupMenu.show();
-//        // ...
-//        return true;
-//    }
-
-
     private void slideshow() {
 
         handler = new Handler();
@@ -1951,30 +1665,6 @@ public class MainActivity extends AppCompatActivity {
         setupViewPager(launchViewpager);
 
 
-//        launchViewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//            @Override
-//            public void onPageScrolled(int i, float v, int i1) {
-//
-//            }
-//
-//            @Override
-//            public void onPageSelected(int i) {
-//
-//            }
-//
-//            @Override
-//            public void onPageScrollStateChanged(int i) {
-//                if (i == ViewPager.SCROLL_STATE_DRAGGING) {
-//                    isTimerRunning = false;
-//                    swipeTimer.cancel();
-//                } else {
-//                    if (!isTimerRunning) {
-//                        // createSwipeTimer();
-//                        isTimerRunning = true;
-//                    }
-//                }
-//            }
-//        });
 
 
         viewpagerDate = (ViewPager) findViewById(R.id.viewpagerDate);
@@ -2009,20 +1699,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-//        updateSlider = new Runnable() {
-//            @Override
-//            public void run() {
-//
-//                    int currentImg = launchViewpager.getCurrentItem();
-//                    currentImg++;
-//                if (currentImg == 3) {
-//                    currentImg = 0;
-//                }
-//                    launchViewpager.setCurrentItem(currentImg, true);
-//
-//            }
-//        };
 
         Update = new Runnable() {
             @Override

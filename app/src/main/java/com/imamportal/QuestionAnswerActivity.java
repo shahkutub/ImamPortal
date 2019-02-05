@@ -2,6 +2,7 @@ package com.imamportal;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -34,6 +36,8 @@ public class QuestionAnswerActivity extends AppCompatActivity {
     private ImageView imgBack;
     List<AlquranAlhadits> listAlquranAlhadit = new ArrayList<>();
     private TextView tvName;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,18 +68,19 @@ public class QuestionAnswerActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         createTabIcons();
+
     }
 
     private void createTabIcons() {
 
         TextView tabOne = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
         tabOne.setText("বাতায়নে জিজ্ঞাসা");
-        tabOne.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_nari, 0, 0);
+        tabOne.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_contract, 0, 0);
         tabLayout.getTabAt(0).setCustomView(tabOne);
 
         TextView tabTwo = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
         tabTwo.setText("৩৩৩ - তে জিজ্ঞাসা");
-        tabTwo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_children, 0, 0);
+        tabTwo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_phone, 0, 0);
         tabLayout.getTabAt(1).setCustomView(tabTwo);
 
     }
@@ -118,5 +123,7 @@ public class QuestionAnswerActivity extends AppCompatActivity {
             return mFragmentTitleList.get(position);
         }
     }
+
+
 
 }

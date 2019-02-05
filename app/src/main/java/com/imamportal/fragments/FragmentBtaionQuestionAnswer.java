@@ -185,12 +185,12 @@ public class FragmentBtaionQuestionAnswer extends Fragment {
         public void onBindViewHolder(final QuestionAnsAdapter.MyViewHolder holder, final int position) {
 
             final QuestionAnswerModel data = santirBaniList.get(position);
-//            holder.tvPublishDate.setText(data.getCreated_at());
+            holder.tvPublishDate.setText(data.getCreated_at());
 //            if(data.getUser_detail()!=null){
-//                holder.tvPublisher.setText(data.getUser_detail().getName());
+                holder.tvPublisher.setText(data.getName());
 //            }
-//            holder.tvTitle.setText(data.getJob_title());
-//            holder.tvShortDescription.setText(data.getJob_description());
+            holder.tvTitle.setText(data.getQuestion());
+            holder.tvShortDescription.setText(data.getAnswer());
 //            //holder.tvViewCount.setText(data.getView_count());
 //
 //            if(!TextUtils.isEmpty(data.getFile())){
