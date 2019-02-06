@@ -15,6 +15,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -104,6 +105,7 @@ public class QuestionAnswerActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
+
             return mFragmentList.get(position);
         }
 
@@ -123,6 +125,7 @@ public class QuestionAnswerActivity extends AppCompatActivity {
             return mFragmentTitleList.get(position);
         }
     }
+
 
 
 

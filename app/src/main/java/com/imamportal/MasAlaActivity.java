@@ -15,9 +15,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.imamportal.fragments.FragmentNari;
-import com.imamportal.fragments.FragmentOnnoDhara;
-import com.imamportal.fragments.FragmentShishu;
+import com.imamportal.fragments.FragmentMasalaHoz;
+import com.imamportal.fragments.FragmentMasalaIttikaf;
+import com.imamportal.fragments.FragmentMasalaJakat;
+import com.imamportal.fragments.FragmentMasalaJanaja;
+import com.imamportal.fragments.FragmentMasalaKurbani;
+import com.imamportal.fragments.FragmentMasalaPobitrota;
+import com.imamportal.fragments.FragmentMasalaSalat;
+import com.imamportal.fragments.FragmentMasalaSiam;
 import com.imamportal.model.AllBlogpostModel;
 import com.imamportal.model.AlquranAlhadits;
 import com.imamportal.utils.AlertMessage;
@@ -34,13 +39,16 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class BlogActivity extends AppCompatActivity {
+public class MasAlaActivity extends AppCompatActivity {
 
     Context context;
     private TabLayout tabLayout;
     public ViewPager viewPager;
     private ImageView imgBack;
+    private TextView tvName;
     List<AlquranAlhadits>  listAlquranAlhadit = new ArrayList<>();
+    String [] titles = {"পবিত্রতা","সালাত","জানাযা ও কবর সংক্রান্ত","সিয়াম","ইতেকাফ","হজ ও ওমরা","যাকাত ও সাদকা",
+            "কুরবানি","পারিবারিক মাসায়েল","অন্যান্য"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,8 +61,11 @@ public class BlogActivity extends AppCompatActivity {
     }
 
     private void initUi() {
-
+        AppConstant.masalaFragmentName = titles[0];
         imgBack = (ImageView)findViewById(R.id.imgBack);
+        tvName = (TextView) findViewById(R.id.tvName);
+
+        tvName.setText(AppConstant.activitiname);
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,7 +80,26 @@ public class BlogActivity extends AppCompatActivity {
 
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
-        createTabIcons();
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                AppConstant.masalaFragmentName = titles[i];
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+                AppConstant.masalaFragmentName = titles[i];
+            }
+        });
+
+
+
+       // createTabIcons();
     }
 
     private void createTabIcons() {
@@ -92,9 +122,17 @@ public class BlogActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new FragmentNari(), getString(R.string.narikornar));
-        adapter.addFragment(new FragmentShishu(), getString(R.string.sisukisur));
-        adapter.addFragment(new FragmentOnnoDhara(), getString(R.string.onnodhara));
+        adapter.addFragment(new FragmentMasalaPobitrota(), "পবিত্রতা");
+        adapter.addFragment(new FragmentMasalaSalat(), "সালাত");
+        adapter.addFragment(new FragmentMasalaJanaja(), "জানাযা ও কবর সংক্রান্ত");
+        adapter.addFragment(new FragmentMasalaSiam(), "সিয়াম");
+        adapter.addFragment(new FragmentMasalaIttikaf(), "ইতেকাফ");
+        adapter.addFragment(new FragmentMasalaHoz(), "হজ ও ওমরা");
+        adapter.addFragment(new FragmentMasalaJakat(), "যাকাত ও সাদকা");
+        adapter.addFragment(new FragmentMasalaKurbani(), "কুরবানি");
+        adapter.addFragment(new FragmentMasalaPobitrota(), "পারিবারিক মাসায়েল");
+        adapter.addFragment(new FragmentMasalaSalat(), "অন্যান্য");
+
         //adapter.addFragment(new FragmentOnnanoHadith(), "অন্যান্য");
         viewPager.setAdapter(adapter);
     }
@@ -109,6 +147,7 @@ public class BlogActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
+            //AppConstant.masalaFragmentName = mFragmentTitleList.get(position);
             return mFragmentList.get(position);
         }
 
@@ -125,8 +164,11 @@ public class BlogActivity extends AppCompatActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
+
+
             return mFragmentTitleList.get(position);
         }
+
     }
 
 
@@ -161,7 +203,7 @@ public class BlogActivity extends AppCompatActivity {
                 if(listAlblog.size()>0){
                     AppConstant.listAllBlogPost = listAlblog;
                 }
-                initUi();
+                //initUi();
             }
 
             @Override

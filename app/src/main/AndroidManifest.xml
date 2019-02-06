@@ -29,10 +29,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ToolbarSearchActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme" />
+
+        <activity
+            android:name=".MasAlaActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyMaterialTheme" />
+
+
+        <activity
+            android:name=".AmarpataActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyMaterialTheme" />
+
+
+
+        <activity
+            android:name=".UploadActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyMaterialTheme" />
+
+
         <activity
             android:name=".RegistrationActivity"
             android:screenOrientation="portrait" />

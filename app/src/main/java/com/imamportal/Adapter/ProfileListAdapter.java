@@ -3,6 +3,7 @@ package com.imamportal.Adapter;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +24,8 @@ import java.util.List;
 
 public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListAdapter.MyViewHolder> {
 
-    Bitmap bmp = null;
+    //Bitmap bmp = null;
+    List<Bitmap> listbmp = new ArrayList<>();
     List<PhotoModel> listPhoto = new ArrayList<>();
     Context context;
 
@@ -69,22 +71,33 @@ public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListAdapter.
                 .into(new SimpleTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
-                        holder.imgPhoto.setImageBitmap(resource);
-                        bmp = resource;
+                        if(resource!=null){
+                            holder.imgPhoto.setImageBitmap(resource);
+                            listbmp.add(resource);
+                        }
+
+//                        else {
+//                            Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.appbg);
+//                            listbmp.add(bmp);
+//                            holder.imgPhoto.setImageBitmap(listbmp.get(position));
+//                        }
+
                     }
                 });
 
         holder.imgPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dilogFullPic(bmp);
+                holder.imgPhoto.buildDrawingCache();
+                Bitmap bmap = holder.imgPhoto.getDrawingCache();
+                dilogFullPic(bmap);
             }
         });
 
 
     }
 
-    private void dilogFullPic(Bitmap bmp) {
+    private void dilogFullPic(Bitmap bitmap) {
         final Dialog dialog = new Dialog(context, R.style.Theme_Dialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialoge_bigpic);
@@ -92,8 +105,7 @@ public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListAdapter.
         dialog.show();
 
         ImageView imgPhoto = (ImageView)dialog.findViewById(R.id.imgPhoto);
-        imgPhoto.setImageBitmap(bmp);
-
+        imgPhoto.setImageBitmap(bitmap);
 
     }
 

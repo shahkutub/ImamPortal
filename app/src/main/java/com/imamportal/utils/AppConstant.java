@@ -1,6 +1,7 @@
 package com.imamportal.utils;
 
 import android.app.AlarmManager;
+import android.app.Dialog;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -13,10 +14,15 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Base64;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.TextView;
 
 
 import com.google.gson.Gson;
+import com.imamportal.R;
 import com.imamportal.model.AllBlogpostModel;
 import com.imamportal.model.AlquranAlhadits;
 import com.imamportal.model.AudioModel;
@@ -73,6 +79,7 @@ public class AppConstant {
     public static List<VideoModel> listVideo = new ArrayList<>();
     public static String bolgpostName;
     public static List<AllBlogpostModel> listAllBlogPost = new ArrayList<>();
+    public static String masalaFragmentName = "";
 
     public static String BitMapToString(Bitmap bitmap){
         ByteArrayOutputStream baos=new ByteArrayOutputStream();
@@ -308,4 +315,29 @@ public class AppConstant {
 //
 //        return output;
 //    }
+
+    public static void dilogDetails(Context context,String title,String content,String publisher,String publishDate,String viewcount, String likecount,String commentcount){
+
+        final Dialog dialog = new Dialog(context, R.style.Theme_Dialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.details_common_post);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        dialog.show();
+
+        TextView tvTitle = (TextView)dialog.findViewById(R.id.tvTitle);
+        TextView tvDescription = (TextView)dialog.findViewById(R.id.tvDescription);
+        tvDescription.setMovementMethod(new ScrollingMovementMethod());
+
+        TextView tvPublisher = (TextView)dialog.findViewById(R.id.tvPublisher);
+        TextView tvPublishDate = (TextView)dialog.findViewById(R.id.tvPublishDate);
+        TextView tvCountView = (TextView)dialog.findViewById(R.id.tvCountView);
+        TextView tvCommentCount = (TextView)dialog.findViewById(R.id.tvCommentCount);
+        tvTitle.setText(title);
+        tvDescription.setText(content);
+        tvPublisher.setText(publisher);
+        tvPublishDate.setText(publishDate);
+        tvCountView.setText(viewcount);
+        tvCommentCount.setText(commentcount);
+
+    }
 }

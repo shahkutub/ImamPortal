@@ -15,7 +15,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.imamportal.fragments.FragmentAmarPataContent;
 import com.imamportal.fragments.FragmentNari;
+import com.imamportal.fragments.FragmentOnnanoHadith;
 import com.imamportal.fragments.FragmentOnnoDhara;
 import com.imamportal.fragments.FragmentShishu;
 import com.imamportal.model.AllBlogpostModel;
@@ -34,7 +36,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class BlogActivity extends AppCompatActivity {
+public class AmarpataActivity extends AppCompatActivity {
 
     Context context;
     private TabLayout tabLayout;
@@ -44,11 +46,11 @@ public class BlogActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.blog);
+        setContentView(R.layout.activity_amarpata);
         context=this;
         overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
 
-        getblog_post();
+        //getblog_post();
         initUi();
     }
 
@@ -69,7 +71,7 @@ public class BlogActivity extends AppCompatActivity {
 
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
-        createTabIcons();
+        //createTabIcons();
     }
 
     private void createTabIcons() {
@@ -92,10 +94,10 @@ public class BlogActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new FragmentNari(), getString(R.string.narikornar));
-        adapter.addFragment(new FragmentShishu(), getString(R.string.sisukisur));
-        adapter.addFragment(new FragmentOnnoDhara(), getString(R.string.onnodhara));
-        //adapter.addFragment(new FragmentOnnanoHadith(), "অন্যান্য");
+        adapter.addFragment(new FragmentAmarPataContent(), "কনটেন্ট");
+        adapter.addFragment(new FragmentAmarPataContent(), getString(R.string.audio));
+        adapter.addFragment(new FragmentAmarPataContent(), getString(R.string.video));
+        adapter.addFragment(new FragmentAmarPataContent(), getString(R.string.photogalari));
         viewPager.setAdapter(adapter);
     }
 

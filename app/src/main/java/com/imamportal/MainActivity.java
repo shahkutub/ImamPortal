@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
     boolean isFABOpen = false;
     boolean isFABmsgOpen = false;
     private String searchStr;
-    private LinearLayout linAmarPata, linRegistration;
+    private LinearLayout linAmarPata, linRegistration,linUpload;
     private TextView tvLogin, tvLogOut;
 
     List<NoticeResponse> listNotice = new ArrayList<>();
@@ -300,11 +300,13 @@ public class MainActivity extends AppCompatActivity {
             tvLogOut.setVisibility(View.GONE);
             tvLogin.setVisibility(View.VISIBLE);
             linAmarPata.setVisibility(View.GONE);
+            linUpload.setVisibility(View.GONE);
         } else {
             relNotification.setVisibility(View.VISIBLE);
             tvLogOut.setVisibility(View.VISIBLE);
             tvLogin.setVisibility(View.GONE);
             linAmarPata.setVisibility(View.VISIBLE);
+            linUpload.setVisibility(View.VISIBLE);
         }
     }
 
@@ -768,9 +770,12 @@ public class MainActivity extends AppCompatActivity {
         tvLogin = (TextView) findViewById(R.id.tvLogin);
         tvLogOut = (TextView) findViewById(R.id.tvLogOut);
         linAmarPata = (LinearLayout) findViewById(R.id.linAmarPata);
+        linUpload = (LinearLayout) findViewById(R.id.linUpload);
         linMsgFloating = (LinearLayout) findViewById(R.id.linMsgFloating);
         relNotification = (RelativeLayout) findViewById(R.id.relNotification);
         linRegistration = (LinearLayout) findViewById(R.id.linRegistration);
+
+
 
         linRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -778,6 +783,24 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(context, RegistrationActivity.class));
             }
         });
+
+
+        linUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(context, UploadActivity.class));
+            }
+        });
+
+
+
+        linAmarPata.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(context, AmarpataActivity.class));
+            }
+        });
+
 
 
         tvLogin.setOnClickListener(new View.OnClickListener() {
@@ -801,6 +824,7 @@ public class MainActivity extends AppCompatActivity {
             tvLogOut.setVisibility(View.GONE);
             tvLogin.setVisibility(View.VISIBLE);
             linAmarPata.setVisibility(View.GONE);
+            linUpload.setVisibility(View.GONE);
             linRegistration.setVisibility(View.VISIBLE);
         } else {
             relNotification.setVisibility(View.VISIBLE);
@@ -808,6 +832,7 @@ public class MainActivity extends AppCompatActivity {
             tvLogin.setVisibility(View.GONE);
             linRegistration.setVisibility(View.GONE);
             linAmarPata.setVisibility(View.VISIBLE);
+            linUpload.setVisibility(View.VISIBLE);
         }
 
         fabBGLayout = findViewById(R.id.fabBGLayout);
@@ -896,7 +921,8 @@ public class MainActivity extends AppCompatActivity {
         linMasael.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialogeMasala();
+                AppConstant.activitiname = "মাসআলা মাসায়েল";
+                startActivity(new Intent(context,MasAlaActivity.class));
             }
         });
 
