@@ -82,6 +82,22 @@
                     android:hint="ব্যবহারকারীর নামঃ" />
             </android.support.design.widget.TextInputLayout>
 
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="#F15A24"
+                android:layout_margin="@dimen/_3sdp">
+                <EditText android:id="@+id/input_UserMobile"
+                    android:layout_width="match_parent"
+                    android:padding="@dimen/_5sdp"
+                    android:layout_height="match_parent"
+                    android:inputType="textCapSentences"
+                    android:background="@drawable/edit_bg"
+                    android:textColor="#000"
+                    android:hint="মোবাইল নাম্বারঃ" />
+            </android.support.design.widget.TextInputLayout>
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -10,12 +10,15 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Base64;
+import android.util.TypedValue;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.TextView;
@@ -24,6 +27,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.imamportal.R;
 import com.imamportal.model.AllBlogpostModel;
+import com.imamportal.model.AllDataResponse;
 import com.imamportal.model.AlquranAlhadits;
 import com.imamportal.model.AudioModel;
 import com.imamportal.model.Catagories;
@@ -80,6 +84,7 @@ public class AppConstant {
     public static String bolgpostName;
     public static List<AllBlogpostModel> listAllBlogPost = new ArrayList<>();
     public static String masalaFragmentName = "";
+    public static AllDataResponse allData;
 
     public static String BitMapToString(Bitmap bitmap){
         ByteArrayOutputStream baos=new ByteArrayOutputStream();
@@ -325,7 +330,7 @@ public class AppConstant {
         dialog.show();
 
         TextView tvTitle = (TextView)dialog.findViewById(R.id.tvTitle);
-        TextView tvDescription = (TextView)dialog.findViewById(R.id.tvDescription);
+        final TextView tvDescription = (TextView)dialog.findViewById(R.id.tvDescription);
         tvDescription.setMovementMethod(new ScrollingMovementMethod());
 
         TextView tvPublisher = (TextView)dialog.findViewById(R.id.tvPublisher);
@@ -338,6 +343,25 @@ public class AppConstant {
         tvPublishDate.setText(publishDate);
         tvCountView.setText(viewcount);
         tvCommentCount.setText(commentcount);
+
+        final int[] font = {13};
+        tvDescription.setTextSize(TypedValue.COMPLEX_UNIT_SP, font[0]);
+        tvDescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(font[0] == 13){
+                    font[0] +=1;
+                    tvDescription.setTextSize(TypedValue.COMPLEX_UNIT_SP, font[0]);
+                }
+
+                if(font[0] == 25){
+                    font[0] =-1;
+                    tvDescription.setTextSize(TypedValue.COMPLEX_UNIT_SP, font[0]);
+                }
+
+            }
+        });
 
     }
 }

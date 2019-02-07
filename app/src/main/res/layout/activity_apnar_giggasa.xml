@@ -46,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:padding="@dimen/_5sdp"
                 android:layout_height="match_parent"
-                android:inputType="textCapWords"
+                android:inputType="textCapSentences"
                 android:background="@drawable/edit_bg"
                 android:textColor="#000"
                 android:hint="*আপনার নামঃ" />
@@ -77,7 +77,7 @@
                 android:layout_width="match_parent"
                 android:padding="@dimen/_5sdp"
                 android:layout_height="match_parent"
-                android:inputType="phone"
+                android:inputType="textEmailAddress"
                 android:background="@drawable/edit_bg"
                 android:textColor="#000"
                 android:hint="আপনার ইমেইলঃ" />
@@ -92,7 +92,7 @@
                 android:layout_width="match_parent"
                 android:padding="@dimen/_5sdp"
                 android:layout_height="match_parent"
-                android:inputType="phone"
+                android:inputType="textCapSentences"
                 android:background="@drawable/edit_bg"
                 android:textColor="#000"
                 android:hint="*বিষয়ঃ" />
@@ -116,7 +116,7 @@
 
 
 
-        <Button
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/btnSave"
             android:layout_marginTop="@dimen/_25sdp"
             android:layout_width="wrap_content"

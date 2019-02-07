@@ -2,6 +2,7 @@ package com.imamportal.utils;
 
 
 import com.imamportal.model.AllBlogpostModel;
+import com.imamportal.model.AllDataResponse;
 import com.imamportal.model.AlquranAlhadits;
 import com.imamportal.model.AudioModel;
 import com.imamportal.model.Catagories;
@@ -90,6 +91,15 @@ public interface Api {
     public Call<List<PhotoModel>> photo_gallery();
 
 
+    @GET("api/get_all_data")
+    public Call<AllDataResponse> get_all_data();
+
+
+    @FormUrlEncoded
+    @POST("api/signup/store")
+    public Call<String> signup(
+            @Field("data") String jsondata
+            );
 
 
 //

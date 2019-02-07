@@ -20,6 +20,7 @@ import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.imamportal.model.Catagories;
 import com.imamportal.model.SeraContentData;
@@ -53,6 +54,7 @@ public class SplashActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 200;
     LocationMgr mgr;
     RelativeLayout relSplash;
+    private TextView tvWeb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +69,8 @@ public class SplashActivity extends AppCompatActivity {
         ImageView imgNext = (ImageView)findViewById(R.id.imgNext);
         ImageView imgA2i = (ImageView)findViewById(R.id.imgA2i);
         relSplash = (RelativeLayout) findViewById(R.id.relSplash);
+        tvWeb = (TextView) findViewById(R.id.tvWeb);
+
 
         imgA2i.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +78,15 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://a2i.gov.bd/")));
             }
         });
+
+        tvWeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://nanosoftbd.com/imamportal/")));
+            }
+        });
+
+
 
         relSplash.setOnClickListener(new View.OnClickListener() {
             @Override

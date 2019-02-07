@@ -15,11 +15,13 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.imamportal.model.AllDataResponse;
 import com.imamportal.model.Catagories;
 import com.imamportal.utils.AlertMessage;
 import com.imamportal.utils.Api;
@@ -104,7 +106,7 @@ public class LanguageActivity extends AppCompatActivity {
         });
 
 
-        //getCatagories();
+        getAlldata();
 
     }
 
@@ -124,7 +126,7 @@ public class LanguageActivity extends AppCompatActivity {
 
 
 
-    private void getCatagories() {
+    private void getAlldata() {
 
         if(!NetInfo.isOnline(context)){
             AlertMessage.showMessage(context,"Alert!","No internet connection!");
@@ -133,6 +135,7 @@ public class LanguageActivity extends AppCompatActivity {
         final ProgressDialog pd = new ProgressDialog(context);
         pd.setMessage("Loading....");
         pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.setCancelable(false);
         pd.show();
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -141,23 +144,25 @@ public class LanguageActivity extends AppCompatActivity {
                 .build();
 
         Api api = retrofit.create(Api.class);
-        Call<List<Catagories>> userCall = api.categorys();
-        userCall.enqueue(new Callback<List<Catagories>>() {
+        Call<AllDataResponse> userCall = api.get_all_data();
+        userCall.enqueue(new Callback<AllDataResponse>() {
             @Override
-            public void onResponse(Call<List<Catagories>> call, Response<List<Catagories>> response) {
+            public void onResponse(Call<AllDataResponse> call, Response<AllDataResponse> response) {
                 pd.dismiss();
 
-                List<Catagories>  listCatagories = response.body();
+                AllDataResponse  allData = response.body();
 
-                if(listCatagories!=null){
-                    AppConstant.saveCatagories(context,listCatagories);
+                if(allData!=null){
+
+                    AppConstant.allData = allData;
+                    Log.e("allData",""+allData.getResult().size());
 
                 }
 
             }
 
             @Override
-            public void onFailure(Call<List<Catagories>> call, Throwable t) {
+            public void onFailure(Call<AllDataResponse> call, Throwable t) {
 
 
                 pd.dismiss();

@@ -5,6 +5,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,25 +22,38 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.imamportal.model.AllDataResponse;
+import com.imamportal.model.NameInfo;
 import com.imamportal.utils.AlertMessage;
+import com.imamportal.utils.Api;
 import com.imamportal.utils.AppConstant;
 import com.imamportal.utils.BitmapUtils;
+import com.imamportal.utils.NetInfo;
 import com.imamportal.utils.PersistData;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -51,6 +65,11 @@ import java.util.Date;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -66,20 +85,28 @@ public class RegistrationActivity extends AppCompatActivity {
     private CircleImageView imgPic;
     private File file;
     String picture = "";
+    Bitmap userBmp;
     private static File dir = null;
     String imageLocal = "";
     public final int imagecaptureid = 0;
     public final int galarytakid = 1;
     private static final int PERMISSION_REQUEST_CODE = 200;
 
-    private EditText input_name,input_email,input_UserName,input_password,input_password_confirm,input_nid,input_mosq,
+    private EditText input_name,input_email,input_UserName,input_UserMobile,input_password,input_password_confirm,input_nid,input_mosq,
     input_mosq_address,input_wordno,input_postoffice,input_village;
     Spinner spinnerPodobi,spinnerDivision,spinnerCity,spinnerDistrict,spinnerUpojila,spinnerUnion;
     private TextView tvBirthdate;
     private Button btnSubmit;
 
-    private String name,email,username,password,confirmpass,birthdate,nid,mosqname,mosqaddress,wardno,postoffice,village,podobi="",division="",
-    city="",district="",upojila="",union="",photo="";
+    List<NameInfo> listDivision = new ArrayList<>();
+    List<NameInfo> listCity = new ArrayList<>();
+    List<NameInfo> listDistrict = new ArrayList<>();
+    List<NameInfo> listUpozila = new ArrayList<>();
+    List<NameInfo> listUnion = new ArrayList<>();
+
+    private String name,email,username,mobile,password,confirmpass,birthdate,nid,mosqname,mosqaddress,wardno,postoffice,village,podobi="",
+            division="",divisionId,
+    city="",cityId="",district="",districtId="",upojila="",upojilaId="",union="",unionId="",photo="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +129,7 @@ public class RegistrationActivity extends AppCompatActivity {
         input_name = (EditText)findViewById(R.id.input_name);
         input_email = (EditText)findViewById(R.id.input_email);
         input_UserName = (EditText)findViewById(R.id.input_UserName);
+        input_UserMobile = (EditText)findViewById(R.id.input_UserMobile);
         input_password = (EditText)findViewById(R.id.input_password);
         input_password_confirm = (EditText)findViewById(R.id.input_password_confirm);
         input_nid = (EditText)findViewById(R.id.input_nid);
@@ -125,7 +153,7 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(!spinnerPodobi.getSelectedItem().toString().equalsIgnoreCase("নির্বাচন করুন")){
-                    podobi = spinnerPodobi.getSelectedItem().toString();
+                    podobi = ""+i;
                 }
             }
 
@@ -138,67 +166,185 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
         spinnerDivision = (Spinner) findViewById(R.id.spinnerDivision);
-        List<String> listDivision = new ArrayList<String>();
-        listDivision.add("নির্বাচন করুন");
-        listDivision.add("বরিশাল");
-        listDivision.add("চট্টগ্রাম");
-        listDivision.add("ঢাকা");
-        listDivision.add("সিলেট");
-        listDivision.add("রংপুর");
-        listDivision.add("রাজশাহী");
-        listDivision.add("ময়মনসিংহ");
-        ArrayAdapter<String> adapterDivision = new ArrayAdapter<String>(context,
-                android.R.layout.simple_spinner_item, listDivision);
-        spinnerDivision.setAdapter(adapterDivision);
-
-        spinnerDivision.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(!spinnerDivision.getSelectedItem().toString().equalsIgnoreCase("নির্বাচন করুন")){
-                    division = spinnerDivision.getSelectedItem().toString();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-
         spinnerCity = (Spinner) findViewById(R.id.spinnerCity);
-        List<String> listCity = new ArrayList<String>();
-        listCity.add("নির্বাচন করুন");
-        listCity.add("বরিশাল");
-        listCity.add("চট্টগ্রাম");
-        listCity.add("ঢাকা");
-        listCity.add("সিলেট");
-        listCity.add("রংপুর");
-        listCity.add("রাজশাহী");
-        listCity.add("ময়মনসিংহ");
-        ArrayAdapter<String> adapterCity = new ArrayAdapter<String>(context,
-                android.R.layout.simple_spinner_item, listCity);
-        spinnerCity.setAdapter(adapterCity);
-
-        spinnerCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(!spinnerCity.getSelectedItem().toString().equalsIgnoreCase("নির্বাচন করুন")){
-                    city = spinnerCity.getSelectedItem().toString();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-
-
         spinnerDistrict = (Spinner) findViewById(R.id.spinnerDistrict);
         spinnerUpojila = (Spinner) findViewById(R.id.spinnerUpojila);
         spinnerUnion = (Spinner) findViewById(R.id.spinnerUnion);
+
+        listDivision.clear();
+
+        for (int i = 0; i <AppConstant.allData.getResult().size() ; i++) {
+            if(AppConstant.allData.getResult().get(i).getTable_name().equalsIgnoreCase("geo_divisions")){
+                for (int j = 0; j <AppConstant.allData.getResult().get(i).getValues().size() ; j++) {
+                    NameInfo divisionData = new NameInfo();
+                    divisionData.setId(AppConstant.allData.getResult().get(i).getValues().get(j).getId());
+                    divisionData.setName(AppConstant.allData.getResult().get(i).getValues().get(j).getDivision_name_bng());
+                    listDivision.add(divisionData);
+                }
+            }
+        }
+        CustomAdapter adapter = new CustomAdapter(this, listDivision);
+        spinnerDivision.setAdapter(adapter);
+
+
+        spinnerDivision.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
+                listDistrict.clear();
+                if(!spinnerDivision.getSelectedItem().toString().equalsIgnoreCase("নির্বাচন করুন")){
+                    division = spinnerDivision.getSelectedItem().toString();
+                    divisionId = listDivision.get(pos).getId();
+                }
+
+                for (int i = 0; i <AppConstant.allData.getResult().size() ; i++) {
+                    if(AppConstant.allData.getResult().get(i).getTable_name().equalsIgnoreCase("geo_districts")){
+                        for (int j = 0; j <AppConstant.allData.getResult().get(i).getValues().size() ; j++) {
+                            if(AppConstant.allData.getResult().get(i).getValues().get(j).getGeo_division_id().equalsIgnoreCase(divisionId)){
+                                NameInfo data = new NameInfo();
+                                data.setId(AppConstant.allData.getResult().get(i).getValues().get(j).getId());
+                                data.setName(AppConstant.allData.getResult().get(i).getValues().get(j).getDistrict_name_bng());
+                                listDistrict.add(data);
+                            }
+
+                        }
+                    }
+                }
+
+                CustomAdapter adapterDistrict = new CustomAdapter(context, listDistrict);
+                spinnerDistrict.setAdapter(adapterDistrict);
+
+
+
+                listCity.clear();
+
+                for (int i = 0; i <AppConstant.allData.getResult().size() ; i++) {
+                    if(AppConstant.allData.getResult().get(i).getTable_name().equalsIgnoreCase("geo_city_corporations")){
+                        for (int j = 0; j <AppConstant.allData.getResult().get(i).getValues().size() ; j++) {
+                            if(AppConstant.allData.getResult().get(i).getValues().get(j).getGeo_division_id().equalsIgnoreCase(divisionId)){
+                                NameInfo data = new NameInfo();
+                                data.setId(AppConstant.allData.getResult().get(i).getValues().get(j).getId());
+                                data.setName(AppConstant.allData.getResult().get(i).getValues().get(j).getCity_corporation_name_bng());
+                                listCity.add(data);
+                            }
+
+                        }
+                    }
+                }
+
+                CustomAdapter adapterCity = new CustomAdapter(context, listCity);
+                spinnerCity.setAdapter(adapterCity);
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+        spinnerCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                city = spinnerCity.getSelectedItem().toString();
+                cityId = listCity.get(position).getId();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spinnerDistrict.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                listUpozila.clear();
+                if(!spinnerDistrict.getSelectedItem().toString().equalsIgnoreCase("নির্বাচন করুন")){
+                    district = spinnerDistrict.getSelectedItem().toString();
+                    districtId = listDistrict.get(position).getId();
+                }
+
+                for (int i = 0; i <AppConstant.allData.getResult().size() ; i++) {
+                    if(AppConstant.allData.getResult().get(i).getTable_name().equalsIgnoreCase("geo_thanas")){
+                        for (int j = 0; j <AppConstant.allData.getResult().get(i).getValues().size() ; j++) {
+                            if(AppConstant.allData.getResult().get(i).getValues().get(j).getGeo_district_id().
+                                    equalsIgnoreCase(districtId)){
+                                NameInfo data = new NameInfo();
+                                data.setId(AppConstant.allData.getResult().get(i).getValues().get(j).getId());
+                                data.setName(AppConstant.allData.getResult().get(i).getValues().get(j).getThana_name_bng());
+                                listUpozila.add(data);
+                            }
+
+                        }
+                    }
+                }
+
+                CustomAdapter adapterDistrict = new CustomAdapter(context, listUpozila);
+                spinnerUpojila.setAdapter(adapterDistrict);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        spinnerUpojila.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                listUnion.clear();
+                if(!spinnerUpojila.getSelectedItem().toString().equalsIgnoreCase("নির্বাচন করুন")){
+                    upojila= spinnerDistrict.getSelectedItem().toString();
+                    upojilaId = listUpozila.get(position).getId();
+                }
+
+                for (int i = 0; i <AppConstant.allData.getResult().size() ; i++) {
+                    if(AppConstant.allData.getResult().get(i).getTable_name().equalsIgnoreCase("geo_unions")){
+                        for (int j = 0; j <AppConstant.allData.getResult().get(i).getValues().size() ; j++) {
+                            if(AppConstant.allData.getResult().get(i).getValues().get(j).getGeo_upazila_id().
+                                    equalsIgnoreCase(upojilaId)){
+                                NameInfo data = new NameInfo();
+                                data.setId(AppConstant.allData.getResult().get(i).getValues().get(j).getId());
+                                data.setName(AppConstant.allData.getResult().get(i).getValues().get(j).getUnion_name_bng());
+                                listUnion.add(data);
+                            }
+
+                        }
+                    }
+                }
+
+                CustomAdapter adapterDistrict = new CustomAdapter(context, listUnion);
+                spinnerUnion.setAdapter(adapterDistrict);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        spinnerUnion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                union = spinnerUnion.getSelectedItem().toString();
+                unionId = listUnion.get(position).getId();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+
+
 
         imgcam = (ImageView)findViewById(R.id.imgcam);
         imgPic = (CircleImageView) findViewById(R.id.imgPic);
@@ -244,6 +390,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 name=input_name.getText().toString();
                 email=input_email.getText().toString();
                 username=input_UserName.getText().toString();
+                mobile=input_UserMobile.getText().toString();
                 password=input_password.getText().toString();
                 confirmpass=input_password_confirm.getText().toString();
                 birthdate=tvBirthdate.getText().toString();
@@ -260,6 +407,8 @@ public class RegistrationActivity extends AppCompatActivity {
                     AlertMessage.showMessage(context,"Alert!","email is required");
                 }else if(username.isEmpty()){
                     AlertMessage.showMessage(context,"Alert!","username is required");
+                }else if(mobile.isEmpty()){
+                    AlertMessage.showMessage(context,"Alert!","mobile numer is required");
                 }else if(password.isEmpty()){
                     AlertMessage.showMessage(context,"Alert!","password is required");
                 }else if(confirmpass.isEmpty()){
@@ -290,6 +439,44 @@ public class RegistrationActivity extends AppCompatActivity {
                     AlertMessage.showMessage(context,"Alert!","post office is required");
                 }else if(village.isEmpty()){
                     AlertMessage.showMessage(context,"Alert!","village is required");
+                }else {
+
+                    //username email password designation name mobile_no nid dob masjid_name masjid_address division_id
+                    // city_corporation_id word_no district_id upazila_id union_id village image
+                    String img = "";
+                    if(userBmp!=null){
+                        img = getBase64String(userBmp);
+                    }
+                    
+
+                    JSONObject jsonObject = new JSONObject();
+                    try {
+                        jsonObject.put("username",username);
+                        jsonObject.put("email",email);
+                        jsonObject.put("password",password);
+                        jsonObject.put("designation",podobi);
+                        jsonObject.put("name",name);
+                        jsonObject.put("mobile_no",mobile);
+                        jsonObject.put("nid",nid);
+                        jsonObject.put("dob",birthdate);
+                        jsonObject.put("masjid_name",mosqname);
+                        jsonObject.put("masjid_address",mosqaddress);
+                        jsonObject.put("division_id",divisionId);
+                        jsonObject.put("city_corporation_id",cityId);
+                        jsonObject.put("word_no",wardno);
+                        jsonObject.put("district_id",districtId);
+                        jsonObject.put("upazila_id",upojilaId);
+                        jsonObject.put("union_id",unionId);
+                        jsonObject.put("village",village);
+                        jsonObject.put("image",img);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    signUp(jsonObject.toString());
+                    Log.e("jsonObject",""+jsonObject.toString());
+
+
                 }
 
 
@@ -297,6 +484,19 @@ public class RegistrationActivity extends AppCompatActivity {
         });
     }
 
+    private String getBase64String(Bitmap bitmap)
+    {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+
+        byte[] imageBytes = baos.toByteArray();
+
+        String base64String = Base64.encodeToString(imageBytes, Base64.NO_WRAP);
+
+        return base64String;
+    }
+    
     private void imageCaptureDialogue() {
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -500,11 +700,13 @@ public class RegistrationActivity extends AppCompatActivity {
                 Log.e("path", ">>>>>" + path);
                 //PersistData.setStringData(con,AppConstant.path,"");
                 picture = path;
+                userBmp = bitmap;
                 PersistData.setStringData(context, AppConstant.localpic,path);
                 Glide.with(context)
                         .load(picture)
                         .into(imgPic);
 
+                
 
             } catch (final Exception e) {
                 return;
@@ -523,6 +725,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 Log.e("Bitmap >>",
                         "W: " + b.getWidth() + " H: " + b.getHeight());
                 picture = path;
+                userBmp = b;
                 Log.e("path", ">>>>>" + path);
                 PersistData.setStringData(context,AppConstant.localpic,path);
                 PersistData.setStringData(context,AppConstant.path,"");
@@ -611,5 +814,91 @@ public class RegistrationActivity extends AppCompatActivity {
         }
     }
 
+
+    public class CustomAdapter  extends BaseAdapter implements SpinnerAdapter {
+
+        List<NameInfo> company;
+        Context context;
+
+
+        public CustomAdapter(Context context, List<NameInfo> company) {
+            this.company = company;
+            this.context = context;
+        }
+
+        @Override
+        public int getCount() {
+            return company.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return company.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view =  View.inflate(context, R.layout.company_main, null);
+            TextView textView = (TextView) view.findViewById(R.id.main);
+            textView.setText(company.get(position).getName());
+            return textView;
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+
+            View view;
+            view =  View.inflate(context, R.layout.company_dropdown, null);
+            final TextView textView = (TextView) view.findViewById(R.id.dropdown);
+            textView.setText(company.get(position).getName());
+
+
+
+            return view;
+        }
+    }
+
+
+    private void signUp(String data) {
+
+        if(!NetInfo.isOnline(context)){
+            AlertMessage.showMessage(context,"Alert!","No internet connection!");
+        }
+
+        final ProgressDialog pd = new ProgressDialog(context);
+        pd.setMessage("Loading....");
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.setCancelable(false);
+        pd.show();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Api api = retrofit.create(Api.class);
+        Call<String> userCall = api.signup(data);
+        userCall.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                pd.dismiss();
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+
+                pd.dismiss();
+            }
+        });
+
+
+    }
 
 }

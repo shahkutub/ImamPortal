@@ -11,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,6 +33,7 @@ public class ApnarGiggasaActivity extends AppCompatActivity {
     private ImageView imgBack;
     List<AlquranAlhadits> listAlquranAlhadit = new ArrayList<>();
     private TextView tvName;
+    private EditText etNmae;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

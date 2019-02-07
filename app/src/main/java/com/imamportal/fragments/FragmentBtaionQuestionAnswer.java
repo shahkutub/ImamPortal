@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.imamportal.Adapter.AllCommonPostAdapter;
@@ -161,6 +162,7 @@ public class FragmentBtaionQuestionAnswer extends Fragment {
 
             TextView tvTitle,tvShortDescription,tvPublisher,tvPublishDate,tvViewCount;
             ImageView imgFile;
+            LinearLayout linFullView;
             public MyViewHolder(View view) {
                 super(view);
                 tvTitle=(TextView) view.findViewById(R.id.tvTitle);
@@ -169,6 +171,7 @@ public class FragmentBtaionQuestionAnswer extends Fragment {
                 tvPublishDate=(TextView) view.findViewById(R.id.tvPublishDate);
                 tvViewCount=(TextView) view.findViewById(R.id.tvViewCount);
                 imgFile=(ImageView) view.findViewById(R.id.imgFile);
+                linFullView=(LinearLayout) view.findViewById(R.id.linFullView);
             }
         }
 
@@ -191,19 +194,14 @@ public class FragmentBtaionQuestionAnswer extends Fragment {
 //            }
             holder.tvTitle.setText(data.getQuestion());
             holder.tvShortDescription.setText(data.getAnswer());
-//            //holder.tvViewCount.setText(data.getView_count());
-//
-//            if(!TextUtils.isEmpty(data.getFile())){
-//                holder.imgFile.setVisibility(View.VISIBLE);
-//            }
-//
-//            holder.imgFile.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    context.startActivity(new Intent(Intent.ACTION_VIEW,
-//                            Uri.parse("http://192.168.0.119/imamportal/public/job_file/"+data.getFile())));
-//                }
-//            });
+
+            holder.linFullView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AppConstant.dilogDetails(context,data.getQuestion(),data.getAnswer(),data.getName(),
+                            data.getCreated_at(),"","","");
+                }
+            });
 
         }
 

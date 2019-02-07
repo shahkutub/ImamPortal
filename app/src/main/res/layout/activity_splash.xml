@@ -68,14 +68,14 @@
             android:src="@drawable/logo_tollbar"
             />
         <TextView
+            android:id="@+id/tvWeb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginTop="@dimen/_5sdp"
+            android:padding="@dimen/_5sdp"
             android:textColor="#519605"
-            android:textSize="@dimen/_18sdp"
-            android:text="nanosoftbd.com/imamportal/"
-
+            android:textSize="@dimen/_15sdp"
+            android:text="https://nanosoftbd.com/imamportal/"
             />
 
     </LinearLayout>

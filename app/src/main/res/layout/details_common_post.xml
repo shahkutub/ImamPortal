@@ -38,7 +38,6 @@
             android:text=""
             android:textColor="#487CA2"
             android:textSize="@dimen/_15sdp"
-                android:maxLines="1"
             android:layout_alignParentTop="true"
             />
 
