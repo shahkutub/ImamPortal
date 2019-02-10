@@ -1,0 +1,1127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@drawable/shadow"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <ImageView
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:src="@drawable/imam"
+                    />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_15sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:textColor="#000"
+                android:text="মাদ্রাসার শিক্ষার্থীদের জন্য কারিগরি ও বৃত্তিমূলক প্রশিক্ষণ"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/_3sdp"
+        >
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColorHint="#F15A24"
+            android:layout_margin="@dimen/_3sdp">
+            <EditText android:id="@+id/input_name_bn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:padding="@dimen/_5sdp"
+                android:inputType="textCapSentences"
+                android:background="@drawable/edit_bg"
+                android:textColor="#000"
+                android:hint="নাম(বাংলায়)*" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColorHint="#F15A24"
+            android:layout_margin="@dimen/_3sdp">
+            <EditText android:id="@+id/input_name_eng"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:padding="@dimen/_5sdp"
+                android:inputType="textCapSentences"
+                android:background="@drawable/edit_bg"
+                android:textColor="#000"
+                android:hint="নাম(ইংরেজি)*" />
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_3sdp"
+            >
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColorHint="#F15A24"
+                android:layout_margin="@dimen/_3sdp">
+                <EditText android:id="@+id/input_father_name_bn"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:padding="@dimen/_5sdp"
+                    android:inputType="textCapSentences"
+                    android:background="@drawable/edit_bg"
+                    android:textColor="#000"
+                    android:hint="পিতার নাম(বাংলায়)*" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColorHint="#F15A24"
+                android:layout_margin="@dimen/_3sdp">
+                <EditText android:id="@+id/input_father_name_eng"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:padding="@dimen/_5sdp"
+                    android:inputType="textCapSentences"
+                    android:background="@drawable/edit_bg"
+                    android:textColor="#000"
+                    android:hint="পিতার নাম(ইংরেজি)*" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_3sdp"
+            >
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColorHint="#F15A24"
+                android:layout_margin="@dimen/_3sdp">
+                <EditText android:id="@+id/input_mother_name_bn"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:padding="@dimen/_5sdp"
+                    android:inputType="textCapSentences"
+                    android:background="@drawable/edit_bg"
+                    android:textColor="#000"
+                    android:hint="মাতার নাম(বাংলায়)*" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColorHint="#F15A24"
+                android:layout_margin="@dimen/_3sdp">
+                <EditText android:id="@+id/input_mother_name_eng"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:padding="@dimen/_5sdp"
+                    android:inputType="textCapSentences"
+                    android:background="@drawable/edit_bg"
+                    android:textColor="#000"
+                    android:hint="মাতার নাম(ইংরেজি)*" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_3sdp"
+            >
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColorHint="#F15A24"
+                android:layout_margin="@dimen/_3sdp"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="লিঙ্গ *"
+                    android:textColor="#F15A24"
+                    android:textSize="@dimen/_15sdp"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:background="@drawable/edit_bg"
+                    android:layout_height="@dimen/_40sdp">
+                    <Spinner
+                        android:id="@+id/spinnerPodobi"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        ></Spinner>
+                </LinearLayout>
+            </LinearLayout>
+
+           <LinearLayout
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_weight="1"
+               android:textColorHint="#F15A24"
+               android:orientation="vertical"
+               android:layout_margin="@dimen/_3sdp"
+               >
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="জন্ম তারিখঃ"
+                   android:textColor="#F15A24"
+                   android:textSize="@dimen/_15sdp"
+                   android:layout_marginLeft="@dimen/_5sdp"
+                   />
+
+               <TextView
+                   android:id="@+id/tvBirthdate"
+                   android:layout_width="match_parent"
+                   android:layout_height="@dimen/_40sdp"
+                   android:padding="@dimen/_5sdp"
+                   android:text=""
+                   android:textColor="#F15A24"
+                   android:background="@drawable/edit_bg"
+                   android:textSize="@dimen/_15sdp"
+                   android:layout_marginLeft="@dimen/_5sdp"
+                   />
+
+           </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_3sdp"
+            >
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColorHint="#F15A24"
+                android:layout_margin="@dimen/_3sdp"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="বৈবাহিক অবস্থা"
+                    android:textColor="#F15A24"
+                    android:textSize="@dimen/_15sdp"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:background="@drawable/edit_bg"
+                    android:layout_height="@dimen/_40sdp">
+                    <Spinner
+                        android:id="@+id/spinnerMarraige"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        ></Spinner>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColorHint="#F15A24"
+                android:layout_margin="@dimen/_3sdp"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="জাতীয়তা"
+                    android:textColor="#F15A24"
+                    android:textSize="@dimen/_15sdp"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:background="@drawable/edit_bg"
+                    android:layout_height="@dimen/_40sdp">
+                    <Spinner
+                        android:id="@+id/spinnerNatinality"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        ></Spinner>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColorHint="#F15A24"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/_3sdp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="পেশা"
+                    android:textColor="#F15A24"
+                    android:textSize="@dimen/_15sdp"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:background="@drawable/edit_bg"
+                    android:layout_height="@dimen/_40sdp">
+                    <Spinner
+                        android:id="@+id/spinnerOccuPation"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        ></Spinner>
+                </LinearLayout>
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColorHint="#F15A24"
+                android:layout_margin="@dimen/_3sdp"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="জাতীয় পরিচয়পত্র*"
+                    android:textColor="#F15A24"
+                    android:textSize="@dimen/_15sdp"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    />
+                <EditText android:id="@+id/input_nid"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:padding="@dimen/_5sdp"
+                    android:inputType="textCapSentences"
+                    android:background="@drawable/edit_bg"
+                    android:textColor="#000"
+                    android:hint="" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_3sdp"
+            >
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColorHint="#F15A24"
+                android:layout_margin="@dimen/_3sdp">
+                <EditText android:id="@+id/input_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:padding="@dimen/_5sdp"
+                    android:inputType="textEmailAddress"
+                    android:background="@drawable/edit_bg"
+                    android:textColor="#000"
+                    android:hint="ইমেইল(যদি থাকে)" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColorHint="#F15A24"
+                android:layout_margin="@dimen/_3sdp">
+                <EditText android:id="@+id/input_mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:padding="@dimen/_5sdp"
+                    android:inputType="phone"
+                    android:background="@drawable/edit_bg"
+                    android:textColor="#000"
+                    android:hint="মোবাইল নম্বর" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/shadow"
+            android:layout_marginTop="@dimen/_10sdp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" স্থায়ী ঠিকানাঃ"
+                android:textColor="#000"
+                android:textSize="@dimen/_15sdp"
+                />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_3sdp"
+            >
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColorHint="#F15A24"
+                android:layout_margin="@dimen/_3sdp"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="বিভাগঃ"
+                    android:textColor="#F15A24"
+                    android:textSize="@dimen/_15sdp"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:background="@drawable/edit_bg"
+                    android:layout_height="@dimen/_40sdp">
+                    <Spinner
+                        android:id="@+id/spinnerDivision"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        ></Spinner>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColorHint="#F15A24"
+                android:layout_margin="@dimen/_3sdp"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="জেলাঃ"
+                    android:textColor="#F15A24"
+                    android:textSize="@dimen/_15sdp"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:background="@drawable/edit_bg"
+                    android:layout_height="@dimen/_40sdp">
+                    <Spinner
+                        android:id="@+id/spinnerDistrict"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        ></Spinner>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_3sdp"
+                >
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColorHint="#F15A24"
+                    android:layout_margin="@dimen/_3sdp"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="উপজেলাঃ"
+                        android:textColor="#F15A24"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:background="@drawable/edit_bg"
+                        android:layout_height="@dimen/_40sdp">
+                        <Spinner
+                            android:id="@+id/spinnerUpzila"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            ></Spinner>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColorHint="#F15A24"
+                    android:layout_margin="@dimen/_3sdp"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ইউনিয়নঃ"
+                        android:textColor="#F15A24"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:background="@drawable/edit_bg"
+                        android:layout_height="@dimen/_40sdp">
+                        <Spinner
+                            android:id="@+id/spinnerUnion"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            ></Spinner>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_3sdp"
+                >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColorHint="#F15A24"
+                    android:layout_margin="@dimen/_3sdp"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="পোস্ট কোড"
+                        android:textColor="#F15A24"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
+                    <EditText android:id="@+id/input_postcode"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:padding="@dimen/_5sdp"
+                        android:inputType="textCapSentences"
+                        android:background="@drawable/edit_bg"
+                        android:textColor="#000"
+                        android:hint="" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_3sdp"
+                >
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColorHint="#F15A24"
+                    android:layout_margin="@dimen/_3sdp"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="সিটি কর্পোরেশন"
+                        android:textColor="#F15A24"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:background="@drawable/edit_bg"
+                        android:layout_height="@dimen/_40sdp">
+                        <Spinner
+                            android:id="@+id/spinnerCity"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            ></Spinner>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColorHint="#F15A24"
+                    android:layout_margin="@dimen/_3sdp"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ওয়ার্ড নং"
+                        android:textColor="#F15A24"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
+                    <EditText android:id="@+id/input_word"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:padding="@dimen/_5sdp"
+                        android:inputType="textCapWords"
+                        android:background="@drawable/edit_bg"
+                        android:textColor="#000"
+                        android:hint="" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/shadow"
+            android:layout_marginTop="@dimen/_10sdp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" আবেদনকারীর শিক্ষা তথ্য"
+                android:textColor="#000"
+                android:textSize="@dimen/_15sdp"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_3sdp"
+                >
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColorHint="#F15A24"
+                    android:layout_margin="@dimen/_3sdp"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="শিক্ষাগত যোগ্যতা"
+                        android:textColor="#F15A24"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:background="@drawable/edit_bg"
+                        android:layout_height="@dimen/_40sdp">
+                        <Spinner
+                            android:id="@+id/spinnerQualification"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            ></Spinner>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColorHint="#F15A24"
+                    android:layout_margin="@dimen/_3sdp"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="শিক্ষা প্রতিষ্ঠানের নাম"
+                        android:textColor="#F15A24"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
+                    <EditText android:id="@+id/input_institute"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:padding="@dimen/_5sdp"
+                        android:inputType="textCapWords"
+                        android:background="@drawable/edit_bg"
+                        android:textColor="#000"
+                        android:hint="" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_3sdp"
+                >
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColorHint="#F15A24"
+                    android:layout_margin="@dimen/_3sdp"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="শিক্ষা প্রতিষ্ঠানের ধরণ"
+                        android:textColor="#F15A24"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:background="@drawable/edit_bg"
+                        android:layout_height="@dimen/_40sdp">
+                        <Spinner
+                            android:id="@+id/spinnerInstituteType"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            ></Spinner>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/shadow"
+            android:layout_marginTop="@dimen/_10sdp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" শিক্ষা প্রতিষ্ঠানের ঠিকানা"
+                android:textColor="#000"
+                android:textSize="@dimen/_15sdp"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_3sdp"
+                >
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColorHint="#F15A24"
+                    android:layout_margin="@dimen/_3sdp"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="বিভাগঃ"
+                        android:textColor="#F15A24"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:background="@drawable/edit_bg"
+                        android:layout_height="@dimen/_40sdp">
+                        <Spinner
+                            android:id="@+id/spinnerDivisioInsti"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            ></Spinner>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColorHint="#F15A24"
+                    android:layout_margin="@dimen/_3sdp"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="জেলাঃ"
+                        android:textColor="#F15A24"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:background="@drawable/edit_bg"
+                        android:layout_height="@dimen/_40sdp">
+                        <Spinner
+                            android:id="@+id/spinnerDistrictInsti"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            ></Spinner>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_3sdp"
+                >
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColorHint="#F15A24"
+                    android:layout_margin="@dimen/_3sdp"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="উপজেলাঃ"
+                        android:textColor="#F15A24"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:background="@drawable/edit_bg"
+                        android:layout_height="@dimen/_40sdp">
+                        <Spinner
+                            android:id="@+id/spinnerInstituteUpjila"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            ></Spinner>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColorHint="#F15A24"
+                    android:layout_margin="@dimen/_3sdp"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="সর্বশেষ শিক্ষাগত যোগ্যতা"
+                        android:textColor="#F15A24"
+                        android:textSize="@dimen/_10sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
+                    <EditText android:id="@+id/input_lastqualification"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:padding="@dimen/_5sdp"
+                        android:inputType="textCapWords"
+                        android:background="@drawable/edit_bg"
+                        android:textColor="#000"
+                        android:hint="" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/shadow"
+            android:layout_marginTop="@dimen/_10sdp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" কারিগরি প্রশিক্ষণ"
+                android:textColor="#000"
+                android:textSize="@dimen/_15sdp"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_3sdp"
+                >
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColorHint="#F15A24"
+                    android:layout_margin="@dimen/_3sdp"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="যে ট্রেডে প্রশিক্ষণ নিতে ইচ্ছুক"
+                        android:textColor="#F15A24"
+                        android:textSize="@dimen/_10sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:background="@drawable/edit_bg"
+                        android:layout_height="@dimen/_40sdp">
+                        <Spinner
+                            android:id="@+id/spinnerTrade"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            ></Spinner>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColorHint="#F15A24"
+                    android:layout_margin="@dimen/_3sdp"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="নিকটস্থ প্রশিক্ষণ সেন্টার"
+                        android:textColor="#F15A24"
+                        android:textSize="@dimen/_10sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:background="@drawable/edit_bg"
+                        android:layout_height="@dimen/_40sdp">
+                        <Spinner
+                            android:id="@+id/spinnerceter"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            ></Spinner>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/shadow"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" সমন্বয়কারী"
+                android:textColor="#000"
+                android:textSize="@dimen/_15sdp"
+                />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_3sdp"
+                >
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColorHint="#F15A24"
+                    android:layout_margin="@dimen/_3sdp">
+                    <EditText android:id="@+id/input_name_sm"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:padding="@dimen/_5sdp"
+                        android:inputType="textCapSentences"
+                        android:background="@drawable/edit_bg"
+                        android:textColor="#000"
+                        android:hint="নাম" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColorHint="#F15A24"
+                    android:layout_margin="@dimen/_3sdp">
+                    <EditText android:id="@+id/input_mobile_sm"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:padding="@dimen/_5sdp"
+                        android:inputType="textCapSentences"
+                        android:background="@drawable/edit_bg"
+                        android:textColor="#000"
+                        android:hint="মোবাইল নাম্বার" />
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_3sdp"
+                >
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColorHint="#F15A24"
+                    android:layout_margin="@dimen/_3sdp"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="জেলাঃ"
+                        android:textColor="#F15A24"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:background="@drawable/edit_bg"
+                        android:layout_height="@dimen/_40sdp">
+                        <Spinner
+                            android:id="@+id/spinnerZilaSM"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            ></Spinner>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColorHint="#F15A24"
+                    android:layout_margin="@dimen/_3sdp"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="উপজেলাঃ"
+                        android:textColor="#F15A24"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:background="@drawable/edit_bg"
+                        android:layout_height="@dimen/_40sdp">
+                        <Spinner
+                            android:id="@+id/spinnerUpozilaSm"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            ></Spinner>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:gravity="center"
+            android:padding="@dimen/_10sdp"
+            android:background="@drawable/shadow_vid"
+            android:textColor="#fff"
+            android:layout_margin="@dimen/_15sdp"
+            />
+
+    </LinearLayout>
+</ScrollView>

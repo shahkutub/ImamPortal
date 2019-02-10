@@ -58,7 +58,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+        setContentView(R.layout.imam_training_reg_form);
 
         context=this;
 
@@ -66,50 +66,50 @@ public class SplashActivity extends AppCompatActivity {
 
        // linBg = (LinearLayout)findViewById(R.id.linBg);
 
-        ImageView imgNext = (ImageView)findViewById(R.id.imgNext);
-        ImageView imgA2i = (ImageView)findViewById(R.id.imgA2i);
-        relSplash = (RelativeLayout) findViewById(R.id.relSplash);
-        tvWeb = (TextView) findViewById(R.id.tvWeb);
-
-
-        imgA2i.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://a2i.gov.bd/")));
-            }
-        });
-
-        tvWeb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://nanosoftbd.com/imamportal/")));
-            }
-        });
-
-
-
-        relSplash.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),LanguageActivity.class));
-                finish();
-            }
-        });
-
-        Animation anim = new AlphaAnimation(0.0f, 1.0f);
-        anim.setDuration(100); //You can manage the blinking time with this parameter
-        anim.setStartOffset(40);
-        anim.setRepeatMode(Animation.REVERSE);
-        anim.setRepeatCount(Animation.INFINITE);
-        //imgNext.startAnimation(anim);
-
-        imgNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),LanguageActivity.class));
-                        finish();
-            }
-        });
+//        ImageView imgNext = (ImageView)findViewById(R.id.imgNext);
+//        ImageView imgA2i = (ImageView)findViewById(R.id.imgA2i);
+//        relSplash = (RelativeLayout) findViewById(R.id.relSplash);
+//        tvWeb = (TextView) findViewById(R.id.tvWeb);
+//
+//
+//        imgA2i.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://a2i.gov.bd/")));
+//            }
+//        });
+//
+//        tvWeb.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://nanosoftbd.com/imamportal/")));
+//            }
+//        });
+//
+//
+//
+//        relSplash.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(getApplicationContext(),LanguageActivity.class));
+//                finish();
+//            }
+//        });
+//
+//        Animation anim = new AlphaAnimation(0.0f, 1.0f);
+//        anim.setDuration(100); //You can manage the blinking time with this parameter
+//        anim.setStartOffset(40);
+//        anim.setRepeatMode(Animation.REVERSE);
+//        anim.setRepeatCount(Animation.INFINITE);
+//        //imgNext.startAnimation(anim);
+//
+//        imgNext.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(getApplicationContext(),LanguageActivity.class));
+//                        finish();
+//            }
+//        });
 
 
 

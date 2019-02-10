@@ -6,24 +6,31 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -38,10 +45,12 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.imamportal.model.AllDataResponse;
 import com.imamportal.model.NameInfo;
+import com.imamportal.model.SignUpResponse;
 import com.imamportal.utils.AlertMessage;
 import com.imamportal.utils.Api;
 import com.imamportal.utils.AppConstant;
@@ -91,7 +100,7 @@ public class RegistrationActivity extends AppCompatActivity {
     public final int imagecaptureid = 0;
     public final int galarytakid = 1;
     private static final int PERMISSION_REQUEST_CODE = 200;
-
+    private final static int IMAGE_RESULT = 200;
     private EditText input_name,input_email,input_UserName,input_UserMobile,input_password,input_password_confirm,input_nid,input_mosq,
     input_mosq_address,input_wordno,input_postoffice,input_village;
     Spinner spinnerPodobi,spinnerDivision,spinnerCity,spinnerDistrict,spinnerUpojila,spinnerUnion;
@@ -132,6 +141,7 @@ public class RegistrationActivity extends AppCompatActivity {
         input_UserMobile = (EditText)findViewById(R.id.input_UserMobile);
         input_password = (EditText)findViewById(R.id.input_password);
         input_password_confirm = (EditText)findViewById(R.id.input_password_confirm);
+
         input_nid = (EditText)findViewById(R.id.input_nid);
         input_mosq = (EditText)findViewById(R.id.input_mosq);
         input_mosq_address = (EditText)findViewById(R.id.input_mosq_address);
@@ -352,7 +362,7 @@ public class RegistrationActivity extends AppCompatActivity {
         imgcam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imageCaptureDialogue();
+                startActivityForResult(getPickImageChooserIntent(), IMAGE_RESULT);
             }
         });
         if(!checkPermission()){
@@ -405,14 +415,18 @@ public class RegistrationActivity extends AppCompatActivity {
                     AlertMessage.showMessage(context,"Alert!","name is required");
                 }else if(email.isEmpty()){
                     AlertMessage.showMessage(context,"Alert!","email is required");
+                }else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                    AlertMessage.showMessage(context,"Alert!","Invalid email address");
                 }else if(username.isEmpty()){
                     AlertMessage.showMessage(context,"Alert!","username is required");
                 }else if(mobile.isEmpty()){
                     AlertMessage.showMessage(context,"Alert!","mobile numer is required");
                 }else if(password.isEmpty()){
                     AlertMessage.showMessage(context,"Alert!","password is required");
-                }else if(confirmpass.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","confirmpass is required");
+                }else if(password.length()<6){
+                    AlertMessage.showMessage(context,"Alert!","password must be 6 digit");
+                }else if(!confirmpass.equalsIgnoreCase(password)){
+                    AlertMessage.showMessage(context,"Alert!","confirm password  doesn't mach with Password");
                 }else if(podobi.isEmpty()){
                     AlertMessage.showMessage(context,"Alert!","podobi is required");
                 }else if(birthdate.isEmpty()){
@@ -454,6 +468,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         jsonObject.put("username",username);
                         jsonObject.put("email",email);
                         jsonObject.put("password",password);
+                        jsonObject.put("password_confirmation",confirmpass);
                         jsonObject.put("designation",podobi);
                         jsonObject.put("name",name);
                         jsonObject.put("mobile_no",mobile);
@@ -482,6 +497,59 @@ public class RegistrationActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private Uri getCaptureImageOutputUri() {
+        Uri outputFileUri = null;
+        File getImage = getExternalFilesDir("");
+        if (getImage != null) {
+            outputFileUri = Uri.fromFile(new File(getImage.getPath(), "profile.png"));
+        }
+        return outputFileUri;
+    }
+
+    public Intent getPickImageChooserIntent() {
+
+        Uri outputFileUri = getCaptureImageOutputUri();
+
+        List<Intent> allIntents = new ArrayList<>();
+        PackageManager packageManager = getPackageManager();
+
+        Intent captureIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        List<ResolveInfo> listCam = packageManager.queryIntentActivities(captureIntent, 0);
+        for (ResolveInfo res : listCam) {
+            Intent intent = new Intent(captureIntent);
+            intent.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
+            intent.setPackage(res.activityInfo.packageName);
+            if (outputFileUri != null) {
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+            }
+            allIntents.add(intent);
+        }
+
+        Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        galleryIntent.setType("image/*");
+        List<ResolveInfo> listGallery = packageManager.queryIntentActivities(galleryIntent, 0);
+        for (ResolveInfo res : listGallery) {
+            Intent intent = new Intent(galleryIntent);
+            intent.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
+            intent.setPackage(res.activityInfo.packageName);
+            allIntents.add(intent);
+        }
+
+        Intent mainIntent = allIntents.get(allIntents.size() - 1);
+        for (Intent intent : allIntents) {
+            if (intent.getComponent().getClassName().equals("com.android.documentsui.DocumentsActivity")) {
+                mainIntent = intent;
+                break;
+            }
+        }
+        allIntents.remove(mainIntent);
+
+        Intent chooserIntent = Intent.createChooser(mainIntent, "Select source");
+        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, allIntents.toArray(new Parcelable[allIntents.size()]));
+
+        return chooserIntent;
     }
 
     private String getBase64String(Bitmap bitmap)
@@ -677,71 +745,77 @@ public class RegistrationActivity extends AppCompatActivity {
                 .show();
     }
 
+    public Bitmap getResizedBitmap(Bitmap bm,int maxWidth, int maxHeight) {
+
+        Bitmap bmp = null;
+
+        if (maxHeight > 0 && maxWidth > 0) {
+            int width = bm.getWidth();
+            int height = bm.getHeight();
+
+            Log.e("bm.getWidth()",""+bm.getWidth());
+            Log.e("bm.getHeight()",""+bm.getHeight());
+
+            float ratioBitmap = (float) width / (float) height;
+            float ratioMax = (float) maxWidth / (float) maxHeight;
+
+            int finalWidth = maxWidth;
+            int finalHeight = maxHeight;
+            if (ratioMax > ratioBitmap) {
+                finalWidth = (int) ((float)maxHeight * ratioBitmap);
+            } else {
+                finalHeight = (int) ((float)maxWidth / ratioBitmap);
+            }
+            bmp = Bitmap.createScaledBitmap(bm, finalWidth, finalHeight, true);
+            return bmp;
+        } else {
+            return bmp;
+        }
+
+    }
 
     @Override
     public void onActivityResult(final int requestCode, final int resultCode,
                                  final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.e("On Activity Result", "On Activity Result");
-        if (requestCode == galarytakid && resultCode == Activity.RESULT_OK) {
+        if (resultCode == Activity.RESULT_OK) {
 
-            Log.e("In gallelrly", "lllll..........");
-            try {
 
-                final Uri selectedImageUri = data.getData();
+            if (requestCode == IMAGE_RESULT) {
 
-                final Bitmap bitmap = BitmapFactory
-                        .decodeStream(context.getContentResolver().openInputStream(
-                                selectedImageUri));
+                String filePath = getImageFilePath(data);
+                if (filePath != null) {
+                    Bitmap selectedImage = BitmapFactory.decodeFile(filePath);
+                    selectedImage =  getResizedBitmap(selectedImage,300,300);
+                    userBmp = selectedImage;
+                    imgPic.setImageBitmap(selectedImage);
 
-                final String path = setToImageView(bitmap);
-                Log.e("Bitmap >>",
-                        "W: " + bitmap.getWidth() + " H: " + bitmap.getHeight());
-                Log.e("path", ">>>>>" + path);
-                //PersistData.setStringData(con,AppConstant.path,"");
-                picture = path;
-                userBmp = bitmap;
-                PersistData.setStringData(context, AppConstant.localpic,path);
-                Glide.with(context)
-                        .load(picture)
-                        .into(imgPic);
-
-                
-
-            } catch (final Exception e) {
-                return;
-            }
-
-        } else if (requestCode == imagecaptureid
-                && resultCode == Activity.RESULT_OK) {
-
-            try {
-
-                //onCaptureImageResult(data);
-                final Bundle extras = data.getExtras();
-                final Bitmap b = (Bitmap) extras.get("data");
-
-                final String path = setToImageView(b);
-                Log.e("Bitmap >>",
-                        "W: " + b.getWidth() + " H: " + b.getHeight());
-                picture = path;
-                userBmp = b;
-                Log.e("path", ">>>>>" + path);
-                PersistData.setStringData(context,AppConstant.localpic,path);
-                PersistData.setStringData(context,AppConstant.path,"");
-                Glide.with(context)
-                        .load(picture)
-                        .into(imgPic);
-
-            } catch (final Exception e) {
-                return;
+                }
             }
 
         }
 
     }
 
+    private String getImageFromFilePath(Intent data) {
+        boolean isCamera = data == null || data.getData() == null;
 
+        if (isCamera) return getCaptureImageOutputUri().getPath();
+        else return getPathFromURI(data.getData());
+
+    }
+
+    public String getImageFilePath(Intent data) {
+        return getImageFromFilePath(data);
+    }
+
+    private String getPathFromURI(Uri contentUri) {
+        String[] proj = {MediaStore.Audio.Media.DATA};
+        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
 
     private String setToImageView(Bitmap bitmap) {
 
@@ -882,16 +956,43 @@ public class RegistrationActivity extends AppCompatActivity {
                 .build();
 
         Api api = retrofit.create(Api.class);
-        Call<String> userCall = api.signup(data);
-        userCall.enqueue(new Callback<String>() {
+        Call<SignUpResponse> userCall = api.signup(data);
+        userCall.enqueue(new Callback<SignUpResponse>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
                 pd.dismiss();
+
+                SignUpResponse responsData = response.body();
+
+                if(responsData!=null){
+                    if(responsData.getStatus().equalsIgnoreCase("success")){
+                        Toast.makeText(context, ""+responsData.getData().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                if(responsData!=null){
+                    if(responsData.getStatus().equalsIgnoreCase("error")){
+
+                        if(responsData.getData().getEmail()!=null){
+                            for (int i = 0; i <responsData.getData().getEmail().size() ; i++) {
+                                Toast.makeText(context, ""+responsData.getData().getEmail().get(i), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+
+//                        if(responsData.getData().getPassword()!=null){
+//                            for (int i = 0; i <responsData.getData().getPassword().size() ; i++) {
+//                                Toast.makeText(context, ""+responsData.getData().getPassword().get(i), Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+
+                    }
+                }
 
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<SignUpResponse> call, Throwable t) {
 
 
                 pd.dismiss();

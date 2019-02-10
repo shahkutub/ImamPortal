@@ -11,6 +11,7 @@ import com.imamportal.model.NoticeResponse;
 import com.imamportal.model.PhotoModel;
 import com.imamportal.model.QuestionAnswerModel;
 import com.imamportal.model.SeraContentData;
+import com.imamportal.model.SignUpResponse;
 import com.imamportal.model.VideoModel;
 
 import java.util.List;
@@ -97,7 +98,7 @@ public interface Api {
 
     @FormUrlEncoded
     @POST("api/signup/store")
-    public Call<String> signup(
+    public Call<SignUpResponse> signup(
             @Field("data") String jsondata
             );
 

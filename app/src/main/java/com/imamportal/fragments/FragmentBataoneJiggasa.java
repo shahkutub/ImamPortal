@@ -7,11 +7,13 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.imamportal.Adapter.AudioAdapter;
 import com.imamportal.R;
@@ -86,6 +88,20 @@ public class FragmentBataoneJiggasa extends Fragment {
             btnSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    String name = "",mobile = "",email = "",subject = "",ask = "";
+
+                    if(TextUtils.isEmpty(name)){
+                        Toast.makeText(context, "আপনার নাম লিখুন", Toast.LENGTH_SHORT).show();
+                    }else if(TextUtils.isEmpty(mobile)){
+                        Toast.makeText(context, "আপনার মোবাইল নম্বর  লিখুন\n", Toast.LENGTH_SHORT).show();
+                    }else if(TextUtils.isEmpty(email)){
+                        Toast.makeText(context, "আপনার ইমেইল  লিখুন", Toast.LENGTH_SHORT).show();
+                    }else if(TextUtils.isEmpty(subject)){
+                        Toast.makeText(context, "বিষয় লিখুন", Toast.LENGTH_SHORT).show();
+                    }else if(TextUtils.isEmpty(ask)){
+                        Toast.makeText(context, "প্রশ্ন লিখুন", Toast.LENGTH_SHORT).show();
+                    }
 
                 }
             });

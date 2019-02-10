@@ -35,6 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
             >
 
             <android.support.design.widget.TextInputLayout
@@ -44,8 +46,8 @@
                 android:layout_margin="@dimen/_5sdp">
                 <EditText android:id="@+id/input_name"
                     android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
                     android:padding="@dimen/_5sdp"
-                    android:layout_height="match_parent"
                     android:inputType="textCapWords"
                     android:background="@drawable/edit_bg"
                     android:textColor="#000"
@@ -59,8 +61,8 @@
                 android:layout_margin="@dimen/_3sdp">
                 <EditText android:id="@+id/input_email"
                     android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
                     android:padding="@dimen/_5sdp"
-                    android:layout_height="match_parent"
                     android:inputType="textEmailAddress"
                     android:background="@drawable/edit_bg"
                     android:textColor="#000"
@@ -74,8 +76,8 @@
                 android:layout_margin="@dimen/_3sdp">
                 <EditText android:id="@+id/input_UserName"
                     android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
                     android:padding="@dimen/_5sdp"
-                    android:layout_height="match_parent"
                     android:inputType="textCapSentences"
                     android:background="@drawable/edit_bg"
                     android:textColor="#000"
@@ -90,9 +92,9 @@
                 android:layout_margin="@dimen/_3sdp">
                 <EditText android:id="@+id/input_UserMobile"
                     android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
                     android:padding="@dimen/_5sdp"
-                    android:layout_height="match_parent"
-                    android:inputType="textCapSentences"
+                    android:inputType="phone"
                     android:background="@drawable/edit_bg"
                     android:textColor="#000"
                     android:hint="মোবাইল নাম্বারঃ" />
@@ -105,8 +107,8 @@
                 android:layout_margin="@dimen/_3sdp">
                 <EditText android:id="@+id/input_password"
                     android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
                     android:padding="@dimen/_5sdp"
-                    android:layout_height="match_parent"
                     android:inputType="textPassword"
                     android:background="@drawable/edit_bg"
                     android:textColor="#000"
@@ -121,8 +123,8 @@
                 android:layout_margin="@dimen/_3sdp">
                 <EditText android:id="@+id/input_password_confirm"
                     android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
                     android:padding="@dimen/_5sdp"
-                    android:layout_height="match_parent"
                     android:inputType="textPassword"
                     android:background="@drawable/edit_bg"
                     android:textColor="#000"
@@ -140,9 +142,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_height="@dimen/_40sdp"
                 android:padding="@dimen/_5sdp"
+                android:orientation="vertical"
                 android:layout_marginLeft="@dimen/_3sdp"
                 android:layout_marginRight="@dimen/_3sdp"
                 android:background="@drawable/edit_bg"
@@ -167,11 +169,11 @@
             <TextView
                 android:id="@+id/tvBirthdate"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_40sdp"
+                android:padding="@dimen/_5sdp"
                 android:text=""
                 android:textColor="#F15A24"
                 android:background="@drawable/edit_bg"
-                android:padding="@dimen/_5sdp"
                 android:textSize="@dimen/_15sdp"
                 android:layout_marginLeft="@dimen/_5sdp"
                 android:layout_marginRight="@dimen/_5sdp"
@@ -184,8 +186,8 @@
                 android:layout_margin="@dimen/_3sdp">
                 <EditText android:id="@+id/input_nid"
                     android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
                     android:padding="@dimen/_5sdp"
-                    android:layout_height="match_parent"
                     android:inputType="number"
                     android:background="@drawable/edit_bg"
                     android:textColor="#000"
@@ -199,8 +201,8 @@
                 android:layout_margin="@dimen/_3sdp">
                 <EditText android:id="@+id/input_mosq"
                     android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
                     android:padding="@dimen/_5sdp"
-                    android:layout_height="match_parent"
                     android:inputType="textCapSentences"
                     android:background="@drawable/edit_bg"
                     android:textColor="#000"
@@ -214,8 +216,8 @@
                 android:layout_margin="@dimen/_3sdp">
                 <EditText android:id="@+id/input_mosq_address"
                     android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
                     android:padding="@dimen/_5sdp"
-                    android:layout_height="match_parent"
                     android:inputType="textCapSentences"
                     android:background="@drawable/edit_bg"
                     android:textColor="#000"
@@ -234,9 +236,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_height="@dimen/_40sdp"
                 android:padding="@dimen/_5sdp"
+                android:orientation="vertical"
                 android:layout_marginLeft="@dimen/_3sdp"
                 android:layout_marginRight="@dimen/_3sdp"
                 android:background="@drawable/edit_bg"
@@ -260,9 +262,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_height="@dimen/_40sdp"
                 android:padding="@dimen/_5sdp"
+                android:orientation="vertical"
                 android:layout_marginLeft="@dimen/_3sdp"
                 android:layout_marginRight="@dimen/_3sdp"
                 android:background="@drawable/edit_bg"
@@ -283,8 +285,8 @@
                 android:layout_margin="@dimen/_3sdp">
                 <EditText android:id="@+id/input_wordno"
                     android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
                     android:padding="@dimen/_5sdp"
-                    android:layout_height="match_parent"
                     android:inputType="textCapSentences"
                     android:background="@drawable/edit_bg"
                     android:textColor="#000"
@@ -303,9 +305,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_height="@dimen/_40sdp"
                 android:padding="@dimen/_5sdp"
+                android:orientation="vertical"
                 android:layout_marginLeft="@dimen/_3sdp"
                 android:layout_marginRight="@dimen/_3sdp"
                 android:background="@drawable/edit_bg"
@@ -328,9 +330,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_height="@dimen/_40sdp"
                 android:padding="@dimen/_5sdp"
+                android:orientation="vertical"
                 android:layout_marginLeft="@dimen/_3sdp"
                 android:layout_marginRight="@dimen/_3sdp"
                 android:background="@drawable/edit_bg"
@@ -352,9 +354,9 @@
                 />
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_height="@dimen/_40sdp"
                 android:padding="@dimen/_5sdp"
+                android:orientation="vertical"
                 android:layout_marginLeft="@dimen/_3sdp"
                 android:layout_marginRight="@dimen/_3sdp"
                 android:background="@drawable/edit_bg"
@@ -376,8 +378,8 @@
                 android:layout_margin="@dimen/_3sdp">
                 <EditText android:id="@+id/input_postoffice"
                     android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
                     android:padding="@dimen/_5sdp"
-                    android:layout_height="match_parent"
                     android:inputType="textCapSentences"
                     android:background="@drawable/edit_bg"
                     android:textColor="#000"
@@ -392,8 +394,8 @@
                 android:layout_margin="@dimen/_3sdp">
                 <EditText android:id="@+id/input_village"
                     android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
                     android:padding="@dimen/_5sdp"
-                    android:layout_height="match_parent"
                     android:inputType="textCapSentences"
                     android:background="@drawable/edit_bg"
                     android:textColor="#000"
@@ -433,7 +435,7 @@
                     android:layout_height="@dimen/_35sdp"
                     android:layout_toRightOf="@+id/imgPic"
                     android:layout_marginRight="@dimen/_15sdp"
-                    android:src="@drawable/ic_instagram_logo"
+                    app:srcCompat="@drawable/ic_instagram_logo"
                     />
 
             </RelativeLayout>
