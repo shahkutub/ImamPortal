@@ -88,20 +88,22 @@
             android:gravity="center"
             android:layout_marginTop="@dimen/_3sdp"
             >
+
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColorHint="#F15A24"
                 android:layout_margin="@dimen/_3sdp">
-                <EditText android:id="@+id/input_father_name_bn"
+                <EditText android:id="@+id/input_name_mother"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
                     android:padding="@dimen/_5sdp"
                     android:inputType="textCapSentences"
                     android:background="@drawable/edit_bg"
                     android:textColor="#000"
-                    android:hint="পিতার নাম(বাংলায়)*" />
+                    android:hint="মাতার নামঃ *" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -110,14 +112,14 @@
                 android:layout_weight="1"
                 android:textColorHint="#F15A24"
                 android:layout_margin="@dimen/_3sdp">
-                <EditText android:id="@+id/input_father_name_mother"
+                <EditText android:id="@+id/input_name_mosq"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
                     android:padding="@dimen/_5sdp"
                     android:inputType="textCapSentences"
                     android:background="@drawable/edit_bg"
                     android:textColor="#000"
-                    android:hint="মাতার নামঃ *" />
+                    android:hint="মসজিদের নামঃ *" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
         <LinearLayout
@@ -127,21 +129,7 @@
             android:gravity="center"
             android:layout_marginTop="@dimen/_3sdp"
             >
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColorHint="#F15A24"
-                android:layout_margin="@dimen/_3sdp">
-                <EditText android:id="@+id/input_mother_name_mosq"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:padding="@dimen/_5sdp"
-                    android:inputType="textCapSentences"
-                    android:background="@drawable/edit_bg"
-                    android:textColor="#000"
-                    android:hint="মসজিদের নামঃ *" />
-            </android.support.design.widget.TextInputLayout>
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -158,37 +146,28 @@
                     android:hint="মোবাইল নম্বর" />
             </android.support.design.widget.TextInputLayout>
 
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColorHint="#F15A24"
-            android:orientation="vertical"
-            android:layout_margin="@dimen/_3sdp"
-            >
-            <TextView
-                android:layout_width="wrap_content"
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="জন্ম তারিখঃ"
-                android:textColor="#F15A24"
-                android:textSize="@dimen/_15sdp"
-                android:layout_marginLeft="@dimen/_5sdp"
-                />
-
-            <TextView
-                android:id="@+id/tvBirthdate"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:padding="@dimen/_5sdp"
-                android:text=""
-                android:textColor="#F15A24"
-                android:background="@drawable/edit_bg"
-                android:textSize="@dimen/_15sdp"
-                android:layout_marginLeft="@dimen/_5sdp"
-                />
+                android:layout_weight="1"
+                android:textColorHint="#F15A24"
+                android:layout_margin="@dimen/_3sdp">
+                <EditText android:id="@+id/input_birtdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:padding="@dimen/_5sdp"
+                    android:inputType="phone"
+                    android:background="@drawable/edit_bg"
+                    android:textColor="#000"
+                    android:hint="জন্ম তারিখঃ"
+                    />
+            </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -290,7 +269,7 @@
                     android:background="@drawable/edit_bg"
                     android:layout_height="@dimen/_40sdp">
                     <Spinner
-                        android:id="@+id/spinnerUpzila"
+                        android:id="@+id/spinnerUpojila"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         ></Spinner>
@@ -354,7 +333,7 @@
                         android:textSize="@dimen/_15sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         />
-                    <EditText android:id="@+id/input_postcode"
+                    <EditText android:id="@+id/input_postoffice"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_40sdp"
                         android:padding="@dimen/_5sdp"
@@ -619,11 +598,950 @@
         </LinearLayout>
 
 
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/shadow">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=" শিক্ষাগত যোগ্যতার বিবরণঃ"
+                    android:textColor="#000"
+                    android:textSize="@dimen/_15sdp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:text="ক্রমিক নং"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <TextView
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:text="পরীক্ষার নাম"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <TextView
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:text="বোর্ড/বিশ্ববিদ্যালয়"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <TextView
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:text="শিক্ষা প্রতিষ্ঠানের নাম"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <TextView
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:text="শাখা/বিষয়"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
 
 
+                    <TextView
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:text="বিভাগ/শ্রেণী"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <TextView
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:text="সন"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:text="(ক)"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <EditText
+                        android:id="@+id/tvExamName1"
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <EditText
+                        android:id="@+id/tvBoard1"
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <EditText
+                        android:id="@+id/tvInstitute1"
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <EditText
+                        android:id="@+id/tvsubject1"
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
 
 
+                    <EditText
+                        android:id="@+id/tvgpa1"
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
 
+                    <EditText
+                        android:id="@+id/tvYear1"
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:text="(খ)"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <EditText
+                        android:id="@+id/tvExamName2"
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <EditText
+                        android:id="@+id/tvBoard2"
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <EditText
+                        android:id="@+id/tvInstitute2"
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <EditText
+                        android:id="@+id/tvsubject2"
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+
+                    <EditText
+                        android:id="@+id/tvgpa2"
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <EditText
+                        android:id="@+id/tvYear2"
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:text="(গ)"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <EditText
+                        android:id="@+id/tvExamName3"
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <EditText
+                        android:id="@+id/tvBoard3"
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <EditText
+                        android:id="@+id/tvInstitute3"
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <EditText
+                        android:id="@+id/tvsubject3"
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+
+                    <EditText
+                        android:id="@+id/tvgpa3"
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <EditText
+                        android:id="@+id/tvYear3"
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:text="(ঘ)"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <EditText
+                        android:id="@+id/tvExamName4"
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <EditText
+                        android:id="@+id/tvBoard4"
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <EditText
+                        android:id="@+id/tvInstitute4"
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <EditText
+                        android:id="@+id/tvsubject4"
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+
+                    <EditText
+                        android:id="@+id/tvgpa4"
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <EditText
+                        android:id="@+id/tvYear4"
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:text="(ঙ)"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <EditText
+                        android:id="@+id/tvExamName5"
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <EditText
+                        android:id="@+id/tvBoard5"
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <EditText
+                        android:id="@+id/tvInstitute5"
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <EditText
+                        android:id="@+id/tvsubject5"
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+
+                    <EditText
+                        android:id="@+id/tvgpa5"
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <EditText
+                        android:id="@+id/tvYear5"
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:text="(চ)"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <EditText
+                        android:id="@+id/tvExamName6"
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <EditText
+                        android:id="@+id/tvBoard6"
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <EditText
+                        android:id="@+id/tvInstitute6"
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <EditText
+                        android:id="@+id/tvsubject6"
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+
+                    <EditText
+                        android:id="@+id/tvgpa6"
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <EditText
+                        android:id="@+id/tvYear6"
+                        android:layout_width="@dimen/_150sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="#000"
+                        android:textSize="@dimen/_15sdp" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp"
+            android:background="#F2DEDE"
+            android:padding="@dimen/_5sdp"
+            android:text="N.B সকল সনদপত্র অবশ্যই স্ক্যান কপি ইমেজ হতে হবে এবং ইমেজ এর সাইজ অবশ্যই ১০২৪ * ৭৬৮ হতে হবে।"
+            android:textColor="#A94442" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" শিক্ষাগত যোগ্যতার মূল সনদপত্রঃ"
+            android:textColor="#000"
+            android:textSize="@dimen/_15sdp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/_5sdp"
+            android:gravity="center_vertical"
+            android:background="@drawable/edit_bg"
+            >
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnChoseFile"
+                android:layout_width="wrap_content"
+                android:background="#808080"
+                android:text="Chose file"
+                android:textColor="#fff"
+                android:textSize="@dimen/_10sdp"
+                android:paddingRight="@dimen/_5sdp"
+                android:paddingLeft="@dimen/_5sdp"
+                android:layout_height="@dimen/_30sdp" />
+
+
+            <ImageView
+                android:id="@+id/eduFile1"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:src="@drawable/file"
+                android:visibility="gone"
+                />
+            <ImageView
+                android:id="@+id/eduFile2"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:src="@drawable/file"
+                android:layout_marginLeft="@dimen/_3sdp"
+                android:visibility="gone"
+                />
+
+            <ImageView
+                android:id="@+id/eduFile3"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:src="@drawable/file"
+                android:layout_marginLeft="@dimen/_3sdp"
+                android:visibility="gone"
+                />
+            <ImageView
+                android:id="@+id/eduFile4"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:src="@drawable/file"
+                android:layout_marginLeft="@dimen/_3sdp"
+                android:visibility="gone"
+                />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" প্রশংসাপত্রঃ"
+            android:textColor="#000"
+            android:textSize="@dimen/_15sdp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/_5sdp"
+            android:gravity="center_vertical"
+            android:background="@drawable/edit_bg"
+            >
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnChoseFileTestimoni"
+                android:layout_width="wrap_content"
+                android:background="#808080"
+                android:text="Chose file"
+                android:textColor="#fff"
+                android:textSize="@dimen/_10sdp"
+                android:paddingRight="@dimen/_5sdp"
+                android:paddingLeft="@dimen/_5sdp"
+                android:layout_height="@dimen/_30sdp" />
+
+
+            <ImageView
+                android:id="@+id/TestimoniFile1"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:src="@drawable/file"
+                android:visibility="gone"
+                />
+            <ImageView
+                android:id="@+id/TestimoniFile2"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:src="@drawable/file"
+                android:layout_marginLeft="@dimen/_3sdp"
+                android:visibility="gone"
+                />
+
+            <ImageView
+                android:id="@+id/TestimoniFile3"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:src="@drawable/file"
+                android:layout_marginLeft="@dimen/_3sdp"
+                android:visibility="gone"
+                />
+            <ImageView
+                android:id="@+id/TestimoniFile4"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:src="@drawable/file"
+                android:layout_marginLeft="@dimen/_3sdp"
+                android:visibility="gone"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" জাতীয় পরিচয়পত্র"
+            android:textColor="#000"
+            android:textSize="@dimen/_15sdp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/_5sdp"
+            android:gravity="center_vertical"
+            android:background="@drawable/edit_bg"
+            >
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnChoseNid"
+                android:layout_width="wrap_content"
+                android:background="#808080"
+                android:text="Chose file"
+                android:textColor="#fff"
+                android:textSize="@dimen/_10sdp"
+                android:paddingRight="@dimen/_5sdp"
+                android:paddingLeft="@dimen/_5sdp"
+                android:layout_height="@dimen/_30sdp" />
+
+
+            <ImageView
+                android:id="@+id/nidFile1"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:src="@drawable/file"
+                android:visibility="gone"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" স্থানীয় ইউনিয়ন পরিষদের চেয়ারম্যান/ওয়ার্ড কমিশনারের দেয়া ইমামতির প্রমাণপত্র"
+            android:textColor="#000"
+            android:textSize="@dimen/_10sdp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/_5sdp"
+            android:gravity="center_vertical"
+            android:background="@drawable/edit_bg"
+            >
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnChoseChairmanCopy"
+                android:layout_width="wrap_content"
+                android:background="#808080"
+                android:text="Chose file"
+                android:textColor="#fff"
+                android:textSize="@dimen/_10sdp"
+                android:paddingRight="@dimen/_5sdp"
+                android:paddingLeft="@dimen/_5sdp"
+                android:layout_height="@dimen/_30sdp" />
+
+
+            <ImageView
+                android:id="@+id/cairmanCopyFile1"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:src="@drawable/file"
+                android:visibility="gone"
+                />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" ইসলামী ফাউন্ডেশন জেলা কার্যালয় থেকে মনোনয়নপত্র"
+            android:textColor="#000"
+            android:textSize="@dimen/_15sdp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/_5sdp"
+            android:gravity="center_vertical"
+            android:background="@drawable/edit_bg"
+            >
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnChoseIsfoundatonCopy"
+                android:layout_width="wrap_content"
+                android:background="#808080"
+                android:text="Chose file"
+                android:textColor="#fff"
+                android:textSize="@dimen/_10sdp"
+                android:paddingRight="@dimen/_5sdp"
+                android:paddingLeft="@dimen/_5sdp"
+                android:layout_height="@dimen/_30sdp" />
+
+
+            <ImageView
+                android:id="@+id/isfoundatonCopyFile"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:src="@drawable/file"
+                android:visibility="gone"
+                />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" মসজিদ কমিটির সভাপতি/সম্পাদক/মোতাওয়াল্লী কতৃক ছুটি মঞ্জুরিপত্র"
+            android:textColor="#000"
+            android:textSize="@dimen/_10sdp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/_5sdp"
+            android:gravity="center_vertical"
+            android:background="@drawable/edit_bg"
+            >
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnChoseLeaveCopy"
+                android:layout_width="wrap_content"
+                android:background="#808080"
+                android:text="Chose file"
+                android:textColor="#fff"
+                android:textSize="@dimen/_10sdp"
+                android:paddingRight="@dimen/_5sdp"
+                android:paddingLeft="@dimen/_5sdp"
+                android:layout_height="@dimen/_30sdp" />
+
+
+            <ImageView
+                android:id="@+id/leaveCopyFile"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:src="@drawable/file"
+                android:visibility="gone"
+                />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" প্রশিক্ষণ গ্রহণের ব্যাপারে যথাযথ কতৃপক্ষের অনুমতিপত্র (শিক্ষা প্রতিষ্ঠানে কর্মরত প্রার্থীর ক্ষেত্রে প্রযোজ্য )"
+            android:textColor="#000"
+            android:textSize="@dimen/_10sdp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/_5sdp"
+            android:gravity="center_vertical"
+            android:background="@drawable/edit_bg"
+            >
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnChoseAuthPermissionCopy"
+                android:layout_width="wrap_content"
+                android:background="#808080"
+                android:text="Chose file"
+                android:textColor="#fff"
+                android:textSize="@dimen/_10sdp"
+                android:paddingRight="@dimen/_5sdp"
+                android:paddingLeft="@dimen/_5sdp"
+                android:layout_height="@dimen/_30sdp" />
+
+
+            <ImageView
+                android:id="@+id/authPermissionCopyFile"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:src="@drawable/file"
+                android:visibility="gone"
+                />
+
+        </LinearLayout>
 
         <android.support.v7.widget.AppCompatButton
             android:layout_width="match_parent"
