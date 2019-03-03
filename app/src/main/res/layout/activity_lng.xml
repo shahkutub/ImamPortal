@@ -13,15 +13,14 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        android:background="@drawable/appbg6"
+        android:background="@drawable/appbg4"
         >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_centerInParent="true"
-            android:layout_marginRight="@dimen/_30sdp"
+            android:layout_marginBottom="@dimen/_160sdp"
 
             >
             <LinearLayout
@@ -73,52 +72,7 @@
 
                     />
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_50sdp"
-                android:layout_alignParentBottom="true"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textColor="#000"
-                    android:textSize="@dimen/_15sdp"
-                    android:text="পরিকল্পনা ও বাস্তবায়নে"
-                    />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textColor="#FF0000"
-                        android:textSize="@dimen/_12sdp"
-                        android:text="এটুআই"
-                        android:textStyle="bold"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textColor="#025939"
-                        android:textSize="@dimen/_12sdp"
-                        android:text=" -একসেস টু ইনফরমেশন"
-                        android:textStyle="bold"
-                        />
-                </LinearLayout>
-
-            </LinearLayout>
 
         </LinearLayout>
 
@@ -225,7 +179,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        android:visibility="gone"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_50sdp"
         android:layout_alignParentBottom="true"

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <LinearLayout
@@ -16,26 +18,36 @@
             android:background="@drawable/shadow"
             >
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 >
 
-                <ImageView
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/imgPic"
                     android:layout_width="@dimen/_80sdp"
                     android:layout_height="@dimen/_80sdp"
                     android:src="@drawable/imam"
+                    app:civ_border_width="2dp"
+                    android:layout_centerInParent="true"
+                    app:civ_border_color="#FF000000"/>
+                <ImageView
+                    android:id="@+id/imgcam"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_toRightOf="@+id/imgPic"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    app:srcCompat="@drawable/ic_instagram_logo"
                     />
 
-
-            </LinearLayout>
+            </RelativeLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_15sdp"
-                android:layout_marginLeft="@dimen/_10sdp"
                 android:textColor="#000"
                 android:text="মাদ্রাসার শিক্ষার্থীদের জন্য কারিগরি ও বৃত্তিমূলক প্রশিক্ষণ"
                 />
@@ -189,7 +201,7 @@
                     android:background="@drawable/edit_bg"
                     android:layout_height="@dimen/_40sdp">
                     <Spinner
-                        android:id="@+id/spinnerPodobi"
+                        android:id="@+id/spinnerGender"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         ></Spinner>
@@ -219,9 +231,11 @@
                    android:layout_height="@dimen/_40sdp"
                    android:padding="@dimen/_5sdp"
                    android:text=""
-                   android:textColor="#F15A24"
+                   android:textColor="#000"
                    android:background="@drawable/edit_bg"
                    android:textSize="@dimen/_15sdp"
+
+                   android:gravity="center"
                    android:layout_marginLeft="@dimen/_5sdp"
                    />
 
@@ -978,7 +992,7 @@
                         android:background="@drawable/edit_bg"
                         android:layout_height="@dimen/_40sdp">
                         <Spinner
-                            android:id="@+id/spinnerceter"
+                            android:id="@+id/spinnerCenter"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             ></Spinner>
@@ -1113,14 +1127,18 @@
 
 
         <android.support.v7.widget.AppCompatButton
+            android:id="@+id/appcomBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Submit"
             android:gravity="center"
             android:padding="@dimen/_10sdp"
-            android:background="@drawable/shadow_vid"
+            android:background="#449D44"
             android:textColor="#fff"
-            android:layout_margin="@dimen/_15sdp"
+            android:layout_marginLeft="@dimen/_50sdp"
+            android:layout_marginRight="@dimen/_50sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
             />
 
     </LinearLayout>

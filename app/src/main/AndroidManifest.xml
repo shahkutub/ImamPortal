@@ -18,8 +18,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/MyMaterialTheme">
+        android:theme="@style/MyMaterialTheme"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait">
@@ -29,23 +29,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ToolbarSearchActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme" />
-
         <activity
             android:name=".MasAlaActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme" />
-
-
         <activity
             android:name=".AmarpataActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme" />
-
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -54,15 +49,13 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
 
         <activity
             android:name=".UploadActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme" />
-
-
         <activity
             android:name=".RegistrationActivity"
             android:screenOrientation="portrait" />
@@ -115,8 +108,7 @@
         <activity
             android:name=".LanguageActivity"
             android:label="@string/title_activity_quiz_bijoyee"
-            android:screenOrientation="portrait"
-             />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".PhotoGallaryActivity"
             android:label="@string/title_activity_quiz_bijoyee"
@@ -139,83 +131,59 @@
             android:name=".AlHadithActivity"
             android:label="@string/title_activity_quiz_bijoyee"
             android:screenOrientation="portrait" />
-
-
-         <activity
+        <activity
             android:name=".SompadokioActivity"
             android:label="@string/title_activity_quiz_bijoyee"
             android:screenOrientation="portrait" />
-
-
-         <activity
+        <activity
             android:name=".BlogActivity"
             android:label="@string/title_activity_quiz_bijoyee"
             android:screenOrientation="portrait" />
-
-
-         <activity
+        <activity
             android:name=".DokkotarGolpoActivity"
             android:label="@string/title_activity_quiz_bijoyee"
             android:screenOrientation="portrait" />
-
-
-            <activity
-                android:name=".ApnarPoramorsoActivity"
-                android:label="@string/title_activity_quiz_bijoyee"
-                android:screenOrientation="portrait" />
-
-                <activity
-                android:name=".ChatAppActivity"
-                android:label="@string/title_activity_quiz_bijoyee"
-                android:screenOrientation="portrait" />
-
-                <activity
-                android:name=".ChatUserListActivity"
-                android:screenOrientation="portrait" />
-
-                <activity
-                android:name=".ChatSearchActivity"
-                android:screenOrientation="portrait" />
-
-
-                <activity
-                android:name=".ChatCreateGroupActivity"
-                android:screenOrientation="portrait" />
-
-
-                <activity
-                android:name=".AudioActivity"
-                android:screenOrientation="portrait" />
-
-
-                <activity
-                android:name=".VideoActivity"
-                android:screenOrientation="portrait" />
-
-
-
-         <activity
-                android:name=".ActivityGoponiyoNitimala"
-                android:screenOrientation="portrait" />
-
         <activity
-                android:name=".ActivitySochorachorJiggsa"
-                android:screenOrientation="portrait" />
-
-
-             <activity
-                android:name=".ActivityBeboherSorto"
-                android:screenOrientation="portrait" />
-
-
+            android:name=".ApnarPoramorsoActivity"
+            android:label="@string/title_activity_quiz_bijoyee"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ChatAppActivity"
+            android:label="@string/title_activity_quiz_bijoyee"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ChatUserListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ChatSearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ChatCreateGroupActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AudioActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".VideoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityGoponiyoNitimala"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivitySochorachorJiggsa"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityBeboherSorto"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ImamtrainingRegistrationActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ChatNewChatActivity"
             android:screenOrientation="portrait" />
-
         <activity
-                    android:name=".VideoPostActivity"
-                    android:screenOrientation="portrait" />
-
+            android:name=".VideoPostActivity"
+            android:screenOrientation="portrait" />
 
         <service
             android:name=".fcm.MyFirebaseInstanceIDService"
@@ -233,10 +201,10 @@
             </intent-filter>
         </service>
 
-
+        <activity
+            android:name=".VocationalTrainingActivity"
+            android:label="@string/title_activity_vocational_training"
+            android:theme="@style/MyMaterialTheme"></activity>
     </application>
-
-
-
 
 </manifest>

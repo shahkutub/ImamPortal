@@ -938,6 +938,7 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
 
+
     private void signUp(String data) {
 
         if(!NetInfo.isOnline(context)){

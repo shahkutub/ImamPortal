@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
     boolean isFABOpen = false;
     boolean isFABmsgOpen = false;
     private String searchStr;
-    private LinearLayout linAmarPata, linRegistration,linUpload;
+    private LinearLayout linAmarPata, linRegistration,linImamtrainingReg,linVocationalTrainReg,linUpload;
     private TextView tvLogin, tvLogOut;
 
     List<NoticeResponse> listNotice = new ArrayList<>();
@@ -259,6 +259,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dialogeNamajTime();
+                //startActivity(new Intent(context,NamjTimeActivity.class));
                 closeFABMenu();
             }
         });
@@ -474,7 +475,7 @@ public class MainActivity extends AppCompatActivity {
         String hd = hijriFormat.format(todayExact);
 
 
-        dates = new String[]{"বাংলা: " + banglaDate, "ইংরেজি: " + d, "হিজরী:" + hd};
+        dates = new String[]{"বাংলা: " + banglaDate, "ইংরেজি: " + d, "Hijri:" + hd};
 
 
     }
@@ -574,10 +575,10 @@ public class MainActivity extends AppCompatActivity {
 
         double latitude = 23.8103;
         double longitude = 90.4125;
-        if (!TextUtils.isEmpty(AppConstant.lat) || !TextUtils.isEmpty(AppConstant.lng)) {
-            latitude = Double.parseDouble(AppConstant.lat);
-            longitude = Double.parseDouble(AppConstant.lng);
-        }
+//        if (!TextUtils.isEmpty(AppConstant.lat) || !TextUtils.isEmpty(AppConstant.lng)) {
+//            latitude = Double.parseDouble(AppConstant.lat);
+//            longitude = Double.parseDouble(AppConstant.lng);
+//        }
 
 
         double timezone = 6;
@@ -659,23 +660,24 @@ public class MainActivity extends AppCompatActivity {
         updateTimer.schedule(new TimerTask() {
             public void run() {
                 try {
-                    final Date date1 = getNextPrayer();
 
-                    final Date date2 = new Date();
-
-                    long mills = date1.getTime() - date2.getTime();
-                    int hours = (int) (mills / (1000 * 60 * 60));
-                    int mins = (int) ((mills / (1000 * 60)) % 60);
-                    int secs = (int) ((mills / (1000)) % 60);
-
-                    final String diff = hours + ":" + mins + ":" + secs;
-                    Log.e("diff", "" + diff);
 
                     // updated value every1 second
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             // update TextView here!
+                            final Date date1 = getNextPrayer();
+
+                            final Date date2 = new Date();
+
+                            long mills = date1.getTime() - date2.getTime();
+                            int hours = (int) (mills / (1000 * 60 * 60));
+                            int mins = (int) ((mills / (1000 * 60)) % 60);
+                            int secs = (int) ((mills / (1000)) % 60);
+
+                            final String diff = hours + ":" + mins + ":" + secs;
+                            Log.e("diff", "" + diff);
                             tvReminder.setText(pryname + ":" + diff);
                         }
                     });
@@ -698,15 +700,13 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < size - 1; i++) {
             if (prayerTimesDate.get(i).getTime() < now.getTime()) {
                 nextPreyerTime = prayerTimesDate.get(i + 1);
-                pryname = prayerNames.get(i + 1);
-                //prayerNamesHighlite(prayerNames.get(i));
+                pryname=prayerNames.get(i + 1);
+
             } else {
                 nextPreyerTime = prayerTimesDate.get(i);
-                pryname = prayerNames.get(i - 1);
-
+                pryname=prayerNames.get(i);
                 break;
             }
-
         }
 
         if (pryname.equalsIgnoreCase("ফজর")) {
@@ -774,6 +774,8 @@ public class MainActivity extends AppCompatActivity {
         linMsgFloating = (LinearLayout) findViewById(R.id.linMsgFloating);
         relNotification = (RelativeLayout) findViewById(R.id.relNotification);
         linRegistration = (LinearLayout) findViewById(R.id.linRegistration);
+        linImamtrainingReg = (LinearLayout) findViewById(R.id.linImamtrainingReg);
+        linVocationalTrainReg = (LinearLayout) findViewById(R.id.linVocationalTrainReg);
 
 
 
@@ -783,6 +785,23 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(context, RegistrationActivity.class));
             }
         });
+
+
+        linImamtrainingReg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(context, ImamtrainingRegistrationActivity.class));
+            }
+        });
+
+
+        linVocationalTrainReg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(context, VocationalTrainingActivity.class));
+            }
+        });
+
 
 
         linUpload.setOnClickListener(new View.OnClickListener() {

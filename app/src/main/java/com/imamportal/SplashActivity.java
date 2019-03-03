@@ -58,7 +58,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.imam_training_reg_form);
+        setContentView(R.layout.activity_splash);
 
         context=this;
 
@@ -68,7 +68,7 @@ public class SplashActivity extends AppCompatActivity {
 
 //        ImageView imgNext = (ImageView)findViewById(R.id.imgNext);
 //        ImageView imgA2i = (ImageView)findViewById(R.id.imgA2i);
-//        relSplash = (RelativeLayout) findViewById(R.id.relSplash);
+        relSplash = (RelativeLayout) findViewById(R.id.relSplash);
 //        tvWeb = (TextView) findViewById(R.id.tvWeb);
 //
 //
@@ -88,13 +88,13 @@ public class SplashActivity extends AppCompatActivity {
 //
 //
 //
-//        relSplash.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(getApplicationContext(),LanguageActivity.class));
-//                finish();
-//            }
-//        });
+        relSplash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),LanguageActivity.class));
+                finish();
+            }
+        });
 //
 //        Animation anim = new AlphaAnimation(0.0f, 1.0f);
 //        anim.setDuration(100); //You can manage the blinking time with this parameter

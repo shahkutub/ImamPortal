@@ -21,6 +21,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 
@@ -337,6 +338,15 @@ public class AppConstant {
         TextView tvPublishDate = (TextView)dialog.findViewById(R.id.tvPublishDate);
         TextView tvCountView = (TextView)dialog.findViewById(R.id.tvCountView);
         TextView tvCommentCount = (TextView)dialog.findViewById(R.id.tvCommentCount);
+
+        WebView webView = (WebView)dialog.findViewById(R.id.webView);
+        webView.getSettings().setBuiltInZoomControls(true);
+
+        String htmlString = "<div style=\"color:#069\"><b>"+"প্রশ্ন: "+title+"</b></div\n" + "<p>"+content+"</p>";
+        webView.loadData(htmlString, "text/html; charset=utf-8", "UTF-8");
+
+
+
         tvTitle.setText(title);
         tvDescription.setText(content);
         tvPublisher.setText(publisher);

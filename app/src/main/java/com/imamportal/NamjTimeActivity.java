@@ -30,7 +30,7 @@ public class NamjTimeActivity extends AppCompatActivity {
 
 
     LinearLayout linFojor,linJohor,linAsor,linMagrib,linIsha,linNamajTime;
-    private TextView tvFojorTime,tvJohorTime,tvAsorTime,tvMagribTime,tvIshaTime,tvReminderTime;
+    private TextView tvFojorTime,tvJohorTime,tvAsorTime,tvMagribTime,tvIshaTime,tvReminder;
 
     Context context;
 
@@ -121,6 +121,7 @@ public class NamjTimeActivity extends AppCompatActivity {
         tvAsorTime.setText(prayerTimes.get(3));
         tvMagribTime.setText(prayerTimes.get(5));
         tvIshaTime.setText(prayerTimes.get(6));
+        tvIshaTime.setText(prayerTimes.get(6));
 
 //        Calendar calendar = Calendar.getInstance();
 ////        int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
@@ -165,7 +166,7 @@ public class NamjTimeActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             // update TextView here!
-                            tvReminderTime.setText( pryname+":" + diff);
+                            tvReminder.setText( pryname+":" + diff);
                         }
                     });
 
@@ -259,6 +260,7 @@ public class NamjTimeActivity extends AppCompatActivity {
         tvAsorTime = (TextView) findViewById(R.id.tvAsorTime);
         tvMagribTime = (TextView) findViewById(R.id.tvMagribTime);
         tvIshaTime = (TextView) findViewById(R.id.tvIshaTime);
+        tvReminder = (TextView) findViewById(R.id.tvReminder);
 
 
 

@@ -14,6 +14,13 @@
         android:orientation="horizontal"
         android:layout_above="@+id/bottom"
         >
+
+
+        <WebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></WebView>
+
         <ImageView
             android:id="@+id/imgPublisher"
             android:layout_width="@dimen/_60sdp"
@@ -30,6 +37,7 @@
             android:orientation="vertical"
             android:layout_marginLeft="@dimen/_3sdp"
             android:layout_marginTop="@dimen/_10sdp"
+            android:visibility="gone"
             >
             <TextView
             android:id="@+id/tvTitle"

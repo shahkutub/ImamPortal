@@ -26,6 +26,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
 import android.util.Base64;
 import android.util.Log;
 import android.util.Patterns;
@@ -68,6 +69,9 @@ import java.util.Date;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -84,11 +88,10 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 public class ImamtrainingRegistrationActivity extends AppCompatActivity {
 
     Context context;
-    private ImageView imgcam;
-    private CircleImageView imgPic;
+    private ImageView imgcam,imgPic;
     private File file;
     String picture = "";
-    Bitmap userBmp;
+    Bitmap bmpuser,bmpmulsonod,bmptestimo,bmpNid,bmpChairman,bmpIfa,bmpLeave,bmpAuth;
     private static File dir = null;
     String imageLocal = "";
     public final int imagecaptureid = 0;
@@ -96,21 +99,33 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 200;
     private final static int IMAGE_RESULT = 200;
     private EditText input_name,input_name_father,input_father_name_bn,input_name_mother,input_name_mosq,input_mobile,input_birtdate,
-    input_mosq_address,input_wordno,input_postoffice,input_village;
-    Spinner spinnerCity,spinnerDistrict,spinnerUpojila,spinnerUnion;
-    private TextView tvBirthdate;
-    private Button btnSubmit;
+    input_mosq_address,input_wordno,input_postoffice_present,input_village_present,input_postoffficePermanent,input_villagePermanent,
+            etExamName1, etBoard1,etInstitute1,etsubject1,etgpa1,etYear1,etExamName2,etBoard2,etInstitute2,etsubject2,
+            etgpa2,etYear2,etBoard3,etInstitute3,etsubject3,etgpa3,etYear3,etExamName4,etBoard4,etInstitute4,etsubject4,
+            etgpa4,etYear4,etExamName5,etBoard5,etInstitute5,etsubject5,etgpa5,etYear5,etExamName6,etBoard6,etInstitute6,
+            tvsubject6,etgpa6,etYear6;
+    Spinner spinnerCity,spinnerDistrict,spinnerUpozila,spinnerUnion,spinnerDistrictPermanent,spinnerUpojilaPermanent,spinnerUnionPermanent;
+    private AppCompatButton btnSubmit;
 
-    List<NameInfo> listDivision = new ArrayList<>();
-    List<NameInfo> listCity = new ArrayList<>();
+
     List<NameInfo> listDistrict = new ArrayList<>();
+    List<NameInfo> listDistrictPermanent = new ArrayList<>();
     List<NameInfo> listUpozila = new ArrayList<>();
+    List<NameInfo> listUpozilaPermanent = new ArrayList<>();
     List<NameInfo> listUnion = new ArrayList<>();
+    List<NameInfo> listUnionPermanent = new ArrayList<>();
 
-    private String name,nameFather,nameFatherBn,mothername,mosqName,mobile,birthdate,mosqname,mosqaddress,wardno,postoffice,village,podobi="",
-            division="",divisionId,
-    city="",cityId="",district="",districtId="",upojila="",upojilaId="",union="",unionId="",photo="";
+    private String name,nameFather,mothername,mobile,birthdate,mosqname,mosqaddress,wardno,postofficePresent,
+            villagePresent,postoffficePermanent,villagePermanent,podobi="", division="",divisionId, city="",cityId="",districtPresent="",
+            districtPermanent="",districtIdPresent="",districtIdPermanent="",upojilaPresent="",upojilaPermanent="",upojilaIdPresent="",
+            upojilaIdPermanent="",unionPresent="",unionPermanent="",unionIdPresent="",unionIdPermanent,photo="";
 
+    AppCompatButton btnChoseFileSonod,btnChoseFileTestimoni,btnChoseNid,btnChoseChairmanCopy,btnChoseIsfaCopy,
+            btnChoseLeaveCopy,btnChoseAuthPermissionCopy;
+    private ImageView imgMulsonod,imgTestimonial,imgnidFile,imgChaimanFile,imgIFAFile,imgLeaveFile,imgauthPermissionFile;
+    private String imgId;
+
+    String userPicPath;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,11 +136,95 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
     }
 
     private void innitUi() {
-        ImageView imgBack = (ImageView)findViewById(R.id.imgBack);
-        imgBack.setOnClickListener(new View.OnClickListener() {
+
+
+        btnChoseFileSonod = (AppCompatButton)findViewById(R.id.btnChoseFileSonod);
+        btnChoseFileTestimoni = (AppCompatButton)findViewById(R.id.btnChoseFileTestimoni);
+        btnChoseNid = (AppCompatButton)findViewById(R.id.btnChoseNid);
+        btnChoseChairmanCopy = (AppCompatButton)findViewById(R.id.btnChoseChairmanCopy);
+        btnChoseIsfaCopy = (AppCompatButton)findViewById(R.id.btnChoseIsfaCopy);
+        btnChoseLeaveCopy = (AppCompatButton)findViewById(R.id.btnChoseLeaveCopy);
+        btnChoseAuthPermissionCopy = (AppCompatButton)findViewById(R.id.btnChoseAuthPermissionCopy);
+
+
+        btnChoseFileSonod.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                finish();
+            public void onClick(View v) {
+                imgId = "mulsonod";
+                startActivityForResult(getPickImageChooserIntent(), IMAGE_RESULT);
+            }
+        });
+
+
+        btnChoseFileTestimoni.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imgId = "testimonial";
+                startActivityForResult(getPickImageChooserIntent(), IMAGE_RESULT);
+            }
+        });
+
+        btnChoseNid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imgId = "nid";
+                startActivityForResult(getPickImageChooserIntent(), IMAGE_RESULT);
+            }
+        });
+
+
+        btnChoseChairmanCopy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imgId = "chairman";
+                startActivityForResult(getPickImageChooserIntent(), IMAGE_RESULT);
+            }
+        });
+
+
+        btnChoseIsfaCopy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imgId = "ifa";
+                startActivityForResult(getPickImageChooserIntent(), IMAGE_RESULT);
+            }
+        });
+
+
+        btnChoseLeaveCopy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imgId = "leave";
+                startActivityForResult(getPickImageChooserIntent(), IMAGE_RESULT);
+            }
+        });
+
+
+        btnChoseAuthPermissionCopy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imgId = "permission";
+                startActivityForResult(getPickImageChooserIntent(), IMAGE_RESULT);
+            }
+        });
+
+
+
+        imgMulsonod = (ImageView)findViewById(R.id.imgMulsonod);
+        imgTestimonial = (ImageView)findViewById(R.id.imgTestimonial);
+        imgnidFile = (ImageView)findViewById(R.id.imgnidFile);
+        imgChaimanFile = (ImageView)findViewById(R.id.imgChaimanFile);
+        imgIFAFile = (ImageView)findViewById(R.id.imgIFAFile);
+        imgLeaveFile = (ImageView)findViewById(R.id.imgLeaveFile);
+        imgauthPermissionFile = (ImageView)findViewById(R.id.imgauthPermissionFile);
+        imgcam = (ImageView)findViewById(R.id.imgcam);
+        imgPic = (ImageView)findViewById(R.id.imgPic);
+
+        imgcam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imgId = "user";
+                startActivityForResult(getPickImageChooserIntent(), IMAGE_RESULT);
             }
         });
 
@@ -139,69 +238,242 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
         input_birtdate = (EditText)findViewById(R.id.input_birtdate);
         input_mosq_address = (EditText)findViewById(R.id.input_mosq_address);
         input_wordno = (EditText)findViewById(R.id.input_wordno);
-        input_postoffice = (EditText)findViewById(R.id.input_postoffice);
-        input_village = (EditText)findViewById(R.id.input_village);
+        input_postoffice_present = (EditText)findViewById(R.id.input_postoffice_present);
+        input_village_present = (EditText)findViewById(R.id.input_village_present);
+        input_postoffficePermanent = (EditText)findViewById(R.id.input_postoffficePermanent);
+        input_villagePermanent = (EditText)findViewById(R.id.input_villagePermanent);
+        etExamName1 = (EditText)findViewById(R.id.etExamName1);
+        etBoard1 = (EditText)findViewById(R.id.etBoard1);
+        etInstitute1 = (EditText)findViewById(R.id.etInstitute1);
+        etsubject1 = (EditText)findViewById(R.id.etsubject1);
+        etgpa1 = (EditText)findViewById(R.id.etgpa1);
+        etYear1 = (EditText)findViewById(R.id.etYear1);
+        etExamName2 = (EditText)findViewById(R.id.etExamName2);
+        etBoard2 = (EditText)findViewById(R.id.etBoard2);
+        etInstitute2 = (EditText)findViewById(R.id.etInstitute2);
+        etsubject2 = (EditText)findViewById(R.id.etsubject2);
+        etgpa2 = (EditText)findViewById(R.id.etgpa2);
+        etYear2 = (EditText)findViewById(R.id.etYear2);
+        etBoard3 = (EditText)findViewById(R.id.etBoard3);
+        etInstitute3 = (EditText)findViewById(R.id.etInstitute3);
+        etsubject3 = (EditText)findViewById(R.id.etsubject3);
+        etgpa3 = (EditText)findViewById(R.id.etgpa3);
+        etYear3 = (EditText)findViewById(R.id.etYear3);
+        etExamName4 = (EditText)findViewById(R.id.etExamName4);
+        etBoard4 = (EditText)findViewById(R.id.etBoard4);
+        etInstitute4 = (EditText)findViewById(R.id.etInstitute4);
+        etsubject4 = (EditText)findViewById(R.id.etsubject4);
+        etgpa4 = (EditText)findViewById(R.id.etgpa4);
+        etYear4 = (EditText)findViewById(R.id.etYear4);
+        etExamName5 = (EditText)findViewById(R.id.etExamName5);
+        etBoard5 = (EditText)findViewById(R.id.etBoard5);
+        etInstitute5 = (EditText)findViewById(R.id.etInstitute5);
+        etsubject5 = (EditText)findViewById(R.id.etsubject5);
+        etgpa5 = (EditText)findViewById(R.id.etgpa5);
+        etYear5 = (EditText)findViewById(R.id.etYear5);
+        etExamName6 = (EditText)findViewById(R.id.etExamName6);
+        etBoard6 = (EditText)findViewById(R.id.etBoard6);
+        etInstitute6 = (EditText)findViewById(R.id.etInstitute6);
+        tvsubject6 = (EditText)findViewById(R.id.tvsubject6);
+        etgpa6 = (EditText)findViewById(R.id.etgpa6);
+        etYear6 = (EditText)findViewById(R.id.etYear6);
 
 
 
         spinnerCity = (Spinner) findViewById(R.id.spinnerCity);
         spinnerDistrict = (Spinner) findViewById(R.id.spinnerDistrict);
-        spinnerUpojila = (Spinner) findViewById(R.id.spinnerUpojila);
+        spinnerUpozila = (Spinner) findViewById(R.id.spinnerUpozila);
         spinnerUnion = (Spinner) findViewById(R.id.spinnerUnion);
 
-        listDivision.clear();
 
-        for (int i = 0; i <AppConstant.allData.getResult().size() ; i++) {
-            if(AppConstant.allData.getResult().get(i).getTable_name().equalsIgnoreCase("geo_divisions")){
-                for (int j = 0; j <AppConstant.allData.getResult().get(i).getValues().size() ; j++) {
-                    NameInfo divisionData = new NameInfo();
-                    divisionData.setId(AppConstant.allData.getResult().get(i).getValues().get(j).getId());
-                    divisionData.setName(AppConstant.allData.getResult().get(i).getValues().get(j).getDivision_name_bng());
-                    listDivision.add(divisionData);
+        spinnerDistrictPermanent = (Spinner) findViewById(R.id.spinnerDistrictPermanent);
+        spinnerUpojilaPermanent = (Spinner) findViewById(R.id.spinnerUpzilaPermanent);
+        spinnerUnionPermanent = (Spinner) findViewById(R.id.spinnerUnionPermanent);
+
+        if(AppConstant.allData != null){
+            for (int i = 0; i <AppConstant.allData.getResult().size() ; i++) {
+                if(AppConstant.allData.getResult().get(i).getTable_name().equalsIgnoreCase("geo_districts")){
+                    for (int j = 0; j <AppConstant.allData.getResult().get(i).getValues().size() ; j++) {
+                        NameInfo divisionData = new NameInfo();
+                        divisionData.setId(AppConstant.allData.getResult().get(i).getValues().get(j).getId());
+                        divisionData.setName(AppConstant.allData.getResult().get(i).getValues().get(j).getDistrict_name_bng());
+                        listDistrict.add(divisionData);
+                        listDistrictPermanent.add(divisionData);
+
+                    }
                 }
             }
+
+            CustomAdapter adapterDistrict = new CustomAdapter(context, listDistrict);
+            spinnerDistrict.setAdapter(adapterDistrict);
+
+            CustomAdapter adapterDistrictPermanent = new CustomAdapter(context, listDistrictPermanent);
+            spinnerDistrictPermanent.setAdapter(adapterDistrictPermanent);
+
+
+            spinnerDistrict.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    listUpozila.clear();
+                    if(!spinnerDistrict.getSelectedItem().toString().equalsIgnoreCase("নির্বাচন করুন")){
+                        districtPresent = spinnerDistrict.getSelectedItem().toString();
+                        districtIdPresent = listDistrict.get(position).getId();
+                    }
+
+                    for (int i = 0; i <AppConstant.allData.getResult().size() ; i++) {
+                        if(AppConstant.allData.getResult().get(i).getTable_name().equalsIgnoreCase("geo_thanas")){
+                            for (int j = 0; j <AppConstant.allData.getResult().get(i).getValues().size() ; j++) {
+                                if(AppConstant.allData.getResult().get(i).getValues().get(j).getGeo_district_id().
+                                        equalsIgnoreCase(districtIdPresent)){
+                                    NameInfo data = new NameInfo();
+                                    data.setId(AppConstant.allData.getResult().get(i).getValues().get(j).getId());
+                                    data.setName(AppConstant.allData.getResult().get(i).getValues().get(j).getThana_name_bng());
+                                    listUpozila.add(data);
+                                }
+
+                            }
+                        }
+                    }
+
+                    CustomAdapter adapterDistrict = new CustomAdapter(context, listUpozila);
+                    spinnerUpozila.setAdapter(adapterDistrict);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+            spinnerUpozila.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    listUnion.clear();
+                    if(!spinnerUpozila.getSelectedItem().toString().equalsIgnoreCase("নির্বাচন করুন")){
+                        upojilaPresent= spinnerDistrict.getSelectedItem().toString();
+                        upojilaIdPresent = listUpozila.get(position).getId();
+                    }
+
+                    for (int i = 0; i <AppConstant.allData.getResult().size() ; i++) {
+                        if(AppConstant.allData.getResult().get(i).getTable_name().equalsIgnoreCase("geo_unions")){
+                            for (int j = 0; j <AppConstant.allData.getResult().get(i).getValues().size() ; j++) {
+                                if(AppConstant.allData.getResult().get(i).getValues().get(j).getGeo_upazila_id().
+                                        equalsIgnoreCase(upojilaIdPresent)){
+                                    NameInfo data = new NameInfo();
+                                    data.setId(AppConstant.allData.getResult().get(i).getValues().get(j).getId());
+                                    data.setName(AppConstant.allData.getResult().get(i).getValues().get(j).getUnion_name_bng());
+                                    listUnion.add(data);
+                                }
+
+                            }
+                        }
+                    }
+
+                    CustomAdapter adapterDistrict = new CustomAdapter(context, listUnion);
+                    spinnerUnion.setAdapter(adapterDistrict);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+            spinnerUnion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    if(!spinnerUnion.getSelectedItem().toString().equalsIgnoreCase("নির্বাচন করুন")){
+                        unionPresent= spinnerUnion.getSelectedItem().toString();
+                        unionIdPresent = listUnion.get(position).getId();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+
+            spinnerDistrictPermanent.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    listUpozilaPermanent.clear();
+                    if(!spinnerDistrictPermanent.getSelectedItem().toString().equalsIgnoreCase("নির্বাচন করুন")){
+                        districtPermanent = spinnerDistrictPermanent.getSelectedItem().toString();
+                        districtIdPermanent = listDistrictPermanent.get(position).getId();
+                    }
+
+                    for (int i = 0; i <AppConstant.allData.getResult().size() ; i++) {
+                        if(AppConstant.allData.getResult().get(i).getTable_name().equalsIgnoreCase("geo_thanas")){
+                            for (int j = 0; j <AppConstant.allData.getResult().get(i).getValues().size() ; j++) {
+                                if(AppConstant.allData.getResult().get(i).getValues().get(j).getGeo_district_id().
+                                        equalsIgnoreCase(districtIdPermanent)){
+                                    NameInfo data = new NameInfo();
+                                    data.setId(AppConstant.allData.getResult().get(i).getValues().get(j).getId());
+                                    data.setName(AppConstant.allData.getResult().get(i).getValues().get(j).getThana_name_bng());
+                                    listUpozilaPermanent.add(data);
+                                }
+
+                            }
+                        }
+                    }
+
+                    CustomAdapter adapterDistrict = new CustomAdapter(context, listUpozilaPermanent);
+                    spinnerUpojilaPermanent.setAdapter(adapterDistrict);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            spinnerUpojilaPermanent.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    listUnionPermanent.clear();
+                    if(!spinnerUpojilaPermanent.getSelectedItem().toString().equalsIgnoreCase("নির্বাচন করুন")){
+                        upojilaPermanent= spinnerUpojilaPermanent.getSelectedItem().toString();
+                        upojilaIdPermanent = listUpozilaPermanent.get(position).getId();
+                    }
+
+                    for (int i = 0; i <AppConstant.allData.getResult().size() ; i++) {
+                        if(AppConstant.allData.getResult().get(i).getTable_name().equalsIgnoreCase("geo_unions")){
+                            for (int j = 0; j <AppConstant.allData.getResult().get(i).getValues().size() ; j++) {
+                                if(AppConstant.allData.getResult().get(i).getValues().get(j).getGeo_upazila_id().
+                                        equalsIgnoreCase(upojilaIdPermanent)){
+                                    NameInfo data = new NameInfo();
+                                    data.setId(AppConstant.allData.getResult().get(i).getValues().get(j).getId());
+                                    data.setName(AppConstant.allData.getResult().get(i).getValues().get(j).getUnion_name_bng());
+                                    listUnionPermanent.add(data);
+                                }
+
+                            }
+                        }
+                    }
+
+                    CustomAdapter adapterDistrict = new CustomAdapter(context, listUnionPermanent);
+                    spinnerUnionPermanent.setAdapter(adapterDistrict);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
         }
 
-
-        spinnerCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerUnionPermanent.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                city = spinnerCity.getSelectedItem().toString();
-                cityId = listCity.get(position).getId();
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        spinnerDistrict.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                listUpozila.clear();
-                if(!spinnerDistrict.getSelectedItem().toString().equalsIgnoreCase("নির্বাচন করুন")){
-                    district = spinnerDistrict.getSelectedItem().toString();
-                    districtId = listDistrict.get(position).getId();
+                if(!spinnerUpojilaPermanent.getSelectedItem().toString().equalsIgnoreCase("নির্বাচন করুন")){
+                    unionPermanent = spinnerUnionPermanent.getSelectedItem().toString();
+                    unionIdPermanent = spinnerUnionPermanent.getSelectedItem().toString();
                 }
 
-                for (int i = 0; i <AppConstant.allData.getResult().size() ; i++) {
-                    if(AppConstant.allData.getResult().get(i).getTable_name().equalsIgnoreCase("geo_thanas")){
-                        for (int j = 0; j <AppConstant.allData.getResult().get(i).getValues().size() ; j++) {
-                            if(AppConstant.allData.getResult().get(i).getValues().get(j).getGeo_district_id().
-                                    equalsIgnoreCase(districtId)){
-                                NameInfo data = new NameInfo();
-                                data.setId(AppConstant.allData.getResult().get(i).getValues().get(j).getId());
-                                data.setName(AppConstant.allData.getResult().get(i).getValues().get(j).getThana_name_bng());
-                                listUpozila.add(data);
-                            }
-
-                        }
-                    }
-                }
-
-                CustomAdapter adapterDistrict = new CustomAdapter(context, listUpozila);
-                spinnerUpojila.setAdapter(adapterDistrict);
             }
 
             @Override
@@ -211,88 +483,25 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
         });
 
 
-        spinnerUpojila.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                listUnion.clear();
-                if(!spinnerUpojila.getSelectedItem().toString().equalsIgnoreCase("নির্বাচন করুন")){
-                    upojila= spinnerDistrict.getSelectedItem().toString();
-                    upojilaId = listUpozila.get(position).getId();
-                }
-
-                for (int i = 0; i <AppConstant.allData.getResult().size() ; i++) {
-                    if(AppConstant.allData.getResult().get(i).getTable_name().equalsIgnoreCase("geo_unions")){
-                        for (int j = 0; j <AppConstant.allData.getResult().get(i).getValues().size() ; j++) {
-                            if(AppConstant.allData.getResult().get(i).getValues().get(j).getGeo_upazila_id().
-                                    equalsIgnoreCase(upojilaId)){
-                                NameInfo data = new NameInfo();
-                                data.setId(AppConstant.allData.getResult().get(i).getValues().get(j).getId());
-                                data.setName(AppConstant.allData.getResult().get(i).getValues().get(j).getUnion_name_bng());
-                                listUnion.add(data);
-                            }
-
-                        }
-                    }
-                }
-
-                CustomAdapter adapterDistrict = new CustomAdapter(context, listUnion);
-                spinnerUnion.setAdapter(adapterDistrict);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-
-        spinnerUnion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                union = spinnerUnion.getSelectedItem().toString();
-                unionId = listUnion.get(position).getId();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-
-
-
-
-
-        imgcam = (ImageView)findViewById(R.id.imgcam);
-        imgPic = (CircleImageView) findViewById(R.id.imgPic);
-
-        imgcam.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivityForResult(getPickImageChooserIntent(), IMAGE_RESULT);
-            }
-        });
         if(!checkPermission()){
             requestPermission();
         }
 
 
-        tvBirthdate = (TextView) findViewById(R.id.tvBirthdate);
-        tvBirthdate.setText(new SimpleDateFormat("dd-MM-yyy").format(new Date()));
+        input_birtdate = (EditText) findViewById(R.id.input_birtdate);
+        input_birtdate.setText(new SimpleDateFormat("dd-MM-yyy").format(new Date()));
 
         Calendar newCalendar = Calendar.getInstance();
         final DatePickerDialog startTime = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
-                tvBirthdate.setText(new SimpleDateFormat("dd-MM-yyy").format(newDate.getTime()));
+                input_birtdate.setText(new SimpleDateFormat("dd-MM-yyy").format(newDate.getTime()));
             }
 
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
 
-        tvBirthdate.setOnClickListener(new View.OnClickListener() {
+        input_birtdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startTime.show();
@@ -300,7 +509,7 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
         });
 
 
-        btnSubmit = (Button)findViewById(R.id.btnSubmit);
+        btnSubmit = (AppCompatButton) findViewById(R.id.btnSubmit);
 //        password,confirmpass,nid,mosqname,mosqaddress,wardno,postoffice,village,pdobi,division,
 //                city,district,upojila,union,photo
         btnSubmit.setOnClickListener(new View.OnClickListener() {
@@ -308,86 +517,50 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
             public void onClick(View view) {
                 name=input_name.getText().toString();
                 nameFather=input_name_father.getText().toString();
-                nameFatherBn=input_father_name_bn.getText().toString();
                 mothername=input_name_mother.getText().toString();
                 mosqname=input_name_mosq.getText().toString();
                 mobile=input_mobile.getText().toString();
                 birthdate=input_birtdate.getText().toString();
-                mosqaddress = input_mosq_address.getText().toString();
-                wardno=input_wordno.getText().toString();
-                postoffice=input_postoffice.getText().toString();
-                village=input_village.getText().toString();
+                postofficePresent=input_postoffice_present.getText().toString();
+                villagePresent=input_village_present.getText().toString();
+                postoffficePermanent=input_postoffficePermanent.getText().toString();
+                villagePermanent=input_villagePermanent.getText().toString();
+
+
 
                 if(name.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","name is required");
+                    AlertMessage.showMessage(context,"Alert!","আপনার নাম লিখুন");
                 }else if(nameFather.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","email is required");
-                }else if(nameFatherBn.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","father name is required");
+                    AlertMessage.showMessage(context,"Alert!","আপনার পিতার নাম লিখুন");
                 }else if(mothername.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","mobile numer is required");
-                }else if(mosqName.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","mosq Name is required");
-                }else if(birthdate.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","Birth date is required");
+                    AlertMessage.showMessage(context,"Alert!","আপনার মায়ের নাম লিখুন");
                 }else if(mosqname.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","Mosq name is required");
-                }else if(mosqaddress.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","Mosq address is required");
-                }else if(division.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","Division is required");
-                }else if(city.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","City is required");
-                }else if(wardno.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","wardno is required");
-                }else if(district.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","District is required");
-                }else if(upojila.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","Upojila is required");
-                }else if(union.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","Union is required");
-                }else if(postoffice.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","post office is required");
-                }else if(village.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","village is required");
+                    AlertMessage.showMessage(context,"Alert!","মসজিদের নাম লিখুন");
+                }else if(mobile.isEmpty()){
+                    AlertMessage.showMessage(context,"Alert!","আপনার মোবাইল নম্বর লিখুন");
+                }else if(birthdate.isEmpty()){
+                    AlertMessage.showMessage(context,"Alert!","আপনার জন্ম তারিখ লিখুন");
+                }else if(districtIdPresent.isEmpty()){
+                    AlertMessage.showMessage(context,"Alert!","আপনার বর্তমান জেলা নির্বাচন করুন");
+                }else if(upojilaIdPresent.isEmpty()){
+                    AlertMessage.showMessage(context,"Alert!","আপনার বর্তমান উপজেলা নির্বাচন করুন");
+                }else if(unionIdPresent.isEmpty()){
+                    AlertMessage.showMessage(context,"Alert!","আপনার বর্তমান ইউনিয়ন নির্বাচন করুন");
+                }else if(postofficePresent.isEmpty()){
+                    AlertMessage.showMessage(context,"Alert!","আপনার বর্তমান পোস্ট অফিস লিখুন");
+                }else if(villagePresent.isEmpty()){
+                    AlertMessage.showMessage(context,"Alert!","আপনার বর্তমান গ্রাম লিখুন");
+                }else if(districtIdPermanent.isEmpty()){
+                    AlertMessage.showMessage(context,"Alert!","আপনার স্থায়ী জেলা নির্বাচন করুন");
+                }else if(upojilaIdPermanent.isEmpty()){
+                    AlertMessage.showMessage(context,"Alert!","আপনার স্থায়ী উপজেলা নির্বাচন করুন");
+                }else if(unionIdPermanent.isEmpty()){
+                    AlertMessage.showMessage(context,"Alert!","আপনার স্থায়ী ইউনিয়ন নির্বাচন করুন");
+                }else if(postoffficePermanent.isEmpty()){
+                    AlertMessage.showMessage(context,"Alert!","আপনার স্থায়ী পোস্ট অফিস লিখুন");
+                }else if(villagePermanent.isEmpty()){
+                    AlertMessage.showMessage(context,"Alert!","আপনার স্থায়ী গ্রাম লিখুন");
                 }else {
-
-                    //username email password designation name mobile_no nid dob masjid_name masjid_address division_id
-                    // city_corporation_id word_no district_id upazila_id union_id village image
-                    String img = "";
-                    if(userBmp!=null){
-                        img = getBase64String(userBmp);
-                    }
-
-
-//                    JSONObject jsonObject = new JSONObject();
-//                    try {
-//                        jsonObject.put("username",username);
-//                        jsonObject.put("father_name",nameFather);
-//                        jsonObject.put("password",password);
-//                        jsonObject.put("password_confirmation",confirmpass);
-//                        jsonObject.put("designation",podobi);
-//                        jsonObject.put("name",name);
-//                        jsonObject.put("mobile_no",mobile);
-//                        jsonObject.put("nid",nid);
-//                        jsonObject.put("dob",birthdate);
-//                        jsonObject.put("masjid_name",mosqname);
-//                        jsonObject.put("masjid_address",mosqaddress);
-//                        jsonObject.put("division_id",divisionId);
-//                        jsonObject.put("city_corporation_id",cityId);
-//                        jsonObject.put("word_no",wardno);
-//                        jsonObject.put("district_id",districtId);
-//                        jsonObject.put("upazila_id",upojilaId);
-//                        jsonObject.put("union_id",unionId);
-//                        jsonObject.put("village",village);
-//                        jsonObject.put("image",img);
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-
-//                    signUp(jsonObject.toString());
-//                    Log.e("jsonObject",""+jsonObject.toString());
-
 
                 }
 
@@ -396,14 +569,7 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
         });
     }
 
-    private Uri getCaptureImageOutputUri() {
-        Uri outputFileUri = null;
-        File getImage = getExternalFilesDir("");
-        if (getImage != null) {
-            outputFileUri = Uri.fromFile(new File(getImage.getPath(), "profile.png"));
-        }
-        return outputFileUri;
-    }
+
 
     public Intent getPickImageChooserIntent() {
 
@@ -412,7 +578,7 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
         List<Intent> allIntents = new ArrayList<>();
         PackageManager packageManager = getPackageManager();
 
-        Intent captureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Intent captureIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         List<ResolveInfo> listCam = packageManager.queryIntentActivities(captureIntent, 0);
         for (ResolveInfo res : listCam) {
             Intent intent = new Intent(captureIntent);
@@ -448,118 +614,15 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
 
         return chooserIntent;
     }
-
-    private String getBase64String(Bitmap bitmap)
-    {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-
-        byte[] imageBytes = baos.toByteArray();
-
-        String base64String = Base64.encodeToString(imageBytes, Base64.NO_WRAP);
-
-        return base64String;
-    }
-    
-    private void imageCaptureDialogue() {
-        final Dialog dialog = new Dialog(context);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.chang_photo_dialogue);
-
-        dialog.getWindow().setBackgroundDrawable(
-                new ColorDrawable(android.graphics.Color.TRANSPARENT));
-
-        LinearLayout tvUseCam = (LinearLayout) dialog
-                .findViewById(R.id.tvUseCam);
-        LinearLayout tvRoll = (LinearLayout) dialog
-                .findViewById(R.id.tvRoll);
-        LinearLayout tvCance = (LinearLayout) dialog
-                .findViewById(R.id.tvCance);
-
-
-        tvRoll.setOnClickListener(new View.OnClickListener() {
-
-            @TargetApi(Build.VERSION_CODES.M)
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-
-
-                AppConstant.isGallery = true;
-//                if (ActivityCompat.checkSelfPermission(con, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-//                        != PackageManager.PERMISSION_GRANTED) {
-//                    ActivityCompat.requestPermissions((Activity) ProfileSettingsActivity.this,
-//                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, AppConstant.WRITEEXTERNAL_PERMISSION_RUNTIME);
-//                    dialog.dismiss();
-//                } else {
-                final Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), galarytakid);
-                dialog.dismiss();
-                // }
-            }
-
-
-
-
-        });
-
-        tvUseCam.setOnClickListener(new View.OnClickListener() {
-
-            @TargetApi(Build.VERSION_CODES.M)
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-
-                AppConstant.isGallery = false;
-                final Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(i, imagecaptureid);
-                dialog.dismiss();
-                // }
-                //}
-            }
-
-
-//                if (ContextCompat.checkSelfPermission(con,Manifest.permission.CAMERA)
-//                        != PackageManager.PERMISSION_GRANTED) {
-//
-//                    requestPermissions(new String[]{Manifest.permission.CAMERA},
-//                            1);
-//
-//                }else if(ContextCompat.checkSelfPermission(con,Manifest.permission.CAMERA)
-//                        == PackageManager.PERMISSION_GRANTED){
-//                    final Intent i = new Intent(
-//                            "android.media.action.IMAGE_CAPTURE");
-//                    startActivityForResult(i, imagecaptureid);
-//                    dialog.dismiss();
-//                }
-
-
-        });
-
-        tvCance.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
-
-
+    private Uri getCaptureImageOutputUri() {
+        Uri outputFileUri = null;
+        File getImage = getExternalFilesDir("");
+        if (getImage != null) {
+            outputFileUri = Uri.fromFile(new File(getImage.getPath(), "profile.png"));
+        }
+        return outputFileUri;
     }
 
-    public String getCurrentTimeStamp() {
-        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-    }
-
-    private void getBirthDate(){
-
-
-    }
 
 
 
@@ -683,9 +746,59 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
                 String filePath = getImageFilePath(data);
                 if (filePath != null) {
                     Bitmap selectedImage = BitmapFactory.decodeFile(filePath);
-                    selectedImage =  getResizedBitmap(selectedImage,300,300);
-                    userBmp = selectedImage;
-                    imgPic.setImageBitmap(selectedImage);
+                    selectedImage =  getResizedBitmap(selectedImage,1024,768);
+
+
+                    if(imgId.equalsIgnoreCase("user")){
+                        selectedImage =  getResizedBitmap(selectedImage,300,300);
+                        userPicPath = filePath;
+                        bmpuser = selectedImage;
+                        imgPic.setImageBitmap(selectedImage);
+                        Log.e("userPicPath",""+userPicPath);
+                    }
+
+
+                    if(imgId.equalsIgnoreCase("mulsonod")){
+                        bmpmulsonod = selectedImage;
+                        imgMulsonod.setImageBitmap(selectedImage);
+                    }
+
+
+                    if(imgId.equalsIgnoreCase("testimonial")){
+                        bmptestimo = selectedImage;
+                        imgTestimonial.setImageBitmap(selectedImage);
+                    }
+
+
+                   if(imgId.equalsIgnoreCase("nid")){
+                       bmpNid = selectedImage;
+                        imgnidFile.setImageBitmap(selectedImage);
+                    }
+
+
+                   if(imgId.equalsIgnoreCase("chairman")){
+                       bmpChairman = selectedImage;
+                       imgChaimanFile.setImageBitmap(selectedImage);
+                    }
+
+
+                   if(imgId.equalsIgnoreCase("ifa")){
+                       bmpIfa = selectedImage;
+                       imgIFAFile.setImageBitmap(selectedImage);
+                    }
+
+
+                   if(imgId.equalsIgnoreCase("leave")){
+                       bmpLeave = selectedImage;
+                       imgLeaveFile.setImageBitmap(selectedImage);
+                    }
+
+
+                   if(imgId.equalsIgnoreCase("permission")){
+                       bmpAuth = selectedImage;
+                       imgauthPermissionFile.setImageBitmap(selectedImage);
+                    }
+
 
                 }
             }
@@ -714,79 +827,9 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
         return cursor.getString(column_index);
     }
 
-    private String setToImageView(Bitmap bitmap) {
-
-        try {
-
-            // if (isImage) {
-            final Bitmap bit = BitmapUtils.getResizedBitmap(bitmap, 100);
-            final double time = System.currentTimeMillis();
-
-            imageLocal = saveBitmapIntoSdcard(bit, "3ss" + time + ".png");
-
-            Log.e("camera saved URL :  ", " " + imageLocal);
 
 
-        } catch (final IOException e) {
-            e.printStackTrace();
-
-            imageLocal = "";
-            Log.e("camera saved URL :  ", e.toString());
-
-        }
-
-        return imageLocal;
-
-    }
-
-    private String saveBitmapIntoSdcard(Bitmap bitmap22, String filename)
-            throws IOException {
-        /*
-         *
-         * check the path and create if needed
-         */
-        createBaseDirctory();
-
-        try {
-
-            new Date();
-
-            OutputStream out = null;
-            file = new File(this.dir, "/" + filename);
-
-            if (file.exists()) {
-                file.delete();
-            }
-
-            out = new FileOutputStream(file);
-
-            bitmap22.compress(Bitmap.CompressFormat.PNG, 50, out);
-
-            out.flush();
-            out.close();
-            // Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
-            return file.getAbsolutePath();
-        } catch (final Exception e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
-    public void createBaseDirctory() {
-        final String extStorageDirectory = Environment
-                .getExternalStorageDirectory().toString();
-        dir = new File(extStorageDirectory + "/3ss");
-
-        if (this.dir.mkdir()) {
-            System.out.println("Directory created");
-        } else {
-            System.out.println("Directory is not created or exists");
-        }
-    }
-
-
-    public class CustomAdapter  extends BaseAdapter implements SpinnerAdapter {
+    private class CustomAdapter  extends BaseAdapter implements SpinnerAdapter {
 
         List<NameInfo> company;
         Context context;
@@ -896,6 +939,45 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+
+    private void filUpload(){
+        if(!NetInfo.isOnline(context)){
+            AlertMessage.showMessage(context,"Alert!","No internet connection!");
+        }
+
+        final ProgressDialog pd = new ProgressDialog(context);
+        pd.setMessage("Loading....");
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.setCancelable(false);
+        pd.show();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Api api = retrofit.create(Api.class);
+
+        File file = new File(userPicPath);
+
+        MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", file.getName(),
+                RequestBody.create(MediaType.parse("image/*"), file));
+
+        Call<String> call = api.uploadAttachment(filePart);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
 
     }
 
