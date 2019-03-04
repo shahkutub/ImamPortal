@@ -51,7 +51,7 @@ public class VocationalTrainingActivity extends AppCompatActivity {
             spinnerUnion,spinnerCity,spinnerQualification,spinnerInstituteType,spinnerDivisioInsti,spinnerDistrictInsti,spinnerInstituteUpjila,
             spinnerTrade,spinnerCenter,spinnerZilaSM,spinnerUpozilaSm;
     private EditText input_name_bn,input_name_eng,input_father_name_bn,input_father_name_eng,input_mother_name_bn,
-            input_mother_name_eng, input_nid,input_email,input_mobile,input_institute,input_lastqualification,input_name_sm,
+            input_mother_name_eng, input_nid,input_email,input_mobile,input_postcode,input_institute,input_lastqualification,input_name_sm,
             input_mobile_sm;
     private TextView tvBirthdate;
 
@@ -81,6 +81,7 @@ public class VocationalTrainingActivity extends AppCompatActivity {
     private String maritalStatus;
     private String nationalality;
     private String occupation;
+    private String postcode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +113,7 @@ public class VocationalTrainingActivity extends AppCompatActivity {
         input_nid = (EditText) findViewById(R.id.input_nid);
         input_email = (EditText) findViewById(R.id.input_email);
         input_mobile = (EditText) findViewById(R.id.input_mobile);
+        input_postcode = (EditText) findViewById(R.id.input_postcode);
         input_institute = (EditText) findViewById(R.id.input_institute);
         input_lastqualification = (EditText) findViewById(R.id.input_lastqualification);
         input_name_sm = (EditText) findViewById(R.id.input_name_sm);
@@ -131,6 +133,7 @@ public class VocationalTrainingActivity extends AppCompatActivity {
                 String nid = input_nid.getText().toString();
                 String email = input_email.getText().toString();
                 String mobile = input_mobile.getText().toString();
+                String postcode = input_postcode.getText().toString();
                 String institute = input_institute.getText().toString();
                 String lastqualification = input_lastqualification.getText().toString();
                 String name_sm = input_name_sm.getText().toString();
@@ -177,7 +180,24 @@ public class VocationalTrainingActivity extends AppCompatActivity {
                 }else if(TextUtils.isEmpty(mobile)){
                     AlertMessage.showMessage(context,"Alert!","আপনার মোবাইল নম্বর লিখুন");
                     input_mobile.requestFocus();
+                }else if(TextUtils.isEmpty(division)){
+                    AlertMessage.showMessage(context,"Alert!","আপনার বিভাগ নির্বাচন করুন");
+                }else if(TextUtils.isEmpty(district)){
+                    AlertMessage.showMessage(context,"Alert!","আপনার জেলা নির্বাচন করুন");
+                }else if(TextUtils.isEmpty(union)){
+                    AlertMessage.showMessage(context,"Alert!","আপনার ইউনিয়ন নির্বাচন করুন");
+                }else if(TextUtils.isEmpty(postcode)){
+                    AlertMessage.showMessage(context,"Alert!","আপনার পোস্টকোড লিখুন");
+                }else if(TextUtils.isEmpty("")){
+                    AlertMessage.showMessage(context,"Alert!","আপনার পোস্টকোড লিখুন");
                 }
+
+
+//                else if(TextUtils.isEmpty(city)){
+//                    AlertMessage.showMessage(context,"Alert!","আপনার সিটি কর্পোরেশন নির্বাচন করুন");
+//                }else if(TextUtils.isEmpty(wardno)){
+//                    AlertMessage.showMessage(context,"Alert!","আপনার ওয়ার্ড নং লিখুন");
+//                }
 
             }
         });

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.imamportal.R;
 import com.imamportal.model.AlquranAlhadits;
 import com.imamportal.model.AudioModel;
+import com.imamportal.utils.AppConstant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +63,9 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.MyViewHolder
         holder.tvPublishDate.setText(data.getCreated_at());
         holder.tvPublisher.setText(data.getUser_detail().getName());
         holder.tvTitle.setText(data.getTitle());
-        holder.tvShortDescription.setText(data.getDescription());
+        if(data.getDescription()!=null){
+            holder.tvShortDescription.setText(android.text.Html.fromHtml(data.getDescription()).toString());
+        }
         holder.tvViewCount.setText(data.getView_count());
 
         if(data.getAudio()!=null){
@@ -73,6 +76,14 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.MyViewHolder
             @Override
             public void onClick(View v) {
                 context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://192.168.0.119/imamportal/public/al-quran_hadith/"+data.getAudio())));
+            }
+        });
+
+        holder.tvShortDescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppConstant.dilogDetails(context,data.getTitle(),data.getDescription(),data.getUser_detail().getName(),data.getCreated_at(),
+                        data.getView_count(),"","");
             }
         });
     }

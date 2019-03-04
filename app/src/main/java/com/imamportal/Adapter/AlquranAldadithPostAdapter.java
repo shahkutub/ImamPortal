@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.imamportal.R;
 import com.imamportal.model.AlquranAlhadits;
 import com.imamportal.model.SantirbaniInfo;
+import com.imamportal.utils.AppConstant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +63,10 @@ public class AlquranAldadithPostAdapter extends RecyclerView.Adapter<AlquranAlda
         holder.tvPublishDate.setText(data.getCreated_at());
         holder.tvPublisher.setText(data.getUser_detail().getName());
         holder.tvTitle.setText(data.getTitle());
-        holder.tvShortDescription.setText(data.getDescription());
+        if(data.getDescription()!=null){
+            holder.tvShortDescription.setText(android.text.Html.fromHtml(data.getDescription()).toString());
+        }
+
 
         if(data.getFile()!=null){
             holder.imgFile.setVisibility(View.VISIBLE);
@@ -72,6 +76,14 @@ public class AlquranAldadithPostAdapter extends RecyclerView.Adapter<AlquranAlda
             @Override
             public void onClick(View v) {
                 context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://192.168.0.119/imamportal/public/al-quran_hadith/"+data.getFile())));
+            }
+        });
+
+        holder.tvShortDescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppConstant.dilogDetails(context,data.getTitle(),data.getDescription(),data.getUser_detail().getName(),data.getCreated_at(),
+                        "","","");
             }
         });
     }

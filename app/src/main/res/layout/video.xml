@@ -36,10 +36,11 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#1A1B1B"
+            android:background="@color/colorPrimaryDark"
+            app:tabBackground="@drawable/tab_color_selector"
             app:tabTextColor="#fff"
             app:tabSelectedTextColor="#FB5D92"
-            app:tabGravity="fill"
+            app:tabGravity="center"
             app:tabMode="scrollable" />
 
     </android.support.design.widget.AppBarLayout>

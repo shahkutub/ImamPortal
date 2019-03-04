@@ -85,7 +85,7 @@ public class AppConstant {
     public static String bolgpostName;
     public static List<AllBlogpostModel> listAllBlogPost = new ArrayList<>();
     public static String masalaFragmentName = "";
-    public static AllDataResponse allData;
+    public static AllDataResponse allData = new AllDataResponse();
 
     public static String BitMapToString(Bitmap bitmap){
         ByteArrayOutputStream baos=new ByteArrayOutputStream();
@@ -221,6 +221,27 @@ public class AppConstant {
 //    }
 //
 
+
+
+    public static void saveAllData(Context con, AllDataResponse allDataResponse) {
+        SharedPreferences mPrefs = con.getSharedPreferences("allDataResponse",MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(allDataResponse);
+        prefsEditor.putString("allDataResponse", json);
+        prefsEditor.commit();
+
+    }
+
+
+        public static AllDataResponse getAllData(Context con){
+        SharedPreferences mPrefs = con.getSharedPreferences("allDataResponse",MODE_PRIVATE);
+        AllDataResponse allDataResponse = new AllDataResponse();
+        Gson gson = new Gson();
+        String json = mPrefs.getString("allDataResponse", "");
+        allDataResponse = gson.fromJson(json, AllDataResponse.class);
+        return allDataResponse;
+    }
 
     //Catagory save
     public static void saveCatagories(Context con, List<Catagories> locationInfos) {

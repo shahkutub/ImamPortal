@@ -64,7 +64,9 @@ public class AllCommonPostAdapter extends RecyclerView.Adapter<AllCommonPostAdap
         holder.tvPublishDate.setText(data.getCreated_at());
         holder.tvPublisher.setText(data.getUser_detail().getName());
         holder.tvTitle.setText(data.getTitle());
-        holder.tvShortDescription.setText(data.getDescription());
+        if(data.getDescription()!=null){
+            holder.tvShortDescription.setText(android.text.Html.fromHtml(data.getDescription()).toString());
+        }
         holder.tvViewCount.setText(data.getView_count());
 
 

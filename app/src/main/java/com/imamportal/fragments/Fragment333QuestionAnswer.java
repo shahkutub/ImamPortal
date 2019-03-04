@@ -186,7 +186,9 @@ public class Fragment333QuestionAnswer extends Fragment {
             holder.tvPublisher.setText(data.getName());
 //            }
             holder.tvTitle.setText(data.getQuestion());
-            holder.tvShortDescription.setText(data.getAnswer());
+            if(data.getAnswer()!=null){
+                holder.tvShortDescription.setText(android.text.Html.fromHtml(data.getAnswer()).toString());
+            }
 
 //            String name = "";
 //            if(data.getUser_detail()!=null){

@@ -193,7 +193,10 @@ public class FragmentBtaionQuestionAnswer extends Fragment {
                 holder.tvPublisher.setText(data.getName());
 //            }
             holder.tvTitle.setText(data.getQuestion());
-            holder.tvShortDescription.setText(data.getAnswer());
+            //holder.tvShortDescription.setText(data.getAnswer());
+            if(data.getAnswer()!=null){
+                holder.tvShortDescription.setText(android.text.Html.fromHtml(data.getAnswer()).toString());
+            }
 
             holder.linFullView.setOnClickListener(new View.OnClickListener() {
                 @Override

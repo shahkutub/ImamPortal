@@ -15,6 +15,7 @@ import com.imamportal.model.SignUpResponse;
 import com.imamportal.model.VideoModel;
 
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -27,6 +28,8 @@ import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.PartMap;
+import retrofit2.http.Query;
 
 
 public interface Api {
@@ -118,6 +121,15 @@ public interface Api {
     @Multipart
     @POST("uploadAttachment")
     Call<String> uploadAttachment(@Part MultipartBody.Part filePart);
+
+    @Multipart
+    @POST("api/jobportal")
+    Call <String> uploadFile(@Part MultipartBody.Part file, @Part("file") RequestBody name,@Part("data") String jsondata );
+
+    @Multipart
+    @POST("api/jobportal")
+    Call<ResponseBody> jobPost(@Part MultipartBody.Part file, @Query("data") String description);
+
 //
 //
 //    @GET
