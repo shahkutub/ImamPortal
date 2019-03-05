@@ -1,5 +1,8 @@
 package com.imamportal.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AllBlogpostModel {
 
 //    "category_id": 52,
@@ -10,9 +13,45 @@ public class AllBlogpostModel {
 //            "image": "08102018_1538974711.jpeg",
 //            "file": "08102018_1538970972.pdf",
 
-    String category_id,type,title,description,status,audio,view_count,created_at;
+    String category_id,type,title,description,status,audio,view_count,created_at,image,file;
 
     UserDetails user_detail = new UserDetails();
+
+    List<CommentModel> comment = new ArrayList<>();
+    List<CommentModel> like_post = new ArrayList<>();
+
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
+    }
+
+    public List<CommentModel> getLike_post() {
+        return like_post;
+    }
+
+    public void setLike_post(List<CommentModel> like_post) {
+        this.like_post = like_post;
+    }
+
+    public List<CommentModel> getComment() {
+        return comment;
+    }
+
+    public void setComment(List<CommentModel> comment) {
+        this.comment = comment;
+    }
 
     public UserDetails getUser_detail() {
         return user_detail;

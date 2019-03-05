@@ -101,11 +101,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme" />
         <activity
-            android:name=".AllCommonPostActivity"
-            android:label="@string/title_activity_quiz_bijoyee"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyMaterialTheme" />
-        <activity
             android:name=".LanguageActivity"
             android:label="@string/title_activity_quiz_bijoyee"
             android:screenOrientation="portrait" />
@@ -119,10 +114,18 @@
             android:label="@string/title_activity_quiz_bijoyee"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme" />
+
         <activity
             android:name=".NamjTimeActivity"
             android:label="@string/title_activity_quiz_bijoyee"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".AllCommonPostActivity"
+            android:label="@string/title_activity_quiz_bijoyee"
+            android:screenOrientation="portrait" />
+
+
         <activity
             android:name=".AlQuranActivity"
             android:label="@string/title_activity_quiz_bijoyee"

@@ -2,6 +2,7 @@ package com.imamportal;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -10,8 +11,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.imamportal.fragments.FragmentBisoyHadith;
 import com.imamportal.fragments.FragmentDorseQuran;
@@ -40,22 +43,26 @@ public class AlQuranActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     public ViewPager viewPager;
     private ImageView imgBack;
-    List<AlquranAlhadits>  listAlquranAlhadit = new ArrayList<>();
-
+    private String tabTitles[] = new String[] { "কুরআন পাঠ", "দরসে কুরআন", "তাফসীরুল কুরআন","বিষয়ভিত্তিক হাদিস","অন্যান্য"};
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();
+
+    public static int int_items = 4;
+    private int fragmentPos=0;
+    private MyAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.al_quran);
         context=this;
         overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
-        getAllQuranAlldadith();
+        //getAllQuranAlldadith();
 
+        initUi();
     }
 
     private void initUi() {
-
+        AppConstant.activitiname = tabTitles[0];
         imgBack = (ImageView)findViewById(R.id.imgBack);
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +71,7 @@ public class AlQuranActivity extends AppCompatActivity {
             }
         });
         viewPager = (ViewPager) findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
+        //setupViewPager(viewPager);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
@@ -77,6 +84,9 @@ public class AlQuranActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int i) {
+                AppConstant.activitiname = tabTitles[i];
+                Log.e("activitiname",""+AppConstant.activitiname);
+
             }
 
             @Override
@@ -85,92 +95,85 @@ public class AlQuranActivity extends AppCompatActivity {
             }
         });
 
-    }
 
-    private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new FragmentQuranPath(), "কুরআন পাঠ");
-        adapter.addFragment(new FragmentDorseQuran(), "দরসে কুরআন");
-        adapter.addFragment(new FragmentTAfsirQuran(), "তাফসীরুল কুরআন");
-        adapter.addFragment(new FragmentBisoyHadith(), "বিষয়ভিত্তিক হাদিস");
-        adapter.addFragment(new FragmentOnnannoQuran(), "অন্যান্য");
+        adapter=new MyAdapter(getSupportFragmentManager());
+
         viewPager.setAdapter(adapter);
-    }
-
-    class ViewPagerAdapter extends FragmentPagerAdapter {
-
-
-        public ViewPagerAdapter(FragmentManager manager) {
-            super(manager);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFragment(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-
-
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-
-            return mFragmentTitleList.get(position);
-        }
+        setPageItem(fragmentPos);
 
 
     }
+    void setPageItem(int i)
+    {
+        viewPager.setCurrentItem(i);
+    }
 
-    private void getAllQuranAlldadith() {
 
-        if(!NetInfo.isOnline(context)){
-            AlertMessage.showMessage(context,"Alert!","No internet connection!");
-        }
 
-        final ProgressDialog pd = new ProgressDialog(context);
-        pd.setMessage("Loading....");
-        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pd.show();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Api.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+    class MyAdapter extends FragmentPagerAdapter {
 
-        Api api = retrofit.create(Api.class);
-        Call<List<AlquranAlhadits>> userCall = api.alquranAllhadits();
-        userCall.enqueue(new Callback<List<AlquranAlhadits>>() {
-            @Override
-            public void onResponse(Call<List<AlquranAlhadits>> call, Response<List<AlquranAlhadits>> response) {
-                pd.dismiss();
-
-                listAlquranAlhadit = response.body();
-
-                Log.e("listAlquranAlhadit",""+listAlquranAlhadit.size());
-
-                if(listAlquranAlhadit.size()>0){
-                    AppConstant.listAlqranAlhadith = listAlquranAlhadit;
-
-                }
-                initUi();
-            }
-
-            @Override
-            public void onFailure(Call<List<AlquranAlhadits>> call, Throwable t) {
-                pd.dismiss();
-            }
-        });
-
+    public MyAdapter(FragmentManager fm) {
+        super(fm);
 
     }
+
+
+
+    @Override
+    public Fragment getItem(int position)
+    {
+        //position = AppConstant.POSITION;
+
+        switch (position){
+
+            case 0 :
+                //tvTitle.setText(tabTitles[0]);
+
+                return new FragmentQuranPath();
+            case 1 :
+                // tvTitle.setText(tabTitles[1]);
+
+                return new FragmentDorseQuran();
+
+            case 2 :
+                //tvTitle.setText(tabTitles[2]);
+                return new FragmentTAfsirQuran();
+            case 3 :
+                //tvTitle.setText(tabTitles[3]);
+                return new FragmentBisoyHadith();
+
+            case 4 :
+                //tvTitle.setText(tabTitles[3]);
+                return new FragmentOnnannoQuran();
+
+
+        }
+        return null;
+    }
+
+    @Override
+    public int getCount() {
+
+        return int_items;
+
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        //AppConstant.pageTitle = tabTitles[position];
+        return tabTitles[position];
+    }
+
+    public View getTabView(int position) {
+        // Given you have a custom layout in `res/layout/custom_tab.xml` with a TextView and ImageView
+        View v = LayoutInflater.from(context).inflate(R.layout.tab_title_layout, null);
+        TextView tv = (TextView) v.findViewById(R.id.tableTitle);
+        ImageView tabImg = (ImageView)v.findViewById(R.id.tabImg);
+
+
+        return v;
+    }
+}
 
 }

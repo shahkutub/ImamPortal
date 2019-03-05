@@ -9,21 +9,42 @@
         android:id="@+id/tvTotalBani"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="সর্বমোট শান্তির বাণী ১ টি"
+        android:text=""
         android:textColor="#000"
         android:textSize="@dimen/_15sdp"
         android:gravity="center"
         />
 
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclSantirBani"
+    <LinearLayout
         android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_height="wrap_content">
+        <ProgressBar
+            android:id="@+id/progressbar"
+            android:layout_width="wrap_content"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            />
+
+    </LinearLayout>
+
+
+
+    <com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout
+        android:id="@+id/swipyrefreshlayout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical"
+        app:srl_direction="both"
         >
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclSantirBani"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            >
+        </android.support.v7.widget.RecyclerView>
+    </com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout>
 
-
-    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

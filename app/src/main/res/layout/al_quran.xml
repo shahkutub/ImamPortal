@@ -9,7 +9,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_30sdp"
+            android:layout_height="@dimen/_40sdp"
             android:background="#8CC63E"
             >
 

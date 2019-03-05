@@ -10,12 +10,12 @@ import com.imamportal.model.JobPortalModel;
 import com.imamportal.model.NoticeResponse;
 import com.imamportal.model.PhotoModel;
 import com.imamportal.model.QuestionAnswerModel;
+import com.imamportal.model.CommonPostResponse;
 import com.imamportal.model.SeraContentData;
 import com.imamportal.model.SignUpResponse;
 import com.imamportal.model.VideoModel;
 
 import java.util.List;
-import java.util.Map;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -24,12 +24,11 @@ import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
-import retrofit2.http.PartMap;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 
 public interface Api {
@@ -67,6 +66,10 @@ public interface Api {
 
     @GET("api/al-quran-hadiths")
     public Call<List<AlquranAlhadits>> alquranAllhadits();
+
+    //api/shantirbani
+    @GET()
+        public Call<CommonPostResponse> shantirbani(@Url String url);
 
     @GET("api/audios")
     public Call<List<AudioModel>> audios();
@@ -130,11 +133,20 @@ public interface Api {
     @POST("api/jobportal")
     Call<ResponseBody> jobPost(@Part MultipartBody.Part file, @Query("data") String description);
 
-//
-//
-//    @GET
-//    public Call<RequsitionApproveSinglaDataResponse> getSingeDataReqIssue(@Url String url);
-//
+
+//Islam
+    @GET
+    public Call<CommonPostResponse> familylaw(@Url String url);
+
+     @GET
+    public Call<CommonPostResponse> fojdariLaw(@Url String url);
+
+
+     @GET
+    public Call<CommonPostResponse> islamiceconomicbooks(@Url String url);
+
+
+
 //    @GET
 //    public Call<StockTransferApproveSinglaDataResponse> getSingeDataStockTransferApprove(@Url String url);
 //
