@@ -39,7 +39,7 @@
             android:background="@color/colorPrimaryDark"
             app:tabBackground="@drawable/tab_color_selector"
             app:tabTextColor="#fff"
-            app:tabSelectedTextColor="#FB5D92"
+            app:tabSelectedTextColor="#4D236B"
             app:tabGravity="center"
             app:tabMode="scrollable" />
 

@@ -67,7 +67,7 @@ public class QuestionAnswerActivity extends AppCompatActivity {
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-
+        tabLayout.setTabMode(TabLayout.MODE_FIXED);
         //createTabIcons();
 
     }

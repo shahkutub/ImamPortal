@@ -62,7 +62,8 @@ public class AudioActivity extends AppCompatActivity {
                 finish();
             }
         });
-        audios();
+        //audios();
+        initUi();
 
     }
 

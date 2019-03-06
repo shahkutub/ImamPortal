@@ -37,10 +37,10 @@ public interface Api {
     //String BASE_URL = "http://192.168.0.22/wasa_inventory/";
 
     //Local
-    String BASE_URL = "http://192.168.0.119/imamportal/";
+    //String BASE_URL = "http://192.168.0.119/imamportal/";
 
     //Live
-    //String BASE_URL = "http://nanosoftbd.com/imamportal/";
+    String BASE_URL = "http://nanosoftbd.com/imamportal/";
 
 
 //

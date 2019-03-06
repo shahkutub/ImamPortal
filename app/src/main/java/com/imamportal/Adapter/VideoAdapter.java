@@ -2,6 +2,7 @@ package com.imamportal.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,9 +12,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.imamportal.R;
+import com.imamportal.model.AllBlogpostModel;
 import com.imamportal.model.AudioModel;
 import com.imamportal.model.VideoModel;
+import com.imamportal.utils.Api;
 import com.imamportal.utils.AppConstant;
 
 import java.util.ArrayList;
@@ -22,11 +28,11 @@ import java.util.List;
 public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.MyViewHolder> {
 
 
-    List<VideoModel> dataList = new ArrayList<>();
+    List<AllBlogpostModel> dataList = new ArrayList<>();
     Context context;
 
 
-    public VideoAdapter(List<VideoModel> santirBaniList, Context context) {
+    public VideoAdapter(List<AllBlogpostModel> santirBaniList, Context context) {
         this.dataList = santirBaniList;
         this.context = context;
     }
@@ -36,7 +42,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.MyViewHolder
 
         LinearLayout linFullView;
         TextView tvTitle,tvShortDescription,tvPublisher,tvPublishDate,tvViewCount;
-        ImageView imgFile;
+        ImageView imgFile,imgPhoto;
         public MyViewHolder(View view) {
             super(view);
             tvTitle=(TextView) view.findViewById(R.id.tvTitle);
@@ -45,6 +51,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.MyViewHolder
             tvPublishDate=(TextView) view.findViewById(R.id.tvPublishDate);
             tvViewCount=(TextView) view.findViewById(R.id.tvViewCount);
             imgFile=(ImageView) view.findViewById(R.id.imgFile);
+            imgPhoto=(ImageView) view.findViewById(R.id.imgPhoto);
             linFullView=(LinearLayout) view.findViewById(R.id.linFullView);
         }
     }
@@ -61,7 +68,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-        final VideoModel data = dataList.get(position);
+        final AllBlogpostModel data = dataList.get(position);
 
         holder.tvPublishDate.setText(data.getCreated_at());
         holder.tvPublisher.setText(data.getUser_detail().getName());
@@ -76,17 +83,24 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.MyViewHolder
         holder.imgFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(data.getUrl_link())));
+                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Api.BASE_URL+"public/video/"+data.getVideo())));
             }
         });
 
-        holder.linFullView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AppConstant.dilogDetails(context,data.getTitle(),data.getDescription(),data.getUser_detail().getName(),
-                        data.getCreated_at(),data.getView_count(),"","");
-            }
-        });
+        Glide.with(context)
+                .asBitmap()
+                .load(Api.BASE_URL+"public/video/"+data.getImage())
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                        if(resource!=null){
+                            holder.imgPhoto.setImageBitmap(resource);
+                        }
+
+                    }
+                });
+
+
     }
 
 

@@ -17,6 +17,7 @@
         android:layout_margin="@dimen/_2sdp"
         >
         <ImageView
+            android:id="@+id/imgPhoto"
             android:layout_width="@dimen/_60sdp"
             android:layout_height="@dimen/_60sdp"
             app:srcCompat="@drawable/imam"
@@ -62,7 +63,6 @@
                     android:layout_width="@dimen/_50sdp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:visibility="gone"
                     android:layout_height="@dimen/_50sdp"
                     app:srcCompat="@drawable/vidcam"
                     />

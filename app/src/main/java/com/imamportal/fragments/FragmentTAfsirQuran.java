@@ -150,9 +150,7 @@ public class FragmentTAfsirQuran extends Fragment implements SwipyRefreshLayout.
 
                     currentPage = commonPostResponse.getCurrent_page();
                     if(commonPostResponse.getData().size()>0){
-                        for (AllBlogpostModel post: commonPostResponse.getData()) {
-                            listSantirbani.add(post);
-                        }
+                        listSantirbani = commonPostResponse.getData();
                         int size = listSantirbani.size();
                         tvTotalBani.setText("সর্বমোট "+size+" টি");
 

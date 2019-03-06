@@ -12,16 +12,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.imamportal.Adapter.AllCommonPostAdapter;
 import com.imamportal.Adapter.AlquranAldadithPostAdapter;
 import com.imamportal.R;
+import com.imamportal.model.AllBlogpostModel;
 import com.imamportal.model.AlquranAlhadits;
+import com.imamportal.model.CommonPostResponse;
 import com.imamportal.model.QuestionAnswerModel;
 import com.imamportal.utils.AlertMessage;
 import com.imamportal.utils.Api;
 import com.imamportal.utils.AppConstant;
 import com.imamportal.utils.NetInfo;
+import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout;
+import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,12 +39,18 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class Fragment333QuestionAnswer extends Fragment {
+public class Fragment333QuestionAnswer extends Fragment implements SwipyRefreshLayout.OnRefreshListener{
 
+    Context context;
     private RecyclerView recyclSantirBani;
     private TextView tvTotalBani,tvName;
-    Context context;
-    private List<QuestionAnswerModel> listQuestionAns= new ArrayList<>();
+    CommonPostResponse commonPostResponse = new CommonPostResponse();
+    List<AllBlogpostModel> listSantirbani = new ArrayList<>();
+    SwipyRefreshLayout swiperefresh;
+    String currentPage;
+    public static final int DISMISS_TIMEOUT = 2000;
+    String api;
+    private ProgressBar progressbar;
 
 
     @Override
@@ -86,23 +98,36 @@ public class Fragment333QuestionAnswer extends Fragment {
     }
 
     private void initUi() {
+//        tvName = (TextView) getView().findViewById(R.id.tvName);
+//        tvName.setText(AppConstant.activitiname);
 
+        listSantirbani.clear();
         tvTotalBani = (TextView) getView().findViewById(R.id.tvTotalBani);
-        recyclSantirBani = (RecyclerView) getView().findViewById(R.id.recyclSantirBani);
+        progressbar = (ProgressBar)getView().findViewById(R.id.progressbar);
 
-        getQuestionAns();
+
+        recyclSantirBani = (RecyclerView) getView().findViewById(R.id.recyclSantirBani);
+        swiperefresh = (SwipyRefreshLayout)getView().findViewById(R.id.swipyrefreshlayout);
+        swiperefresh.setOnRefreshListener(this);
+        swiperefresh.setRefreshing(true);
+
+        api="api/querylist";
+        getblog_post(api);
+
     }
 
-    private void getQuestionAns() {
+
+    private void getblog_post(String url) {
 
         if(!NetInfo.isOnline(context)){
             AlertMessage.showMessage(context,"Alert!","No internet connection!");
         }
 
-        final ProgressDialog pd = new ProgressDialog(context);
-        pd.setMessage("Loading....");
-        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pd.show();
+        if(listSantirbani.size()==0){
+            progressbar.setVisibility(View.VISIBLE);
+        }
+
+        swiperefresh.setRefreshing(true);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Api.BASE_URL)
@@ -110,106 +135,59 @@ public class Fragment333QuestionAnswer extends Fragment {
                 .build();
 
         Api api = retrofit.create(Api.class);
-        Call<List<QuestionAnswerModel>> userCall = api.querylist333();
-        userCall.enqueue(new Callback<List<QuestionAnswerModel>>() {
-            @Override
-            public void onResponse(Call<List<QuestionAnswerModel>> call, Response<List<QuestionAnswerModel>> response) {
-                pd.dismiss();
 
-                listQuestionAns = response.body();
-                if(listQuestionAns.size()>0){
-                    int size = listQuestionAns.size();
-                    tvTotalBani.setText("সর্বমোট "+AppConstant.activitiname+size+" টি");
-                    QuestionAnsAdapter questionAnsAdapter = new QuestionAnsAdapter(listQuestionAns,context);
-                    LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(context,
-                            LinearLayoutManager.VERTICAL, false);
-                    recyclSantirBani.setLayoutManager(horizontalLayoutManager);
-                    recyclSantirBani.setAdapter(questionAnsAdapter);
+        Call<CommonPostResponse> userCall = api.shantirbani(url);
+        userCall.enqueue(new Callback<CommonPostResponse>() {
+            @Override
+            public void onResponse(Call<CommonPostResponse> call, Response<CommonPostResponse> response) {
+                if(listSantirbani.size()==0){
+                    progressbar.setVisibility(View.GONE);
                 }
+
+                swiperefresh.setRefreshing(false);
+                commonPostResponse = response.body();
+
+                //   Log.e("listAlquranAlhadit",""+listAlblog.size());
+
+                if(commonPostResponse !=null){
+
+                    currentPage = commonPostResponse.getCurrent_page();
+                    if(commonPostResponse.getData().size()>0){
+                        for (AllBlogpostModel post: commonPostResponse.getData()) {
+                            listSantirbani.add(post);
+                        }
+                        int size = listSantirbani.size();
+                        tvTotalBani.setText("সর্বমোট "+size+" টি");
+
+                        //Collections.reverse(listSantirbani);
+                        AllCommonPostAdapter questionAnsAdapter = new AllCommonPostAdapter(listSantirbani,context);
+                        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(context,
+                                LinearLayoutManager.VERTICAL, false);
+                        recyclSantirBani.setLayoutManager(horizontalLayoutManager);
+                        recyclSantirBani.setAdapter(questionAnsAdapter);
+
+                        horizontalLayoutManager.scrollToPositionWithOffset(size-1, 20);
+                    }
+                }
+
             }
 
             @Override
-            public void onFailure(Call<List<QuestionAnswerModel>> call, Throwable t) {
-                pd.dismiss();
+            public void onFailure(Call<CommonPostResponse> call, Throwable t) {
+                if(listSantirbani.size()==0){
+                    progressbar.setVisibility(View.GONE);
+                }
+                swiperefresh.setRefreshing(false);
             }
         });
 
-
     }
 
-
-    private class QuestionAnsAdapter extends RecyclerView.Adapter<QuestionAnsAdapter.MyViewHolder> {
-
-
-        List<QuestionAnswerModel> santirBaniList = new ArrayList<>();
-        Context context;
-
-
-        public QuestionAnsAdapter(List<QuestionAnswerModel> santirBaniList, Context context) {
-            this.santirBaniList = santirBaniList;
-            this.context = context;
-        }
-
-
-        public class MyViewHolder extends RecyclerView.ViewHolder {
-
-            TextView tvTitle,tvShortDescription,tvPublisher,tvPublishDate,tvViewCount;
-            ImageView imgFile;
-            LinearLayout linFullView;
-            public MyViewHolder(View view) {
-                super(view);
-                tvTitle=(TextView) view.findViewById(R.id.tvTitle);
-                tvShortDescription=(TextView) view.findViewById(R.id.tvShortDescription);
-                tvPublisher=(TextView) view.findViewById(R.id.tvPublisher);
-                tvPublishDate=(TextView) view.findViewById(R.id.tvPublishDate);
-                tvViewCount=(TextView) view.findViewById(R.id.tvViewCount);
-                imgFile=(ImageView) view.findViewById(R.id.imgFile);
-                linFullView=(LinearLayout) view.findViewById(R.id.linFullView);
-            }
-        }
-
-
-
-        @Override
-        public QuestionAnsAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.raw_common_post, parent, false);
-
-            return new QuestionAnsAdapter.MyViewHolder(itemView);
-        }
-
-        @Override
-        public void onBindViewHolder(final QuestionAnsAdapter.MyViewHolder holder, final int position) {
-
-            final QuestionAnswerModel data = santirBaniList.get(position);
-            holder.tvPublishDate.setText(data.getCreated_at());
-//            if(data.getUser_detail()!=null){
-            holder.tvPublisher.setText(data.getName());
-//            }
-            holder.tvTitle.setText(data.getQuestion());
-            if(data.getAnswer()!=null){
-                holder.tvShortDescription.setText(android.text.Html.fromHtml(data.getAnswer()).toString());
-            }
-
-//            String name = "";
-//            if(data.getUser_detail()!=null){
-//                name = data.getUser_detail().getName();
-//            }
-
-            holder.linFullView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    AppConstant.dilogDetails(context,data.getQuestion(),data.getAnswer(),data.getName(),
-                            data.getCreated_at(),"","","");
-                }
-            });
-
-        }
-
-
-        @Override
-        public int getItemCount()
-        {
-            return santirBaniList.size();
+    @Override
+    public void onRefresh(SwipyRefreshLayoutDirection direction) {
+        if(currentPage!=null){
+            int pageNo = Integer.parseInt(currentPage)+1;
+            getblog_post(api+"?page="+pageNo);
         }
     }
 

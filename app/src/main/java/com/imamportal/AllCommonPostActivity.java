@@ -39,9 +39,10 @@ public class AllCommonPostActivity extends AppCompatActivity implements SwipyRef
     List<AllBlogpostModel> listSantirbani = new ArrayList<>();
     SwipyRefreshLayout swiperefresh;
     String currentPage;
+    private ProgressBar progressbar;
     public static final int DISMISS_TIMEOUT = 2000;
     String api;
-    private ProgressBar progressbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

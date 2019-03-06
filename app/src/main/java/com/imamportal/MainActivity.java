@@ -928,6 +928,7 @@ public class MainActivity extends AppCompatActivity {
         linQuesAns.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AppConstant.activitiname = "answer";
                 startActivity(new Intent(context, QuestionAnswerActivity.class));
             }
         });
@@ -1316,7 +1317,7 @@ public class MainActivity extends AppCompatActivity {
                 String value = menuItem.getTitle().toString();
                 AppConstant.activitiname = value;
                 AppConstant.bolgpostName = value;
-                startActivity(new Intent(context, AllCommonPostActivity.class));
+                startActivity(new Intent(context, KitabActivity.class));
 
                 return true;
             }
@@ -1351,7 +1352,7 @@ public class MainActivity extends AppCompatActivity {
                 String value = menuItem.getTitle().toString();
                 AppConstant.activitiname = value;
                 AppConstant.bolgpostName = value;
-                startActivity(new Intent(context, AllCommonPostActivity.class));
+                startActivity(new Intent(context, KitabActivity.class));
                 return true;
             }
         });
@@ -1490,7 +1491,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 AppConstant.activitiname = "ফিকাহর গ্রন্থাবলী";
                 AppConstant.bolgpostName = "ফিকাহর গ্রন্থাবলী";
-                startActivity(new Intent(context, AllCommonPostActivity.class));
+                startActivity(new Intent(context, KitabActivity.class));
             }
         });
 
@@ -1501,7 +1502,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 AppConstant.activitiname = "ইসলামের ইতিহাসের গ্রন্থাবলী";
                 AppConstant.bolgpostName = "ইসলামের ইতিহাসের গ্রন্থাবলী";
-                startActivity(new Intent(context, AllCommonPostActivity.class));
+                startActivity(new Intent(context, KitabActivity.class));
             }
         });
 
@@ -1512,7 +1513,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 AppConstant.activitiname = "জীবনী";
                 AppConstant.bolgpostName = "জীবনী";
-                startActivity(new Intent(context, AllCommonPostActivity.class));
+                startActivity(new Intent(context, KitabActivity.class));
             }
         });
 
@@ -1522,7 +1523,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 AppConstant.activitiname = "ইসলামী গল্প";
                 AppConstant.bolgpostName = "ইসলামী গল্প";
-                startActivity(new Intent(context, AllCommonPostActivity.class));
+                startActivity(new Intent(context, KitabActivity.class));
             }
         });
 
@@ -1534,7 +1535,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 AppConstant.activitiname = "ইসলামী দর্শন";
                 AppConstant.bolgpostName = "ইসলামী দর্শন";
-                startActivity(new Intent(context, AllCommonPostActivity.class));
+                startActivity(new Intent(context, KitabActivity.class));
             }
         });
 

@@ -13,13 +13,45 @@ public class AllBlogpostModel {
 //            "image": "08102018_1538974711.jpeg",
 //            "file": "08102018_1538970972.pdf",
 
-    String category_id,type,title,description,status,audio,view_count,created_at,image,file;
+    String category_id,type,title,description,status,audio,view_count,created_at,image,file,question,answer,video,Url_link;
 
     UserDetails user_detail = new UserDetails();
 
     List<CommentModel> comment = new ArrayList<>();
     List<CommentModel> like_post = new ArrayList<>();
 
+    public String getUrl_link() {
+        return Url_link;
+    }
+
+    public void setUrl_link(String url_link) {
+        Url_link = url_link;
+    }
+
+
+    public String getVideo() {
+        return video;
+    }
+
+    public void setVideo(String video) {
+        this.video = video;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
 
     public String getImage() {
         return image;

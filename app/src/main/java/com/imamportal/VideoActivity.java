@@ -53,8 +53,8 @@ public class VideoActivity extends AppCompatActivity {
         setContentView(R.layout.video);
         context=this;
         overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
-        videos();
-
+        //videos();
+        initUi();
     }
 
     private void initUi() {

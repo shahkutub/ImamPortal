@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.imamportal.fragments.FragmentBlog;
 import com.imamportal.fragments.FragmentNari;
 import com.imamportal.fragments.FragmentOnnoDhara;
 import com.imamportal.fragments.FragmentShishu;
@@ -48,7 +49,7 @@ public class BlogActivity extends AppCompatActivity {
         context=this;
         overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
 
-        getblog_post();
+        //getblog_post();
         initUi();
     }
 
@@ -69,7 +70,7 @@ public class BlogActivity extends AppCompatActivity {
 
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
-        createTabIcons();
+        //createTabIcons();
     }
 
     private void createTabIcons() {
@@ -92,10 +93,10 @@ public class BlogActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new FragmentBlog(), "ব্লগ");
         adapter.addFragment(new FragmentNari(), getString(R.string.narikornar));
         adapter.addFragment(new FragmentShishu(), getString(R.string.sisukisur));
         adapter.addFragment(new FragmentOnnoDhara(), getString(R.string.onnodhara));
-        //adapter.addFragment(new FragmentOnnanoHadith(), "অন্যান্য");
         viewPager.setAdapter(adapter);
     }
 

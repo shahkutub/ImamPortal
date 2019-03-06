@@ -20,6 +20,8 @@ import com.imamportal.fragments.FragmentMasalaIttikaf;
 import com.imamportal.fragments.FragmentMasalaJakat;
 import com.imamportal.fragments.FragmentMasalaJanaja;
 import com.imamportal.fragments.FragmentMasalaKurbani;
+import com.imamportal.fragments.FragmentMasalaOthers;
+import com.imamportal.fragments.FragmentMasalaParibarik;
 import com.imamportal.fragments.FragmentMasalaPobitrota;
 import com.imamportal.fragments.FragmentMasalaSalat;
 import com.imamportal.fragments.FragmentMasalaSiam;
@@ -56,7 +58,7 @@ public class MasAlaActivity extends AppCompatActivity {
         context=this;
         overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
 
-        getblog_post();
+        //getblog_post();
         initUi();
     }
 
@@ -130,8 +132,8 @@ public class MasAlaActivity extends AppCompatActivity {
         adapter.addFragment(new FragmentMasalaHoz(), "হজ ও ওমরা");
         adapter.addFragment(new FragmentMasalaJakat(), "যাকাত ও সাদকা");
         adapter.addFragment(new FragmentMasalaKurbani(), "কুরবানি");
-        adapter.addFragment(new FragmentMasalaPobitrota(), "পারিবারিক মাসায়েল");
-        adapter.addFragment(new FragmentMasalaSalat(), "অন্যান্য");
+        adapter.addFragment(new FragmentMasalaParibarik(), "পারিবারিক মাসায়েল");
+        adapter.addFragment(new FragmentMasalaOthers(), "অন্যান্য");
 
         //adapter.addFragment(new FragmentOnnanoHadith(), "অন্যান্য");
         viewPager.setAdapter(adapter);

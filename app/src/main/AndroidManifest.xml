@@ -188,6 +188,10 @@
             android:name=".VideoPostActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".KitabActivity"
+            android:screenOrientation="portrait" />
+
         <service
             android:name=".fcm.MyFirebaseInstanceIDService"
             android:exported="false">

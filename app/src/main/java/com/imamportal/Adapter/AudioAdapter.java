@@ -2,6 +2,7 @@ package com.imamportal.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,9 +11,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.imamportal.R;
+import com.imamportal.model.AllBlogpostModel;
 import com.imamportal.model.AlquranAlhadits;
 import com.imamportal.model.AudioModel;
+import com.imamportal.utils.Api;
 import com.imamportal.utils.AppConstant;
 
 import java.util.ArrayList;
@@ -21,11 +27,11 @@ import java.util.List;
 public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.MyViewHolder> {
 
 
-    List<AudioModel> dataList = new ArrayList<>();
+    List<AllBlogpostModel> dataList = new ArrayList<>();
     Context context;
 
 
-    public AudioAdapter(List<AudioModel> santirBaniList, Context context) {
+    public AudioAdapter(List<AllBlogpostModel> santirBaniList, Context context) {
         this.dataList = santirBaniList;
         this.context = context;
     }
@@ -34,7 +40,7 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.MyViewHolder
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvTitle,tvShortDescription,tvPublisher,tvPublishDate,tvViewCount;
-        ImageView imgFile;
+        ImageView imgFile,imgPhoto;
         public MyViewHolder(View view) {
             super(view);
             tvTitle=(TextView) view.findViewById(R.id.tvTitle);
@@ -43,6 +49,8 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.MyViewHolder
             tvPublishDate=(TextView) view.findViewById(R.id.tvPublishDate);
             tvViewCount=(TextView) view.findViewById(R.id.tvViewCount);
             imgFile=(ImageView) view.findViewById(R.id.imgFile);
+            imgPhoto=(ImageView) view.findViewById(R.id.imgPhoto);
+
         }
     }
 
@@ -58,7 +66,7 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-        final AudioModel data = dataList.get(position);
+        final AllBlogpostModel data = dataList.get(position);
 
         holder.tvPublishDate.setText(data.getCreated_at());
         holder.tvPublisher.setText(data.getUser_detail().getName());
@@ -75,9 +83,22 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.MyViewHolder
         holder.imgFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://192.168.0.119/imamportal/public/al-quran_hadith/"+data.getAudio())));
+                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Api.BASE_URL+"public/audio/"+data.getAudio())));
             }
         });
+
+        Glide.with(context)
+                .asBitmap()
+                .load(Api.BASE_URL+"public/audio/"+data.getImage())
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                        if(resource!=null){
+                            holder.imgPhoto.setImageBitmap(resource);
+                        }
+
+                    }
+                });
 
         holder.tvShortDescription.setOnClickListener(new View.OnClickListener() {
             @Override

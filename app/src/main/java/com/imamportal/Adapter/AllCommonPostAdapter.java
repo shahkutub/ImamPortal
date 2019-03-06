@@ -97,12 +97,26 @@ public class AllCommonPostAdapter extends RecyclerView.Adapter<AllCommonPostAdap
         holder.linFullView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(AppConstant.activitiname.equalsIgnoreCase("answer")){
+                    AppConstant.dilogDetails(context,data.getQuestion(),data.getAnswer(),""+name,
+                            data.getCreated_at(),data.getView_count(),"","");
+                }else {
+                    AppConstant.dilogDetails(context,data.getTitle(),data.getDescription(),""+name,
+                            data.getCreated_at(),data.getView_count(),"","");
+                }
 
-                AppConstant.dilogDetails(context,data.getTitle(),data.getDescription(),""+name,
-                        data.getCreated_at(),data.getView_count(),"","");
+
             }
         });
 
+        if(AppConstant.activitiname.equalsIgnoreCase("answer")){
+            holder.tvTitle.setText(data.getQuestion());
+            if(data.getAnswer()!=null){
+                holder.tvShortDescription.setText(android.text.Html.fromHtml(data.getAnswer()).toString());
+            }
+
+
+        }
     }
 
 

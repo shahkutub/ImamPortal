@@ -13,16 +13,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.imamportal.Adapter.AllCommonPostAdapter;
-import com.imamportal.Adapter.AlquranAldadithPostAdapter;
-import com.imamportal.Adapter.AudioAdapter;
 import com.imamportal.R;
 import com.imamportal.model.AllBlogpostModel;
-import com.imamportal.model.AlquranAlhadits;
-import com.imamportal.model.AudioModel;
 import com.imamportal.model.CommonPostResponse;
 import com.imamportal.utils.AlertMessage;
 import com.imamportal.utils.Api;
-import com.imamportal.utils.AppConstant;
 import com.imamportal.utils.NetInfo;
 import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout;
 import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection;
@@ -37,7 +32,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class FragmentAudioQuran extends Fragment implements SwipyRefreshLayout.OnRefreshListener{
+public class FragmentBlog extends Fragment implements SwipyRefreshLayout.OnRefreshListener{
 
     Context context;
     private RecyclerView recyclSantirBani;
@@ -109,7 +104,7 @@ public class FragmentAudioQuran extends Fragment implements SwipyRefreshLayout.O
         swiperefresh.setOnRefreshListener(this);
         swiperefresh.setRefreshing(true);
 
-        api="api/audio/al-quran";
+        api="api/blog";
         getblog_post(api);
 
     }
@@ -158,7 +153,7 @@ public class FragmentAudioQuran extends Fragment implements SwipyRefreshLayout.O
                         tvTotalBani.setText("সর্বমোট "+size+" টি");
 
                         //Collections.reverse(listSantirbani);
-                        AudioAdapter questionAnsAdapter = new AudioAdapter(listSantirbani,context);
+                        AllCommonPostAdapter questionAnsAdapter = new AllCommonPostAdapter(listSantirbani,context);
                         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(context,
                                 LinearLayoutManager.VERTICAL, false);
                         recyclSantirBani.setLayoutManager(horizontalLayoutManager);
