@@ -6,6 +6,8 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Handler;
@@ -24,6 +26,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -137,13 +140,16 @@ public class MainActivity extends AppCompatActivity {
 
     List<NoticeResponse> listNotice = new ArrayList<>();
     private String seraContentdataName;
-
+    Locale myLocale;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.main);
-        overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
         context = this;
+        overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
+
+        //setLocale("bn");
         updateworkdone();
         ApplicationStarter.initialize(this, true);
         getBangladate();
@@ -181,45 +187,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-//    private void fabmsgUi() {
-//
-//        fabLayoutChat= (LinearLayout) findViewById(R.id.fabLayoutChat);
-//        fabLayoutGroup= (LinearLayout) findViewById(R.id.fabLayoutGroup);
-//        fabLayoutPoramorso= (LinearLayout) findViewById(R.id.fabLayoutPoramorso);
-//
-//
-//        fabChat = (FloatingActionButton) findViewById(R.id.fabChat);
-//        fabGroup= (FloatingActionButton) findViewById(R.id.fabGroup);
-//        fabPoramorso = (FloatingActionButton) findViewById(R.id.fabPoramorso);
-//
-//        fabChat.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                dialogeNamajTime();
-//                closeFABmsgMenu();
-//            }
-//        });
-//
-//        fabBGLayout=findViewById(R.id.fabBGLayout);
-//
-//        relNotification.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(!isFABmsgOpen){
-//                    showFABmsgMenu();
-//                }else{
-//                    closeFABmsgMenu();
-//                }
-//            }
-//        });
-//        fabBGLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                closeFABmsgMenu();
-//            }
-//        });
-//    }
 
 
     private void fabinitUi() {
@@ -274,17 +241,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    private void showFABmsgMenu(){
-//        isFABmsgOpen=true;
-//        fabLayoutGroup.setVisibility(View.VISIBLE);
-//        fabLayoutPoramorso.setVisibility(View.VISIBLE);
-//        fabLayoutChat.setVisibility(View.VISIBLE);
-//        fabBGLayout.setVisibility(View.VISIBLE);
-//        //fab.animate().rotationBy(180);
-////        fabLayoutGroup.animate().translationY(-getResources().getDimension(R.dimen._55sdp));
-////        fabLayoutPoramorso.animate().translationY(-getResources().getDimension(R.dimen._100sdp));
-////        fabLayoutChat.animate().translationY(-getResources().getDimension(R.dimen._145sdp));
-//    }
+
 
 
     @Override
@@ -319,41 +276,6 @@ public class MainActivity extends AppCompatActivity {
         fabLayout2.animate().translationY(-getResources().getDimension(R.dimen._100sdp));
         fabLayout3.animate().translationY(-getResources().getDimension(R.dimen._145sdp));
     }
-
-
-//    private void closeFABmsgMenu(){
-//        isFABmsgOpen=false;
-//        fabBGLayout.setVisibility(View.GONE);
-//        //fab.animate().rotationBy(-180);
-////        fabLayoutPoramorso.animate().translationY(0);
-////        fabLayoutChat.animate().translationY(0);
-////        fabLayoutGroup.animate().translationY(0).setListener(new Animator.AnimatorListener() {
-////            @Override
-////            public void onAnimationStart(Animator animator) {
-////
-////            }
-////
-////            @Override
-////            public void onAnimationEnd(Animator animator) {
-////                if(!isFABmsgOpen){
-////                    fabLayoutChat.setVisibility(View.GONE);
-////                    fabLayoutPoramorso.setVisibility(View.GONE);
-////                    fabLayoutGroup.setVisibility(View.GONE);
-////                }
-////
-////            }
-////
-////            @Override
-////            public void onAnimationCancel(Animator animator) {
-////
-////            }
-////
-////            @Override
-////            public void onAnimationRepeat(Animator animator) {
-////
-////            }
-////        });
-//    }
 
     private void closeFABMenu() {
         isFABOpen = false;
@@ -393,46 +315,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void hijriDate() {
-
-
-//        Translate t = null;
-//        try {
-//            t = new Translate.Builder(
-//                    GoogleNetHttpTransport.newTrustedTransport()
-//                    , GsonFactory.getDefaultInstance(), null)
-//                    // Set your application name
-//                    .setApplicationName("Stackoverflow-Example")
-//                    .build();
-//        } catch (GeneralSecurityException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        Translate.Translations.List list = null;
-//        try {
-//            list = t.new Translations().list(
-//                    Arrays.asList(
-//                            // Pass in list of strings to be translated
-//                            "Hello World",
-//                            "How to use Google Translate from Java"),
-//                    // Target language
-//                    "ES");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        // TODO: Set your API-Key from https://console.developers.google.com/
-//        list.setKey("your-api-key");
-//        TranslationsListResponse response = null;
-//        try {
-//            response = list.execute();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        for (TranslationsResource translationsResource : response.getTranslations())
-//        {
-//            System.out.println(translationsResource.getTranslatedText());
-//        }
 
 
         Date date = Calendar.getInstance().getTime();
@@ -821,7 +703,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(context, LoginActivity.class));
-                PersistentUser.setLogin(context);
+
             }
         });
         tvLogOut.setOnClickListener(new View.OnClickListener() {
@@ -874,22 +756,6 @@ public class MainActivity extends AppCompatActivity {
         tvDate = (TextView) findViewById(R.id.tvDate);
 
 
-//        linNoticeview = (LinearLayout) findViewById(R.id.linNoticeview);
-//        linNoticeview.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(isRuning){
-//                    isRuning=false;
-//                    MarqueeText.setSelected(false);
-//                }else if(!isRuning) {
-//                    isRuning=true;
-//                    MarqueeText.setSelected(true);
-//                }
-//
-//            }
-//        });
-
-
         linKitabsomuho = (LinearLayout) findViewById(R.id.linKitabsomuho);
         linDokhotaSomuho = (LinearLayout) findViewById(R.id.linDokhotaSomuho);
         linIslamMenus = (LinearLayout) findViewById(R.id.linIslamMenus);
@@ -908,20 +774,6 @@ public class MainActivity extends AppCompatActivity {
 
                 startActivity(new Intent(context, BlogActivity.class));
 
-//                PopupMenu popup = new PopupMenu(context,v);
-//                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-//                    @Override
-//                    public boolean onMenuItemClick(MenuItem menuItem) {
-//
-//                        String value = menuItem.getTitle().toString();
-//                        AppConstant.activitiname=value;
-//                        startActivity(new Intent(context,AllCommonPostActivity.class));
-//                        return true;
-//                    }
-//                });
-//                MenuInflater inflater = popup.getMenuInflater();
-//                inflater.inflate(R.menu.menu_blog, popup.getMenu());
-//                popup.show();
             }
         });
 
@@ -966,23 +818,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-//        relKitab = (RelativeLayout)findViewById(R.id.relKitab);
-//        relDokhota = (RelativeLayout)findViewById(R.id.relDokhota);
-//        relIslam = (RelativeLayout)findViewById(R.id.relIslam);
-//        relMasala = (RelativeLayout)findViewById(R.id.relMasala);
-//
-//        relAlKural = (RelativeLayout)findViewById(R.id.relAlKural);
-//        relHadithGrontho = (RelativeLayout)findViewById(R.id.relHadithGrontho);
-        //relProfile = (RelativeLayout) findViewById(R.id.relProfile);
         relSompadokio = (RelativeLayout) findViewById(R.id.relSompadokio);
 
-//        relProfile.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(context,PhotoGallaryActivity.class));
-//            }
-//        });
+
 
         relSisukisur = (LinearLayout) findViewById(R.id.relSisukisur);
         relOnndhra = (LinearLayout) findViewById(R.id.relOnndhra);
@@ -1112,87 +950,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        relHadithGrontho.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showMenuAlhadith(v);
-//            }
-//        });
-//
-//        relAlKural.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showMenuAlquran(v);
-//            }
-//        });
-
-//        relIslamicAin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showMenu(v);
-//            }
-//        });
-
         imgKitabArow = (ImageView) findViewById(R.id.imgKitabArow);
         imgDokhotaArow = (ImageView) findViewById(R.id.imgDokhotaArow);
         imgIslamArow = (ImageView) findViewById(R.id.imgIslamArow);
         imgMasala = (ImageView) findViewById(R.id.imgMasala);
 
-//        relMasala.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(linMasalaMenus.getVisibility()==View.GONE){
-//                    imgMasala.setImageResource(R.drawable.ic_uparow);
-//                    linMasalaMenus.setVisibility(View.VISIBLE);
-//
-//                }else if(linMasalaMenus.getVisibility()==View.VISIBLE){
-//                    imgMasala.setImageResource(R.drawable.ic_downarrow);
-//                    linMasalaMenus.setVisibility(View.GONE);
-//                }
-//            }
-//        });
-//
-//        relIslam.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(linIslamMenus.getVisibility()==View.GONE){
-//                    imgIslamArow.setImageResource(R.drawable.ic_uparow);
-//                    linIslamMenus.setVisibility(View.VISIBLE);
-//
-//                }else if(linIslamMenus.getVisibility()==View.VISIBLE){
-//                    imgIslamArow.setImageResource(R.drawable.ic_downarrow);
-//                    linIslamMenus.setVisibility(View.GONE);
-//                }
-//            }
-//        });
-
-//        relDokhota.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(linDokhotaSomuho.getVisibility()==View.GONE){
-//                    imgDokhotaArow.setImageResource(R.drawable.ic_uparow);
-//                    linDokhotaSomuho.setVisibility(View.VISIBLE);
-//
-//                }else if(linDokhotaSomuho.getVisibility()==View.VISIBLE){
-//                    imgDokhotaArow.setImageResource(R.drawable.ic_downarrow);
-//                    linDokhotaSomuho.setVisibility(View.GONE);
-//                }
-//            }
-//        });
-//
-//        relKitab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(linKitabsomuho.getVisibility()==View.GONE){
-//                    imgKitabArow.setImageResource(R.drawable.ic_uparow);
-//                    linKitabsomuho.setVisibility(View.VISIBLE);
-//
-//                }else if(linKitabsomuho.getVisibility()==View.VISIBLE){
-//                    imgKitabArow.setImageResource(R.drawable.ic_downarrow);
-//                    linKitabsomuho.setVisibility(View.GONE);
-//                }
-//            }
-//        });
 
 
         linAutoserch = (RelativeLayout) findViewById(R.id.linAutoserch);
@@ -1288,6 +1050,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void setLocale(String lang) {
+
+        myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+        Intent refresh = new Intent(context, MainActivity.class);
+        startActivity(refresh);
+    }
 
     public void showMenu(View v) {
         PopupMenu popup = new PopupMenu(context, v);

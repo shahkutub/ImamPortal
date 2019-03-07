@@ -37,6 +37,9 @@
         android:visibility="visible"
         android:layout_height="wrap_content"
         android:background="#E4DFD9"
+        app:tabBackground="@drawable/tab_color_selector"
+        app:tabTextColor="#fff"
+        app:tabSelectedTextColor="#fff"
         app:tabMode="scrollable">
 
     </android.support.design.widget.TabLayout>

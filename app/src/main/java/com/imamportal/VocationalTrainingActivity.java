@@ -2,6 +2,7 @@ package com.imamportal;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -33,9 +34,12 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
+import com.imamportal.model.AllDataResponse;
 import com.imamportal.model.NameInfo;
 import com.imamportal.utils.AlertMessage;
+import com.imamportal.utils.Api;
 import com.imamportal.utils.AppConstant;
+import com.imamportal.utils.NetInfo;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -43,6 +47,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class VocationalTrainingActivity extends AppCompatActivity {
 
@@ -88,7 +98,59 @@ public class VocationalTrainingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vocational_training);
         context = this;
-        initUi();
+        if(AppConstant.allData!=null){
+            initUi();
+        }else {
+            getAlldata();
+        }
+
+
+
+    }
+
+    private void getAlldata() {
+
+        if(!NetInfo.isOnline(context)){
+            AlertMessage.showMessage(context,"Alert!","No internet connection!");
+        }
+
+        final ProgressDialog pd = new ProgressDialog(context);
+        pd.setMessage("Loading....");
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.setCancelable(false);
+        pd.show();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Api api = retrofit.create(Api.class);
+        Call<AllDataResponse> userCall = api.get_all_data();
+        userCall.enqueue(new Callback<AllDataResponse>() {
+            @Override
+            public void onResponse(Call<AllDataResponse> call, Response<AllDataResponse> response) {
+                pd.dismiss();
+
+                AllDataResponse  allData = response.body();
+
+                if(allData!=null){
+
+                    AppConstant.allData = allData;
+                    Log.e("allData",""+allData.getResult().size());
+                    initUi();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<AllDataResponse> call, Throwable t) {
+
+
+                pd.dismiss();
+            }
+        });
+
 
     }
 

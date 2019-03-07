@@ -86,6 +86,7 @@ public class AppConstant {
     public static List<AllBlogpostModel> listAllBlogPost = new ArrayList<>();
     public static String masalaFragmentName = "";
     public static AllDataResponse allData = new AllDataResponse();
+    public static String loginToken = "loginToken";
 
     public static String BitMapToString(Bitmap bitmap){
         ByteArrayOutputStream baos=new ByteArrayOutputStream();

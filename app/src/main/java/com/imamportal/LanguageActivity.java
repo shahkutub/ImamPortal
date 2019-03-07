@@ -72,41 +72,15 @@ public class LanguageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 setLocale("bn");
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                finish();
-            }
-        });
-
-        linAr.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setLocale("ar");
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                finish();
-            }
-        });
-
-        linEng.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setLocale("en");
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                startActivity(new Intent(context,MainActivity.class));
                 finish();
             }
         });
 
 
-        linBang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setLocale("bn");
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                finish();
-            }
-        });
 
 
-        getAlldata();
+        //getAlldata();
 
     }
 

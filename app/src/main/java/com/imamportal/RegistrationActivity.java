@@ -123,7 +123,11 @@ public class RegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
         context= this;
         overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
-        innitUi();
+        if(AppConstant.allData!=null){
+            innitUi();
+        }else {
+            getAlldata();
+        }
     }
 
     private void innitUi() {
@@ -994,6 +998,52 @@ public class RegistrationActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<SignUpResponse> call, Throwable t) {
+
+
+                pd.dismiss();
+            }
+        });
+
+
+    }
+
+    private void getAlldata() {
+
+        if(!NetInfo.isOnline(context)){
+            AlertMessage.showMessage(context,"Alert!","No internet connection!");
+        }
+
+        final ProgressDialog pd = new ProgressDialog(context);
+        pd.setMessage("Loading....");
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.setCancelable(false);
+        pd.show();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Api api = retrofit.create(Api.class);
+        Call<AllDataResponse> userCall = api.get_all_data();
+        userCall.enqueue(new Callback<AllDataResponse>() {
+            @Override
+            public void onResponse(Call<AllDataResponse> call, Response<AllDataResponse> response) {
+                pd.dismiss();
+
+                AllDataResponse  allData = response.body();
+
+                if(allData!=null){
+
+                    AppConstant.allData = allData;
+                    Log.e("allData",""+allData.getResult().size());
+                    innitUi();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<AllDataResponse> call, Throwable t) {
 
 
                 pd.dismiss();
