@@ -1050,17 +1050,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void setLocale(String lang) {
-
-        myLocale = new Locale(lang);
-        Resources res = getResources();
-        DisplayMetrics dm = res.getDisplayMetrics();
-        Configuration conf = res.getConfiguration();
-        conf.locale = myLocale;
-        res.updateConfiguration(conf, dm);
-        Intent refresh = new Intent(context, MainActivity.class);
-        startActivity(refresh);
-    }
+//    public void setLocale(String lang) {
+//
+//        myLocale = new Locale(lang);
+//        Resources res = getResources();
+//        DisplayMetrics dm = res.getDisplayMetrics();
+//        Configuration conf = res.getConfiguration();
+//        conf.locale = myLocale;
+//        res.updateConfiguration(conf, dm);
+//        Intent refresh = new Intent(context, MainActivity.class);
+//        startActivity(refresh);
+//    }
 
     public void showMenu(View v) {
         PopupMenu popup = new PopupMenu(context, v);

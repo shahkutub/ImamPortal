@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.os.CountDownTimer;
@@ -237,8 +238,6 @@ public class QuizeActivity extends AppCompatActivity {
         });
 
 
-
-
         tabQuize = (TabLayout) findViewById(R.id.tabQuize);
         tabQuize.setVisibility(View.VISIBLE);
 
@@ -252,9 +251,6 @@ public class QuizeActivity extends AppCompatActivity {
 
             }
         });
-
-
-
 
 
         tvStart.setOnClickListener(new View.OnClickListener() {
@@ -483,7 +479,7 @@ public class QuizeActivity extends AppCompatActivity {
         JSONObject jsonObjectAnswer = new JSONObject();
         if(ans1!=null){
 
-            tvAns1.setText("আপনার উত্তর: "+ans1);
+            //tvAns1.setText("আপনার উত্তর: "+ans1);
             jsonArrayQuiestion.add(responsData.getQuestions().get(0).getId());
             for (int i = 0; i <responsData.getQuestions().get(0).getQuiz_question_option().size() ; i++) {
                 if(ans1.equalsIgnoreCase(responsData.getQuestions().get(0).getQuiz_question_option().get(i).getOption_title())){
@@ -495,24 +491,34 @@ public class QuizeActivity extends AppCompatActivity {
 
                     if(responsData.getQuestions().get(0).getQuiz_question_option().get(i).getRight_answer().equalsIgnoreCase("1")){
                        // imgWright1.setVisibility(View.VISIBLE);
+                        //tvAns1.setText("সঠিক উত্তর: "+responsData.getQuestions().get(0).getQuiz_question_option().get(i).getOption_title());
                         wrightWrong.add("1");
                     }else {
                         //imgWrong1.setVisibility(View.VISIBLE);
                         wrightWrong.add("0");
+                        //tvAns1.setText("সঠিক উত্তর: "+responsData.getQuestions().get(0).getQuiz_question_option().get(i).getOption_title());
                     }
                 }
 
-
+                if(responsData.getQuestions().get(0).getQuiz_question_option().get(i).getRight_answer().equalsIgnoreCase("1")){
+                    tvAns1.setText("সঠিক উত্তর: "+responsData.getQuestions().get(0).getQuiz_question_option().get(i).getOption_title());
+                }
 
             }
 
         }else {
-            tvAns1.setText("আপনার উত্তর: "+"No");
+            for (int i = 0; i <responsData.getQuestions().get(0).getQuiz_question_option().size() ; i++) {
+                wrightWrong.add("0");
+                if(responsData.getQuestions().get(0).getQuiz_question_option().get(i).getRight_answer().equalsIgnoreCase("1")){
+                    tvAns1.setText("সঠিক উত্তর: "+responsData.getQuestions().get(0).getQuiz_question_option().get(i).getOption_title());
+                }
+            }
+            //tvAns1.setText("আপনার উত্তর: "+"No");
         }
 
         //2
         if(ans2!=null){
-            tvAns2.setText("আপনার উত্তর: "+ans2);
+            //tvAns2.setText("আপনার উত্তর: "+ans2);
 
             jsonArrayQuiestion.add(responsData.getQuestions().get(1).getId());
             for (int i = 0; i <responsData.getQuestions().get(1).getQuiz_question_option().size() ; i++) {
@@ -525,24 +531,35 @@ public class QuizeActivity extends AppCompatActivity {
 
                     if(responsData.getQuestions().get(1).getQuiz_question_option().get(i).getRight_answer().equalsIgnoreCase("1")){
                         wrightWrong.add("1");
+                        //tvAns2.setText("সঠিক উত্তর: "+responsData.getQuestions().get(1).getQuiz_question_option().get(i).getOption_title());
                     }else {
                         //imgWrong1.setVisibility(View.VISIBLE);
                         wrightWrong.add("0");
+                        //tvAns2.setText("সঠিক উত্তর: "+responsData.getQuestions().get(1).getQuiz_question_option().get(i).getOption_title());
                     }
                 }
+                if(responsData.getQuestions().get(1).getQuiz_question_option().get(i).getRight_answer().equalsIgnoreCase("1")){
+                    tvAns2.setText("সঠিক উত্তর: "+responsData.getQuestions().get(1).getQuiz_question_option().get(i).getOption_title());
+                }
+
             }
 
-
         }else {
-            tvAns2.setText("আপনার উত্তর: "+"No");
+            for (int i = 0; i <responsData.getQuestions().get(1).getQuiz_question_option().size() ; i++) {
+                wrightWrong.add("0");
+                if(responsData.getQuestions().get(1).getQuiz_question_option().get(i).getRight_answer().equalsIgnoreCase("1")){
+                    tvAns2.setText("সঠিক উত্তর: "+responsData.getQuestions().get(1).getQuiz_question_option().get(i).getOption_title());
+                }
+            }
+            //tvAns2.setText("আপনার উত্তর: "+"No");
         }
 
         if(ans3!=null){
-            tvAns3.setText("আপনার উত্তর: "+ans3);
+            //tvAns3.setText("আপনার উত্তর: "+ans3);
 
             jsonArrayQuiestion.add(responsData.getQuestions().get(2).getId());
             for (int i = 0; i <responsData.getQuestions().get(2).getQuiz_question_option().size() ; i++) {
-                if(ans2.equalsIgnoreCase(responsData.getQuestions().get(2).getQuiz_question_option().get(i).getOption_title())){
+                if(ans3.equalsIgnoreCase(responsData.getQuestions().get(2).getQuiz_question_option().get(i).getOption_title())){
                     try {
                         jsonObjectAnswer.put(responsData.getQuestions().get(2).getId(),responsData.getQuestions().get(2).getQuiz_question_option().get(i).getId());
                     } catch (JSONException e) {
@@ -551,24 +568,36 @@ public class QuizeActivity extends AppCompatActivity {
 
                     if(responsData.getQuestions().get(2).getQuiz_question_option().get(i).getRight_answer().equalsIgnoreCase("1")){
                         wrightWrong.add("1");
+                        //tvAns3.setText("সঠিক উত্তর: "+responsData.getQuestions().get(2).getQuiz_question_option().get(i).getOption_title());
                     }else {
                         //imgWrong1.setVisibility(View.VISIBLE);
                         wrightWrong.add("0");
+                        //tvAns3.setText("সঠিক উত্তর: "+responsData.getQuestions().get(2).getQuiz_question_option().get(i).getOption_title());
                     }
                 }
+
+                if(responsData.getQuestions().get(2).getQuiz_question_option().get(i).getRight_answer().equalsIgnoreCase("1")){
+                    tvAns3.setText("সঠিক উত্তর: "+responsData.getQuestions().get(2).getQuiz_question_option().get(i).getOption_title());
+                }
+
             }
 
-
         }else {
-            tvAns3.setText("আপনার উত্তর: "+"No");
+            for (int i = 0; i <responsData.getQuestions().get(2).getQuiz_question_option().size() ; i++) {
+                wrightWrong.add("0");
+                if(responsData.getQuestions().get(2).getQuiz_question_option().get(i).getRight_answer().equalsIgnoreCase("1")){
+                    tvAns3.setText("সঠিক উত্তর: "+responsData.getQuestions().get(2).getQuiz_question_option().get(i).getOption_title());
+                }
+            }
+            //tvAns3.setText("আপনার উত্তর: "+"No");
         }
 
         if(ans4!=null){
-            tvAns4.setText("আপনার উত্তর: "+ans4);
+            //tvAns4.setText("আপনার উত্তর: "+ans4);
 
             jsonArrayQuiestion.add(responsData.getQuestions().get(3).getId());
             for (int i = 0; i <responsData.getQuestions().get(3).getQuiz_question_option().size() ; i++) {
-                if(ans2.equalsIgnoreCase(responsData.getQuestions().get(3).getQuiz_question_option().get(i).getOption_title())){
+                if(ans4.equalsIgnoreCase(responsData.getQuestions().get(3).getQuiz_question_option().get(i).getOption_title())){
                     try {
                         jsonObjectAnswer.put(responsData.getQuestions().get(3).getId(),responsData.getQuestions().get(3).getQuiz_question_option().get(i).getId());
                     } catch (JSONException e) {
@@ -577,23 +606,37 @@ public class QuizeActivity extends AppCompatActivity {
 
                     if(responsData.getQuestions().get(3).getQuiz_question_option().get(i).getRight_answer().equalsIgnoreCase("1")){
                         wrightWrong.add("1");
+                        //tvAns4.setText("সঠিক উত্তর: "+responsData.getQuestions().get(3).getQuiz_question_option().get(i).getOption_title());
+
                     }else {
                         //imgWrong1.setVisibility(View.VISIBLE);
                         wrightWrong.add("0");
+                        //tvAns4.setText("সঠিক উত্তর: "+responsData.getQuestions().get(3).getQuiz_question_option().get(i).getOption_title());
                     }
                 }
+
+                if(responsData.getQuestions().get(3).getQuiz_question_option().get(i).getRight_answer().equalsIgnoreCase("1")){
+                    tvAns4.setText("সঠিক উত্তর: "+responsData.getQuestions().get(3).getQuiz_question_option().get(i).getOption_title());
+                }
+
             }
 
         }else {
-            tvAns4.setText("আপনার উত্তর: "+"No");
+            for (int i = 0; i <responsData.getQuestions().get(3).getQuiz_question_option().size() ; i++) {
+                wrightWrong.add("0");
+                if(responsData.getQuestions().get(3).getQuiz_question_option().get(i).getRight_answer().equalsIgnoreCase("1")){
+                    tvAns4.setText("সঠিক উত্তর: "+responsData.getQuestions().get(3).getQuiz_question_option().get(i).getOption_title());
+                }
+            }
+            //tvAns4.setText("আপনার উত্তর: "+"No");
         }
 
         if(ans5!=null){
-            tvAns5.setText("আপনার উত্তর: "+ans5);
+            //tvAns5.setText("আপনার উত্তর: "+ans5);
 
             jsonArrayQuiestion.add(responsData.getQuestions().get(4).getId());
             for (int i = 0; i <responsData.getQuestions().get(4).getQuiz_question_option().size() ; i++) {
-                if(ans2.equalsIgnoreCase(responsData.getQuestions().get(4).getQuiz_question_option().get(i).getOption_title())){
+                if(ans5.equalsIgnoreCase(responsData.getQuestions().get(4).getQuiz_question_option().get(i).getOption_title())){
                     try {
                         jsonObjectAnswer.put(responsData.getQuestions().get(4).getId(),responsData.getQuestions().get(4).getQuiz_question_option().get(i).getId());
                     } catch (JSONException e) {
@@ -602,15 +645,28 @@ public class QuizeActivity extends AppCompatActivity {
 
                     if(responsData.getQuestions().get(4).getQuiz_question_option().get(i).getRight_answer().equalsIgnoreCase("1")){
                         wrightWrong.add("1");
+                        //tvAns5.setText("সঠিক উত্তর: "+responsData.getQuestions().get(4).getQuiz_question_option().get(i).getOption_title());
                     }else {
                         //imgWrong1.setVisibility(View.VISIBLE);
                         wrightWrong.add("0");
+                        //tvAns5.setText("সঠিক উত্তর: "+responsData.getQuestions().get(4).getQuiz_question_option().get(i).getOption_title());
                     }
                 }
+
+                if(responsData.getQuestions().get(4).getQuiz_question_option().get(i).getRight_answer().equalsIgnoreCase("1")){
+                    tvAns5.setText("সঠিক উত্তর: "+responsData.getQuestions().get(4).getQuiz_question_option().get(i).getOption_title());
+                }
+
             }
 
         }else {
-            tvAns5.setText("আপনার উত্তর: "+"No");
+            for (int i = 0; i <responsData.getQuestions().get(4).getQuiz_question_option().size() ; i++) {
+                wrightWrong.add("0");
+                if(responsData.getQuestions().get(4).getQuiz_question_option().get(i).getRight_answer().equalsIgnoreCase("1")){
+                    tvAns5.setText("সঠিক উত্তর: "+responsData.getQuestions().get(4).getQuiz_question_option().get(i).getOption_title());
+                }
+            }
+            //tvAns5.setText("আপনার উত্তর: "+"No");
         }
 
         Log.e("jsonArrayQuiestion",""+jsonArrayQuiestion.toString());
@@ -655,7 +711,9 @@ public class QuizeActivity extends AppCompatActivity {
                     }
 
                 }else {
-                    Toast.makeText(context, "No data found", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Login token expired, Please login again ", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(context,LoginActivity.class));
+                    finish();
                 }
 
 
@@ -784,8 +842,6 @@ public class QuizeActivity extends AppCompatActivity {
             }
 
         }
-
-        
 
 
     }

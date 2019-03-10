@@ -119,6 +119,16 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
+
+    <string name="title_activity_home">Home</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="title_activity_vocational_training">VocationalTrainingActivity</string>
+
     <string name="login">লগইন</string>
     <string name="logout">লগ আউট</string>
     <string name="registration">নিবন্ধন</string>
@@ -126,12 +136,6 @@
     <string name="upload">আপলোড</string>
     <string name="member">সদস্য ৪</string>
     <string name="helpline">হেল্পলাইন</string>
-    <string name="title_activity_home">Home</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
     <string name="islam">ইসলাম</string>
     <string name="sompadokio">সম্পাদকীয়</string>
     <string name="onnodhara">অন্যধারা</string>
@@ -146,12 +150,12 @@
     <string name="alhadith">আল হাদিস</string>
     <string name="santirbani">শান্তির বাণী</string>
     <string name="blog">ব্লগ</string>
-    <string name="masayel">মাসায়েল</string>
+    <string name="masayel">মাসআলা</string>
     <string name="prosnokorun">আপনার জিজ্ঞাসা</string>
     <string name="prosneruttor">প্রশ্নের উত্তর</string>
     <string name="ajkerprosno">আজকের প্রশ্ন</string>
     <string name="quize">কুইজ</string>
-    <string name="poygam">পয়গাম :</string>
+    <string name="poygam">পয়গাম:</string>
     <string name="namajsomoy">নামাজের সময়সূচী</string>
     <string name="oakto">ওয়াক্ত</string>
     <string name="time">সময়</string>
@@ -161,11 +165,12 @@
     <string name="magrib">মাগরিব</string>
     <string name="isa">ইশা</string>
     <string name="islamicain">ইসলামিক আইন</string>
-    <string name="islamiceconomy">ইসলামী অর্থনীতি</string>
+    <string name="islamiceconomy">ইসলামিক অর্থনীত</string>
+    <string name="dawah">দাওয়াত</string>
     <string name="familysocity">পরিবার ও সমাজ</string>
     <string name="imanakida">ঈমান ও আকীদাহ</string>
     <string name="character">চরিত্র</string>
-    <string name="other">Other</string>
+    <string name="other">অন্যান্য</string>
     <string name="familylaw">পারিবারিক আইন</string>
     <string name="criminallaw">ফৌজদারি আইন</string>
     <string name="seracontent">এই সপ্তাহের সেরা কনটেন্ট দাতা</string>
@@ -179,7 +184,7 @@
     <string name="biography">জীবনী</string>
     <string name="islamicstory">ইসলামী গল্প</string>
     <string name="islamic_philosophy">ইসলামী দর্শন</string>
-    <string name="rules_of_quiz">Rules of Quiz</string>
+    <string name="rules_of_quiz">কুইজের নিয়মাবলি</string>
     <string name="qiuze_rule1">#কুইজে মোট পাঁচটি প্রশ্ন থাকবে এবং প্রতিটা প্রশ্নের সাথে চারটি করে অপশন থাকবে; আপনাকে সঠিক উত্তরটি সিলেক্ট করতে হবে।</string>
     <string name="quize_rule2"># ২ মিনেটের মধ্যে আপনাকে প্রশ্নগুলির উত্তর দিতে হবে।</string>
     <string name="cancel">বাতিল</string>
@@ -195,6 +200,5 @@
     <string name="beboherSorto">ব্যবহারের শর্তাবলী</string>
     <string name="sochorchorjiggasa">সচরাচর জিজ্ঞাসা</string>
     <string name="sarbiksohojogita">সার্বিক সহযোগিতায়</string>
-    <string name="title_activity_vocational_training">VocationalTrainingActivity</string>
 
 </resources>

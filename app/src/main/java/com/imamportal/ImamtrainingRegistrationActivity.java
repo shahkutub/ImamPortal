@@ -995,42 +995,6 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
     }
 
 
-    private void filUpload(){
-        if(!NetInfo.isOnline(context)){
-            AlertMessage.showMessage(context,"Alert!","No internet connection!");
-        }
 
-        final ProgressDialog pd = new ProgressDialog(context);
-        pd.setMessage("Loading....");
-        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pd.setCancelable(false);
-        pd.show();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Api.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        Api api = retrofit.create(Api.class);
-
-        File file = new File(userPicPath);
-
-        MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", file.getName(),
-                RequestBody.create(MediaType.parse("image/*"), file));
-
-        Call<String> call = api.uploadAttachment(filePart);
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-
-            }
-        });
-
-    }
 
 }

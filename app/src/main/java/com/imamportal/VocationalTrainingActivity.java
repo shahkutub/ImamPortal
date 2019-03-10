@@ -33,6 +33,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.imamportal.model.AllDataResponse;
 import com.imamportal.model.NameInfo;
@@ -41,6 +42,9 @@ import com.imamportal.utils.Api;
 import com.imamportal.utils.AppConstant;
 import com.imamportal.utils.NetInfo;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -48,6 +52,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -61,7 +69,7 @@ public class VocationalTrainingActivity extends AppCompatActivity {
             spinnerUnion,spinnerCity,spinnerQualification,spinnerInstituteType,spinnerDivisioInsti,spinnerDistrictInsti,spinnerInstituteUpjila,
             spinnerTrade,spinnerCenter,spinnerZilaSM,spinnerUpozilaSm;
     private EditText input_name_bn,input_name_eng,input_father_name_bn,input_father_name_eng,input_mother_name_bn,
-            input_mother_name_eng, input_nid,input_email,input_mobile,input_postcode,input_institute,input_lastqualification,input_name_sm,
+            input_mother_name_eng, input_nid,input_word,input_email,input_mobile,input_postcode,input_institute,input_lastqualification,input_name_sm,
             input_mobile_sm;
     private TextView tvBirthdate;
 
@@ -76,10 +84,15 @@ public class VocationalTrainingActivity extends AppCompatActivity {
     private List<NameInfo> listUnion = new ArrayList<>();
     private List<NameInfo> listUnionInstitute = new ArrayList<>();
     private List<NameInfo> listCity = new ArrayList<>();
+    private List<NameInfo> listQualification = new ArrayList<>();
+    private List<NameInfo> listInstituteType = new ArrayList<>();
+    private List<NameInfo> listTrainingTrade = new ArrayList<>();
+    private List<NameInfo> listTrainingCenter = new ArrayList<>();
 
-    private String name,nameFather,nameFatherBn,mothername,mosqName,mobile,birthdate,mosqname,mosqaddress,wardno,postoffice,village,podobi="",
+    private String name,nameFather,nameFatherBn,mothername,mosqName,mobile,birthdate,mosqname,mosqaddress,postoffice,village,podobi="",
             division="",divisionInstitute="",divisionId,divisionIdInstitute, city="",cityId="",district="",districtInstitute="",
-            districtSm="",districtId="",districtIdInstitute="",districtIdSm="",upojila="",upojilaInstitute="",upojilaId="",upojilaIdInstitute="",union="",unionId="",photo="";
+            districtSm="",districtId="",districtIdInstitute="",districtIdSm="",upojila="",upojilaInstitute="",upojilaId="",
+            upojilaIdInstitute="",union="",unionId="",photo="",educationQualification,educationQualificationId;
 
     private AppCompatButton appcomBtn;
     private ImageView imgcam,imgPic;
@@ -92,19 +105,24 @@ public class VocationalTrainingActivity extends AppCompatActivity {
     private String nationalality;
     private String occupation;
     private String postcode;
-
+    private String instituteTypeId;
+    private String instituteType;
+    private String trade;
+    private String trainingCenter;
+    private String upojilaIdSm;
+    String filePath;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vocational_training);
         context = this;
-        if(AppConstant.allData!=null){
-            initUi();
-        }else {
-            getAlldata();
-        }
+//        if(AppConstant.allData!=null){
+//            initUi();
+//        }else {
+//            getAlldata();
+//        }
 
-
+        getAlldata();
 
     }
 
@@ -173,6 +191,7 @@ public class VocationalTrainingActivity extends AppCompatActivity {
         input_mother_name_bn = (EditText) findViewById(R.id.input_mother_name_bn);
         input_mother_name_eng = (EditText) findViewById(R.id.input_mother_name_eng);
         input_nid = (EditText) findViewById(R.id.input_nid);
+        input_word = (EditText) findViewById(R.id.input_word);
         input_email = (EditText) findViewById(R.id.input_email);
         input_mobile = (EditText) findViewById(R.id.input_mobile);
         input_postcode = (EditText) findViewById(R.id.input_postcode);
@@ -197,10 +216,11 @@ public class VocationalTrainingActivity extends AppCompatActivity {
                 String mobile = input_mobile.getText().toString();
                 String postcode = input_postcode.getText().toString();
                 String institute = input_institute.getText().toString();
-                String lastqualification = input_lastqualification.getText().toString();
+                String lastEduQualification = input_lastqualification.getText().toString();
                 String name_sm = input_name_sm.getText().toString();
                 String mobile_sm = input_mobile_sm.getText().toString();
                 String birthdate = tvBirthdate.getText().toString();
+                String wardno = input_word.getText().toString();
 
                 if(TextUtils.isEmpty(name_bn)){
                     AlertMessage.showMessage(context,"Alert!","আপনার নাম লিখুন বাংলায়");
@@ -242,24 +262,97 @@ public class VocationalTrainingActivity extends AppCompatActivity {
                 }else if(TextUtils.isEmpty(mobile)){
                     AlertMessage.showMessage(context,"Alert!","আপনার মোবাইল নম্বর লিখুন");
                     input_mobile.requestFocus();
-                }else if(TextUtils.isEmpty(division)){
+                }else if(TextUtils.isEmpty(divisionId)){
                     AlertMessage.showMessage(context,"Alert!","আপনার বিভাগ নির্বাচন করুন");
-                }else if(TextUtils.isEmpty(district)){
+                }else if(TextUtils.isEmpty(districtId)){
                     AlertMessage.showMessage(context,"Alert!","আপনার জেলা নির্বাচন করুন");
-                }else if(TextUtils.isEmpty(union)){
+                }else if(TextUtils.isEmpty(upojilaId)){
+                    AlertMessage.showMessage(context,"Alert!","আপনার উপজেলা নির্বাচন করুন");
+                }else if(TextUtils.isEmpty(unionId)){
                     AlertMessage.showMessage(context,"Alert!","আপনার ইউনিয়ন নির্বাচন করুন");
                 }else if(TextUtils.isEmpty(postcode)){
                     AlertMessage.showMessage(context,"Alert!","আপনার পোস্টকোড লিখুন");
-                }else if(TextUtils.isEmpty("")){
-                    AlertMessage.showMessage(context,"Alert!","আপনার পোস্টকোড লিখুন");
+                }else if(TextUtils.isEmpty(cityId)){
+                    AlertMessage.showMessage(context,"Alert!","আপনার সিটি নির্বাচন করুন");
+                }else if(TextUtils.isEmpty(wardno)){
+                    AlertMessage.showMessage(context,"Alert!","আপনার ওয়ার্ড লিখুন");
+                }else if(TextUtils.isEmpty(educationQualification)){
+                    AlertMessage.showMessage(context,"Alert!","আপনার শিক্ষাগত যোগ্যতা নির্বাচন করুন");
+                }else if(TextUtils.isEmpty(institute)){
+                    AlertMessage.showMessage(context,"Alert!","আপনার শিক্ষা প্রতিষ্ঠানের নাম লিখুন");
+                }else if(TextUtils.isEmpty(instituteType)){
+                    AlertMessage.showMessage(context,"Alert!","আপনার শিক্ষা প্রতিষ্ঠানের ধরণ নির্বাচন করুন");
+                }else if(TextUtils.isEmpty(divisionIdInstitute)){
+                    AlertMessage.showMessage(context,"Alert!","আপনার শিক্ষা প্রতিষ্ঠানের বিভাগ নির্বাচন করুন");
+                }else if(TextUtils.isEmpty(districtIdInstitute)){
+                    AlertMessage.showMessage(context,"Alert!","আপনার শিক্ষা প্রতিষ্ঠানের জেলা নির্বাচন করুন");
+                }else if(TextUtils.isEmpty(upojilaIdInstitute)){
+                    AlertMessage.showMessage(context,"Alert!","আপনার শিক্ষা প্রতিষ্ঠানের উপজেলা নির্বাচন করুন");
+                }else if(TextUtils.isEmpty(lastEduQualification)){
+                    AlertMessage.showMessage(context,"Alert!","আপনার সর্বশেষ শিক্ষাগত যোগ্যতা লিখুন");
+                    input_lastqualification.requestFocus();
+                }else if(TextUtils.isEmpty(trade)){
+                    AlertMessage.showMessage(context,"Alert!","প্রশিক্ষণ ট্রেড নির্বাচন করুন");
+                }else if(TextUtils.isEmpty(trade)){
+                    AlertMessage.showMessage(context,"Alert!","প্রশিক্ষণ সেন্টার নির্বাচন করুন");
+                }else if(TextUtils.isEmpty(name_sm)){
+                    AlertMessage.showMessage(context,"Alert!","সমন্বয়কারীর নাম লিখুন");
+                    input_name_sm.requestFocus();
+                }else if(TextUtils.isEmpty(mobile_sm)){
+                    AlertMessage.showMessage(context,"Alert!","সমন্বয়কারীর মোবাইল নম্বর লিখুন");
+                    input_mobile_sm.requestFocus();
+                }else if(TextUtils.isEmpty(districtIdSm)){
+                    AlertMessage.showMessage(context,"Alert!","সমন্বয়কারীর জেলা নির্বাচন করুন");
+                }else if(TextUtils.isEmpty(upojilaIdSm)){
+                    AlertMessage.showMessage(context,"Alert!","সমন্বয়কারীর উপজেলা নির্বাচন করুন");
+                }else {
+
+                    JSONObject data = new JSONObject();
+                    try {
+                        data.put("name_bn",name_bn);
+                        data.put("name_en",name_eng);
+                        data.put("father_name_bn",father_name_bn);
+                        data.put("father_name_en",father_name_eng);
+                        data.put("mother_name_bn",mother_name_bn);
+                        data.put("mother_name_en",mother_name_eng);
+                        data.put("gender",gender);
+                        data.put("dob",birthdate);
+                        data.put("maritial_status",maritalStatus);
+                        data.put("nationality",nationalality);
+                        data.put("profession",occupation);
+                        data.put("nid",nid);
+                        data.put("email",email);
+                        data.put("mobile_number",mobile);
+                        data.put("division_id",divisionId);
+                        data.put("district_id",districtId);
+                        data.put("upazila_id",upojilaId);
+                        data.put("union_id",unionId);
+                        data.put("word_no",wardno);
+                        data.put("city_corporation_id",cityId);
+                        data.put("educational_qualification",educationQualification);
+                        data.put("organization_name",institute);
+                        data.put("organization_type",instituteType);
+                        data.put("edu_division_id",divisionIdInstitute);
+                        data.put("edu_district_id",districtIdInstitute);
+                        data.put("edu_upazila_id",upojilaIdInstitute);
+                        data.put("educational_qualification_details",lastEduQualification);
+                        data.put("training_trade",trade);
+                        data.put("training_center",trainingCenter);
+                        data.put("coordinator_name",name_sm);
+                        data.put("coordinator_mobile",mobile_sm);
+                        data.put("adjustment_district_id",districtIdSm);
+                        data.put("adjustment_upazila_id",upojilaIdSm);
+
+
+                        Log.e("data",data.toString());
+                        uploadData(data.toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
 
 
-//                else if(TextUtils.isEmpty(city)){
-//                    AlertMessage.showMessage(context,"Alert!","আপনার সিটি কর্পোরেশন নির্বাচন করুন");
-//                }else if(TextUtils.isEmpty(wardno)){
-//                    AlertMessage.showMessage(context,"Alert!","আপনার ওয়ার্ড নং লিখুন");
-//                }
+
 
             }
         });
@@ -336,7 +429,7 @@ public class VocationalTrainingActivity extends AppCompatActivity {
         });
 
         //Marital status spinner
-        List<NameInfo> listMaritual = new ArrayList<>();
+        final List<NameInfo> listMaritual = new ArrayList<>();
         NameInfo  marinfosl = new NameInfo();
         marinfosl.setId("select");
         marinfosl.setName("নির্বাচন করুন");
@@ -353,9 +446,22 @@ public class VocationalTrainingActivity extends AppCompatActivity {
         listMaritual.add(mrinfo1);
         CustomAdapter adapterMr = new CustomAdapter(context, listMaritual);
         spinnerMarraige.setAdapter(adapterMr);
+        spinnerMarraige.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position>0){
+                    maritalStatus = listMaritual.get(position).getName();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         //nationality spinner
-        List<NameInfo> listNationality = new ArrayList<>();
+        final List<NameInfo> listNationality = new ArrayList<>();
         NameInfo  nationalityinfosl = new NameInfo();
         nationalityinfosl.setId("select");
         nationalityinfosl.setName("নির্বাচন করুন");
@@ -367,10 +473,22 @@ public class VocationalTrainingActivity extends AppCompatActivity {
         listNationality.add(nationalityinfo);
         CustomAdapter adapterNational = new CustomAdapter(context, listNationality);
         spinnerNatinality.setAdapter(adapterNational);
+        spinnerNatinality.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position>0){
+                    nationalality = listNationality.get(position).getName();
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         //occupation spinner
-        List<NameInfo> listoccupation = new ArrayList<>();
+        final List<NameInfo> listoccupation = new ArrayList<>();
         NameInfo  occupationinfosl = new NameInfo();
         occupationinfosl.setId("select");
         occupationinfosl.setName("নির্বাচন করুন");
@@ -403,7 +521,19 @@ public class VocationalTrainingActivity extends AppCompatActivity {
 
         CustomAdapter adapteroccupation = new CustomAdapter(context, listoccupation);
         spinnerOccuPation.setAdapter(adapteroccupation);
+        spinnerOccuPation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position>0){
+                    occupation = listoccupation.get(position).getName();
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
         //present location spinner data set
@@ -534,6 +664,21 @@ public class VocationalTrainingActivity extends AppCompatActivity {
 
                 }
             });
+
+            spinnerUnion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    if(position>0){
+                        unionId = listUnion.get(position).getId();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
 
             // institute spinner data
             spinnerDivisioInsti.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -698,6 +843,21 @@ public class VocationalTrainingActivity extends AppCompatActivity {
                 }
             });
 
+            spinnerUpozilaSm.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    if(position>0){
+                        upojilaIdSm = listUpozilaSm.get(position).getId();
+                    }
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
 
             //city spinner data set
             listCity.clear();
@@ -718,6 +878,131 @@ public class VocationalTrainingActivity extends AppCompatActivity {
             spinnerCity.setAdapter(adapterCity);
 
         }
+        spinnerCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position>0){
+                    cityId = listCity.get(position).getId();
+                    city = listCity.get(position).getName();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+
+
+        listQualification.clear();
+        listQualification.add(0,infosl);
+
+        String[] qualifi = {"SSC","HSC","ALIM","FAZIL"};
+        for (int i = 0; i <qualifi.length ; i++) {
+            NameInfo inf = new NameInfo();
+            inf.setName(qualifi[i]);
+            listQualification.add(inf);
+        }
+
+        CustomAdapter adapterQualification = new CustomAdapter(context, listQualification);
+        spinnerQualification.setAdapter(adapterQualification);
+
+        spinnerQualification.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position>0){
+                    educationQualificationId = listCity.get(position).getId();
+                    educationQualification = listCity.get(position).getName();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        listInstituteType.clear();
+        listInstituteType.add(0,infosl);
+
+        String[] instype = {"test","test1","test2","test3"};
+        for (int i = 0; i <instype.length ; i++) {
+            NameInfo inf = new NameInfo();
+            inf.setName(instype[i]);
+            listInstituteType.add(inf);
+        }
+        CustomAdapter adapterInstituteType = new CustomAdapter(context, listInstituteType);
+        spinnerInstituteType.setAdapter(adapterInstituteType);
+
+        spinnerInstituteType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position>0){
+                    instituteTypeId = listInstituteType.get(position).getId();
+                    instituteType = listInstituteType.get(position).getName();
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        listTrainingTrade.clear();
+        listTrainingTrade.add(0,infosl);
+        for (int i = 0; i <instype.length ; i++) {
+            NameInfo inf = new NameInfo();
+            inf.setName(instype[i]);
+            listTrainingTrade.add(inf);
+        }
+        CustomAdapter adapterTrainingTrade = new CustomAdapter(context, listTrainingTrade);
+        spinnerTrade.setAdapter(adapterTrainingTrade);
+
+        spinnerTrade.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position>0){
+                    trade = listTrainingTrade.get(position).getName();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+        listTrainingCenter.clear();
+        listTrainingCenter.add(0,infosl);
+        for (int i = 0; i <instype.length ; i++) {
+            NameInfo inf = new NameInfo();
+            inf.setName(instype[i]);
+            listTrainingCenter.add(inf);
+        }
+        CustomAdapter adapterTrainingCenter = new CustomAdapter(context, listTrainingCenter);
+        spinnerCenter.setAdapter(adapterTrainingCenter);
+        spinnerCenter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position>0){
+                    trainingCenter = listTrainingCenter.get(position).getName();
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
 
@@ -814,7 +1099,7 @@ public class VocationalTrainingActivity extends AppCompatActivity {
 
             if (requestCode == IMAGE_RESULT) {
 
-                String filePath = getImageFilePath(data);
+                filePath = getImageFilePath(data);
                 if (filePath != null) {
                     Bitmap selectedImage = BitmapFactory.decodeFile(filePath);
                     //selectedImage =  getResizedBitmap(selectedImage,1024,768);
@@ -903,4 +1188,48 @@ public class VocationalTrainingActivity extends AppCompatActivity {
         }
     }
 
+
+    private void uploadData(String data) {
+
+        if(!NetInfo.isOnline(context)){
+            AlertMessage.showMessage(context,"Alert!","No internet connection!");
+        }
+
+        final ProgressDialog pd = new ProgressDialog(context);
+        pd.setMessage("Loading....");
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.show();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Api api = retrofit.create(Api.class);
+        File file = new File(filePath);
+
+        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), filePath);
+
+        MultipartBody.Part multipartBody =MultipartBody.Part.createFormData("file",file.getName(),requestFile);
+
+
+        Call<ResponseBody> userCall = api.addtechnicaltraining( multipartBody,""+data);
+        userCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                pd.dismiss();
+
+                //String  reData = response.body();
+                Toast.makeText(context, "Send Successful", Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                pd.dismiss();
+            }
+        });
+
+
+    }
 }

@@ -148,19 +148,16 @@ public interface Api {
 
 
     @Multipart
-    @POST("uploadAttachment")
-    Call<String> uploadAttachment(@Part MultipartBody.Part filePart);
-
-    @Multipart
-    @POST("api/jobportal")
-    Call <String> uploadFile(@Part MultipartBody.Part file, @Part("file") RequestBody name,@Part("data") String jsondata );
-
-    @Multipart
     @POST("api/jobportal")
     Call<ResponseBody> jobPost(@Part MultipartBody.Part file, @Query("data") String description);
 
 
-//Islam
+    @Multipart
+    @POST("api/add-technical-training")
+    Call<ResponseBody> addtechnicaltraining(@Part MultipartBody.Part image, @Query("data") String description);
+
+
+    //Islam
     @GET
     public Call<CommonPostResponse> familylaw(@Url String url);
 

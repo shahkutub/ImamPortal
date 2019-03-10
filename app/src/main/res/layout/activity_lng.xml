@@ -33,7 +33,7 @@
                 <ImageView
                     android:layout_width="@dimen/_80sdp"
                     android:layout_height="@dimen/_80sdp"
-                    app:srcCompat="@drawable/ic_a21logo"
+                    app:srcCompat="@drawable/govt"
 
                     />
 

@@ -67,11 +67,11 @@ public class LanguageActivity extends AppCompatActivity {
         linAr = (LinearLayout)findViewById(R.id.linAr);
         relBg = (RelativeLayout) findViewById(R.id.relBg);
 
-
+        //setLocale("bn");
         relBg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setLocale("bn");
+
                 startActivity(new Intent(context,MainActivity.class));
                 finish();
             }
