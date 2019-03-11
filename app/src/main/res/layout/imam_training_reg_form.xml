@@ -901,7 +901,7 @@
                         android:textSize="@dimen/_15sdp" />
 
                     <EditText
-                        android:id="@+id/tvExamName3"
+                        android:id="@+id/etExamName3"
                         android:layout_width="@dimen/_200sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
@@ -1188,7 +1188,7 @@
                         android:textSize="@dimen/_15sdp" />
 
                     <EditText
-                        android:id="@+id/tvsubject6"
+                        android:id="@+id/etSubject6"
                         android:layout_width="@dimen/_150sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginLeft="@dimen/_5sdp"

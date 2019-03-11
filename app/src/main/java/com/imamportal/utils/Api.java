@@ -156,6 +156,18 @@ public interface Api {
     @POST("api/add-technical-training")
     Call<ResponseBody> addtechnicaltraining(@Part MultipartBody.Part image, @Query("data") String description);
 
+    @Multipart
+    @POST("api/skill/training/store")
+    Call<ResponseBody> imamTraining(@Part MultipartBody.Part image,
+                                    @Part MultipartBody.Part educational_certificate,
+                                    @Part MultipartBody.Part testimonial,
+                                    @Part MultipartBody.Part nid,
+                                    @Part MultipartBody.Part imam_prove_certificate,
+                                    @Part MultipartBody.Part nomination_certificate,
+                                    @Part MultipartBody.Part leave_certificate,
+                                    @Part MultipartBody.Part authority_approve_certificate,
+                                    @Query("exam_name") String exam_name,
+                                    @Query("data") String data);
 
     //Islam
     @GET

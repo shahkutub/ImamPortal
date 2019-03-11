@@ -55,6 +55,7 @@ import com.imamportal.utils.AppConstant;
 import com.imamportal.utils.BitmapUtils;
 import com.imamportal.utils.NetInfo;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -73,6 +74,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -102,9 +104,9 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
     private EditText input_name,input_name_father,input_father_name_bn,input_name_mother,input_name_mosq,input_mobile,input_birtdate,
     input_mosq_address,input_wordno,input_postoffice_present,input_village_present,input_postoffficePermanent,input_villagePermanent,
             etExamName1, etBoard1,etInstitute1,etsubject1,etgpa1,etYear1,etExamName2,etBoard2,etInstitute2,etsubject2,
-            etgpa2,etYear2,etBoard3,etInstitute3,etsubject3,etgpa3,etYear3,etExamName4,etBoard4,etInstitute4,etsubject4,
+            etgpa2,etYear2,etExamName3,etBoard3,etInstitute3,etsubject3,etgpa3,etYear3,etExamName4,etBoard4,etInstitute4,etsubject4,
             etgpa4,etYear4,etExamName5,etBoard5,etInstitute5,etsubject5,etgpa5,etYear5,etExamName6,etBoard6,etInstitute6,
-            tvsubject6,etgpa6,etYear6;
+            etSubject6,etgpa6,etYear6;
     Spinner spinnerCity,spinnerDistrict,spinnerUpozila,spinnerUnion,spinnerDistrictPermanent,spinnerUpojilaPermanent,spinnerUnionPermanent;
     private AppCompatButton btnSubmit;
 
@@ -127,18 +129,17 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
     private String imgId;
 
     String userPicPath;
+    private String userPhotoPath,educirtificatePath,testimonialPath,nidPath,chaimanCirtificatePath,
+            ifaCirtificatePath,leaveCirtificatePath,permissionCertificatePath;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.imam_training_reg_form);
         context= this;
         overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
-        if(AppConstant.allData!=null){
-            innitUi();
-        }else {
-            getAlldata();
-        }
 
+        getAlldata();
     }
 
     private void getAlldata() {
@@ -306,6 +307,7 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
         etsubject2 = (EditText)findViewById(R.id.etsubject2);
         etgpa2 = (EditText)findViewById(R.id.etgpa2);
         etYear2 = (EditText)findViewById(R.id.etYear2);
+        etExamName3 = (EditText)findViewById(R.id.etExamName3);
         etBoard3 = (EditText)findViewById(R.id.etBoard3);
         etInstitute3 = (EditText)findViewById(R.id.etInstitute3);
         etsubject3 = (EditText)findViewById(R.id.etsubject3);
@@ -326,7 +328,7 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
         etExamName6 = (EditText)findViewById(R.id.etExamName6);
         etBoard6 = (EditText)findViewById(R.id.etBoard6);
         etInstitute6 = (EditText)findViewById(R.id.etInstitute6);
-        tvsubject6 = (EditText)findViewById(R.id.tvsubject6);
+        etSubject6 = (EditText)findViewById(R.id.etSubject6);
         etgpa6 = (EditText)findViewById(R.id.etgpa6);
         etYear6 = (EditText)findViewById(R.id.etYear6);
 
@@ -614,7 +616,98 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
                     AlertMessage.showMessage(context,"Alert!","আপনার স্থায়ী গ্রাম লিখুন");
                 }else {
 
+
+                    JSONObject data = new JSONObject();
+                    JSONArray exam_nameArray =new JSONArray();
+                    JSONObject exam1 = new JSONObject();
+                    JSONObject exam2 = new JSONObject();
+                    JSONObject exam3 = new JSONObject();
+                    JSONObject exam4 = new JSONObject();
+                    JSONObject exam5 = new JSONObject();
+                    JSONObject exam6 = new JSONObject();
+                    try {
+                        data.put("name",name);
+                        data.put("father_name",nameFather);
+                        data.put("mother_name",mothername);
+                        data.put("masjid_name",mosqname);
+                        data.put("masjid_upazila_id",upojilaIdPresent);
+                        data.put("masjid_union_id",unionIdPresent);
+                        data.put("masjid_post_office",postofficePresent);
+                        data.put("masjid_village",villagePresent);
+                        data.put("masjid_mobile",mobile);
+                        data.put("address_upazila_id",upojilaIdPermanent);
+                        data.put("address_union_id",unionIdPermanent);
+                        data.put("address_post_office",postoffficePermanent);
+                        data.put("address_village",villagePermanent);
+                        data.put("dob",birthdate);
+                        data.put("masjid_district_id",districtIdPresent);
+                        data.put("address_district_id",districtIdPermanent);
+                        data.put("training_facility","");
+
+                        Log.e("data",""+data.toString());
+                        //exam
+                        exam1.put("exam_name",etExamName1.getText().toString());
+                        exam1.put("board",etBoard1.getText().toString());
+                        exam1.put("institute_name",etInstitute1.getText().toString());
+                        exam1.put("subject",etsubject1.getText().toString());
+                        exam1.put("group",etgpa1.getText().toString());
+                        exam1.put("year",etYear1.getText().toString());
+
+                        exam2.put("exam_name",etExamName2.getText().toString());
+                        exam2.put("board",etBoard2.getText().toString());
+                        exam2.put("institute_name",etInstitute2.getText().toString());
+                        exam2.put("subject",etsubject2.getText().toString());
+                        exam2.put("group",etgpa2.getText().toString());
+                        exam2.put("year",etYear2.getText().toString());
+
+                        exam3.put("exam_name",etExamName3.getText().toString());
+                        exam3.put("board",etBoard3.getText().toString());
+                        exam3.put("institute_name",etInstitute3.getText().toString());
+                        exam3.put("subject",etsubject3.getText().toString());
+                        exam3.put("group",etgpa3.getText().toString());
+                        exam3.put("year",etYear3.getText().toString());
+
+                        exam4.put("exam_name",etExamName4.getText().toString());
+                        exam4.put("board",etBoard4.getText().toString());
+                        exam4.put("institute_name",etInstitute4.getText().toString());
+                        exam4.put("subject",etsubject4.getText().toString());
+                        exam4.put("group",etgpa4.getText().toString());
+                        exam4.put("year",etYear4.getText().toString());
+
+                        exam5.put("exam_name",etExamName5.getText().toString());
+                        exam5.put("board",etBoard5.getText().toString());
+                        exam5.put("institute_name",etInstitute5.getText().toString());
+                        exam5.put("subject",etsubject5.getText().toString());
+                        exam5.put("group",etgpa5.getText().toString());
+                        exam5.put("year",etYear5.getText().toString());
+
+                        exam6.put("exam_name",etExamName6.getText().toString());
+                        exam6.put("board",etBoard6.getText().toString());
+                        exam6.put("institute_name",etInstitute6.getText().toString());
+                        exam6.put("subject",etSubject6.getText().toString());
+                        exam6.put("group",etgpa6.getText().toString());
+                        exam6.put("year",etYear6.getText().toString());
+
+
+                        exam_nameArray.put(exam1);
+                        exam_nameArray.put(exam2);
+
+                        exam_nameArray.put(exam3);
+                        exam_nameArray.put(exam4);
+
+                        exam_nameArray.put(exam5);
+                        exam_nameArray.put(exam6);
+
+
+                        Log.e("exam",""+exam_nameArray.toString());
+                        uploadData(exam_nameArray.toString(),data.toString());
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
+
+
 
 
             }
@@ -622,6 +715,58 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
     }
 
 
+    private void uploadData(String exam,String data) {
+
+        if(!NetInfo.isOnline(context)){
+            AlertMessage.showMessage(context,"Alert!","No internet connection!");
+        }
+
+        final ProgressDialog pd = new ProgressDialog(context);
+        pd.setMessage("Loading....");
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.show();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Api api = retrofit.create(Api.class);
+
+
+
+        Call<ResponseBody> userCall = api.imamTraining( multipartBody(userPhotoPath),multipartBody(educirtificatePath),
+                multipartBody(testimonialPath),multipartBody(nidPath),multipartBody(chaimanCirtificatePath),
+                multipartBody(ifaCirtificatePath),multipartBody(leaveCirtificatePath),multipartBody(permissionCertificatePath),
+                ""+exam,""+data);
+        userCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                pd.dismiss();
+
+                //String  reData = response.body();
+                Toast.makeText(context, "Send Successful", Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                pd.dismiss();
+            }
+        });
+
+
+    }
+
+    private MultipartBody.Part multipartBody(String filpath) {
+        MultipartBody.Part multipartBody = null;
+        if(filpath!=null){
+            File file = new File(filpath);
+            RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), userPhotoPath);
+            multipartBody = MultipartBody.Part.createFormData("file",file.getName(),requestFile);
+        }
+        return multipartBody;
+    }
 
     public Intent getPickImageChooserIntent() {
 
@@ -797,11 +942,11 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
 
                 String filePath = getImageFilePath(data);
                 if (filePath != null) {
-                    Bitmap selectedImage = BitmapFactory.decodeFile(filePath);
-                    selectedImage =  getResizedBitmap(selectedImage,1024,768);
 
 
                     if(imgId.equalsIgnoreCase("user")){
+                        userPhotoPath = getImageFilePath(data);
+                        Bitmap selectedImage = BitmapFactory.decodeFile(filePath);
                         selectedImage =  getResizedBitmap(selectedImage,300,300);
                         userPicPath = filePath;
                         bmpuser = selectedImage;
@@ -811,42 +956,63 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
 
 
                     if(imgId.equalsIgnoreCase("mulsonod")){
+                        educirtificatePath = getImageFilePath(data);
+                        Bitmap selectedImage = BitmapFactory.decodeFile(filePath);
+                        selectedImage =  getResizedBitmap(selectedImage,1024,768);
                         bmpmulsonod = selectedImage;
                         imgMulsonod.setImageBitmap(selectedImage);
                     }
 
 
                     if(imgId.equalsIgnoreCase("testimonial")){
+                        testimonialPath = getImageFilePath(data);
+                        Bitmap selectedImage = BitmapFactory.decodeFile(filePath);
+                        selectedImage =  getResizedBitmap(selectedImage,1024,768);
                         bmptestimo = selectedImage;
                         imgTestimonial.setImageBitmap(selectedImage);
                     }
 
 
                    if(imgId.equalsIgnoreCase("nid")){
+                       nidPath = getImageFilePath(data);
+                       Bitmap selectedImage = BitmapFactory.decodeFile(filePath);
+                       selectedImage =  getResizedBitmap(selectedImage,1024,768);
                        bmpNid = selectedImage;
-                        imgnidFile.setImageBitmap(selectedImage);
+                       imgnidFile.setImageBitmap(selectedImage);
                     }
 
 
                    if(imgId.equalsIgnoreCase("chairman")){
+                       chaimanCirtificatePath  = getImageFilePath(data);
+                       Bitmap selectedImage = BitmapFactory.decodeFile(filePath);
+                       selectedImage =  getResizedBitmap(selectedImage,1024,768);
                        bmpChairman = selectedImage;
                        imgChaimanFile.setImageBitmap(selectedImage);
                     }
 
 
                    if(imgId.equalsIgnoreCase("ifa")){
+                       ifaCirtificatePath  = getImageFilePath(data);
+                       Bitmap selectedImage = BitmapFactory.decodeFile(filePath);
+                       selectedImage =  getResizedBitmap(selectedImage,1024,768);
                        bmpIfa = selectedImage;
                        imgIFAFile.setImageBitmap(selectedImage);
                     }
 
 
                    if(imgId.equalsIgnoreCase("leave")){
+                       leaveCirtificatePath  = getImageFilePath(data);
+                       Bitmap selectedImage = BitmapFactory.decodeFile(filePath);
+                       selectedImage =  getResizedBitmap(selectedImage,1024,768);
                        bmpLeave = selectedImage;
                        imgLeaveFile.setImageBitmap(selectedImage);
                     }
 
 
                    if(imgId.equalsIgnoreCase("permission")){
+                       permissionCertificatePath  = getImageFilePath(data);
+                       Bitmap selectedImage = BitmapFactory.decodeFile(filePath);
+                       selectedImage =  getResizedBitmap(selectedImage,1024,768);
                        bmpAuth = selectedImage;
                        imgauthPermissionFile.setImageBitmap(selectedImage);
                     }

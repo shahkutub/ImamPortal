@@ -202,155 +202,50 @@ public class VocationalTrainingActivity extends AppCompatActivity {
         tvBirthdate = (TextView) findViewById(R.id.tvBirthdate);
         appcomBtn = (AppCompatButton) findViewById(R.id.appcomBtn);
 
+
         appcomBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name_bn = input_name_bn.getText().toString();
-                String name_eng = input_name_eng.getText().toString();
-                String father_name_bn = input_father_name_bn.getText().toString();
-                String father_name_eng = input_father_name_eng.getText().toString();
-                String mother_name_bn = input_mother_name_bn.getText().toString();
-                String mother_name_eng = input_mother_name_eng.getText().toString();
-                String nid = input_nid.getText().toString();
-                String email = input_email.getText().toString();
-                String mobile = input_mobile.getText().toString();
-                String postcode = input_postcode.getText().toString();
-                String institute = input_institute.getText().toString();
-                String lastEduQualification = input_lastqualification.getText().toString();
-                String name_sm = input_name_sm.getText().toString();
-                String mobile_sm = input_mobile_sm.getText().toString();
-                String birthdate = tvBirthdate.getText().toString();
-                String wardno = input_word.getText().toString();
-
-                if(TextUtils.isEmpty(name_bn)){
-                    AlertMessage.showMessage(context,"Alert!","আপনার নাম লিখুন বাংলায়");
-                    input_name_bn.requestFocus();
-                }else if(TextUtils.isEmpty(name_eng)){
-                    AlertMessage.showMessage(context,"Alert!","আপনার নাম লিখুন ইংরেজিতে");
-                    input_name_eng.requestFocus();
-                }else if(TextUtils.isEmpty(father_name_bn)){
-                    AlertMessage.showMessage(context,"Alert!","আপনার পিতার নাম লিখুন বাংলায়");
-                    input_father_name_bn.requestFocus();
-                }else if(TextUtils.isEmpty(father_name_eng)){
-                    AlertMessage.showMessage(context,"Alert!","আপনার পিতার নাম লিখুন ইংরেজিতে");
-                    input_father_name_eng.requestFocus();
-                }else if(TextUtils.isEmpty(mother_name_bn)){
-                    AlertMessage.showMessage(context,"Alert!","আপনার মাতার নাম লিখুন বাংলায়");
-                    input_mother_name_bn.requestFocus();
-                }else if(TextUtils.isEmpty(mother_name_eng)){
-                    AlertMessage.showMessage(context,"Alert!","আপনার মাতার নাম লিখুন ইংরেজিতে");
-                    input_mother_name_eng.requestFocus();
-                }else if(TextUtils.isEmpty(nid)){
-                    AlertMessage.showMessage(context,"Alert!","আপনার লিঙ্গ নির্বাচন করুন");
-                }else if(TextUtils.isEmpty(birthdate)){
-                    AlertMessage.showMessage(context,"Alert!","আপনার জন্ম তারিখ লিখুন");
-                }else if(TextUtils.isEmpty(maritalStatus)){
-                    AlertMessage.showMessage(context,"Alert!","আপনার বৈবাহিক অবস্থা নির্বাচন করুন");
-                }else if(TextUtils.isEmpty(nationalality)){
-                    AlertMessage.showMessage(context,"Alert!","আপনার জাতীয়তা নির্বাচন করুন");
-                }else if(TextUtils.isEmpty(occupation)){
-                    AlertMessage.showMessage(context,"Alert!","আপনার পেশা নির্বাচন করুন");
-                }else if(TextUtils.isEmpty(nid)){
-                    AlertMessage.showMessage(context,"Alert!","আপনার জাতীয় পরিচয় পত্র নম্বর লিখুন");
-                    input_nid.requestFocus();
-                }else if(TextUtils.isEmpty(email)){
-                    AlertMessage.showMessage(context,"Alert!","ইমেইল এড্রেস লিখুন");
-                    input_email.requestFocus();
-                }else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                    AlertMessage.showMessage(context,"Alert!","ইমেইল এড্রেস সঠিক নয়");
-                    input_email.requestFocus();
-                }else if(TextUtils.isEmpty(mobile)){
-                    AlertMessage.showMessage(context,"Alert!","আপনার মোবাইল নম্বর লিখুন");
-                    input_mobile.requestFocus();
-                }else if(TextUtils.isEmpty(divisionId)){
-                    AlertMessage.showMessage(context,"Alert!","আপনার বিভাগ নির্বাচন করুন");
-                }else if(TextUtils.isEmpty(districtId)){
-                    AlertMessage.showMessage(context,"Alert!","আপনার জেলা নির্বাচন করুন");
-                }else if(TextUtils.isEmpty(upojilaId)){
-                    AlertMessage.showMessage(context,"Alert!","আপনার উপজেলা নির্বাচন করুন");
-                }else if(TextUtils.isEmpty(unionId)){
-                    AlertMessage.showMessage(context,"Alert!","আপনার ইউনিয়ন নির্বাচন করুন");
-                }else if(TextUtils.isEmpty(postcode)){
-                    AlertMessage.showMessage(context,"Alert!","আপনার পোস্টকোড লিখুন");
-                }else if(TextUtils.isEmpty(cityId)){
-                    AlertMessage.showMessage(context,"Alert!","আপনার সিটি নির্বাচন করুন");
-                }else if(TextUtils.isEmpty(wardno)){
-                    AlertMessage.showMessage(context,"Alert!","আপনার ওয়ার্ড লিখুন");
-                }else if(TextUtils.isEmpty(educationQualification)){
-                    AlertMessage.showMessage(context,"Alert!","আপনার শিক্ষাগত যোগ্যতা নির্বাচন করুন");
-                }else if(TextUtils.isEmpty(institute)){
-                    AlertMessage.showMessage(context,"Alert!","আপনার শিক্ষা প্রতিষ্ঠানের নাম লিখুন");
-                }else if(TextUtils.isEmpty(instituteType)){
-                    AlertMessage.showMessage(context,"Alert!","আপনার শিক্ষা প্রতিষ্ঠানের ধরণ নির্বাচন করুন");
-                }else if(TextUtils.isEmpty(divisionIdInstitute)){
-                    AlertMessage.showMessage(context,"Alert!","আপনার শিক্ষা প্রতিষ্ঠানের বিভাগ নির্বাচন করুন");
-                }else if(TextUtils.isEmpty(districtIdInstitute)){
-                    AlertMessage.showMessage(context,"Alert!","আপনার শিক্ষা প্রতিষ্ঠানের জেলা নির্বাচন করুন");
-                }else if(TextUtils.isEmpty(upojilaIdInstitute)){
-                    AlertMessage.showMessage(context,"Alert!","আপনার শিক্ষা প্রতিষ্ঠানের উপজেলা নির্বাচন করুন");
-                }else if(TextUtils.isEmpty(lastEduQualification)){
-                    AlertMessage.showMessage(context,"Alert!","আপনার সর্বশেষ শিক্ষাগত যোগ্যতা লিখুন");
-                    input_lastqualification.requestFocus();
-                }else if(TextUtils.isEmpty(trade)){
-                    AlertMessage.showMessage(context,"Alert!","প্রশিক্ষণ ট্রেড নির্বাচন করুন");
-                }else if(TextUtils.isEmpty(trade)){
-                    AlertMessage.showMessage(context,"Alert!","প্রশিক্ষণ সেন্টার নির্বাচন করুন");
-                }else if(TextUtils.isEmpty(name_sm)){
-                    AlertMessage.showMessage(context,"Alert!","সমন্বয়কারীর নাম লিখুন");
-                    input_name_sm.requestFocus();
-                }else if(TextUtils.isEmpty(mobile_sm)){
-                    AlertMessage.showMessage(context,"Alert!","সমন্বয়কারীর মোবাইল নম্বর লিখুন");
-                    input_mobile_sm.requestFocus();
-                }else if(TextUtils.isEmpty(districtIdSm)){
-                    AlertMessage.showMessage(context,"Alert!","সমন্বয়কারীর জেলা নির্বাচন করুন");
-                }else if(TextUtils.isEmpty(upojilaIdSm)){
-                    AlertMessage.showMessage(context,"Alert!","সমন্বয়কারীর উপজেলা নির্বাচন করুন");
+                String data = "{\n" +
+                        "\t\"name_bn\": \"Sadi \",\n" +
+                        "\t\"name_en\": \"Sksk\",\n" +
+                        "\t\"father_name_bn\": \"Hssj\",\n" +
+                        "\t\"father_name_en\": \"Jzjs\",\n" +
+                        "\t\"mother_name_bn\": \"Jssk\",\n" +
+                        "\t\"mother_name_en\": \"Skskek\",\n" +
+                        "\t\"gender\": \"পুরুষ\",\n" +
+                        "\t\"dob\": \"11-03-2019\",\n" +
+                        "\t\"maritial_status\": \" বিবাহিত \",\n" +
+                        "\t\"nationality\": \"  বাংলাদেশী  \",\n" +
+                        "\t\"profession\": \"শিক্ষক\",\n" +
+                        "\t\"nid\": \"124556\",\n" +
+                        "\t\"email\": \"robin@gmail.com\",\n" +
+                        "\t\"mobile_number\": \"13797997\",\n" +
+                        "\t\"division_id\": \"3\",\n" +
+                        "\t\"district_id\": \"20\",\n" +
+                        "\t\"upazila_id\": \"213\",\n" +
+                        "\t\"union_id\": \"3972\",\n" +
+                        "\t\"word_no\": \"23678\",\n" +
+                        "\t\"city_corporation_id\": \"2\",\n" +
+                        "\t\"educational_qualification\": \"কুমিল্লা সিটি কর্পোরেশন\",\n" +
+                        "\t\"organization_name\": \"Hzjsk\",\n" +
+                        "\t\"organization_type\": \"test1\",\n" +
+                        "\t\"edu_division_id\": \"6\",\n" +
+                        "\t\"edu_district_id\": \"57\",\n" +
+                        "\t\"edu_upazila_id\": \"413\",\n" +
+                        "\t\"educational_qualification_details\": \"Kamil\",\n" +
+                        "\t\"training_trade\": \"test1\",\n" +
+                        "\t\"training_center\": \"test1\",\n" +
+                        "\t\"coordinator_name\": \"Hsn\",\n" +
+                        "\t\"coordinator_mobile\": \"16767\",\n" +
+                        "\t\"adjustment_district_id\": \"9\",\n" +
+                        "\t\"adjustment_upazila_id\": \"63\"\n" +
+                        "}";
+                if(!TextUtils.isEmpty(filePath)){
+                    validation();
                 }else {
-
-                    JSONObject data = new JSONObject();
-                    try {
-                        data.put("name_bn",name_bn);
-                        data.put("name_en",name_eng);
-                        data.put("father_name_bn",father_name_bn);
-                        data.put("father_name_en",father_name_eng);
-                        data.put("mother_name_bn",mother_name_bn);
-                        data.put("mother_name_en",mother_name_eng);
-                        data.put("gender",gender);
-                        data.put("dob",birthdate);
-                        data.put("maritial_status",maritalStatus);
-                        data.put("nationality",nationalality);
-                        data.put("profession",occupation);
-                        data.put("nid",nid);
-                        data.put("email",email);
-                        data.put("mobile_number",mobile);
-                        data.put("division_id",divisionId);
-                        data.put("district_id",districtId);
-                        data.put("upazila_id",upojilaId);
-                        data.put("union_id",unionId);
-                        data.put("word_no",wardno);
-                        data.put("city_corporation_id",cityId);
-                        data.put("educational_qualification",educationQualification);
-                        data.put("organization_name",institute);
-                        data.put("organization_type",instituteType);
-                        data.put("edu_division_id",divisionIdInstitute);
-                        data.put("edu_district_id",districtIdInstitute);
-                        data.put("edu_upazila_id",upojilaIdInstitute);
-                        data.put("educational_qualification_details",lastEduQualification);
-                        data.put("training_trade",trade);
-                        data.put("training_center",trainingCenter);
-                        data.put("coordinator_name",name_sm);
-                        data.put("coordinator_mobile",mobile_sm);
-                        data.put("adjustment_district_id",districtIdSm);
-                        data.put("adjustment_upazila_id",upojilaIdSm);
-
-
-                        Log.e("data",data.toString());
-                        uploadData(data.toString());
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    AlertMessage.showMessage(context,"Alert","Photo not captured");
                 }
-
 
 
 
@@ -396,7 +291,7 @@ public class VocationalTrainingActivity extends AppCompatActivity {
         spinnerUpozilaSm = (Spinner)findViewById(R.id.spinnerUpozilaSm);
 
         //gender spinner
-        List<NameInfo> listGender = new ArrayList<>();
+        final List<NameInfo> listGender = new ArrayList<>();
         final NameInfo  infosl = new NameInfo();
         infosl.setId("select");
         infosl.setName("নির্বাচন করুন");
@@ -416,8 +311,8 @@ public class VocationalTrainingActivity extends AppCompatActivity {
         spinnerGender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(!spinnerGender.getSelectedItem().toString().equalsIgnoreCase("নির্বাচন করুন")){
-                    gender =  spinnerGender.getSelectedItem().toString();
+                if(position>0){
+                    gender =  listGender.get(position).getName();
                 }
 
             }
@@ -1006,6 +901,155 @@ public class VocationalTrainingActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private void validation() {
+
+        String name_bn = input_name_bn.getText().toString();
+        String name_eng = input_name_eng.getText().toString();
+        String father_name_bn = input_father_name_bn.getText().toString();
+        String father_name_eng = input_father_name_eng.getText().toString();
+        String mother_name_bn = input_mother_name_bn.getText().toString();
+        String mother_name_eng = input_mother_name_eng.getText().toString();
+        String nid = input_nid.getText().toString();
+        String email = input_email.getText().toString();
+        String mobile = input_mobile.getText().toString();
+        String postcode = input_postcode.getText().toString();
+        String institute = input_institute.getText().toString();
+        String lastEduQualification = input_lastqualification.getText().toString();
+        String name_sm = input_name_sm.getText().toString();
+        String mobile_sm = input_mobile_sm.getText().toString();
+        String birthdate = tvBirthdate.getText().toString();
+        String wardno = input_word.getText().toString();
+
+        if(TextUtils.isEmpty(name_bn)){
+            AlertMessage.showMessage(context,"Alert!","আপনার নাম লিখুন বাংলায়");
+            input_name_bn.requestFocus();
+        }else if(TextUtils.isEmpty(name_eng)){
+            AlertMessage.showMessage(context,"Alert!","আপনার নাম লিখুন ইংরেজিতে");
+            input_name_eng.requestFocus();
+        }else if(TextUtils.isEmpty(father_name_bn)){
+            AlertMessage.showMessage(context,"Alert!","আপনার পিতার নাম লিখুন বাংলায়");
+            input_father_name_bn.requestFocus();
+        }else if(TextUtils.isEmpty(father_name_eng)){
+            AlertMessage.showMessage(context,"Alert!","আপনার পিতার নাম লিখুন ইংরেজিতে");
+            input_father_name_eng.requestFocus();
+        }else if(TextUtils.isEmpty(mother_name_bn)){
+            AlertMessage.showMessage(context,"Alert!","আপনার মাতার নাম লিখুন বাংলায়");
+            input_mother_name_bn.requestFocus();
+        }else if(TextUtils.isEmpty(mother_name_eng)){
+            AlertMessage.showMessage(context,"Alert!","আপনার মাতার নাম লিখুন ইংরেজিতে");
+            input_mother_name_eng.requestFocus();
+        }else if(TextUtils.isEmpty(gender)){
+            AlertMessage.showMessage(context,"Alert!","আপনার লিঙ্গ নির্বাচন করুন");
+        }else if(TextUtils.isEmpty(birthdate)){
+            AlertMessage.showMessage(context,"Alert!","আপনার জন্ম তারিখ লিখুন");
+        }else if(TextUtils.isEmpty(maritalStatus)){
+            AlertMessage.showMessage(context,"Alert!","আপনার বৈবাহিক অবস্থা নির্বাচন করুন");
+        }else if(TextUtils.isEmpty(nationalality)){
+            AlertMessage.showMessage(context,"Alert!","আপনার জাতীয়তা নির্বাচন করুন");
+        }else if(TextUtils.isEmpty(occupation)){
+            AlertMessage.showMessage(context,"Alert!","আপনার পেশা নির্বাচন করুন");
+        }else if(TextUtils.isEmpty(nid)){
+            AlertMessage.showMessage(context,"Alert!","আপনার জাতীয় পরিচয় পত্র নম্বর লিখুন");
+            input_nid.requestFocus();
+        }else if(TextUtils.isEmpty(email)){
+            AlertMessage.showMessage(context,"Alert!","ইমেইল এড্রেস লিখুন");
+            input_email.requestFocus();
+        }else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            AlertMessage.showMessage(context,"Alert!","ইমেইল এড্রেস সঠিক নয়");
+            input_email.requestFocus();
+        }else if(TextUtils.isEmpty(mobile)){
+            AlertMessage.showMessage(context,"Alert!","আপনার মোবাইল নম্বর লিখুন");
+            input_mobile.requestFocus();
+        }else if(TextUtils.isEmpty(divisionId)){
+            AlertMessage.showMessage(context,"Alert!","আপনার বিভাগ নির্বাচন করুন");
+        }else if(TextUtils.isEmpty(districtId)){
+            AlertMessage.showMessage(context,"Alert!","আপনার জেলা নির্বাচন করুন");
+        }else if(TextUtils.isEmpty(upojilaId)){
+            AlertMessage.showMessage(context,"Alert!","আপনার উপজেলা নির্বাচন করুন");
+        }else if(TextUtils.isEmpty(unionId)){
+            AlertMessage.showMessage(context,"Alert!","আপনার ইউনিয়ন নির্বাচন করুন");
+        }else if(TextUtils.isEmpty(postcode)){
+            AlertMessage.showMessage(context,"Alert!","আপনার পোস্টকোড লিখুন");
+        }else if(TextUtils.isEmpty(cityId)){
+            AlertMessage.showMessage(context,"Alert!","আপনার সিটি নির্বাচন করুন");
+        }else if(TextUtils.isEmpty(wardno)){
+            AlertMessage.showMessage(context,"Alert!","আপনার ওয়ার্ড লিখুন");
+        }else if(TextUtils.isEmpty(educationQualification)){
+            AlertMessage.showMessage(context,"Alert!","আপনার শিক্ষাগত যোগ্যতা নির্বাচন করুন");
+        }else if(TextUtils.isEmpty(institute)){
+            AlertMessage.showMessage(context,"Alert!","আপনার শিক্ষা প্রতিষ্ঠানের নাম লিখুন");
+        }else if(TextUtils.isEmpty(instituteType)){
+            AlertMessage.showMessage(context,"Alert!","আপনার শিক্ষা প্রতিষ্ঠানের ধরণ নির্বাচন করুন");
+        }else if(TextUtils.isEmpty(divisionIdInstitute)){
+            AlertMessage.showMessage(context,"Alert!","আপনার শিক্ষা প্রতিষ্ঠানের বিভাগ নির্বাচন করুন");
+        }else if(TextUtils.isEmpty(districtIdInstitute)){
+            AlertMessage.showMessage(context,"Alert!","আপনার শিক্ষা প্রতিষ্ঠানের জেলা নির্বাচন করুন");
+        }else if(TextUtils.isEmpty(upojilaIdInstitute)){
+            AlertMessage.showMessage(context,"Alert!","আপনার শিক্ষা প্রতিষ্ঠানের উপজেলা নির্বাচন করুন");
+        }else if(TextUtils.isEmpty(lastEduQualification)){
+            AlertMessage.showMessage(context,"Alert!","আপনার সর্বশেষ শিক্ষাগত যোগ্যতা লিখুন");
+            input_lastqualification.requestFocus();
+        }else if(TextUtils.isEmpty(trade)){
+            AlertMessage.showMessage(context,"Alert!","প্রশিক্ষণ ট্রেড নির্বাচন করুন");
+        }else if(TextUtils.isEmpty(trade)){
+            AlertMessage.showMessage(context,"Alert!","প্রশিক্ষণ সেন্টার নির্বাচন করুন");
+        }else if(TextUtils.isEmpty(name_sm)){
+            AlertMessage.showMessage(context,"Alert!","সমন্বয়কারীর নাম লিখুন");
+            input_name_sm.requestFocus();
+        }else if(TextUtils.isEmpty(mobile_sm)){
+            AlertMessage.showMessage(context,"Alert!","সমন্বয়কারীর মোবাইল নম্বর লিখুন");
+            input_mobile_sm.requestFocus();
+        }else if(TextUtils.isEmpty(districtIdSm)){
+            AlertMessage.showMessage(context,"Alert!","সমন্বয়কারীর জেলা নির্বাচন করুন");
+        }else if(TextUtils.isEmpty(upojilaIdSm)){
+            AlertMessage.showMessage(context,"Alert!","সমন্বয়কারীর উপজেলা নির্বাচন করুন");
+        }else {
+
+            JSONObject data = new JSONObject();
+            try {
+                data.put("name_bn",name_bn);
+                data.put("name_en",name_eng);
+                data.put("father_name_bn",father_name_bn);
+                data.put("father_name_en",father_name_eng);
+                data.put("mother_name_bn",mother_name_bn);
+                data.put("mother_name_en",mother_name_eng);
+                data.put("gender",gender);
+                data.put("dob",birthdate);
+                data.put("maritial_status",maritalStatus);
+                data.put("nationality",nationalality);
+                data.put("profession",occupation);
+                data.put("nid",nid);
+                data.put("email",email);
+                data.put("mobile_number",mobile);
+                data.put("division_id",divisionId);
+                data.put("district_id",districtId);
+                data.put("upazila_id",upojilaId);
+                data.put("union_id",unionId);
+                data.put("word_no",wardno);
+                data.put("city_corporation_id",cityId);
+                data.put("educational_qualification",educationQualification);
+                data.put("organization_name",institute);
+                data.put("organization_type",instituteType);
+                data.put("edu_division_id",divisionIdInstitute);
+                data.put("edu_district_id",districtIdInstitute);
+                data.put("edu_upazila_id",upojilaIdInstitute);
+                data.put("educational_qualification_details",lastEduQualification);
+                data.put("training_trade",trade);
+                data.put("training_center",trainingCenter);
+                data.put("coordinator_name",name_sm);
+                data.put("coordinator_mobile",mobile_sm);
+                data.put("adjustment_district_id",districtIdSm);
+                data.put("adjustment_upazila_id",upojilaIdSm);
+
+
+                Log.e("data",data.toString());
+                uploadData(data.toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public Intent getPickImageChooserIntent() {
