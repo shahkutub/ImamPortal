@@ -18,6 +18,7 @@ import com.bumptech.glide.request.transition.Transition;
 import com.imamportal.R;
 import com.imamportal.model.PhotoModel;
 import com.imamportal.model.SantirbaniInfo;
+import com.imamportal.utils.Api;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +68,7 @@ public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListAdapter.
 
         Glide.with(context)
                 .asBitmap()
-                .load("http://192.168.0.119/imamportal/public/photo_gallery/"+data.getImage())
+                .load(Api.BASE_URL+"public/photo_gallery/"+data.getImage())
                 .into(new SimpleTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {

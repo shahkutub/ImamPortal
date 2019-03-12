@@ -114,18 +114,14 @@
             android:label="@string/title_activity_quiz_bijoyee"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme" />
-
         <activity
             android:name=".NamjTimeActivity"
             android:label="@string/title_activity_quiz_bijoyee"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".AllCommonPostActivity"
             android:label="@string/title_activity_quiz_bijoyee"
             android:screenOrientation="portrait" />
-
-
         <activity
             android:name=".AlQuranActivity"
             android:label="@string/title_activity_quiz_bijoyee"
@@ -187,7 +183,6 @@
         <activity
             android:name=".VideoPostActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".KitabActivity"
             android:screenOrientation="portrait" />
@@ -211,6 +206,10 @@
         <activity
             android:name=".VocationalTrainingActivity"
             android:label="@string/title_activity_vocational_training"
+            android:theme="@style/MyMaterialTheme" />
+        <activity
+            android:name=".DetailsActivity"
+            android:label="@string/title_activity_details"
             android:theme="@style/MyMaterialTheme"></activity>
     </application>
 

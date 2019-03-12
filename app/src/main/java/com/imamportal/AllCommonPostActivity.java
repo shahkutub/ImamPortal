@@ -58,7 +58,6 @@ public class AllCommonPostActivity extends AppCompatActivity implements SwipyRef
         tvName = (TextView) findViewById(R.id.tvName);
         tvName.setText(AppConstant.activitiname);
         tvTotalBani = (TextView) findViewById(R.id.tvTotalBani);
-        progressbar = (ProgressBar)findViewById(R.id.progressbar);
 
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +65,8 @@ public class AllCommonPostActivity extends AppCompatActivity implements SwipyRef
                 finish();
             }
         });
+
+        progressbar = (ProgressBar)findViewById(R.id.progressbar);
         recyclSantirBani = (RecyclerView) findViewById(R.id.recyclSantirBani);
         swiperefresh = (SwipyRefreshLayout)findViewById(R.id.swipyrefreshlayout);
         swiperefresh.setOnRefreshListener(this);

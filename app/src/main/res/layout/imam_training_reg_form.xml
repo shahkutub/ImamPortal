@@ -648,7 +648,7 @@
                         android:textSize="@dimen/_15sdp" />
 
                     <TextView
-                        android:layout_width="@dimen/_200sdp"
+                        android:layout_width="@dimen/_150sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:background="@drawable/edit_bg"
@@ -659,7 +659,7 @@
                         android:textSize="@dimen/_15sdp" />
 
                     <TextView
-                        android:layout_width="@dimen/_200sdp"
+                        android:layout_width="@dimen/_150sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:background="@drawable/edit_bg"
@@ -670,7 +670,7 @@
                         android:textSize="@dimen/_15sdp" />
 
                     <TextView
-                        android:layout_width="@dimen/_200sdp"
+                        android:layout_width="@dimen/_150sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:background="@drawable/edit_bg"
@@ -734,7 +734,7 @@
 
                     <EditText
                         android:id="@+id/etExamName1"
-                        android:layout_width="@dimen/_200sdp"
+                        android:layout_width="@dimen/_150sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:background="@drawable/edit_bg"
@@ -745,7 +745,7 @@
 
                     <EditText
                         android:id="@+id/etBoard1"
-                        android:layout_width="@dimen/_200sdp"
+                        android:layout_width="@dimen/_150sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:background="@drawable/edit_bg"
@@ -756,7 +756,7 @@
 
                     <EditText
                         android:id="@+id/etInstitute1"
-                        android:layout_width="@dimen/_200sdp"
+                        android:layout_width="@dimen/_150sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:background="@drawable/edit_bg"
@@ -818,7 +818,7 @@
 
                     <EditText
                         android:id="@+id/etExamName2"
-                        android:layout_width="@dimen/_200sdp"
+                        android:layout_width="@dimen/_150sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:background="@drawable/edit_bg"
@@ -829,7 +829,7 @@
 
                     <EditText
                         android:id="@+id/etBoard2"
-                        android:layout_width="@dimen/_200sdp"
+                        android:layout_width="@dimen/_150sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:background="@drawable/edit_bg"
@@ -840,7 +840,7 @@
 
                     <EditText
                         android:id="@+id/etInstitute2"
-                        android:layout_width="@dimen/_200sdp"
+                        android:layout_width="@dimen/_150sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:background="@drawable/edit_bg"
@@ -902,7 +902,7 @@
 
                     <EditText
                         android:id="@+id/etExamName3"
-                        android:layout_width="@dimen/_200sdp"
+                        android:layout_width="@dimen/_150sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:background="@drawable/edit_bg"
@@ -913,7 +913,7 @@
 
                     <EditText
                         android:id="@+id/etBoard3"
-                        android:layout_width="@dimen/_200sdp"
+                        android:layout_width="@dimen/_150sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:background="@drawable/edit_bg"
@@ -924,7 +924,7 @@
 
                     <EditText
                         android:id="@+id/etInstitute3"
-                        android:layout_width="@dimen/_200sdp"
+                        android:layout_width="@dimen/_150sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:background="@drawable/edit_bg"
@@ -986,7 +986,7 @@
 
                     <EditText
                         android:id="@+id/etExamName4"
-                        android:layout_width="@dimen/_200sdp"
+                        android:layout_width="@dimen/_150sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:background="@drawable/edit_bg"
@@ -997,7 +997,7 @@
 
                     <EditText
                         android:id="@+id/etBoard4"
-                        android:layout_width="@dimen/_200sdp"
+                        android:layout_width="@dimen/_150sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:background="@drawable/edit_bg"
@@ -1008,7 +1008,7 @@
 
                     <EditText
                         android:id="@+id/etInstitute4"
-                        android:layout_width="@dimen/_200sdp"
+                        android:layout_width="@dimen/_150sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:background="@drawable/edit_bg"
@@ -1071,7 +1071,7 @@
 
                     <EditText
                         android:id="@+id/etExamName5"
-                        android:layout_width="@dimen/_200sdp"
+                        android:layout_width="@dimen/_150sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:background="@drawable/edit_bg"
@@ -1082,7 +1082,7 @@
 
                     <EditText
                         android:id="@+id/etBoard5"
-                        android:layout_width="@dimen/_200sdp"
+                        android:layout_width="@dimen/_150sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:background="@drawable/edit_bg"
@@ -1093,7 +1093,7 @@
 
                     <EditText
                         android:id="@+id/etInstitute5"
-                        android:layout_width="@dimen/_200sdp"
+                        android:layout_width="@dimen/_150sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:background="@drawable/edit_bg"
@@ -1156,7 +1156,7 @@
 
                     <EditText
                         android:id="@+id/etExamName6"
-                        android:layout_width="@dimen/_200sdp"
+                        android:layout_width="@dimen/_150sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:background="@drawable/edit_bg"
@@ -1167,7 +1167,7 @@
 
                     <EditText
                         android:id="@+id/etBoard6"
-                        android:layout_width="@dimen/_200sdp"
+                        android:layout_width="@dimen/_150sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:background="@drawable/edit_bg"
@@ -1178,7 +1178,7 @@
 
                     <EditText
                         android:id="@+id/etInstitute6"
-                        android:layout_width="@dimen/_200sdp"
+                        android:layout_width="@dimen/_150sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:background="@drawable/edit_bg"

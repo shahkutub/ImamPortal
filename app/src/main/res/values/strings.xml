@@ -200,5 +200,6 @@
     <string name="beboherSorto">ব্যবহারের শর্তাবলী</string>
     <string name="sochorchorjiggasa">সচরাচর জিজ্ঞাসা</string>
     <string name="sarbiksohojogita">সার্বিক সহযোগিতায়</string>
+    <string name="title_activity_details">DetailsActivity</string>
 
 </resources>

@@ -27,6 +27,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.util.Patterns;
@@ -118,6 +119,9 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
     List<NameInfo> listUnion = new ArrayList<>();
     List<NameInfo> listUnionPermanent = new ArrayList<>();
 
+    NameInfo  infosl = new NameInfo();
+
+
     private String name,nameFather,mothername,mobile,birthdate,mosqname,mosqaddress,wardno,postofficePresent,
             villagePresent,postoffficePermanent,villagePermanent,podobi="", division="",divisionId, city="",cityId="",districtPresent="",
             districtPermanent="",districtIdPresent="",districtIdPermanent="",upojilaPresent="",upojilaPermanent="",upojilaIdPresent="",
@@ -131,13 +135,16 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
     String userPicPath;
     private String userPhotoPath,educirtificatePath,testimonialPath,nidPath,chaimanCirtificatePath,
             ifaCirtificatePath,leaveCirtificatePath,permissionCertificatePath;
-
+    JSONObject data = new JSONObject();
+    JSONArray exam_nameArray =new JSONArray();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.imam_training_reg_form);
         context= this;
         overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
+        infosl.setId("select");
+        infosl.setName("নির্বাচন করুন");
 
         getAlldata();
     }
@@ -344,7 +351,11 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
         spinnerUpojilaPermanent = (Spinner) findViewById(R.id.spinnerUpzilaPermanent);
         spinnerUnionPermanent = (Spinner) findViewById(R.id.spinnerUnionPermanent);
 
+
         if(AppConstant.allData != null){
+            listDistrict.add(0,infosl);
+            listDistrictPermanent.add(0,infosl);
+
             for (int i = 0; i <AppConstant.allData.getResult().size() ; i++) {
                 if(AppConstant.allData.getResult().get(i).getTable_name().equalsIgnoreCase("geo_districts")){
                     for (int j = 0; j <AppConstant.allData.getResult().get(i).getValues().size() ; j++) {
@@ -369,6 +380,7 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     listUpozila.clear();
+                    listUpozila.add(0,infosl);
                     if(!spinnerDistrict.getSelectedItem().toString().equalsIgnoreCase("নির্বাচন করুন")){
                         districtPresent = spinnerDistrict.getSelectedItem().toString();
                         districtIdPresent = listDistrict.get(position).getId();
@@ -404,6 +416,7 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                     listUnion.clear();
+                    listUnion.add(0,infosl);
                     if(!spinnerUpozila.getSelectedItem().toString().equalsIgnoreCase("নির্বাচন করুন")){
                         upojilaPresent= spinnerDistrict.getSelectedItem().toString();
                         upojilaIdPresent = listUpozila.get(position).getId();
@@ -454,6 +467,7 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     listUpozilaPermanent.clear();
+                    listUpozilaPermanent.add(0,infosl);
                     if(!spinnerDistrictPermanent.getSelectedItem().toString().equalsIgnoreCase("নির্বাচন করুন")){
                         districtPermanent = spinnerDistrictPermanent.getSelectedItem().toString();
                         districtIdPermanent = listDistrictPermanent.get(position).getId();
@@ -488,6 +502,7 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                     listUnionPermanent.clear();
+                    listUnionPermanent.add(0,infosl);
                     if(!spinnerUpojilaPermanent.getSelectedItem().toString().equalsIgnoreCase("নির্বাচন করুন")){
                         upojilaPermanent= spinnerUpojilaPermanent.getSelectedItem().toString();
                         upojilaIdPermanent = listUpozilaPermanent.get(position).getId();
@@ -617,8 +632,7 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
                 }else {
 
 
-                    JSONObject data = new JSONObject();
-                    JSONArray exam_nameArray =new JSONArray();
+
                     JSONObject exam1 = new JSONObject();
                     JSONObject exam2 = new JSONObject();
                     JSONObject exam3 = new JSONObject();
@@ -700,17 +714,16 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
 
 
                         Log.e("exam",""+exam_nameArray.toString());
-                        uploadData(exam_nameArray.toString(),data.toString());
+
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
 
-
-
-
+                uploadData(exam_nameArray.toString(),data.toString());
             }
+
         });
     }
 
@@ -760,10 +773,12 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
 
     private MultipartBody.Part multipartBody(String filpath) {
         MultipartBody.Part multipartBody = null;
-        if(filpath!=null){
+        if(!TextUtils.isEmpty(filpath)){
             File file = new File(filpath);
-            RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), userPhotoPath);
+            RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), filpath);
             multipartBody = MultipartBody.Part.createFormData("file",file.getName(),requestFile);
+        }else {
+            Toast.makeText(context, "File not taken", Toast.LENGTH_SHORT).show();
         }
         return multipartBody;
     }
@@ -948,7 +963,6 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
                         userPhotoPath = getImageFilePath(data);
                         Bitmap selectedImage = BitmapFactory.decodeFile(filePath);
                         selectedImage =  getResizedBitmap(selectedImage,300,300);
-                        userPicPath = filePath;
                         bmpuser = selectedImage;
                         imgPic.setImageBitmap(selectedImage);
                         Log.e("userPicPath",""+userPicPath);
@@ -961,6 +975,7 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
                         selectedImage =  getResizedBitmap(selectedImage,1024,768);
                         bmpmulsonod = selectedImage;
                         imgMulsonod.setImageBitmap(selectedImage);
+                        Log.e("educirtificatePath",""+educirtificatePath);
                     }
 
 
@@ -970,6 +985,7 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
                         selectedImage =  getResizedBitmap(selectedImage,1024,768);
                         bmptestimo = selectedImage;
                         imgTestimonial.setImageBitmap(selectedImage);
+                        Log.e("testimonialPath",""+testimonialPath);
                     }
 
 
@@ -979,6 +995,7 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
                        selectedImage =  getResizedBitmap(selectedImage,1024,768);
                        bmpNid = selectedImage;
                        imgnidFile.setImageBitmap(selectedImage);
+                       Log.e("nidPath",""+nidPath);
                     }
 
 
@@ -988,6 +1005,7 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
                        selectedImage =  getResizedBitmap(selectedImage,1024,768);
                        bmpChairman = selectedImage;
                        imgChaimanFile.setImageBitmap(selectedImage);
+                       Log.e("chaimanCirtificatePath",""+chaimanCirtificatePath);
                     }
 
 
@@ -997,6 +1015,7 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
                        selectedImage =  getResizedBitmap(selectedImage,1024,768);
                        bmpIfa = selectedImage;
                        imgIFAFile.setImageBitmap(selectedImage);
+                       Log.e("ifaCirtificatePath",""+ifaCirtificatePath);
                     }
 
 
@@ -1006,6 +1025,7 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
                        selectedImage =  getResizedBitmap(selectedImage,1024,768);
                        bmpLeave = selectedImage;
                        imgLeaveFile.setImageBitmap(selectedImage);
+                       Log.e("leaveCirtificatePath",""+leaveCirtificatePath);
                     }
 
 
@@ -1015,6 +1035,7 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
                        selectedImage =  getResizedBitmap(selectedImage,1024,768);
                        bmpAuth = selectedImage;
                        imgauthPermissionFile.setImageBitmap(selectedImage);
+                       Log.e("pertificatePath",""+permissionCertificatePath);
                     }
 
 

@@ -1,6 +1,7 @@
 package com.imamportal.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.imamportal.DetailsActivity;
 import com.imamportal.R;
 import com.imamportal.model.AllBlogpostModel;
 import com.imamportal.model.AlquranAlhadits;
@@ -98,11 +100,16 @@ public class AllCommonPostAdapter extends RecyclerView.Adapter<AllCommonPostAdap
             @Override
             public void onClick(View v) {
                 if(AppConstant.activitiname.equalsIgnoreCase("answer")){
-                    AppConstant.dilogDetails(context,data.getQuestion(),data.getAnswer(),""+name,
-                            data.getCreated_at(),data.getView_count(),"","");
+                   AppConstant.detaisData = data;
+                   context.startActivity(new Intent(context, DetailsActivity.class));
+//                    AppConstant.dilogDetails(context,data.getQuestion(),data.getAnswer(),""+name,
+//                            data.getCreated_at(),data.getView_count(),"","");
                 }else {
-                    AppConstant.dilogDetails(context,data.getTitle(),data.getDescription(),""+name,
-                            data.getCreated_at(),data.getView_count(),"","");
+//                    AppConstant.dilogDetails(context,data.getTitle(),data.getDescription(),""+name,
+//                            data.getCreated_at(),data.getView_count(),"","");
+
+                    AppConstant.detaisData = data;
+                    context.startActivity(new Intent(context, DetailsActivity.class));
                 }
 
 

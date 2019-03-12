@@ -48,7 +48,7 @@ public class SompadokioActivity extends AppCompatActivity {
         setContentView(R.layout.sompadokio);
         context=this;
         overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
-        getblog_post();
+        //getblog_post();
         initUi();
         //getAllQuranAlldadith();
     }
@@ -126,46 +126,5 @@ public class SompadokioActivity extends AppCompatActivity {
         }
     }
 
-    private void getblog_post() {
 
-        if(!NetInfo.isOnline(context)){
-            AlertMessage.showMessage(context,"Alert!","No internet connection!");
-        }
-
-        final ProgressDialog pd = new ProgressDialog(context);
-        pd.setMessage("Loading....");
-        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pd.show();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Api.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        Api api = retrofit.create(Api.class);
-        Call<List<AllBlogpostModel>> userCall = api.blog_post();
-        userCall.enqueue(new Callback<List<AllBlogpostModel>>() {
-            @Override
-            public void onResponse(Call<List<AllBlogpostModel>> call, Response<List<AllBlogpostModel>> response) {
-                pd.dismiss();
-
-                List<AllBlogpostModel> listAlblog = new ArrayList<>();
-                listAlblog = response.body();
-
-                Log.e("listAlquranAlhadit",""+listAlblog.size());
-
-                if(listAlblog.size()>0){
-                    AppConstant.listAllBlogPost = listAlblog;
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<List<AllBlogpostModel>> call, Throwable t) {
-                pd.dismiss();
-            }
-        });
-
-
-    }
 }

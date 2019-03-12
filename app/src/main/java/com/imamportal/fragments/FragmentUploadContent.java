@@ -68,7 +68,6 @@ public class FragmentUploadContent extends Fragment {
     private void initUi() {
 
 
-
     }
 
 }
