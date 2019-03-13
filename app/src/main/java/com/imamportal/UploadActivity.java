@@ -19,6 +19,7 @@ import com.imamportal.fragments.FragmentAmarPataContent;
 import com.imamportal.fragments.FragmentUploadContent;
 import com.imamportal.model.AllBlogpostModel;
 import com.imamportal.model.AlquranAlhadits;
+import com.imamportal.model.Catagories;
 import com.imamportal.utils.AlertMessage;
 import com.imamportal.utils.Api;
 import com.imamportal.utils.AppConstant;
@@ -39,7 +40,6 @@ public class UploadActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     public ViewPager viewPager;
     private ImageView imgBack;
-    List<AlquranAlhadits>  listAlquranAlhadit = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +68,7 @@ public class UploadActivity extends AppCompatActivity {
 
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
-        //createTabIcons();
+        getblog_post();
     }
 
     private void createTabIcons() {
@@ -146,25 +146,24 @@ public class UploadActivity extends AppCompatActivity {
                 .build();
 
         Api api = retrofit.create(Api.class);
-        Call<List<AllBlogpostModel>> userCall = api.blog_post();
-        userCall.enqueue(new Callback<List<AllBlogpostModel>>() {
+        Call<List<Catagories>> userCall = api.categorys();
+        userCall.enqueue(new Callback<List<Catagories>>() {
             @Override
-            public void onResponse(Call<List<AllBlogpostModel>> call, Response<List<AllBlogpostModel>> response) {
+            public void onResponse(Call<List<Catagories>> call, Response<List<Catagories>> response) {
                 pd.dismiss();
 
-                List<AllBlogpostModel> listAlblog = new ArrayList<>();
+                List<Catagories> listAlblog = new ArrayList<>();
                 listAlblog = response.body();
 
                 Log.e("listAlquranAlhadit",""+listAlblog.size());
 
                 if(listAlblog.size()>0){
-                    AppConstant.listAllBlogPost = listAlblog;
+                    AppConstant.listAllCatagory = listAlblog;
                 }
-                initUi();
             }
 
             @Override
-            public void onFailure(Call<List<AllBlogpostModel>> call, Throwable t) {
+            public void onFailure(Call<List<Catagories>> call, Throwable t) {
                 pd.dismiss();
             }
         });

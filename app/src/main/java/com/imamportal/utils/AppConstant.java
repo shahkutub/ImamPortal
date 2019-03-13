@@ -84,6 +84,7 @@ public class AppConstant {
     public static List<VideoModel> listVideo = new ArrayList<>();
     public static String bolgpostName;
     public static List<AllBlogpostModel> listAllBlogPost = new ArrayList<>();
+    public static List<Catagories> listAllCatagory = new ArrayList<>();
     public static String masalaFragmentName = "";
     public static AllDataResponse allData = new AllDataResponse();
     public static String loginToken = "loginToken";

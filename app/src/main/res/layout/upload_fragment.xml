@@ -7,7 +7,6 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:background="@drawable/shadow_santirbani"
         android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,9 +22,9 @@
             android:layout_height="wrap_content"
             android:textColorHint="#F15A24"
             android:layout_margin="@dimen/_5sdp">
-            <EditText android:id="@+id/input_name"
+            <EditText android:id="@+id/etHeadline"
                 android:layout_width="match_parent"
-                android:padding="@dimen/_5sdp"
+                android:padding="@dimen/_10sdp"
                 android:layout_height="match_parent"
                 android:inputType="textCapWords"
                 android:background="@drawable/edit_bg"
@@ -45,13 +44,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/_5sdp"
+            android:padding="@dimen/_10sdp"
             android:layout_marginLeft="@dimen/_3sdp"
             android:layout_marginRight="@dimen/_3sdp"
             android:background="@drawable/edit_bg"
             >
             <Spinner
-                android:id="@+id/spinnerDivision"
+                android:id="@+id/spinnerCatagory"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 ></Spinner>
@@ -72,7 +71,7 @@
                 android:background="@drawable/edit_bg"
                 android:gravity="top|left"
                 android:textColor="#000"
-                android:hint="*আপনার পরামর্শ" />
+                android:hint="*বর্ণনা" />
         </android.support.design.widget.TextInputLayout>
 
         <LinearLayout
@@ -91,7 +90,7 @@
                 android:textSize="@dimen/_15sdp"
                 android:paddingRight="@dimen/_15sdp"
                 android:paddingLeft="@dimen/_15sdp"
-                android:layout_height="@dimen/_30sdp" />
+                android:layout_height="@dimen/_40sdp" />
 
 
             <TextView
@@ -104,7 +103,7 @@
 
         </LinearLayout>
 
-        <Button
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/btnSave"
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginBottom="@dimen/_10sdp"
@@ -115,7 +114,7 @@
             android:textSize="@dimen/_15sdp"
             android:paddingRight="@dimen/_35sdp"
             android:paddingLeft="@dimen/_35sdp"
-            android:layout_height="wrap_content" />
+            android:layout_height="@dimen/_40sdp" />
     </LinearLayout>
 
 

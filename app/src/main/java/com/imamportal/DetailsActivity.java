@@ -2,19 +2,22 @@ package com.imamportal;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+
 import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.imamportal.Adapter.AllCommonPostAdapter;
+import com.imamportal.Adapter.CommentAdapter;
 import com.imamportal.utils.AppConstant;
 
 import java.text.ParseException;
@@ -26,7 +29,9 @@ public class DetailsActivity extends AppCompatActivity {
     Context context;
     ///String title, content, publisher, publishDate, viewcount,  likecount, commentcount;
 
+    private ImageView imgLike;
 
+    private RecyclerView recyclerViewComment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,13 +47,31 @@ public class DetailsActivity extends AppCompatActivity {
         TextView tvCountView = (TextView)findViewById(R.id.tvCountView);
         TextView tvCommentCount = (TextView)findViewById(R.id.tvCommentCount);
         ImageView imgShare = (ImageView)findViewById(R.id.imgShare);
+        imgLike = (ImageView)findViewById(R.id.imgLike);
+        imgLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imgLike.setImageResource(R.drawable.ic_like_select);
+            }
+        });
+
+        recyclerViewComment = (RecyclerView) findViewById(R.id.recyclerViewComment);
+        CommentAdapter questionAnsAdapter = new CommentAdapter(AppConstant.detaisData.getComment(),context);
+        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(context,
+                LinearLayoutManager.VERTICAL, false);
+        recyclerViewComment.setLayoutManager(horizontalLayoutManager);
+        recyclerViewComment.setAdapter(questionAnsAdapter);
+
         imgShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                String text = AppConstant.detaisData.getTitle()+"\n"+""+AppConstant.detaisData.getDescription().toString();
+                Log.e("text",""+text);
                 ShareCompat.IntentBuilder.from(DetailsActivity.this)
                         .setType("text/plain")
                         .setChooserTitle("Share")
-                        .setText(Html.fromHtml(AppConstant.detaisData.getDescription()).toString())
+                        .setText(Html.fromHtml(text).toString())
                         .startChooser();
             }
         });
@@ -95,7 +118,7 @@ public class DetailsActivity extends AppCompatActivity {
         }
         tvPublishDate.setText(fomateDate);
         tvCountView.setText(AppConstant.detaisData.getView_count());
-//        tvCommentCount.setText(AppConstant.detaisData.getComment().size());
+        tvCommentCount.setText(AppConstant.detaisData.getComment().size()+"");
 
     }
 

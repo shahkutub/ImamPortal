@@ -97,8 +97,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginLeft="@dimen/_2sdp"
             android:text="প্রকাশঃ "
+            android:visibility="gone"
             android:textColor="#4D236B"
             android:textSize="@dimen/_12sdp" />
 
@@ -133,15 +134,14 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_15sdp"
             android:layout_marginLeft="@dimen/_3sdp"
-            android:visibility="gone"
             app:srcCompat="@drawable/ic_comment" />
 
         <TextView
+            android:id="@+id/tvCommentCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_2sdp"
-            android:text="40"
-            android:visibility="gone"
+            android:text=""
             android:textColor="#4D236B"
             android:textSize="@dimen/_8sdp" />
 

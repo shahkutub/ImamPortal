@@ -184,9 +184,11 @@ public class JobCirculerActivity extends AppCompatActivity {
     }
 
     private void showFileChooser() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("application/*");
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("*/*");
+       // String[] mimetypes = {"image/*", "video/*"};
+        //intent.putExtra(Intent.EXTRA_MIME_TYPES, mimetypes);
 
         try {
             startActivityForResult(
