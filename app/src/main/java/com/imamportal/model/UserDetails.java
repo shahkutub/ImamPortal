@@ -10,7 +10,54 @@ public class UserDetails {
     //            "masjid_address": null,
     //            "image": "16072018_1531724890.png",
 
-    String name,mobile_no,image;
+    //  "id": 16,
+    //        "username": "reaz",
+    //        "email": "reaz@gmail.com",
+    //        "user_type": "imam",
+    //        "role": 2,
+    //        "status": 1,
+
+    String name,mobile_no,image,id,username,email,user_type,role;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getUser_type() {
+        return user_type;
+    }
+
+    public void setUser_type(String user_type) {
+        this.user_type = user_type;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public String getName() {
         return name;

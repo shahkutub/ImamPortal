@@ -20,6 +20,7 @@ import com.imamportal.R;
 import com.imamportal.model.AllBlogpostModel;
 import com.imamportal.model.AlquranAlhadits;
 import com.imamportal.model.SantirbaniInfo;
+import com.imamportal.utils.Api;
 import com.imamportal.utils.AppConstant;
 
 import java.text.ParseException;
@@ -109,7 +110,7 @@ public class AllCommonPostAdapter extends RecyclerView.Adapter<AllCommonPostAdap
             holder.imgFile.setVisibility(View.VISIBLE);
             Glide.with(context)
                     .asBitmap()
-                    .load("http://nanosoftbd.com/imamportal/"+data.getImage())
+                    .load(Api.BASE_URL+"public/upload/user/"+data.getImage())
                     .into(new SimpleTarget<Bitmap>() {
                         @Override
                         public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
@@ -143,9 +144,9 @@ public class AllCommonPostAdapter extends RecyclerView.Adapter<AllCommonPostAdap
             if(data.getAnswer()!=null){
                 holder.tvShortDescription.setText(android.text.Html.fromHtml(data.getAnswer()).toString());
             }
-
-
         }
+
+
     }
 
 

@@ -44,6 +44,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.google.code.gson:gson:2.6.2'
     implementation 'com.github.orangegangsters:swipy:1.2.3@aar'
+    implementation 'com.github.ahmedeltaher:Azan:2.1'
 
 //    compile 'com.google.cloud:google-cloud-translate:0.3.0'
 //    compile 'com.google.http-client:google-http-client-gson:1.23.0'

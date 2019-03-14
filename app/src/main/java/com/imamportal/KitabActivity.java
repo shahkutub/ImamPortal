@@ -200,7 +200,9 @@ public class KitabActivity extends AppCompatActivity implements SwipyRefreshLayo
                 commonPostResponse = response.body();
                 if(commonPostResponse!=null){
                     currentPage = commonPostResponse.getCurrent_page();
-                    listSantirbani = commonPostResponse.getData();
+                    for (AllBlogpostModel post: commonPostResponse.getData()) {
+                        listSantirbani.add(post);
+                    }
                     if(listSantirbani.size()>0){
                         KitabListAdapter questionAnsAdapter = new KitabListAdapter(listSantirbani,context);
                         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(context,
@@ -209,7 +211,6 @@ public class KitabActivity extends AppCompatActivity implements SwipyRefreshLayo
                         recyclProfielist.setAdapter(questionAnsAdapter);
                     }
                 }
-
             }
 
             @Override

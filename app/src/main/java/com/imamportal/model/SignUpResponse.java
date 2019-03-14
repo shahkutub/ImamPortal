@@ -14,6 +14,15 @@ public class SignUpResponse {
 //    }
 
     String token;
+    UserDetails user_data = new UserDetails();
+
+    public UserDetails getUser_data() {
+        return user_data;
+    }
+
+    public void setUser_data(UserDetails user_data) {
+        this.user_data = user_data;
+    }
 
     public String getToken() {
         return token;

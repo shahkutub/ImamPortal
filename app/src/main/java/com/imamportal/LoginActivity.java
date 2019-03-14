@@ -104,6 +104,7 @@ public class LoginActivity extends AppCompatActivity {
                 if(responsData!=null){
                    if(responsData.getToken()!=null){
                        PersistData.setStringData(context, AppConstant.loginToken,responsData.getToken());
+                       PersistData.setStringData(context, AppConstant.loginUserid,responsData.getUser_data().getId());
                        Toast.makeText(context, "Login Success", Toast.LENGTH_SHORT).show();
                        PersistentUser.setLogin(context);
                        finish();

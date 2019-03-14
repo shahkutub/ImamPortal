@@ -8,6 +8,8 @@
         android:id="@+id/tvNme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Reaz"
+        android:textColor="#92288F"
 
         />
 
@@ -15,6 +17,7 @@
         android:id="@+id/tvComment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
 
         />
 

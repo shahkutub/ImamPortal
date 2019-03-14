@@ -45,13 +45,20 @@ public interface Api {
     String BASE_URL = "http://nanosoftbd.com/imamportal/";
 
 
-//
-//    @FormUrlEncoded
-//    @POST("api/assigncomplain")
-//    Call<AssigncomplainResponse> assigncomplain(
-//            @Field("auth_data") String auth_data,
-//            @Field("application_no") String complain_application_id
-//    );
+
+    @FormUrlEncoded
+    @POST("api/likepost")
+    Call<String> likepost(
+            @Field("id") String complain_application_id
+    );
+
+    @FormUrlEncoded
+    @POST("api/singlepost/comment")
+    Call<String> commentepost(
+            @Field("user_id") String user_id,
+            @Field("user_id") String blog_post_id,
+            @Field("user_id") String comment
+    );
 
 
     @GET("api/categorys")

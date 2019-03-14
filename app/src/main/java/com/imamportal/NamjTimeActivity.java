@@ -12,6 +12,9 @@ import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.azan.PrayerTimes;
+import com.azan.TimeCalculator;
+import com.azan.types.PrayersType;
 import com.imamportal.utils.AppConstant;
 
 import java.text.DateFormat;
@@ -20,10 +23,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
+
+import static com.azan.types.AngleCalculationType.EGYPT;
+import static com.azan.types.AngleCalculationType.KARACHI;
+import static com.azan.types.AngleCalculationType.MUHAMMADIYAH;
 
 
 public class NamjTimeActivity extends AppCompatActivity {
@@ -51,7 +60,39 @@ public class NamjTimeActivity extends AppCompatActivity {
 
     }
 
+    public static void main(String[] args) {
+        azan();
+    }
+    public static void azan() {
+        GregorianCalendar date = new GregorianCalendar();
+        System.out.println(date.getTimeInMillis());
+        PrayerTimes prayerTimes = new TimeCalculator().date(date).location(23.8103, 90.4125,
+                0, 0).timeCalculationMethod(KARACHI).calculateTimes();
+        prayerTimes.setUseSecond(true);
+        System.out.println("----------------------------------------");
+        System.out.println("Fajr ---> " + prayerTimes.getPrayTime(PrayersType.FAJR));
+        System.out.println("sunrise --->" + prayerTimes.getPrayTime(PrayersType.SUNRISE));
+        System.out.println("Zuhr --->" + prayerTimes.getPrayTime(PrayersType.ZUHR));
+        System.out.println("Asr --->" + prayerTimes.getPrayTime(PrayersType.ASR));
+        System.out.println("Maghrib --->" + prayerTimes.getPrayTime(PrayersType.MAGHRIB));
+        System.out.println("ISHA  --->" + prayerTimes.getPrayTime(PrayersType.ISHA));
+        System.out.println("----------------------------------------");
 
+        int fojormilis = (int) prayerTimes.getPrayTime(PrayersType.FAJR).getTime();
+        int johormilis = (int) prayerTimes.getPrayTime(PrayersType.ZUHR).getTime();
+        int asormilis  = (int) prayerTimes.getPrayTime(PrayersType.ASR).getTime();
+        int Maghribmilis  = (int) prayerTimes.getPrayTime(PrayersType.MAGHRIB).getTime();
+        int isamilis  = (int) prayerTimes.getPrayTime(PrayersType.ISHA).getTime();
+
+        System.out.println("----------------------------------------");
+        System.out.println("Fajr ---> " + (johormilis - fojormilis));
+
+        long millis = (johormilis - fojormilis);
+        String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
+                TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
+                TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+        System.out.println(hms);
+    }
 
 
     ArrayList<Date> prayerTimesDate;
