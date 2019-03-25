@@ -5,20 +5,54 @@ import java.util.List;
 
 public class AllBlogpostModel {
 
-//    "category_id": 52,
-//            "type": 4,
-//            "title": "this is test title",
-//            "description": "<p>asfasas</p>",
-//            "status": 1,
-//            "image": "08102018_1538974711.jpeg",
-//            "file": "08102018_1538970972.pdf",
 
-    String category_id,type,title,description,status,audio,view_count,created_at,image,file,question,answer,video,Url_link;
+    String id, category_id,type,title,description,status,audio,view_count,created_at,image,file,question,answer,video,Url_link
+            ,job_title,job_description,job_location,job_salary_range;
 
     UserDetails user_detail = new UserDetails();
 
     List<CommentModel> comment = new ArrayList<>();
     List<CommentModel> like_post = new ArrayList<>();
+
+    public String getJob_title() {
+        return job_title;
+    }
+
+    public void setJob_title(String job_title) {
+        this.job_title = job_title;
+    }
+
+    public String getJob_description() {
+        return job_description;
+    }
+
+    public void setJob_description(String job_description) {
+        this.job_description = job_description;
+    }
+
+    public String getJob_location() {
+        return job_location;
+    }
+
+    public void setJob_location(String job_location) {
+        this.job_location = job_location;
+    }
+
+    public String getJob_salary_range() {
+        return job_salary_range;
+    }
+
+    public void setJob_salary_range(String job_salary_range) {
+        this.job_salary_range = job_salary_range;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getUrl_link() {
         return Url_link;

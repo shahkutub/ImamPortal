@@ -45,8 +45,18 @@ public class ChatAppActivity extends AppCompatActivity {
 
         // Create the initial data list.
         final List<ChatAppMsgDTO> msgDtoList = new ArrayList<ChatAppMsgDTO>();
-        ChatAppMsgDTO msgDto = new ChatAppMsgDTO(ChatAppMsgDTO.MSG_TYPE_RECEIVED, "hello");
+        ChatAppMsgDTO msgDto = new ChatAppMsgDTO(ChatAppMsgDTO.MSG_TYPE_SENT, "hello");
         msgDtoList.add(msgDto);
+
+        ChatAppMsgDTO msgDt1 = new ChatAppMsgDTO(ChatAppMsgDTO.MSG_TYPE_RECEIVED, "hello");
+        msgDtoList.add(msgDt1);
+
+
+        ChatAppMsgDTO msgDt2 = new ChatAppMsgDTO(ChatAppMsgDTO.MSG_TYPE_SENT, "salam");
+        msgDtoList.add(msgDt2);
+
+        ChatAppMsgDTO msgDt3 = new ChatAppMsgDTO(ChatAppMsgDTO.MSG_TYPE_RECEIVED, "salam");
+        msgDtoList.add(msgDt3);
 
         // Create the data adapter with above data list.
         final ChatAppMsgAdapter chatAppMsgAdapter = new ChatAppMsgAdapter(msgDtoList);
@@ -65,7 +75,7 @@ public class ChatAppActivity extends AppCompatActivity {
                 if(!TextUtils.isEmpty(msgContent))
                 {
                     // Add a new sent message to the list.
-                    ChatAppMsgDTO msgDto = new ChatAppMsgDTO(ChatAppMsgDTO.MSG_TYPE_RECEIVED, msgContent);
+                    ChatAppMsgDTO msgDto = new ChatAppMsgDTO(ChatAppMsgDTO.MSG_TYPE_SENT, msgContent);
                     msgDtoList.add(msgDto);
 
                     int newMsgPosition = msgDtoList.size() - 1;

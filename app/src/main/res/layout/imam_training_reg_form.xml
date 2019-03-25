@@ -1275,7 +1275,7 @@
                 android:id="@+id/eduFile3"
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="@dimen/_50sdp"
-                android:src="@drawable/file"
+                android:src="@drawable/pdf"
                 android:layout_marginLeft="@dimen/_3sdp"
                 android:visibility="gone"
                 />
@@ -1283,7 +1283,7 @@
                 android:id="@+id/eduFile4"
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="@dimen/_50sdp"
-                android:src="@drawable/file"
+                android:src="@drawable/pdf"
                 android:layout_marginLeft="@dimen/_3sdp"
                 android:visibility="gone"
                 />
@@ -1329,7 +1329,7 @@
                 android:id="@+id/TestimoniFile2"
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="@dimen/_50sdp"
-                android:src="@drawable/file"
+                android:src="@drawable/pdf"
                 android:layout_marginLeft="@dimen/_3sdp"
                 android:visibility="gone"
                 />
@@ -1338,7 +1338,7 @@
                 android:id="@+id/TestimoniFile3"
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="@dimen/_50sdp"
-                android:src="@drawable/file"
+                android:src="@drawable/pdf"
                 android:layout_marginLeft="@dimen/_3sdp"
                 android:visibility="gone"
                 />
@@ -1346,7 +1346,7 @@
                 android:id="@+id/TestimoniFile4"
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="@dimen/_50sdp"
-                android:src="@drawable/file"
+                android:src="@drawable/pdf"
                 android:layout_marginLeft="@dimen/_3sdp"
                 android:visibility="gone"
                 />

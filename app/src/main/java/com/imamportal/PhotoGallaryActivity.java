@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.imamportal.Adapter.ProfileListAdapter;
+import com.imamportal.model.AllBlogpostModel;
+import com.imamportal.model.CommonPostResponse;
 import com.imamportal.model.PhotoModel;
 import com.imamportal.model.QuestionAnswerModel;
 import com.imamportal.model.SantirbaniInfo;
@@ -21,6 +23,7 @@ import com.imamportal.utils.AppConstant;
 import com.imamportal.utils.NetInfo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -35,7 +38,8 @@ public class PhotoGallaryActivity extends AppCompatActivity {
     private ImageView imgBack;
     private RecyclerView recyclProfielist;
     private TextView tvTotalBani,tvName;
-    List<PhotoModel> listPhoto = new ArrayList<>();
+    List<AllBlogpostModel> listPhoto = new ArrayList<>();
+    CommonPostResponse commonPostResponse = new CommonPostResponse();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,17 +88,19 @@ public class PhotoGallaryActivity extends AppCompatActivity {
                 .build();
 
         Api api = retrofit.create(Api.class);
-        Call<List<PhotoModel>> userCall = api.photo_gallery();
-        userCall.enqueue(new Callback<List<PhotoModel>>() {
+        Call<CommonPostResponse> userCall = api.photo_gallery();
+        userCall.enqueue(new Callback<CommonPostResponse>() {
             @Override
-            public void onResponse(Call<List<PhotoModel>> call, Response<List<PhotoModel>> response) {
+            public void onResponse(Call<CommonPostResponse> call, Response<CommonPostResponse> response) {
                 pd.dismiss();
 
-                listPhoto = response.body();
-                if(listPhoto.size()>0){
+                commonPostResponse = response.body();
+                if(commonPostResponse.getData().size()>0){
                     int size = listPhoto.size();
                     tvTotalBani.setText("সর্বমোট "+AppConstant.activitiname+size+" টি");
-                    ProfileListAdapter questionAnsAdapter = new ProfileListAdapter(listPhoto,context);
+
+                    Collections.reverse(commonPostResponse.getData());
+                    ProfileListAdapter questionAnsAdapter = new ProfileListAdapter(commonPostResponse.getData(),context);
                     LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(context,
                             LinearLayoutManager.VERTICAL, false);
                     recyclProfielist.setLayoutManager(new GridLayoutManager(context, 2));
@@ -103,7 +109,7 @@ public class PhotoGallaryActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<PhotoModel>> call, Throwable t) {
+            public void onFailure(Call<CommonPostResponse> call, Throwable t) {
                 pd.dismiss();
             }
         });

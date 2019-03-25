@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,12 +26,14 @@ import android.widget.Toast;
 import com.imamportal.Adapter.AllCommonPostAdapter;
 import com.imamportal.model.AllBlogpostModel;
 import com.imamportal.model.AlquranAlhadits;
+import com.imamportal.model.CommonPostResponse;
 import com.imamportal.model.JobPortalModel;
 import com.imamportal.model.SantirbaniInfo;
 import com.imamportal.utils.AlertMessage;
 import com.imamportal.utils.Api;
 import com.imamportal.utils.AppConstant;
 import com.imamportal.utils.NetInfo;
+import com.imamportal.utils.PathUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -58,11 +61,11 @@ public class JobCirculerActivity extends AppCompatActivity {
     private LinearLayout linJobCirList,linJobCirForm;
     private EditText etJobNmae,etJobDesignation,etPlace,etSalary,etJobDescription;
     private Button btnSave,btnChoseFile;
-    private List<JobPortalModel> listjob = new ArrayList<>();
+    private CommonPostResponse commonPostResponse = new CommonPostResponse();
     private String uploadedFileName;
     private String filePath;
     JSONObject data = new JSONObject();
-
+    Uri fileUri;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -141,6 +144,7 @@ public class JobCirculerActivity extends AppCompatActivity {
         tvJobSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getJobPost();
                 tvJobSearch.setBackgroundColor(Color.parseColor("#5E397A"));
                 tvJobcirForm.setBackgroundColor(Color.parseColor("#4D5155"));
                 linJobCirForm.setVisibility(View.GONE);
@@ -183,22 +187,22 @@ public class JobCirculerActivity extends AppCompatActivity {
 
     }
 
-    private void showFileChooser() {
-        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("*/*");
-       // String[] mimetypes = {"image/*", "video/*"};
-        //intent.putExtra(Intent.EXTRA_MIME_TYPES, mimetypes);
-
-        try {
-            startActivityForResult(
-                    Intent.createChooser(intent, "Select a File to Upload"),
-                    1);
-        } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(context, "Please install a File Manager.",
-                    Toast.LENGTH_SHORT).show();
-        }
-    }
+//    private void showFileChooser() {
+//        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+//        intent.addCategory(Intent.CATEGORY_OPENABLE);
+//        intent.setType("*/*");
+//       // String[] mimetypes = {"image/*", "video/*"};
+//        //intent.putExtra(Intent.EXTRA_MIME_TYPES, mimetypes);
+//
+//        try {
+//            startActivityForResult(
+//                    Intent.createChooser(intent, "Select a File to Upload"),
+//                    1);
+//        } catch (android.content.ActivityNotFoundException ex) {
+//            Toast.makeText(context, "Please install a File Manager.",
+//                    Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
 
     @Override
@@ -210,6 +214,7 @@ public class JobCirculerActivity extends AppCompatActivity {
                 Uri selectedFileURI = data.getData();
                 File file = new File(selectedFileURI.getPath().toString());
                 filePath = selectedFileURI.getPath().toString();
+                fileUri = data.getData();
                 Log.e("filePath", "" + filePath);
                 uploadedFileName = file.getName().toString();
                 Log.e("File", "" + uploadedFileName);
@@ -228,11 +233,11 @@ public class JobCirculerActivity extends AppCompatActivity {
     private class JobpostAdapter extends RecyclerView.Adapter<JobpostAdapter.MyViewHolder> {
 
 
-        List<JobPortalModel> santirBaniList = new ArrayList<>();
+        List<AllBlogpostModel> santirBaniList = new ArrayList<>();
         Context context;
 
 
-        public JobpostAdapter(List<JobPortalModel> santirBaniList, Context context) {
+        public JobpostAdapter(List<AllBlogpostModel> santirBaniList, Context context) {
             this.santirBaniList = santirBaniList;
             this.context = context;
         }
@@ -257,7 +262,7 @@ public class JobCirculerActivity extends AppCompatActivity {
 
         @Override
         public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.raw_common_post, parent, false);
+            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.raw_joblist, parent, false);
 
             return new MyViewHolder(itemView);
         }
@@ -265,7 +270,7 @@ public class JobCirculerActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-            final JobPortalModel data = santirBaniList.get(position);
+            final AllBlogpostModel data = santirBaniList.get(position);
             holder.tvPublishDate.setText(data.getCreated_at());
             if(data.getUser_detail()!=null){
                 holder.tvPublisher.setText(data.getUser_detail().getName());
@@ -282,7 +287,7 @@ public class JobCirculerActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     context.startActivity(new Intent(Intent.ACTION_VIEW,
-                            Uri.parse("http://192.168.0.119/imamportal/public/job_file/"+data.getFile())));
+                            Uri.parse(Api.BASE_URL+"public/job_file/"+data.getFile())));
                 }
             });
 
@@ -313,17 +318,18 @@ public class JobCirculerActivity extends AppCompatActivity {
                 .build();
 
         Api api = retrofit.create(Api.class);
-        Call<List<JobPortalModel>> userCall = api.jobportals();
-        userCall.enqueue(new Callback<List<JobPortalModel>>() {
+        Call<CommonPostResponse> userCall = api.jobportals();
+        userCall.enqueue(new Callback<CommonPostResponse>() {
             @Override
-            public void onResponse(Call<List<JobPortalModel>> call, Response<List<JobPortalModel>> response) {
+            public void onResponse(Call<CommonPostResponse> call, Response<CommonPostResponse> response) {
                 pd.dismiss();
 
-                listjob = response.body();
-                    if(listjob.size()>0){
-                        int size = listjob.size();
+                commonPostResponse = response.body();
+                    if(commonPostResponse.getData()!=null){
+                        int size = commonPostResponse.getData().size();
+                        Log.e("size",""+size);
                         tvTotalBani.setText("সর্বমোট "+AppConstant.activitiname+size+" টি");
-                        JobpostAdapter questionAnsAdapter = new JobpostAdapter(listjob,context);
+                        JobpostAdapter questionAnsAdapter = new JobpostAdapter(commonPostResponse.getData(),context);
                         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(context,
                                 LinearLayoutManager.VERTICAL, false);
                         recyclSantirBani.setLayoutManager(horizontalLayoutManager);
@@ -332,7 +338,7 @@ public class JobCirculerActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<JobPortalModel>> call, Throwable t) {
+            public void onFailure(Call<CommonPostResponse> call, Throwable t) {
                 pd.dismiss();
             }
         });
@@ -357,14 +363,15 @@ public class JobCirculerActivity extends AppCompatActivity {
                 .build();
 
         Api api = retrofit.create(Api.class);
-        File file = new File(filePath);
+        File file = new File(PathUtils.getPath(context, fileUri));
 
-        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), filePath);
+        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
 
         MultipartBody.Part multipartBody =MultipartBody.Part.createFormData("file",file.getName(),requestFile);
+        RequestBody dataoj = RequestBody.create(MediaType.parse("text/plain"), data.toString());
 
 
-        Call<ResponseBody> userCall = api.jobPost( multipartBody,""+data);
+        Call<ResponseBody> userCall = api.jobPost( multipartBody,dataoj);
         userCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -384,5 +391,19 @@ public class JobCirculerActivity extends AppCompatActivity {
 
     }
 
+    private void showFileChooser() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("application/*");
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+        try {
+            startActivityForResult(
+                    Intent.createChooser(intent, "Select a File to Upload"),
+                    1);
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(context, "Please install a File Manager.",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
 
 }

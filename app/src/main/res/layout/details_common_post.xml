@@ -72,7 +72,7 @@
                     android:layout_centerVertical="true"
                     android:visibility="gone"
                     android:layout_height="@dimen/_50sdp"
-                    android:src="@drawable/file"
+                    android:src="@drawable/pdf"
                     />
             </RelativeLayout>
         </LinearLayout>

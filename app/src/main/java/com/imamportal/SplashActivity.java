@@ -69,8 +69,8 @@ public class SplashActivity extends AppCompatActivity {
 //        ImageView imgNext = (ImageView)findViewById(R.id.imgNext);
 //        ImageView imgA2i = (ImageView)findViewById(R.id.imgA2i);
         relSplash = (RelativeLayout) findViewById(R.id.relSplash);
-//        tvWeb = (TextView) findViewById(R.id.tvWeb);
-//
+        tvWeb = (TextView) findViewById(R.id.tvWeb);
+
 //
 //        imgA2i.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -79,12 +79,12 @@ public class SplashActivity extends AppCompatActivity {
 //            }
 //        });
 //
-//        tvWeb.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://nanosoftbd.com/imamportal/")));
-//            }
-//        });
+        tvWeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://nanosoftbd.com/imamportal/")));
+            }
+        });
 //
 //
 //

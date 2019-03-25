@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.imamportal.R;
+import com.imamportal.model.AllBlogpostModel;
 import com.imamportal.model.PhotoModel;
 import com.imamportal.model.SantirbaniInfo;
 import com.imamportal.utils.Api;
@@ -27,11 +28,11 @@ public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListAdapter.
 
     //Bitmap bmp = null;
     List<Bitmap> listbmp = new ArrayList<>();
-    List<PhotoModel> listPhoto = new ArrayList<>();
+    List<AllBlogpostModel> listPhoto = new ArrayList<>();
     Context context;
 
 
-    public ProfileListAdapter(List<PhotoModel> santirBaniList, Context context) {
+    public ProfileListAdapter(List<AllBlogpostModel> santirBaniList, Context context) {
         this.listPhoto = santirBaniList;
         this.context = context;
     }
@@ -60,7 +61,7 @@ public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListAdapter.
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-        PhotoModel data = listPhoto.get(position);
+        AllBlogpostModel data = listPhoto.get(position);
 
         holder.tvPicTitle.setText(data.getTitle());
         //Glide.with(context).load("http://192.168.0.119/imamportal/public/photo_gallery/"+data.getImage()).into( holder.imgPhoto).getRequest();

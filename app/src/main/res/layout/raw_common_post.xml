@@ -65,7 +65,7 @@
                     android:layout_centerVertical="true"
                     android:visibility="gone"
                     android:layout_height="@dimen/_50sdp"
-                    android:src="@drawable/file"
+                    android:src="@drawable/pdf"
                     />
             </RelativeLayout>
         </LinearLayout>
@@ -113,6 +113,7 @@
             android:textSize="@dimen/_10sdp" />
 
         <ImageView
+
             android:layout_width="@dimen/_15sdp"
             android:layout_height="@dimen/_15sdp"
             android:layout_marginLeft="@dimen/_4sdp"

@@ -2,6 +2,7 @@ package com.imamportal;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.support.v4.app.ShareCompat;
@@ -90,11 +91,14 @@ public class DetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 comment = etAsk.getText().toString();
-                if(TextUtils.isEmpty(comment)){
+                if(TextUtils.isEmpty(PersistData.getStringData(context,AppConstant.loginUserid))){
+                    startActivity(new Intent(context,LoginActivity.class));
+                }else if(TextUtils.isEmpty(comment)){
                     Toast.makeText(context, "কমেন্ট লিখুন", Toast.LENGTH_SHORT).show();
                 }else {
                     commentPost();
                 }
+
             }
         });
 
@@ -230,7 +234,7 @@ public class DetailsActivity extends AppCompatActivity {
                 .build();
 
         Api api = retrofit.create(Api.class);
-        Call<String> userCall = api.commentepost(PersistData.getStringData(context,AppConstant.loginUserid),AppConstant.detaisData.getCategory_id(),comment);
+        Call<String> userCall = api.commentepost(PersistData.getStringData(context,AppConstant.loginUserid),AppConstant.detaisData.getId(),comment);
         userCall.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

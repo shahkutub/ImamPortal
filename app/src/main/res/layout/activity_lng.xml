@@ -31,18 +31,20 @@
                 >
 
                 <ImageView
-                    android:layout_width="@dimen/_80sdp"
-                    android:layout_height="@dimen/_80sdp"
+                    android:id="@+id/imgGovt"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_60sdp"
                     app:srcCompat="@drawable/govt"
 
                     />
 
 
                 <ImageView
-                    android:layout_width="@dimen/_80sdp"
-                    android:layout_height="@dimen/_80sdp"
-                    app:srcCompat="@drawable/ic_a21logo"
-                    android:layout_marginLeft="@dimen/_50sdp"
+                    android:id="@+id/imgA2i"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"
+                    app:srcCompat="@drawable/a2i"
+                    android:layout_marginLeft="@dimen/_20sdp"
 
                     />
             </LinearLayout>
@@ -56,21 +58,33 @@
                 android:gravity="center"
                 >
 
+                    <ImageView
+                        android:id="@+id/imgCabinet"
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="@dimen/_80sdp"
+                        app:srcCompat="@drawable/cabinet"
+
+                        />
+
+
                 <ImageView
+                    android:id="@+id/imgUndp"
                     android:layout_width="@dimen/_80sdp"
                     android:layout_height="@dimen/_80sdp"
-                    app:srcCompat="@drawable/ic_a21logo"
+                    app:srcCompat="@drawable/undp"
+                    android:layout_marginLeft="@dimen/_20sdp"
 
                     />
 
-
                 <ImageView
+                    android:id="@+id/imgUsaid"
                     android:layout_width="@dimen/_80sdp"
                     android:layout_height="@dimen/_80sdp"
-                    app:srcCompat="@drawable/ic_a21logo"
-                    android:layout_marginLeft="@dimen/_50sdp"
+                    app:srcCompat="@drawable/usaidlogo"
+                    android:layout_marginLeft="@dimen/_20sdp"
 
                     />
+
             </LinearLayout>
 
 

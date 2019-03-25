@@ -1,44 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/linFullView"
+    android:background="@drawable/shadow"
     android:orientation="vertical"
-    android:background="#fff"
     >
-
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_above="@+id/bottom"
+        android:gravity="center"
+        android:layout_margin="@dimen/_2sdp"
         >
-
-
-        <WebView
-            android:id="@+id/webView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"></WebView>
-
         <ImageView
             android:id="@+id/imgPublisher"
             android:layout_width="@dimen/_60sdp"
             android:layout_height="@dimen/_60sdp"
             app:srcCompat="@drawable/imam"
             android:scaleType="fitXY"
-            android:visibility="gone"
             android:layout_above="@+id/tvname"
             />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/_80sdp"
             android:orientation="vertical"
             android:layout_marginLeft="@dimen/_3sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:visibility="gone"
             >
             <TextView
                 android:id="@+id/tvTitle"
@@ -47,6 +38,7 @@
                 android:text=""
                 android:textColor="#487CA2"
                 android:textSize="@dimen/_15sdp"
+                android:maxLines="1"
                 android:layout_alignParentTop="true"
                 />
 
@@ -55,15 +47,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
-                    android:id="@+id/tvDescription"
+                    android:id="@+id/tvShortDescription"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:scrollbars="vertical"
-                    android:text="
-ইবাদাত ইবাদাত কি? 'ইসলামের হাকীকত' গ্রন্থের শেষ প্রবন্ধে 'দ্বীন' ও 'শরীয়াত' এ শব্দ দু'টির প্রকৃত অর্থ এবং ব্যাখ্যা বর্ণনা করা হয়েছে। এখানে আমি 'ইবাদাত' শব্দটির বিস্তারিত অর্থ আপনাদের সামনে পেশ করবো। এ শব্দটি সর্বসাধারণ মুসলমান প্রায়ই বলে থাকে কিন্তু এর প্রকৃত অর্থ অনেকেই জানে না। ইবাদতের অর্থঃ ব্যাপক অর্থে ..."
+                    android:layout_height="match_parent"
+                    android:text=""
                     android:textColor="#000"
-                    android:textSize="@dimen/_12sdp"
-                    android:padding="@dimen/_3sdp"
+                    android:textSize="@dimen/_10sdp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/imgFile"
                     />
 
                 <ImageView
@@ -79,43 +71,25 @@
         </LinearLayout>
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imgShare"
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_40sdp"
-        app:srcCompat="@drawable/ic_share"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_margin="@dimen/_5sdp"
-        />
 
     <LinearLayout
-        android:id="@+id/bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/_5sdp"
-        android:layout_alignParentBottom="true"
-        android:orientation="vertical"
-        >
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            >
+        android:layout_marginTop="@dimen/_2sdp"
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="@dimen/_15sdp"
             android:layout_height="@dimen/_15sdp"
-            android:layout_marginLeft="@dimen/_1sdp"
+            android:layout_marginLeft="@dimen/_4sdp"
             app:srcCompat="@drawable/ic_mansmall" />
 
         <TextView
             android:id="@+id/tvPublisher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_2sdp"
             android:text=""
             android:textColor="#4D236B"
             android:textSize="@dimen/_8sdp" />
@@ -123,47 +97,45 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginLeft="@dimen/_2sdp"
             android:text="প্রকাশঃ "
             android:visibility="gone"
             android:textColor="#4D236B"
-            android:textSize="@dimen/_10sdp" />
+            android:textSize="@dimen/_12sdp" />
 
         <TextView
             android:id="@+id/tvPublishDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_3sdp"
             android:text=""
-            android:visibility="gone"
             android:textColor="#4D236B"
             android:textSize="@dimen/_10sdp" />
 
         <ImageView
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:layout_marginLeft="@dimen/_2sdp"
+
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:visibility="gone"
             app:srcCompat="@drawable/ic_eye" />
 
         <TextView
-            android:id="@+id/tvCountView"
+            android:id="@+id/tvViewCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_2sdp"
             android:text=""
+            android:visibility="visible"
             android:textColor="#4D236B"
             android:textSize="@dimen/_8sdp" />
-            <LinearLayout
-                android:id="@+id/linComClick"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                >
+
 
         <ImageView
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_15sdp"
             android:layout_marginLeft="@dimen/_3sdp"
+            android:visibility="gone"
             app:srcCompat="@drawable/ic_comment" />
 
         <TextView
@@ -175,89 +147,8 @@
             android:textColor="#4D236B"
             android:textSize="@dimen/_8sdp" />
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linLike"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                >
-            <ImageView
-                android:id="@+id/imgLike"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_marginLeft="@dimen/_3sdp"
-                app:srcCompat="@drawable/ic_like_unselect" />
-
-                <TextView
-                    android:id="@+id/tvLikeCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_2sdp"
-                    android:text=""
-                    android:textColor="#4D236B"
-                    android:textSize="@dimen/_8sdp" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linComment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone"
-            >
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-        <EditText android:id="@+id/etAsk"
-            android:layout_width="wrap_content"
-            android:padding="@dimen/_5sdp"
-            android:layout_height="wrap_content"
-            android:inputType="textMultiLine"
-            android:background="@drawable/edit_bg"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:gravity="top|left"
-            android:textColor="#000"
-            android:textColorHint="#92288F"
-            android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/btnPost"
-            android:hint="Add a New Comment" />
-
-            <android.support.v7.widget.AppCompatButton
-                android:id="@+id/btnPost"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/_35sdp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:textColor="#92288F"
-                android:layout_marginLeft="@dimen/_5sdp"
-                android:text="Post"
-                />
-
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/tvAllComment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_marginTop="@dimen/_5sdp"
-            android:text="All Comments"
-            android:textColor="#6A3291"
-            android:textSize="@dimen/_12sdp" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerViewComment"
-            android:layout_width="wrap_content"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
-
     </LinearLayout>
-    </LinearLayout>
+
     <!--<RelativeLayout-->
     <!--android:layout_width="wrap_content"-->
     <!--android:layout_height="@dimen/_90sdp"-->
@@ -374,4 +265,4 @@
 
 
 
-</RelativeLayout>
+</LinearLayout>

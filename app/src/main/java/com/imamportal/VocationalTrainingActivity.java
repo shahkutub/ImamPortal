@@ -1103,6 +1103,23 @@ public class VocationalTrainingActivity extends AppCompatActivity {
         }
         return outputFileUri;
     }
+    private String getImageFromFilePath(Intent data) {
+        boolean isCamera = data == null || data.getData() == null;
+
+        if (isCamera) return getCaptureImageOutputUri().getPath();
+        else return getPathFromURI(data.getData());
+
+    }
+    public String getImageFilePath(Intent data) {
+        return getImageFromFilePath(data);
+    }
+    private String getPathFromURI(Uri contentUri) {
+        String[] proj = {MediaStore.Audio.Media.DATA};
+        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
 
 
     public Bitmap getResizedBitmap(Bitmap bm, int maxWidth, int maxHeight) {
@@ -1166,25 +1183,7 @@ public class VocationalTrainingActivity extends AppCompatActivity {
 
     }
 
-    private String getImageFromFilePath(Intent data) {
-        boolean isCamera = data == null || data.getData() == null;
 
-        if (isCamera) return getCaptureImageOutputUri().getPath();
-        else return getPathFromURI(data.getData());
-
-    }
-
-    public String getImageFilePath(Intent data) {
-        return getImageFromFilePath(data);
-    }
-
-    private String getPathFromURI(Uri contentUri) {
-        String[] proj = {MediaStore.Audio.Media.DATA};
-        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
-        cursor.moveToFirst();
-        return cursor.getString(column_index);
-    }
 
     public class CustomAdapter  extends BaseAdapter implements SpinnerAdapter {
 

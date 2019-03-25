@@ -399,7 +399,7 @@ public class MainActivity extends AppCompatActivity {
             currentMonth = "মাঘ";
         } else if (mnth.equalsIgnoreCase("FALGUN")) {
             currentMonth = "ফাল্গুন";
-        } else if (mnth.equalsIgnoreCase("চৈত্র")) {
+        } else if (mnth.equalsIgnoreCase("CHOITRO")) {
             currentMonth = "চৈত্র";
         }
 

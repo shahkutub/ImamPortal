@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -17,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -78,6 +80,42 @@ public class LanguageActivity extends AppCompatActivity {
         });
 
 
+        ImageView imgGovt = (ImageView)findViewById(R.id.imgGovt);
+        ImageView imgA2i = (ImageView)findViewById(R.id.imgA2i);
+        ImageView imgCabinet = (ImageView)findViewById(R.id.imgCabinet);
+        ImageView imgUndp = (ImageView)findViewById(R.id.imgUndp);
+        ImageView imgUsaid = (ImageView)findViewById(R.id.imgUsaid);
+
+        imgGovt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://bangladesh.gov.bd/index.php")));
+            }
+        });
+        imgA2i.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://a2i.gov.bd/")));
+            }
+        });
+        imgCabinet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://cabinet.gov.bd/")));
+            }
+        });
+        imgUndp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.bd.undp.org/")));
+            }
+        });
+        imgUsaid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.usaid.gov/bd")));
+            }
+        });
 
 
         //getAlldata();

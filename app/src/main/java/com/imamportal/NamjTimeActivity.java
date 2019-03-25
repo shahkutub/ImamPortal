@@ -18,7 +18,9 @@ import com.azan.types.PrayersType;
 import com.imamportal.utils.AppConstant;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -78,20 +80,57 @@ public class NamjTimeActivity extends AppCompatActivity {
         System.out.println("ISHA  --->" + prayerTimes.getPrayTime(PrayersType.ISHA));
         System.out.println("----------------------------------------");
 
-        int fojormilis = (int) prayerTimes.getPrayTime(PrayersType.FAJR).getTime();
-        int johormilis = (int) prayerTimes.getPrayTime(PrayersType.ZUHR).getTime();
-        int asormilis  = (int) prayerTimes.getPrayTime(PrayersType.ASR).getTime();
-        int Maghribmilis  = (int) prayerTimes.getPrayTime(PrayersType.MAGHRIB).getTime();
-        int isamilis  = (int) prayerTimes.getPrayTime(PrayersType.ISHA).getTime();
+        String FAJR = ""+prayerTimes.getPrayTime(PrayersType.FAJR);
+        FAJR = FAJR.replace("BDT","GMT+06:00");
+        System.out.println("fojorstr ---> " + FAJR);
 
-        System.out.println("----------------------------------------");
-        System.out.println("Fajr ---> " + (johormilis - fojormilis));
+        String ZUHR = ""+prayerTimes.getPrayTime(PrayersType.ZUHR);
+        ZUHR = ZUHR.replace("BDT","GMT+06:00");
 
-        long millis = (johormilis - fojormilis);
+        String ASR = ""+prayerTimes.getPrayTime(PrayersType.ASR);
+        ASR = ASR.replace("BDT","GMT+06:00");
+
+        String MAGHRIB = ""+prayerTimes.getPrayTime(PrayersType.MAGHRIB);
+        MAGHRIB = MAGHRIB.replace("BDT","GMT+06:00");
+
+        String ISHA = ""+prayerTimes.getPrayTime(PrayersType.ISHA);
+        ISHA = ISHA.replace("BDT","GMT+06:00");
+
+
+        long fojormilis =  convertMilis(FAJR);
+        long johormilis =  convertMilis(ZUHR);
+        long asormilis  =  convertMilis(ASR);
+        long Maghribmilis  =  convertMilis(MAGHRIB);
+        long isamilis  =  convertMilis(ISHA);
+
+        String fojorHm = FAJR.split("\\ ")[3];
+        String zohorHm = ZUHR.split("\\ ")[3];
+        String asorHm = ASR.split("\\ ")[3];
+        String magribHm = MAGHRIB.split("\\ ")[3];
+        String isaHm = ISHA.split("\\ ")[3];
+
+      //  generalNews.split("\\)")[0];
+        System.out.println("Fajr hm---> " + FAJR.split("\\ ")[3]);
+
+
+        long millis = (new Date().getTime() - fojormilis);
         String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
                 TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
                 TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
         System.out.println(hms);
+    }
+
+    private static long convertMilis(String dateTime) {
+        long timeInMilliseconds = 0;
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
+        try {
+            Date mDate = sdf.parse(dateTime);
+            timeInMilliseconds = mDate.getTime();
+            System.out.println("Date in milli :: " + timeInMilliseconds);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return timeInMilliseconds;
     }
 
 

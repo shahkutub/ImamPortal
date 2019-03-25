@@ -56,8 +56,8 @@ public interface Api {
     @POST("api/singlepost/comment")
     Call<String> commentepost(
             @Field("user_id") String user_id,
-            @Field("user_id") String blog_post_id,
-            @Field("user_id") String comment
+            @Field("blog_post_id") String blog_post_id,
+            @Field("comment") String comment
     );
 
 
@@ -96,7 +96,7 @@ public interface Api {
     public Call<List<AllBlogpostModel>> skill();
 
     @GET("api/job-portals")
-    public Call<List<JobPortalModel>> jobportals();
+    public Call<CommonPostResponse> jobportals();
 
     @GET("api/querylist")
     public Call<List<QuestionAnswerModel>> querylist();
@@ -109,7 +109,7 @@ public interface Api {
 
 
     @GET("api/photo-gallery")
-    public Call<List<PhotoModel>> photo_gallery();
+    public Call<CommonPostResponse> photo_gallery();
 
 
     @GET("api/get_all_data")
@@ -156,7 +156,7 @@ public interface Api {
 
     @Multipart
     @POST("api/jobportal")
-    Call<ResponseBody> jobPost(@Part MultipartBody.Part file, @Query("data") String description);
+    Call<ResponseBody> jobPost(@Part MultipartBody.Part file, @Part("data") RequestBody description);
 
 
     @Multipart
