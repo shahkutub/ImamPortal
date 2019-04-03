@@ -9,7 +9,7 @@
     android:layout_gravity="top|right"
     android:layout_marginRight="@dimen/_12sdp"
     app:layout_anchorGravity="top|right"
-    android:layout_marginTop="@dimen/_55sdp"
+    android:layout_marginTop="@dimen/_75sdp"
     android:visibility="gone"
     >
 

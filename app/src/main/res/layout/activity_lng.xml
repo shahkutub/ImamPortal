@@ -53,25 +53,24 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:gravity="center"
-                >
+                android:orientation="horizontal"
+                android:visibility="gone">
 
-                    <ImageView
-                        android:id="@+id/imgCabinet"
-                        android:layout_width="@dimen/_80sdp"
-                        android:layout_height="@dimen/_80sdp"
-                        app:srcCompat="@drawable/cabinet"
+                <ImageView
+                    android:id="@+id/imgCabinet"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    app:srcCompat="@drawable/cabinet"
 
-                        />
+                    />
 
 
                 <ImageView
                     android:id="@+id/imgUndp"
                     android:layout_width="@dimen/_80sdp"
                     android:layout_height="@dimen/_80sdp"
-                    app:srcCompat="@drawable/undp"
                     android:layout_marginLeft="@dimen/_20sdp"
 
                     />
@@ -80,7 +79,6 @@
                     android:id="@+id/imgUsaid"
                     android:layout_width="@dimen/_80sdp"
                     android:layout_height="@dimen/_80sdp"
-                    app:srcCompat="@drawable/usaidlogo"
                     android:layout_marginLeft="@dimen/_20sdp"
 
                     />

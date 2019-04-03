@@ -1,24 +1,8 @@
 package com.imamportal.model;
 
-public class UserDetails {
+public class UserAllData {
 
-    //"name": "Delwar Hossain",
-    //            "mobile_no": "01556984227",
-    //            "nid": "564654654655",
-    //            "dob": "1989-03-13",
-    //            "masjid_name": null,
-    //            "masjid_address": null,
-    //            "image": "16072018_1531724890.png",
-
-    //  "id": 16,
-    //        "username": "reaz",
-    //        "email": "reaz@gmail.com",
-    //        "user_type": "imam",
-    //        "role": 2,
-    //        "status": 1,
-
-
-//    "id": 6,
+    //    "id": 6,
 //            "user_id": 16,
 //            "division_id": null,
 //            "district_id": null,
@@ -39,14 +23,29 @@ public class UserDetails {
 //            "updated_at": "2019-01-30 14:13:16"
 
     String name,mobile_no,image,id,username,email,user_type,role;
-    UserAllData user_details = new UserAllData();
 
-    public UserAllData getUser_details() {
-        return user_details;
+    public String getName() {
+        return name;
     }
 
-    public void setUser_details(UserAllData user_details) {
-        this.user_details = user_details;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getMobile_no() {
+        return mobile_no;
+    }
+
+    public void setMobile_no(String mobile_no) {
+        this.mobile_no = mobile_no;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getId() {
@@ -87,29 +86,5 @@ public class UserDetails {
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getMobile_no() {
-        return mobile_no;
-    }
-
-    public void setMobile_no(String mobile_no) {
-        this.mobile_no = mobile_no;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 }

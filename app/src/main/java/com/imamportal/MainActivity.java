@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Handler;
@@ -44,6 +45,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.imamportal.Adapter.AdapteDate;
 import com.imamportal.Adapter.KitabAdapter;
 import com.imamportal.Adapter.SlidingViewPagerAdapter;
@@ -57,6 +61,7 @@ import com.imamportal.utils.AlertMessage;
 import com.imamportal.utils.Api;
 import com.imamportal.utils.AppConstant;
 import com.imamportal.utils.NetInfo;
+import com.imamportal.utils.PersistData;
 import com.imamportal.utils.PersistentUser;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
@@ -77,6 +82,7 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -127,7 +133,8 @@ public class MainActivity extends AppCompatActivity {
     //private List<KitabInfo> data2 = new ArrayList<>();
     String pryname, banglaDate;
 
-    TextView tvTabDescription, tvSompadokioDes, tvDate, MarqueeText;
+    TextView tvTabDescription, tvSompadokioDes, tvDate, MarqueeText,tvUser;
+    private CircleImageView imgUser;
 
     FloatingActionButton fab, fabChatGroup, fabApnarPoramorso, fabNamaj, fabChat, fabGroup, fabPoramorso, fabMsg;
     LinearLayout fabLayout1, fabLayout2, fabLayoutChatGroup, fabLayout3, fabLayoutChat, fabLayoutGroup, fabLayoutPoramorso;
@@ -352,7 +359,7 @@ public class MainActivity extends AppCompatActivity {
         String hd = hijriFormat.format(todayExact);
 
 
-        dates = new String[]{"বাংলা: " + banglaDate, "ইংরেজি: " + d, "Hijri:" + hd};
+        dates = new String[]{"" + banglaDate, "" + d, "" + hd};
 
 
     }
@@ -644,6 +651,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void initUi() {
 
+        tvUser = (TextView) findViewById(R.id.tvUser);
+        imgUser = (CircleImageView) findViewById(R.id.imgUser);
         tvLogin = (TextView) findViewById(R.id.tvLogin);
         tvLogOut = (TextView) findViewById(R.id.tvLogOut);
         linAmarPata = (LinearLayout) findViewById(R.id.linAmarPata);
@@ -654,6 +663,20 @@ public class MainActivity extends AppCompatActivity {
         linImamtrainingReg = (LinearLayout) findViewById(R.id.linImamtrainingReg);
         linVocationalTrainReg = (LinearLayout) findViewById(R.id.linVocationalTrainReg);
 
+        if(AppConstant.getUserdata(context)!=null){
+            tvUser.setText(AppConstant.getUserdata(context).getUser_data().getUser_details().getName());
+            Glide.with(context)
+                    .asBitmap()
+                    .load(Api.BASE_URL+"public/upload/user/"+AppConstant.getUserdata(context).getUser_data().getUser_details().getImage())
+                    .into(new SimpleTarget<Bitmap>() {
+                        @Override
+                        public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                            if(resource!=null){
+                                imgUser.setImageBitmap(resource);
+                            }
+                        }
+                    });
+        }
 
 
         linRegistration.setOnClickListener(new View.OnClickListener() {
@@ -703,14 +726,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(context, LoginActivity.class));
-
+                drawer.closeDrawers();
             }
         });
         tvLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 PersistentUser.logOut(context);
-                finish();
+                PersistData.setStringData(context,AppConstant.loginToken,"");
+                PersistData.setStringData(context,AppConstant.loginUserid,"");
+                startActivity(new Intent(context,LoginActivity.class));
+                drawer.closeDrawers();
             }
         });
 

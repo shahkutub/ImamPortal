@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#8CC63E"
+    android:background="#fff"
     android:gravity="center"
     >
 
@@ -10,7 +10,7 @@
         android:id="@+id/tvDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#fff"
+        android:textColor="#548C08"
         android:textSize="@dimen/_15sdp"
         android:gravity="center"
         android:singleLine="true"

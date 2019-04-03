@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +37,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class FragmentAmarPataContent extends Fragment {
+public class FragmentAmarPataAudio extends Fragment {
 
     Context context;
     private Spinner spinnerCatagoryAmamrPata,spinnerObosta;
@@ -106,6 +105,7 @@ public class FragmentAmarPataContent extends Fragment {
 
             }
         });
+
         getContents();
     }
 
@@ -184,7 +184,7 @@ public class FragmentAmarPataContent extends Fragment {
                 .build();
 
         Api api = retrofit.create(Api.class);
-        Call<AmarpataContentResponse> userCall = api.mypage_content();
+        Call<AmarpataContentResponse> userCall = api.mypage_Audio();
         userCall.enqueue(new Callback<AmarpataContentResponse>() {
             @Override
             public void onResponse(Call<AmarpataContentResponse> call, Response<AmarpataContentResponse> response) {
@@ -198,7 +198,7 @@ public class FragmentAmarPataContent extends Fragment {
                     catagories.setName_bn("নির্বাচন করুন");
                     amarpataContentResponse.getContent_categories().add(0,catagories);
 
-                    CustomAdapter adapterGender = new CustomAdapter(context, amarpataContentResponse.getContent_categories());
+                    CustomAdapter adapterGender = new CustomAdapter(context, amarpataContentResponse.getMultimedia_categories());
                     spinnerCatagoryAmamrPata.setAdapter(adapterGender);
                 }
 

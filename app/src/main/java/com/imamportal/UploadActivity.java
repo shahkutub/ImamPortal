@@ -16,7 +16,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.imamportal.fragments.FragmentAmarPataContent;
+import com.imamportal.fragments.FragmentUploadAudio;
 import com.imamportal.fragments.FragmentUploadContent;
+import com.imamportal.fragments.FragmentUploadPhoto;
+import com.imamportal.fragments.FragmentUploadVideo;
 import com.imamportal.model.AllBlogpostModel;
 import com.imamportal.model.AlquranAlhadits;
 import com.imamportal.model.Catagories;
@@ -47,8 +50,8 @@ public class UploadActivity extends AppCompatActivity {
         context=this;
         overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
 
-        //getblog_post();
-        initUi();
+        getblog_post();
+
     }
 
     private void initUi() {
@@ -68,7 +71,7 @@ public class UploadActivity extends AppCompatActivity {
 
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
-        getblog_post();
+
     }
 
     private void createTabIcons() {
@@ -92,9 +95,9 @@ public class UploadActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new FragmentUploadContent(), "কনটেন্ট");
-        adapter.addFragment(new FragmentUploadContent(), getString(R.string.audio));
-        adapter.addFragment(new FragmentUploadContent(), getString(R.string.video));
-        adapter.addFragment(new FragmentUploadContent(), getString(R.string.photogalari));
+        adapter.addFragment(new FragmentUploadAudio(), getString(R.string.audio));
+        adapter.addFragment(new FragmentUploadVideo(), getString(R.string.video));
+        adapter.addFragment(new FragmentUploadPhoto(), getString(R.string.photogalari));
         viewPager.setAdapter(adapter);
     }
 
@@ -159,6 +162,7 @@ public class UploadActivity extends AppCompatActivity {
 
                 if(listAlblog.size()>0){
                     AppConstant.listAllCatagory = listAlblog;
+                    initUi();
                 }
             }
 

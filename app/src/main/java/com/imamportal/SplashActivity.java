@@ -30,6 +30,7 @@ import com.imamportal.utils.AppConstant;
 import com.imamportal.utils.LocationMgr;
 import com.imamportal.utils.NetInfo;
 import com.imamportal.utils.PersistData;
+import com.imamportal.utils.PersistentUser;
 
 import java.util.List;
 
@@ -91,8 +92,14 @@ public class SplashActivity extends AppCompatActivity {
         relSplash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),LanguageActivity.class));
-                finish();
+                if(!PersistentUser.isLogged(context)){
+                    startActivity(new Intent(getApplicationContext(),LanguageActivity.class));
+                    finish();
+                }else {
+                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                    finish();
+                }
+
             }
         });
 //

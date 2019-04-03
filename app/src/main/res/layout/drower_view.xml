@@ -13,7 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#614A7C"
+            android:background="#683090"
             android:gravity="center"
             android:orientation="vertical"
             android:paddingBottom="@dimen/_5sdp"
@@ -21,16 +21,18 @@
             android:paddingRight="@dimen/_15sdp">
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgUser"
                 android:layout_width="@dimen/_90sdp"
                 android:layout_height="@dimen/_90sdp"
                 android:layout_marginTop="@dimen/_25sdp"
                 android:src="@drawable/imam" />
 
             <TextView
+                android:id="@+id/tvUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="superadmin "
+                android:text=""
                 android:textColor="#fff"
                 android:textSize="@dimen/_15sdp" />
 
@@ -103,7 +105,7 @@
                 android:gravity="center"
                 android:text="@string/registration"
                 android:textColor="#000"
-                android:textSize="@dimen/_15sdp" />
+                android:textSize="@dimen/_13sdp" />
 
         </LinearLayout>
 
@@ -126,7 +128,7 @@
                 android:gravity="center"
                 android:text="ইমাম প্রশিক্ষণ নিবন্ধন"
                 android:textColor="#000"
-                android:textSize="@dimen/_15sdp" />
+                android:textSize="@dimen/_13sdp" />
 
         </LinearLayout>
 
@@ -149,7 +151,7 @@
                 android:gravity="center"
                 android:text="কারিগরি ও বৃত্তিমূলক প্রশিক্ষণ নিবন্ধন"
                 android:textColor="#000"
-                android:textSize="@dimen/_12sdp" />
+                android:textSize="@dimen/_13sdp" />
 
         </LinearLayout>
 
@@ -173,7 +175,7 @@
                 android:gravity="center"
                 android:text="@string/amarpata"
                 android:textColor="#000"
-                android:textSize="@dimen/_15sdp" />
+                android:textSize="@dimen/_13sdp" />
 
         </LinearLayout>
 
@@ -195,7 +197,7 @@
                 android:gravity="center"
                 android:text="@string/member"
                 android:textColor="#000"
-                android:textSize="@dimen/_15sdp" />
+                android:textSize="@dimen/_13sdp" />
 
         </LinearLayout>
 
@@ -218,7 +220,7 @@
                 android:gravity="center"
                 android:text="@string/upload"
                 android:textColor="#000"
-                android:textSize="@dimen/_15sdp" />
+                android:textSize="@dimen/_13sdp" />
 
         </LinearLayout>
 
@@ -247,7 +249,7 @@
                 android:gravity="center"
                 android:text="সর্বশেষ"
                 android:textColor="#000"
-                android:textSize="@dimen/_15sdp" />
+                android:textSize="@dimen/_13sdp" />
 
         </LinearLayout>
 
@@ -268,7 +270,7 @@
                 android:gravity="center"
                 android:text="অনুসন্ধানের ইতিহাস"
                 android:textColor="#000"
-                android:textSize="@dimen/_15sdp" />
+                android:textSize="@dimen/_13sdp" />
 
         </LinearLayout>
 
@@ -300,7 +302,7 @@
                 android:gravity="center"
                 android:text="অ্যাপটি শেয়ার করুন"
                 android:textColor="#000"
-                android:textSize="@dimen/_15sdp" />
+                android:textSize="@dimen/_13sdp" />
 
         </LinearLayout>
 
@@ -321,7 +323,7 @@
                 android:gravity="center"
                 android:text="সেটিংস"
                 android:textColor="#000"
-                android:textSize="@dimen/_15sdp" />
+                android:textSize="@dimen/_13sdp" />
 
         </LinearLayout>
 
@@ -343,7 +345,7 @@
                 android:gravity="center"
                 android:text="প্রাইভেসী পলিসি"
                 android:textColor="#000"
-                android:textSize="@dimen/_15sdp" />
+                android:textSize="@dimen/_13sdp" />
 
         </LinearLayout>
 
@@ -364,7 +366,7 @@
                 android:gravity="center"
                 android:text="অ্যাপ সম্পর্কে"
                 android:textColor="#000"
-                android:textSize="@dimen/_15sdp" />
+                android:textSize="@dimen/_13sdp" />
 
         </LinearLayout>
 

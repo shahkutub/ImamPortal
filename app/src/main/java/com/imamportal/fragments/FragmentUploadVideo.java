@@ -30,6 +30,7 @@ import com.imamportal.utils.AlertMessage;
 import com.imamportal.utils.Api;
 import com.imamportal.utils.AppConstant;
 import com.imamportal.utils.NetInfo;
+import com.imamportal.utils.PathUtils;
 import com.imamportal.utils.PersistData;
 
 import org.json.JSONException;
@@ -41,8 +42,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Interceptor;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -50,20 +54,21 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class FragmentUploadContent extends Fragment {
+public class FragmentUploadVideo extends Fragment {
 
     Context context;
-    private EditText etHeadline,etAsk;
+    private EditText etHeadline,etAsk,etVideoLink;
     private Spinner spinnerCatagory;
     private TextView tvFileName;
     private LinearLayout linChooseFile;
 
     List<Catagories> catagoriesList = new ArrayList<>();
     private String filePath;
-    private AppCompatButton btnSave;
+    private AppCompatButton btnSave,btnChoseFile;
     private String category_id;
     String data;
     String token;
+    Uri fileUri;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -113,34 +118,51 @@ public class FragmentUploadContent extends Fragment {
 
         etHeadline = (EditText)getView().findViewById(R.id.etHeadline);
         etAsk = (EditText)getView().findViewById(R.id.etAsk);
+        etVideoLink = (EditText)getView().findViewById(R.id.etVideoLink);
+        etVideoLink.setVisibility(View.VISIBLE);
+
         tvFileName = (TextView) getView().findViewById(R.id.tvFileName);
         spinnerCatagory = (Spinner)getView().findViewById(R.id.spinnerCatagory);
         linChooseFile = (LinearLayout) getView().findViewById(R.id.linChooseFile);
         btnSave = (AppCompatButton) getView().findViewById(R.id.btnSave);
+        btnChoseFile = (AppCompatButton) getView().findViewById(R.id.btnChoseFile);
+        btnChoseFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFileChooser();
+            }
+        });
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String title = etHeadline.getText().toString();
                 String description = etAsk.getText().toString();
+                String videolink = etVideoLink.getText().toString();
                 if(TextUtils.isEmpty(title)){
                     AlertMessage.showMessage(context,"Alert!","");
                 }else if(TextUtils.isEmpty(category_id)){
                     AlertMessage.showMessage(context,"Alert!","");
                 }else if(TextUtils.isEmpty(description)){
                     AlertMessage.showMessage(context,"Alert!","");
+                }else if(TextUtils.isEmpty(videolink)){
+                    AlertMessage.showMessage(context,"Alert!","");
+                }else if(fileUri==null){
+                    AlertMessage.showMessage(context,"Alert!","");
                 }else {
                     JSONObject jsonObject = new JSONObject();
                     try {
                         jsonObject.put("title",title);
+                        jsonObject.put("user_id",PersistData.getStringData(context,AppConstant.loginUserid));
                         jsonObject.put("category_id",category_id);
                         jsonObject.put("description",description);
+                        jsonObject.put("url_link",videolink);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
-                     data = jsonObject.toString();
-                     token = PersistData.getStringData(context,
+                    data = jsonObject.toString();
+                    token = PersistData.getStringData(context,
                             AppConstant.loginToken);
 
                     Log.e("data",""+data);
@@ -151,16 +173,45 @@ public class FragmentUploadContent extends Fragment {
             }
         });
 
-        linChooseFile.setVisibility(View.GONE);
-
         Catagories catagories = new Catagories();
         catagories.setName_bn("নির্বাচন করুন");
         catagoriesList.add(0,catagories);
         for (int i = 0; i <AppConstant.listAllCatagory.size() ; i++) {
-            Catagories catagory = new Catagories();
-            catagory.setName_bn(AppConstant.listAllCatagory.get(i).getName_bn());
-            catagory.setId(AppConstant.listAllCatagory.get(i).getId());
-            catagoriesList.add(catagory);
+            if(AppConstant.listAllCatagory.get(i).getName_bn().equalsIgnoreCase("কুরআন তেলাওয়াত")){
+                Catagories catagory = new Catagories();
+                catagory.setName_bn(AppConstant.listAllCatagory.get(i).getName_bn());
+                catagory.setId(AppConstant.listAllCatagory.get(i).getId());
+                catagoriesList.add(catagory);
+            }
+
+            if(AppConstant.listAllCatagory.get(i).getName_bn().equalsIgnoreCase("বয়ান")){
+                Catagories catagory = new Catagories();
+                catagory.setName_bn(AppConstant.listAllCatagory.get(i).getName_bn());
+                catagory.setId(AppConstant.listAllCatagory.get(i).getId());
+                catagoriesList.add(catagory);
+            }
+
+            if(AppConstant.listAllCatagory.get(i).getName_bn().equalsIgnoreCase("হামদ-নাত")){
+                            Catagories catagory = new Catagories();
+                            catagory.setName_bn(AppConstant.listAllCatagory.get(i).getName_bn());
+                            catagory.setId(AppConstant.listAllCatagory.get(i).getId());
+                            catagoriesList.add(catagory);
+                        }
+
+                        if(AppConstant.listAllCatagory.get(i).getName_bn().equalsIgnoreCase("দিকনির্দেশনা")){
+                Catagories catagory = new Catagories();
+                catagory.setName_bn(AppConstant.listAllCatagory.get(i).getName_bn());
+                catagory.setId(AppConstant.listAllCatagory.get(i).getId());
+                catagoriesList.add(catagory);
+            }
+
+//            if(AppConstant.listAllCatagory.get(i).getName_bn().equalsIgnoreCase("অন্যান্য")){
+//                Catagories catagory = new Catagories();
+//                catagory.setName_bn(AppConstant.listAllCatagory.get(i).getName_bn());
+//                catagory.setId(AppConstant.listAllCatagory.get(i).getId());
+//                catagoriesList.add(catagory);
+//            }
+
         }
 
         CustomAdapter adapterGender = new CustomAdapter(context, catagoriesList);
@@ -211,7 +262,21 @@ public class FragmentUploadContent extends Fragment {
                 .build();
 
         Api api = retrofit.create(Api.class);
-        Call<UploadResponse> userCall = api.post_store(data);
+
+
+        File file = new File(PathUtils.getPath(context, fileUri));
+
+        // Parsing any Media type file
+        //RequestBody requestBody=RequestBody.create(MediaType.parse("application/pdf"), file);
+
+         RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), file);
+        MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
+//        RequestBody filename = RequestBody.create(MediaType.parse("text/plain"), file.getName());
+//        RequestBody userid = RequestBody.create(MediaType.parse("text/plain"), AppConstant.getUserdata(context).getUser_id());
+        RequestBody jsonData = RequestBody.create(MediaType.parse("text/plain"), data);
+
+
+        Call<UploadResponse> userCall = api.video_store(fileToUpload,jsonData);
         userCall.enqueue(new Callback<UploadResponse>() {
             @Override
             public void onResponse(Call<UploadResponse> call, Response<UploadResponse> response) {
@@ -249,20 +314,10 @@ public class FragmentUploadContent extends Fragment {
     }
 
     private void showFileChooser() {
-        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("*/*");
-        // String[] mimetypes = {"image/*", "video/*"};
-        //intent.putExtra(Intent.EXTRA_MIME_TYPES, mimetypes);
-
-        try {
-            startActivityForResult(
-                    Intent.createChooser(intent, "Select a File to Upload"),
-                    1);
-        } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(context, "Please install a File Manager.",
-                    Toast.LENGTH_SHORT).show();
-        }
+        Intent intent_upload = new Intent();
+        intent_upload.setType("video/*");
+        intent_upload.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent_upload,1);
     }
 
 
@@ -273,17 +328,12 @@ public class FragmentUploadContent extends Fragment {
         if (requestCode == 1) {
             if (resultCode == Activity.RESULT_OK) {
                 Uri selectedFileURI = data.getData();
+                fileUri = data.getData();
                 File file = new File(selectedFileURI.getPath().toString());
                 filePath = selectedFileURI.getPath().toString();
                 Log.e("filePath", "" + filePath);
-//                uploadedFileName = file.getName().toString();
-//                Log.e("File", "" + uploadedFileName);
                 tvFileName.setText(file.getName().toString());
-//                StringTokenizer tokens = new StringTokenizer(uploadedFileName, ":");
-//
-//                String first = tokens.nextToken();
-//                String file_1 = tokens.nextToken().trim();
-//                tvFileName.setText(file_1);
+
             }
         }
 

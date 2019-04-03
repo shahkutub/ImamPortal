@@ -32,6 +32,7 @@ import com.imamportal.model.AllDataResponse;
 import com.imamportal.model.AlquranAlhadits;
 import com.imamportal.model.AudioModel;
 import com.imamportal.model.Catagories;
+import com.imamportal.model.SignUpResponse;
 import com.imamportal.model.VideoModel;
 
 import org.json.JSONArray;
@@ -204,26 +205,26 @@ public class AppConstant {
 ////        calendar.set(Calendar.SECOND, 00);
 ////        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 24*60*60*1000, pendingIntent);
 //    }
-//
-//    public static void saveUserdat(Context con, LoginData loginData) {
-//        SharedPreferences mPrefs = con.getSharedPreferences("loginData",MODE_PRIVATE);
-//        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-//        Gson gson = new Gson();
-//        String json = gson.toJson(loginData);
-//        prefsEditor.putString("loginData", json);
-//        prefsEditor.commit();
-//
-//    }
-//
-//    public static LoginData getUserdata(Context con){
-//        SharedPreferences mPrefs = con.getSharedPreferences("loginData",MODE_PRIVATE);
-//        LoginData loginData = new LoginData();
-//        Gson gson = new Gson();
-//        String json = mPrefs.getString("loginData", "");
-//        loginData = gson.fromJson(json, LoginData.class);
-//        return loginData;
-//    }
-//
+
+    public static void saveUserdat(Context con, SignUpResponse loginData) {
+        SharedPreferences mPrefs = con.getSharedPreferences("loginData",MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(loginData);
+        prefsEditor.putString("loginData", json);
+        prefsEditor.commit();
+
+    }
+
+    public static SignUpResponse getUserdata(Context con){
+        SharedPreferences mPrefs = con.getSharedPreferences("loginData",MODE_PRIVATE);
+        SignUpResponse loginData = new SignUpResponse();
+        Gson gson = new Gson();
+        String json = mPrefs.getString("loginData", "");
+        loginData = gson.fromJson(json, SignUpResponse.class);
+        return loginData;
+    }
+
 
 
 

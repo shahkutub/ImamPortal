@@ -4,6 +4,7 @@ package com.imamportal.utils;
 import com.imamportal.model.AllBlogpostModel;
 import com.imamportal.model.AllDataResponse;
 import com.imamportal.model.AlquranAlhadits;
+import com.imamportal.model.AmarpataContentResponse;
 import com.imamportal.model.AudioModel;
 import com.imamportal.model.Catagories;
 import com.imamportal.model.JobPortalModel;
@@ -14,6 +15,7 @@ import com.imamportal.model.CommonPostResponse;
 import com.imamportal.model.QuizeQuistionResponse;
 import com.imamportal.model.SeraContentData;
 import com.imamportal.model.SignUpResponse;
+import com.imamportal.model.UploadResponse;
 import com.imamportal.model.VideoModel;
 
 import java.util.List;
@@ -26,6 +28,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -39,7 +42,7 @@ public interface Api {
     //String BASE_URL = "http://192.168.0.22/wasa_inventory/";
 
     //Local
-    //String BASE_URL = "http://192.168.0.109/imamportal/";
+    //String BASE_URL = "http://192.168.0.119/imamportal/";
 
     //Live
     String BASE_URL = "http://nanosoftbd.com/imamportal/";
@@ -91,6 +94,16 @@ public interface Api {
     @GET("api/blog_post")
     public Call<List<AllBlogpostModel>> blog_post();
 
+    @GET("api/mypage/content")
+        public Call<AmarpataContentResponse> mypage_content();
+
+    @GET("api/mypage/audio")
+            public Call<AmarpataContentResponse> mypage_Audio();
+
+
+    @GET("api/mypage/video")
+            public Call<AmarpataContentResponse> mypage_video();
+
 
     @GET("api/skill")
     public Call<List<AllBlogpostModel>> skill();
@@ -129,6 +142,8 @@ public interface Api {
             @Field("data") String jsondata
             );
 
+
+
     @FormUrlEncoded
     @POST("api/login")
     public Call<SignUpResponse> login(
@@ -151,6 +166,39 @@ public interface Api {
             @Header("Authorization") String authHeader,
             @Field("question") String question,
             @Field("question_answer") String question_answer
+    );
+
+    @FormUrlEncoded
+    @POST("api/post_store")
+    public Call<UploadResponse> post_store (
+           // @Header("Authorization") String authHeader,
+            @Field("data") String jsondata
+    );
+
+    @Multipart
+    @POST("api/audio_store")
+    public Call<UploadResponse> audio_store (
+           // @Header("Authorization") String authHeader,
+           @Part MultipartBody.Part file,
+           @Part("data") RequestBody jsondata
+    );
+
+    @Multipart
+    @POST("api/video_store")
+    public Call<UploadResponse> video_store  (
+            // @Header("Authorization") String authHeader,
+            @Part MultipartBody.Part file,
+            @Part("data") RequestBody jsondata
+    );
+
+    @Multipart
+    @POST("api/user_photogallery/add")
+    public Call<UploadResponse>photogallery (
+            // @Header("Authorization") String authHeader,
+            @Part MultipartBody.Part file,
+           // @Part("image") RequestBody image,
+            @Part("title") RequestBody jsondata,
+            @Part("user_id") RequestBody user_id
     );
 
 

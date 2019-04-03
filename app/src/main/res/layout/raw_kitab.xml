@@ -47,7 +47,6 @@
                     android:id="@+id/imgKitab"
                     android:layout_width="@dimen/_60sdp"
                     android:layout_height="@dimen/_70sdp"
-                    android:src="@drawable/ktab"
                     android:layout_marginTop="@dimen/_3sdp"
                     />
 

@@ -18,7 +18,7 @@
                 <shape android:shape="oval">
                     <size android:width="55dp"
                         android:height="55dp"/>
-                    <solid android:color="#268632" />
+                    <solid android:color="#FFFFFF" />
                 </shape>
             </item>
 

@@ -171,7 +171,6 @@
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="@dimen/_50sdp"
                 android:layout_marginTop="@dimen/_2sdp"
-                android:src="@drawable/mobile"
                 />
 
             <TextView
@@ -323,7 +322,6 @@
             <ImageView
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="@dimen/_50sdp"
-                android:src="@drawable/hamdnat"
                 android:layout_marginTop="@dimen/_3sdp"
                 />
 

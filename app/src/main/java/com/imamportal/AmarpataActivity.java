@@ -15,13 +15,16 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.imamportal.fragments.FragmentAmarPataAudio;
 import com.imamportal.fragments.FragmentAmarPataContent;
+import com.imamportal.fragments.FragmentAmarPataVideo;
 import com.imamportal.fragments.FragmentNari;
 import com.imamportal.fragments.FragmentOnnanoHadith;
 import com.imamportal.fragments.FragmentOnnoDhara;
 import com.imamportal.fragments.FragmentShishu;
 import com.imamportal.model.AllBlogpostModel;
 import com.imamportal.model.AlquranAlhadits;
+import com.imamportal.model.Catagories;
 import com.imamportal.utils.AlertMessage;
 import com.imamportal.utils.Api;
 import com.imamportal.utils.AppConstant;
@@ -50,8 +53,8 @@ public class AmarpataActivity extends AppCompatActivity {
         context=this;
         overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
 
-        //getblog_post();
-        initUi();
+       initUi();
+
     }
 
     private void initUi() {
@@ -69,7 +72,7 @@ public class AmarpataActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        //tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
         //createTabIcons();
     }
@@ -95,8 +98,8 @@ public class AmarpataActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new FragmentAmarPataContent(), "কনটেন্ট");
-        adapter.addFragment(new FragmentAmarPataContent(), getString(R.string.audio));
-        adapter.addFragment(new FragmentAmarPataContent(), getString(R.string.video));
+        adapter.addFragment(new FragmentAmarPataAudio(), getString(R.string.audio));
+        adapter.addFragment(new FragmentAmarPataVideo(), getString(R.string.video));
         adapter.addFragment(new FragmentAmarPataContent(), getString(R.string.photogalari));
         viewPager.setAdapter(adapter);
     }
@@ -132,46 +135,5 @@ public class AmarpataActivity extends AppCompatActivity {
     }
 
 
-    private void getblog_post() {
 
-        if(!NetInfo.isOnline(context)){
-            AlertMessage.showMessage(context,"Alert!","No internet connection!");
-        }
-
-        final ProgressDialog pd = new ProgressDialog(context);
-        pd.setMessage("Loading....");
-        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pd.show();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Api.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        Api api = retrofit.create(Api.class);
-        Call<List<AllBlogpostModel>> userCall = api.blog_post();
-        userCall.enqueue(new Callback<List<AllBlogpostModel>>() {
-            @Override
-            public void onResponse(Call<List<AllBlogpostModel>> call, Response<List<AllBlogpostModel>> response) {
-                pd.dismiss();
-
-                List<AllBlogpostModel> listAlblog = new ArrayList<>();
-                listAlblog = response.body();
-
-                Log.e("listAlquranAlhadit",""+listAlblog.size());
-
-                if(listAlblog.size()>0){
-                    AppConstant.listAllBlogPost = listAlblog;
-                }
-                initUi();
-            }
-
-            @Override
-            public void onFailure(Call<List<AllBlogpostModel>> call, Throwable t) {
-                pd.dismiss();
-            }
-        });
-
-
-    }
 }
