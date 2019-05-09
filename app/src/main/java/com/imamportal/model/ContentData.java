@@ -9,7 +9,15 @@ public class ContentData {
 //            "title": "গুনাহ সুকুমার বৃত্তিগুলোর মৃত্যু ঘটায়",
 //            "description":
 
-    String category_id,title,description,audio;
+    String category_id,title,description,audio,created_at,status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getAudio() {
         return audio;
@@ -41,5 +49,13 @@ public class ContentData {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
     }
 }

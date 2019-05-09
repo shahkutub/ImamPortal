@@ -1,6 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:padding="@dimen/_3sdp"
     android:orientation="vertical">
 
     <TextView
@@ -8,10 +9,12 @@
         android:layout_height="@dimen/_20sdp"
         android:id="@+id/main"
         android:singleLine="true"
-        android:layout_marginLeft="50dp"
-        android:text="At res"
+        android:text=""
         android:textColor="#000"
         android:textSize="@dimen/_15sdp"
         android:gravity="center_vertical" />
+
+
+
 
 </LinearLayout>

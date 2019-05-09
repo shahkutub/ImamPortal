@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/linFullView"
-    android:background="@drawable/shadow"
+    android:background="@drawable/shadow_trans"
     android:orientation="vertical"
     >
 

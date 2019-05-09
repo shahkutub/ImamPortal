@@ -102,7 +102,7 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
     public final int galarytakid = 1;
     private static final int PERMISSION_REQUEST_CODE = 200;
     private final static int IMAGE_RESULT = 200;
-    private EditText input_name,input_name_father,input_father_name_bn,input_name_mother,input_name_mosq,input_mobile,input_birtdate,
+    private EditText input_name,input_name_father,input_name_mother,input_name_mosq,input_mobile,input_birtdate,
     input_mosq_address,input_wordno,input_postoffice_present,input_village_present,input_postoffficePermanent,input_villagePermanent,
             etExamName1, etBoard1,etInstitute1,etsubject1,etgpa1,etYear1,etExamName2,etBoard2,etInstitute2,etsubject2,
             etgpa2,etYear2,etExamName3,etBoard3,etInstitute3,etsubject3,etgpa3,etYear3,etExamName4,etBoard4,etInstitute4,etsubject4,
@@ -290,7 +290,6 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
 
         input_name = (EditText)findViewById(R.id.input_name);
         input_name_father = (EditText)findViewById(R.id.input_name_father);
-        input_father_name_bn = (EditText)findViewById(R.id.input_father_name_bn);
         input_name_mother = (EditText)findViewById(R.id.input_name_mother);
         input_name_mosq = (EditText)findViewById(R.id.input_name_mosq);
         input_mobile = (EditText)findViewById(R.id.input_mobile);
@@ -599,10 +598,13 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
 
                 if(name.isEmpty()){
                     AlertMessage.showMessage(context,"Alert!","আপনার নাম লিখুন");
+                    input_name.requestFocus();
                 }else if(nameFather.isEmpty()){
                     AlertMessage.showMessage(context,"Alert!","আপনার পিতার নাম লিখুন");
+                    input_name_father.requestFocus();
                 }else if(mothername.isEmpty()){
                     AlertMessage.showMessage(context,"Alert!","আপনার মায়ের নাম লিখুন");
+                    input_name_mother.requestFocus();
                 }else if(mosqname.isEmpty()){
                     AlertMessage.showMessage(context,"Alert!","মসজিদের নাম লিখুন");
                 }else if(mobile.isEmpty()){

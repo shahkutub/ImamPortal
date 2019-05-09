@@ -163,9 +163,8 @@ public class MainActivity extends AppCompatActivity {
         hijriDate();
         initDrawer();
         initUi();
-        slideshow();
         fabinitUi();
-
+        slideshow();
 
     }
 
@@ -178,6 +177,14 @@ public class MainActivity extends AppCompatActivity {
                 .startChooser();
 
     }
+
+
+    public void bookmarkList(View v) {
+
+        startActivity(new Intent(context,BookMarkListActivity.class));
+
+    }
+
 
     public void goponioNitimala(View v) {
         startActivity(new Intent(context, ActivityGoponiyoNitimala.class));
@@ -848,13 +855,13 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        relSisukisur = (LinearLayout) findViewById(R.id.relSisukisur);
+        //relSisukisur = (LinearLayout) findViewById(R.id.relSisukisur);
         relOnndhra = (LinearLayout) findViewById(R.id.relOnndhra);
 
 
         linIslam = (LinearLayout) findViewById(R.id.linIslam);
         linSompadokio = (LinearLayout) findViewById(R.id.linSompadokio);
-        linNarikornar = (LinearLayout) findViewById(R.id.linNarikornar);
+        //linNarikornar = (LinearLayout) findViewById(R.id.linNarikornar);
         linVideo = (LinearLayout) findViewById(R.id.linVideo);
         linAudio = (LinearLayout) findViewById(R.id.linAudio);
         linDokhotarGolpo = (LinearLayout) findViewById(R.id.linDokhotarGolpo);
@@ -911,15 +918,15 @@ public class MainActivity extends AppCompatActivity {
                 //startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?time_continue=1031&v=zfZZlb0Q_V4")));
             }
         });
-
-        linNarikornar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AppConstant.activitiname = getString(R.string.narikornar);
-                AppConstant.bolgpostName = "নারী কর্নার";
-                startActivity(new Intent(context, AllCommonPostActivity.class));
-            }
-        });
+//
+//        linNarikornar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                AppConstant.activitiname = getString(R.string.narikornar);
+//                AppConstant.bolgpostName = "নারী কর্নার";
+//                startActivity(new Intent(context, AllCommonPostActivity.class));
+//            }
+//        });
 
         linVideo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -967,14 +974,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        relSisukisur.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AppConstant.activitiname = getString(R.string.sisukisur);
-                AppConstant.bolgpostName = "শিশু কিশোর কর্নার";
-                startActivity(new Intent(context, AllCommonPostActivity.class));
-            }
-        });
+//        relSisukisur.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                AppConstant.activitiname = getString(R.string.sisukisur);
+//                AppConstant.bolgpostName = "শিশু কিশোর কর্নার";
+//                startActivity(new Intent(context, AllCommonPostActivity.class));
+//            }
+//        });
 
         imgKitabArow = (ImageView) findViewById(R.id.imgKitabArow);
         imgDokhotaArow = (ImageView) findViewById(R.id.imgDokhotaArow);
@@ -997,7 +1004,7 @@ public class MainActivity extends AppCompatActivity {
                 searchStr = autocoEditView.getText().toString();
                 if (searchStr.length() > 0) {
                     linAutoserch.setVisibility(View.GONE);
-                    startActivity(new Intent(context, ToolbarSearchActivity.class));
+                    //startActivity(new Intent(context, ToolbarSearchActivity.class));
                 }
             }
         });

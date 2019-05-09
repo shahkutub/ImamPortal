@@ -99,10 +99,7 @@ public class AllCommonPostAdapter extends RecyclerView.Adapter<AllCommonPostAdap
             }
         }
 
-        holder.tvTitle.setText(data.getTitle());
-        if(data.getDescription()!=null){
-            holder.tvShortDescription.setText(android.text.Html.fromHtml(data.getDescription()).toString());
-        }
+
         holder.tvViewCount.setText(data.getView_count());
         holder.tvCommentCount.setText(data.getComment().size()+"");
 
@@ -122,27 +119,32 @@ public class AllCommonPostAdapter extends RecyclerView.Adapter<AllCommonPostAdap
         holder.linFullView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(AppConstant.activitiname.equalsIgnoreCase("answer")){
-                   AppConstant.detaisData = data;
-                   context.startActivity(new Intent(context, DetailsActivity.class));
-//                    AppConstant.dilogDetails(context,data.getQuestion(),data.getAnswer(),""+name,
-//                            data.getCreated_at(),data.getView_count(),"","");
-                }else {
-//                    AppConstant.dilogDetails(context,data.getTitle(),data.getDescription(),""+name,
-//                            data.getCreated_at(),data.getView_count(),"","");
-
-                    AppConstant.detaisData = data;
-                    context.startActivity(new Intent(context, DetailsActivity.class));
-                }
-
+//                if(AppConstant.activitiname.equalsIgnoreCase("answer")){
+//                   AppConstant.detaisData = data;
+//                   context.startActivity(new Intent(context, DetailsActivity.class));
+////                    AppConstant.dilogDetails(context,data.getQuestion(),data.getAnswer(),""+name,
+////                            data.getCreated_at(),data.getView_count(),"","");
+//                }else {
+////                    AppConstant.dilogDetails(context,data.getTitle(),data.getDescription(),""+name,
+////                            data.getCreated_at(),data.getView_count(),"","");
+//                    AppConstant.detaisData = data;
+//                    context.startActivity(new Intent(context, DetailsActivity.class));
+//                }
+                AppConstant.detaisData = data;
+                context.startActivity(new Intent(context, DetailsActivity.class));
 
             }
         });
 
-        if(AppConstant.activitiname.equalsIgnoreCase("answer")){
+        if(data.getQuestion()!=null||data.getAnswer()!=null){
             holder.tvTitle.setText(data.getQuestion());
             if(data.getAnswer()!=null){
                 holder.tvShortDescription.setText(android.text.Html.fromHtml(data.getAnswer()).toString());
+            }
+        }else {
+            holder.tvTitle.setText(data.getTitle());
+            if(data.getDescription()!=null){
+                holder.tvShortDescription.setText(android.text.Html.fromHtml(data.getDescription()).toString());
             }
         }
 

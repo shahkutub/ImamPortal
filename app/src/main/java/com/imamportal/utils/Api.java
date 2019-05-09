@@ -105,6 +105,10 @@ public interface Api {
             public Call<AmarpataContentResponse> mypage_video();
 
 
+    @GET("api/mypage/photogallery")
+            public Call<AmarpataContentResponse> mypage_photogallery();
+
+
     @GET("api/skill")
     public Call<List<AllBlogpostModel>> skill();
 

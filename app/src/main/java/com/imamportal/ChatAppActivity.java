@@ -11,11 +11,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.imamportal.Adapter.ChatAppMsgAdapter;
 import com.imamportal.model.ChatAppMsgDTO;
+import com.imamportal.utils.AppConstant;
+import com.imamportal.utils.PersistData;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ChatAppActivity extends AppCompatActivity {
@@ -27,6 +33,7 @@ public class ChatAppActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat);
+        context= this;
 
         imgBack = (ImageView) findViewById(R.id.imgBack);
         imgBack.setOnClickListener(new View.OnClickListener() {
@@ -45,21 +52,21 @@ public class ChatAppActivity extends AppCompatActivity {
 
         // Create the initial data list.
         final List<ChatAppMsgDTO> msgDtoList = new ArrayList<ChatAppMsgDTO>();
-        ChatAppMsgDTO msgDto = new ChatAppMsgDTO(ChatAppMsgDTO.MSG_TYPE_SENT, "hello");
+        ChatAppMsgDTO msgDto = new ChatAppMsgDTO(PersistData.getStringData(context, AppConstant.loginUserid),"","hello",new Date().toString());
         msgDtoList.add(msgDto);
 
-        ChatAppMsgDTO msgDt1 = new ChatAppMsgDTO(ChatAppMsgDTO.MSG_TYPE_RECEIVED, "hello");
+        ChatAppMsgDTO msgDt1 = new ChatAppMsgDTO("2","","hello",new Date().toString());
         msgDtoList.add(msgDt1);
 
 
-        ChatAppMsgDTO msgDt2 = new ChatAppMsgDTO(ChatAppMsgDTO.MSG_TYPE_SENT, "salam");
+        ChatAppMsgDTO msgDt2 = new ChatAppMsgDTO(PersistData.getStringData(context, AppConstant.loginUserid),"","hello",new Date().toString());
         msgDtoList.add(msgDt2);
 
-        ChatAppMsgDTO msgDt3 = new ChatAppMsgDTO(ChatAppMsgDTO.MSG_TYPE_RECEIVED, "salam");
+        ChatAppMsgDTO msgDt3 = new ChatAppMsgDTO("2","","hello",new Date().toString());
         msgDtoList.add(msgDt3);
 
         // Create the data adapter with above data list.
-        final ChatAppMsgAdapter chatAppMsgAdapter = new ChatAppMsgAdapter(msgDtoList);
+        final ChatAppMsgAdapter chatAppMsgAdapter = new ChatAppMsgAdapter(msgDtoList,context);
 
         // Set data adapter to RecyclerView.
         msgRecyclerView.setAdapter(chatAppMsgAdapter);
@@ -75,7 +82,7 @@ public class ChatAppActivity extends AppCompatActivity {
                 if(!TextUtils.isEmpty(msgContent))
                 {
                     // Add a new sent message to the list.
-                    ChatAppMsgDTO msgDto = new ChatAppMsgDTO(ChatAppMsgDTO.MSG_TYPE_SENT, msgContent);
+                    ChatAppMsgDTO msgDto = new ChatAppMsgDTO("2","",msgContent,currentDate());
                     msgDtoList.add(msgDto);
 
                     int newMsgPosition = msgDtoList.size() - 1;
@@ -88,8 +95,24 @@ public class ChatAppActivity extends AppCompatActivity {
 
                     // Empty the input edit text box.
                     msgInputText.setText("");
+                }else {
+                    Toast.makeText(context, "বার্তা লিখুন", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
+
+    private String currentDate() {
+        DateFormat dateFormatter = new SimpleDateFormat("dd-M-yyyy hh:mm");
+
+        dateFormatter.setLenient(false);
+
+        Date today = new Date();
+
+        String s = dateFormatter.format(today);
+
+        return s;
+    }
+
+
 }

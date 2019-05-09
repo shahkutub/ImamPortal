@@ -177,33 +177,36 @@ public class FragmentUploadVideo extends Fragment {
         catagories.setName_bn("নির্বাচন করুন");
         catagoriesList.add(0,catagories);
         for (int i = 0; i <AppConstant.listAllCatagory.size() ; i++) {
-            if(AppConstant.listAllCatagory.get(i).getName_bn().equalsIgnoreCase("কুরআন তেলাওয়াত")){
-                Catagories catagory = new Catagories();
-                catagory.setName_bn(AppConstant.listAllCatagory.get(i).getName_bn());
-                catagory.setId(AppConstant.listAllCatagory.get(i).getId());
-                catagoriesList.add(catagory);
+            if(AppConstant.listAllCatagory.get(i).getName_bn()!=null){
+                if(AppConstant.listAllCatagory.get(i).getName_bn().equalsIgnoreCase("কুরআন তেলাওয়াত")){
+                    Catagories catagory = new Catagories();
+                    catagory.setName_bn(AppConstant.listAllCatagory.get(i).getName_bn());
+                    catagory.setId(AppConstant.listAllCatagory.get(i).getId());
+                    catagoriesList.add(catagory);
+                }
+
+                if(AppConstant.listAllCatagory.get(i).getName_bn().equalsIgnoreCase("বয়ান")){
+                    Catagories catagory = new Catagories();
+                    catagory.setName_bn(AppConstant.listAllCatagory.get(i).getName_bn());
+                    catagory.setId(AppConstant.listAllCatagory.get(i).getId());
+                    catagoriesList.add(catagory);
+                }
+
+                if(AppConstant.listAllCatagory.get(i).getName_bn().equalsIgnoreCase("হামদ-নাত")){
+                    Catagories catagory = new Catagories();
+                    catagory.setName_bn(AppConstant.listAllCatagory.get(i).getName_bn());
+                    catagory.setId(AppConstant.listAllCatagory.get(i).getId());
+                    catagoriesList.add(catagory);
+                }
+
+                if(AppConstant.listAllCatagory.get(i).getName_bn().equalsIgnoreCase("দিকনির্দেশনা")){
+                    Catagories catagory = new Catagories();
+                    catagory.setName_bn(AppConstant.listAllCatagory.get(i).getName_bn());
+                    catagory.setId(AppConstant.listAllCatagory.get(i).getId());
+                    catagoriesList.add(catagory);
+                }
             }
 
-            if(AppConstant.listAllCatagory.get(i).getName_bn().equalsIgnoreCase("বয়ান")){
-                Catagories catagory = new Catagories();
-                catagory.setName_bn(AppConstant.listAllCatagory.get(i).getName_bn());
-                catagory.setId(AppConstant.listAllCatagory.get(i).getId());
-                catagoriesList.add(catagory);
-            }
-
-            if(AppConstant.listAllCatagory.get(i).getName_bn().equalsIgnoreCase("হামদ-নাত")){
-                            Catagories catagory = new Catagories();
-                            catagory.setName_bn(AppConstant.listAllCatagory.get(i).getName_bn());
-                            catagory.setId(AppConstant.listAllCatagory.get(i).getId());
-                            catagoriesList.add(catagory);
-                        }
-
-                        if(AppConstant.listAllCatagory.get(i).getName_bn().equalsIgnoreCase("দিকনির্দেশনা")){
-                Catagories catagory = new Catagories();
-                catagory.setName_bn(AppConstant.listAllCatagory.get(i).getName_bn());
-                catagory.setId(AppConstant.listAllCatagory.get(i).getId());
-                catagoriesList.add(catagory);
-            }
 
 //            if(AppConstant.listAllCatagory.get(i).getName_bn().equalsIgnoreCase("অন্যান্য")){
 //                Catagories catagory = new Catagories();

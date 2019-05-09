@@ -27,6 +27,12 @@
 
 
         <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+        <LinearLayout
             android:id="@+id/linAlQran"
             android:layout_width="@dimen/_85sdp"
             android:layout_height="@dimen/_85sdp"
@@ -40,6 +46,9 @@
                 app:srcCompat="@drawable/alquran"
                 />
 
+
+
+        </LinearLayout>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -49,9 +58,7 @@
                 android:gravity="center"
 
                 />
-
         </LinearLayout>
-
         <LinearLayout
             android:id="@+id/linAHadith"
             android:layout_width="@dimen/_85sdp"

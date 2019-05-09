@@ -13,9 +13,9 @@ public class ChatAppMsgViewHolder extends RecyclerView.ViewHolder {
 
     LinearLayout rightMsgLayout;
 
-    TextView leftMsgTextView;
+    TextView leftMsgTextView,chat_left_text_message_time;
 
-    TextView rightMsgTextView;
+    TextView rightMsgTextView,chat_right_msg_text_message_time;
 
     public ChatAppMsgViewHolder(View itemView) {
         super(itemView);
@@ -25,6 +25,8 @@ public class ChatAppMsgViewHolder extends RecyclerView.ViewHolder {
             rightMsgLayout = (LinearLayout) itemView.findViewById(R.id.chat_right_msg_layout);
             leftMsgTextView = (TextView) itemView.findViewById(R.id.chat_left_msg_text_view);
             rightMsgTextView = (TextView) itemView.findViewById(R.id.chat_right_msg_text_view);
+            chat_right_msg_text_message_time = (TextView) itemView.findViewById(R.id.chat_right_msg_text_message_time);
+            chat_left_text_message_time = (TextView) itemView.findViewById(R.id.chat_left_text_message_time);
         }
     }
 }

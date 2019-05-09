@@ -27,6 +27,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
@@ -42,6 +43,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
@@ -106,6 +108,7 @@ public class RegistrationActivity extends AppCompatActivity {
     Spinner spinnerPodobi,spinnerDivision,spinnerCity,spinnerDistrict,spinnerUpojila,spinnerUnion;
     private TextView tvBirthdate;
     private Button btnSubmit;
+    private ScrollView scrolliew;
 
     List<NameInfo> listDivision = new ArrayList<>();
     List<NameInfo> listCity = new ArrayList<>();
@@ -113,7 +116,9 @@ public class RegistrationActivity extends AppCompatActivity {
     List<NameInfo> listUpozila = new ArrayList<>();
     List<NameInfo> listUnion = new ArrayList<>();
 
-    private String name,email,username,mobile,password,confirmpass,birthdate,nid,mosqname,mosqaddress,wardno,postoffice,village,podobi="",
+    NameInfo select = new NameInfo();
+
+    private String name,email,username,mobile,password,confirmpass,birthdate,nid,mosqname,mosqaddress,wardno,postoffice,village,podobi,
             division="",divisionId,
     city="",cityId="",district="",districtId="",upojila="",upojilaId="",union="",unionId="",photo="";
 
@@ -123,11 +128,14 @@ public class RegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
         context= this;
         overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
-        if(AppConstant.allData!=null){
-            innitUi();
-        }else {
-            getAlldata();
-        }
+        getAlldata();
+
+        select.setName("নির্বাচন করুন");
+//        if(AppConstant.allData!=null){
+//            innitUi();
+//        }else {
+//            getAlldata();
+//        }
     }
 
     private void innitUi() {
@@ -139,6 +147,7 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
+        scrolliew = (ScrollView)findViewById(R.id.scrolliew);
         input_name = (EditText)findViewById(R.id.input_name);
         input_email = (EditText)findViewById(R.id.input_email);
         input_UserName = (EditText)findViewById(R.id.input_UserName);
@@ -154,22 +163,26 @@ public class RegistrationActivity extends AppCompatActivity {
         input_village = (EditText)findViewById(R.id.input_village);
 
         spinnerPodobi = (Spinner) findViewById(R.id.spinnerPodobi);
-        List<String> listPodobi = new ArrayList<String>();
-        listPodobi.add("নির্বাচন করুন");
-        listPodobi.add("ইমাম");
-        listPodobi.add("মুয়াজ্জিন");
-        listPodobi.add("অন্যান্য");
-        ArrayAdapter<String> adapterPodobi = new ArrayAdapter<String>(context,
-                android.R.layout.simple_spinner_item, listPodobi);
+        final List<NameInfo> listPodobi = new ArrayList<NameInfo>();
+
+        String podobis [] = {"নির্বাচন করুন","ইমাম","মুয়াজ্জিন","অন্যান্য"};
+        for (int i = 0; i <podobis.length ; i++) {
+            NameInfo info = new NameInfo();
+            info.setName(podobis[i]);
+            listPodobi.add(info);
+        }
+
+
+        CustomAdapter adapterPodobi = new CustomAdapter(this, listPodobi);
         spinnerPodobi.setAdapter(adapterPodobi);
 
         spinnerPodobi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(!spinnerPodobi.getSelectedItem().toString().equalsIgnoreCase("নির্বাচন করুন")){
-                    podobi = ""+i;
+                if(i>0){
+                    podobi = listPodobi.get(i).getName();
                 }
-            }
+        }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -186,6 +199,7 @@ public class RegistrationActivity extends AppCompatActivity {
         spinnerUnion = (Spinner) findViewById(R.id.spinnerUnion);
 
         listDivision.clear();
+        listDivision.add(0,select);
 
         for (int i = 0; i <AppConstant.allData.getResult().size() ; i++) {
             if(AppConstant.allData.getResult().get(i).getTable_name().equalsIgnoreCase("geo_divisions")){
@@ -205,6 +219,7 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
                 listDistrict.clear();
+                listDistrict.add(0,select);
                 if(!spinnerDivision.getSelectedItem().toString().equalsIgnoreCase("নির্বাচন করুন")){
                     division = spinnerDivision.getSelectedItem().toString();
                     divisionId = listDivision.get(pos).getId();
@@ -230,7 +245,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
                 listCity.clear();
-
+                listCity.add(0,select);
                 for (int i = 0; i <AppConstant.allData.getResult().size() ; i++) {
                     if(AppConstant.allData.getResult().get(i).getTable_name().equalsIgnoreCase("geo_city_corporations")){
                         for (int j = 0; j <AppConstant.allData.getResult().get(i).getValues().size() ; j++) {
@@ -271,10 +286,13 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
+
+
         spinnerDistrict.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 listUpozila.clear();
+                listUpozila.add(0,select);
                 if(!spinnerDistrict.getSelectedItem().toString().equalsIgnoreCase("নির্বাচন করুন")){
                     district = spinnerDistrict.getSelectedItem().toString();
                     districtId = listDistrict.get(position).getId();
@@ -311,6 +329,7 @@ public class RegistrationActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 listUnion.clear();
+                listUnion.add(0,select);
                 if(!spinnerUpojila.getSelectedItem().toString().equalsIgnoreCase("নির্বাচন করুন")){
                     upojila= spinnerDistrict.getSelectedItem().toString();
                     upojilaId = listUpozila.get(position).getId();
@@ -416,47 +435,188 @@ public class RegistrationActivity extends AppCompatActivity {
                 village=input_village.getText().toString();
 
                 if(name.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","name is required");
-                }else if(email.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","email is required");
-                }else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                    AlertMessage.showMessage(context,"Alert!","Invalid email address");
-                }else if(username.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","username is required");
-                }else if(mobile.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","mobile numer is required");
-                }else if(password.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","password is required");
-                }else if(password.length()<6){
-                    AlertMessage.showMessage(context,"Alert!","password must be 6 digit");
-                }else if(!confirmpass.equalsIgnoreCase(password)){
-                    AlertMessage.showMessage(context,"Alert!","confirm password  doesn't mach with Password");
-                }else if(podobi.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","podobi is required");
+                    AlertMessage.showMessage(context,"Alert!","আপনার নাম লিখুন");
+                    input_name.requestFocus();
+                    scrolliew.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrolliew.scrollTo(0, input_name.getBottom());
+                        }
+                    });
+                }
+                else if(email.isEmpty()){
+                    AlertMessage.showMessage(context,"Alert!","আপনার ইমেইল লিখুন");
+                    input_email.requestFocus();
+                    scrolliew.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrolliew.scrollTo(0, input_email.getBottom());
+                        }
+                    });
+                }
+                else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                    AlertMessage.showMessage(context,"Alert!","ইমেইল সঠিক নয়");
+                    input_email.requestFocus();
+                    scrolliew.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrolliew.scrollTo(0, input_email.getBottom());
+                        }
+                    });
+                }
+                else if(username.isEmpty()){
+                    AlertMessage.showMessage(context,"Alert!","আপনার ইউসার নাম লিখুন");
+                    input_UserName.requestFocus();
+                    scrolliew.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrolliew.scrollTo(0, input_UserName.getBottom());
+                        }
+                    });
+                }
+                else if(mobile.isEmpty()){
+                    AlertMessage.showMessage(context,"Alert!","আপনার মোবাইল নম্বর নাম লিখুন");
+                    input_UserMobile.requestFocus();
+                    scrolliew.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrolliew.scrollTo(0, input_UserMobile.getBottom());
+                        }
+                    });
+                }
+                else if(password.isEmpty()){
+                    AlertMessage.showMessage(context,"Alert!","পাসওয়ার্ড লিখুন");
+                    input_password.requestFocus();
+                    scrolliew.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrolliew.scrollTo(0, input_password.getBottom());
+                        }
+                    });
+                }
+                else if(password.length()<6){
+                    AlertMessage.showMessage(context,"Alert!","পাসওয়ার্ড 6 ডিজিট হতে হবে");
+                    input_password.requestFocus();
+                    scrolliew.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrolliew.scrollTo(0, input_password.getBottom());
+                        }
+                    });
+                }
+                else if(!confirmpass.equalsIgnoreCase(password)){
+                    AlertMessage.showMessage(context,"Alert!","পাসওয়ার্ড মিলেনি");
+                    input_password_confirm.requestFocus();
+                    scrolliew.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrolliew.scrollTo(0, input_password_confirm.getBottom());
+                        }
+                    });
+                }
+                else if(TextUtils.isEmpty(podobi)){
+                    AlertMessage.showMessage(context,"Alert!","পদবী নির্বাচন করুন");
+                    scrolliew.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrolliew.scrollTo(0, spinnerPodobi.getBottom());
+                        }
+                    });
                 }else if(birthdate.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","Birth date is required");
+                    AlertMessage.showMessage(context,"Alert!","জন্ম তারিখ লিখুন");
+                    scrolliew.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrolliew.scrollTo(0, tvBirthdate.getBottom());
+                        }
+                    });
                 }else if(nid.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","nid is required");
+                    AlertMessage.showMessage(context,"Alert!","জাতীয় পরিচয় পত্র নম্বর লিখুন");
                 }else if(mosqname.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","Mosq name is required");
+                    AlertMessage.showMessage(context,"Alert!","মসজিদের নাম লিখুন");
+                    input_mosq.requestFocus();
+                    scrolliew.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrolliew.scrollTo(0, input_mosq.getBottom());
+                        }
+                    });
                 }else if(mosqaddress.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","Mosq address is required");
+                    AlertMessage.showMessage(context,"Alert!","মসজিদের ঠিকানা লিখুন");
+                    input_mosq_address.requestFocus();
+                    scrolliew.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrolliew.scrollTo(0, input_mosq_address.getBottom());
+                        }
+                    });
                 }else if(division.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","Division is required");
+                    AlertMessage.showMessage(context,"Alert!","বিভাগ নির্বাচন করুন");
+                    scrolliew.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrolliew.scrollTo(0, spinnerDivision.getBottom());
+                        }
+                    });
                 }else if(city.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","City is required");
+                    AlertMessage.showMessage(context,"Alert!","সিটি নির্বাচন করুন");
+                    scrolliew.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrolliew.scrollTo(0, spinnerCity.getBottom());
+                        }
+                    });
                 }else if(wardno.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","wardno is required");
+                    AlertMessage.showMessage(context,"Alert!","ওয়ার্ড এর নাম লিখুন");
+                    input_wordno.requestFocus();
+                    scrolliew.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrolliew.scrollTo(0, input_wordno.getBottom());
+                        }
+                    });
                 }else if(district.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","District is required");
+                    AlertMessage.showMessage(context,"Alert!","জেলা নির্বাচন করুন");
+                    scrolliew.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrolliew.scrollTo(0, spinnerDistrict.getBottom());
+                        }
+                    });
                 }else if(upojila.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","Upojila is required");
+                    AlertMessage.showMessage(context,"Alert!","উপজেলা নির্বাচন করুন");
+                    scrolliew.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrolliew.scrollTo(0, spinnerUpojila.getBottom());
+                        }
+                    });
                 }else if(union.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","Union is required");
+                    AlertMessage.showMessage(context,"Alert!","ইউনিয়ন নির্বাচন করুন");
+                    scrolliew.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrolliew.scrollTo(0, spinnerUnion.getBottom());
+                        }
+                    });
                 }else if(postoffice.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","post office is required");
+                    AlertMessage.showMessage(context,"Alert!","পোস্ট অফিস এর নাম লিখুন");
+                    input_postoffice.requestFocus();
+                    scrolliew.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrolliew.scrollTo(0, input_postoffice.getBottom());
+                        }
+                    });
                 }else if(village.isEmpty()){
-                    AlertMessage.showMessage(context,"Alert!","village is required");
+                    AlertMessage.showMessage(context,"Alert!","গ্রামের নাম লিখুন");
+                    input_village.requestFocus();
+                    scrolliew.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrolliew.scrollTo(0, input_village.getBottom());
+                        }
+                    });
                 }else {
 
                     //username email password designation name mobile_no nid dob masjid_name masjid_address division_id

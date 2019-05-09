@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.imamportal.fragments.FragmentAmarPataAudio;
 import com.imamportal.fragments.FragmentAmarPataContent;
+import com.imamportal.fragments.FragmentAmarPataPhotoGallary;
 import com.imamportal.fragments.FragmentAmarPataVideo;
 import com.imamportal.fragments.FragmentNari;
 import com.imamportal.fragments.FragmentOnnanoHadith;
@@ -100,7 +101,7 @@ public class AmarpataActivity extends AppCompatActivity {
         adapter.addFragment(new FragmentAmarPataContent(), "কনটেন্ট");
         adapter.addFragment(new FragmentAmarPataAudio(), getString(R.string.audio));
         adapter.addFragment(new FragmentAmarPataVideo(), getString(R.string.video));
-        adapter.addFragment(new FragmentAmarPataContent(), getString(R.string.photogalari));
+        adapter.addFragment(new FragmentAmarPataPhotoGallary(), getString(R.string.photogalari));
         viewPager.setAdapter(adapter);
     }
 

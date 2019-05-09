@@ -57,19 +57,18 @@ public class NamjTimeActivity extends AppCompatActivity {
         //translate = Translator.getInstance();
 
         initUi();
-        getPrayerTime();
-
-
+        //getPrayerTime();
+        azan();
     }
 
     public static void main(String[] args) {
-        azan();
+        //azan();
     }
-    public static void azan() {
+    public void azan() {
         GregorianCalendar date = new GregorianCalendar();
         System.out.println(date.getTimeInMillis());
-        PrayerTimes prayerTimes = new TimeCalculator().date(date).location(23.8103, 90.4125,
-                0, 0).timeCalculationMethod(KARACHI).calculateTimes();
+        PrayerTimes prayerTimes = new TimeCalculator().date(date).location(23.7876622, 90.4254112,
+                0, 0).timeCalculationMethod(MUHAMMADIYAH).calculateTimes();
         prayerTimes.setUseSecond(true);
         System.out.println("----------------------------------------");
         System.out.println("Fajr ---> " + prayerTimes.getPrayTime(PrayersType.FAJR));
@@ -97,11 +96,11 @@ public class NamjTimeActivity extends AppCompatActivity {
         ISHA = ISHA.replace("BDT","GMT+06:00");
 
 
-        long fojormilis =  convertMilis(FAJR);
-        long johormilis =  convertMilis(ZUHR);
-        long asormilis  =  convertMilis(ASR);
-        long Maghribmilis  =  convertMilis(MAGHRIB);
-        long isamilis  =  convertMilis(ISHA);
+        final long fojormilis =  convertMilis(FAJR);
+        final long johormilis =  convertMilis(ZUHR);
+        final long asormilis  =  convertMilis(ASR);
+        final long maghribmilis  =  convertMilis(MAGHRIB);
+        final long isamilis  =  convertMilis(ISHA);
 
         String fojorHm = FAJR.split("\\ ")[3];
         String zohorHm = ZUHR.split("\\ ")[3];
@@ -113,11 +112,75 @@ public class NamjTimeActivity extends AppCompatActivity {
         System.out.println("Fajr hm---> " + FAJR.split("\\ ")[3]);
 
 
-        long millis = (new Date().getTime() - fojormilis);
-        String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
-                TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
-                TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
-        System.out.println(hms);
+        Timer updateTimer = new Timer();
+        updateTimer.schedule(new TimerTask() {
+            public void run() {
+                try {
+
+
+                    // updated value every1 second
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            // update TextView here!
+                            long currentTimeMilis = new Date().getTime();
+
+                            if(fojormilis<currentTimeMilis){
+                                long millis = (johormilis - new Date().getTime());
+                                String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
+                                        TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
+                                        TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+                                Log.e("johor remins: ",""+hms);
+
+                            }
+
+                            if(johormilis<currentTimeMilis){
+                                long millis = (asormilis - new Date().getTime());
+                                String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
+                                        TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
+                                        TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+                                System.out.println("asor remins: "+hms);
+                                Log.e("asor remins: ",""+hms);
+
+
+                            }
+                            if(asormilis<currentTimeMilis){
+                                long millis = (maghribmilis - new Date().getTime());
+                                String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
+                                        TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
+                                        TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+                                System.out.println("magrib remins: "+hms);
+                                Log.e("magrib remins: ",""+hms);
+
+                            }
+                            if(maghribmilis<currentTimeMilis){
+                                long millis = (isamilis - new Date().getTime());
+                                String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
+                                        TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
+                                        TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+                                System.out.println("isa remins: "+hms);
+                                Log.e("isa remins: ",""+hms);
+
+                            }
+                            if(isamilis<currentTimeMilis){
+                                long millis = (fojormilis - new Date().getTime());
+                                String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
+                                        TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
+                                        TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+                                System.out.println("fojor remins: "+hms);
+                                Log.e("fojor remins: ",""+hms);
+                            }
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }, 0, 1000); // here 1000 means 1000 mills i.e. 1 second
+
+
+
     }
 
     private static long convertMilis(String dateTime) {

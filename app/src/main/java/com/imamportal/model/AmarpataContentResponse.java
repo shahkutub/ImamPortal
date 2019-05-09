@@ -8,8 +8,17 @@ public class AmarpataContentResponse {
     Contents contents = new Contents ();
     Contents audios = new Contents ();
     Contents videos = new Contents ();
+    Contents photo_galleries = new Contents ();
     List<Catagories> content_categories = new ArrayList<>();
     List<Catagories> multimedia_categories = new ArrayList<>();
+
+    public Contents getPhoto_galleries() {
+        return photo_galleries;
+    }
+
+    public void setPhoto_galleries(Contents photo_galleries) {
+        this.photo_galleries = photo_galleries;
+    }
 
     public Contents getVideos() {
         return videos;

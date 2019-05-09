@@ -13,6 +13,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -62,6 +63,8 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         context=this;
+        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO);
+        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
         Log.e("token", PersistData.getStringData(context, AppConstant.fcm_token));
 
@@ -92,13 +95,10 @@ public class SplashActivity extends AppCompatActivity {
         relSplash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!PersistentUser.isLogged(context)){
-                    startActivity(new Intent(getApplicationContext(),LanguageActivity.class));
-                    finish();
-                }else {
-                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                    finish();
-                }
+
+                startActivity(new Intent(getApplicationContext(),MainActivityDemo.class));
+                finish();
+
 
             }
         });
