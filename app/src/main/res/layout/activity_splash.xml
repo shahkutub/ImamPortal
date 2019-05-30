@@ -80,7 +80,7 @@
             android:padding="@dimen/_5sdp"
             android:textColor="#519605"
             android:textSize="@dimen/_15sdp"
-            android:text="https://nanosoftbd.com/imamportal/"
+            android:text="http://training.imam.gov.bd/"
             />
         </LinearLayout>
 
@@ -103,8 +103,8 @@
 
             <ImageView
                 android:id="@+id/imgA2i"
-                android:layout_width="@dimen/_100sdp"
-                android:layout_height="@dimen/_100sdp"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_80sdp"
                 app:srcCompat="@drawable/a2i"
                 android:layout_marginLeft="@dimen/_20sdp"
 

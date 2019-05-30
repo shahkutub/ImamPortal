@@ -40,6 +40,14 @@
             android:theme="@style/MyMaterialTheme" />
 
         <activity
+            android:name=".NotificationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyMaterialTheme" />
+        <service
+            android:name=".utils.MyService"
+            android:enabled="true"
+            android:exported="true" />
+        <activity
             android:name=".MainActivityDemo"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme" />

@@ -1,5 +1,6 @@
 package com.imamportal;
 
+import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -14,24 +15,47 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.imamportal.Adapter.ChatCreatAdapter;
 import com.imamportal.Adapter.ChatUsetListAdapter;
 import com.imamportal.model.ChatUserModel;
+import com.imamportal.model.ChatUserResponse;
+import com.imamportal.utils.AlertMessage;
+import com.imamportal.utils.Api;
 import com.imamportal.utils.AppConstant;
+import com.imamportal.utils.NetInfo;
+import com.imamportal.utils.PersistData;
+import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout;
+import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection;
 
 import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatSearchActivity extends AppCompatActivity{
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+public class ChatSearchActivity extends AppCompatActivity implements SwipyRefreshLayout.OnRefreshListener{
     private static final String TAG = MainActivity.class.getSimpleName();
     private RecyclerView recyclerView;
 
@@ -41,7 +65,10 @@ public class ChatSearchActivity extends AppCompatActivity{
     ChatUsetListAdapter mAdapter;
     private LinearLayout linCreateGroup,linNewChat;
 
-
+    private ChatUserResponse responsData;
+    SwipyRefreshLayout swiperefresh;
+    String currentPage;
+    List <ChatUserModel>  chatuserlist = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,98 +87,18 @@ public class ChatSearchActivity extends AppCompatActivity{
             }
         });
 
+        swiperefresh = (SwipyRefreshLayout)findViewById(R.id.swipyrefreshlayout);
+        swiperefresh.setOnRefreshListener(this);
+        swiperefresh.setRefreshing(true);
+
         recyclerView = findViewById(R.id.recycler_view);
-//        contactList = new ArrayList<>();
-
-        ChatUserModel chatUserModel = new ChatUserModel();
-
-        chatUserModel.setContent("Hi whats up");
-        chatUserModel.setUsername("Alom ali");
-        chatUserModel.setDate("21,10,2018");
-
-        List <ChatUserModel>  chatulist = new ArrayList<>();
-
-//        for (int i = 0; i < 15; i++) {
-//            chatUserModel.setUsername("Alom ali");
-//            chatulist.add(chatUserModel);
-//
-//        }
-
-        ChatUserModel chatUserModel1 = new ChatUserModel();
-
-        chatUserModel1.setContent("Hi whats up");
-        chatUserModel1.setUsername("azim");
-        chatUserModel1.setDate("21,10,2018");
-        chatulist.add(chatUserModel1);
-
-        ChatUserModel chatUserModel2 = new ChatUserModel();
-
-        chatUserModel2.setContent("Hi whats up");
-        chatUserModel2.setUsername("Halim");
-        chatUserModel2.setDate("21,10,2018");
-        chatulist.add(chatUserModel2);
-
-        ChatUserModel chatUserModel3 = new ChatUserModel();
-
-        chatUserModel3.setContent("Hi whats up");
-        chatUserModel3.setUsername("Joni");
-        chatUserModel3.setDate("21,10,2018");
-        chatulist.add(chatUserModel3);
-
-        ChatUserModel chatUserModel4 = new ChatUserModel();
-
-        chatUserModel4.setContent("Hi whats up");
-        chatUserModel4.setUsername("Moni");
-        chatUserModel4.setDate("21,10,2018");
-        chatulist.add(chatUserModel4);
-
-
-        ChatUserModel chatUserModel5 = new ChatUserModel();
-
-        chatUserModel5.setContent("Hi whats up");
-        chatUserModel5.setUsername("Kalm");
-        chatUserModel5.setDate("21,10,2018");
-        chatulist.add(chatUserModel5);
-
-        ChatUserModel chatUserModel6 = new ChatUserModel();
-
-        chatUserModel6.setContent("Hi whats up");
-        chatUserModel6.setUsername("Amin");
-        chatUserModel6.setDate("21,10,2018");
-        chatulist.add(chatUserModel6);
-
-
-        ChatUserModel chatUserModel7 = new ChatUserModel();
-
-        chatUserModel7.setContent("Hi whats up");
-        chatUserModel7.setUsername("Sony");
-        chatUserModel7.setDate("21,10,2018");
-        chatulist.add(chatUserModel7);
-
-        ChatUserModel chatUserModel8 = new ChatUserModel();
-
-        chatUserModel8.setContent("Hi whats up");
-        chatUserModel8.setUsername("Any");
-        chatUserModel8.setDate("21,10,2018");
-        chatulist.add(chatUserModel8);
-
-
-        mAdapter = new ChatUsetListAdapter(chatulist,context);
-
-        // white background notification bar
-        whiteNotificationBar(recyclerView);
-
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
-        recyclerView.setAdapter(mAdapter);
-        mAdapter.notifyDataSetChanged();
-
         linCreateGroup = (LinearLayout) findViewById(R.id.linCreateGroup);
         linNewChat = (LinearLayout) findViewById(R.id.linNewChat);
         linCreateGroup.setVisibility(View.VISIBLE);
         linNewChat.setVisibility(View.VISIBLE);
+
+
+
         linCreateGroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -167,6 +114,8 @@ public class ChatSearchActivity extends AppCompatActivity{
                     }
                 });
 
+
+        message_conversations("1");
     }
 
     @Override
@@ -240,4 +189,83 @@ public class ChatSearchActivity extends AppCompatActivity{
     }
 
 
+    private void message_conversations(String page) {
+
+        if(!NetInfo.isOnline(context)){
+            AlertMessage.showMessage(context,"Alert!","No internet connection!");
+        }
+
+        final ProgressDialog pd = new ProgressDialog(context);
+        pd.setMessage("Loading....");
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.setCancelable(false);
+        pd.show();
+        swiperefresh.setRefreshing(true);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Api api = retrofit.create(Api.class);
+        Call<ChatUserResponse> userCall = api.message_conversations("Bearer "+ PersistData.getStringData(context, AppConstant.loginToken),"api/message_conversations?page="+page);
+        userCall.enqueue(new Callback<ChatUserResponse>() {
+            @Override
+            public void onResponse(Call<ChatUserResponse> call, Response<ChatUserResponse> response) {
+                pd.dismiss();
+                swiperefresh.setRefreshing(false);
+                responsData = response.body();
+
+                if(responsData!=null){
+                    currentPage = responsData.getCurrent_page();
+                    if(responsData.getData()!=null){
+                        Log.e("datasize",""+responsData.getData().size());
+
+                        for (ChatUserModel chatUserModel:responsData.getData()) {
+
+                            Log.e("userid",""+chatUserModel.getUser_id());
+
+                            chatuserlist.add(chatUserModel);
+
+                        }
+
+                        mAdapter = new ChatUsetListAdapter(chatuserlist,context);
+
+                        // white background notification bar
+                        whiteNotificationBar(recyclerView);
+
+                        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                        recyclerView.setLayoutManager(mLayoutManager);
+                        recyclerView.setItemAnimator(new DefaultItemAnimator());
+                        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+                        recyclerView.setAdapter(mAdapter);
+                        mAdapter.notifyDataSetChanged();
+
+                    }
+
+                }else {
+                    Toast.makeText(context, "Login token expired, Please login again ", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(context,LoginActivity.class));
+                    finish();
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ChatUserResponse> call, Throwable t) {
+
+                pd.dismiss();
+            }
+        });
+
+
+    }
+
+    @Override
+    public void onRefresh(SwipyRefreshLayoutDirection direction) {
+        if(currentPage!=null){
+            int pageNo = Integer.parseInt(currentPage)+1;
+            message_conversations(""+pageNo);
+        }
+    }
 }

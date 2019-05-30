@@ -7,12 +7,16 @@ import com.imamportal.model.AlquranAlhadits;
 import com.imamportal.model.AmarpataContentResponse;
 import com.imamportal.model.AudioModel;
 import com.imamportal.model.Catagories;
+import com.imamportal.model.ChatUserResponse;
 import com.imamportal.model.JobPortalModel;
+import com.imamportal.model.MessageResponse;
 import com.imamportal.model.NoticeResponse;
+import com.imamportal.model.NotificationResponse;
 import com.imamportal.model.PhotoModel;
 import com.imamportal.model.QuestionAnswerModel;
 import com.imamportal.model.CommonPostResponse;
 import com.imamportal.model.QuizeQuistionResponse;
+import com.imamportal.model.SendMsgResponse;
 import com.imamportal.model.SeraContentData;
 import com.imamportal.model.SignUpResponse;
 import com.imamportal.model.UploadResponse;
@@ -43,16 +47,21 @@ public interface Api {
 
     //Local
     //String BASE_URL = "http://192.168.0.119/imamportal/";
+    //String BASE_URL = "http://192.168.0.109/imamportal/";
 
     //Live
-    String BASE_URL = "http://nanosoftbd.com/imamportal/";
+    //String BASE_URL = "http://nanosoftbd.com/imamportal/";
+    String BASE_URL = "http://training.imam.gov.bd/";
+
 
 
 
     @FormUrlEncoded
     @POST("api/likepost")
     Call<String> likepost(
+            @Field("user_id") String user_id,
             @Field("id") String complain_application_id
+
     );
 
     @FormUrlEncoded
@@ -70,6 +79,10 @@ public interface Api {
 
     @GET("api/notices")
     public Call<List<NoticeResponse>> notices();
+
+
+    @GET("api/member")
+    public Call<ResponseBody> member();
 
 
 
@@ -147,6 +160,15 @@ public interface Api {
             );
 
 
+    @FormUrlEncoded
+    @POST("api/send_message")
+    public Call<SendMsgResponse> send_message(
+            @Header("Authorization") String authHeader,
+            @Field("to_user") String to_user,
+            @Field("message") String message
+            );
+
+
 
     @FormUrlEncoded
     @POST("api/login")
@@ -162,6 +184,9 @@ public interface Api {
             @Header("Authorization") String authHeader,
             @Field("start_quiz") String start_quiz
     );
+
+
+
 
 
     @FormUrlEncoded
@@ -241,9 +266,28 @@ public interface Api {
 
 
 
-//    @GET
-//    public Call<StockTransferApproveSinglaDataResponse> getSingeDataStockTransferApprove(@Url String url);
-//
+    @GET("api/notifications")
+    public Call<NotificationResponse> getNotification(
+            @Header("Authorization") String authHeader);
+
+    @GET
+    public Call<ChatUserResponse> search_chat_member(
+            @Header("Authorization") String authHeader,
+            @Url String url
+    );
+
+    @GET
+    public Call<ChatUserResponse> message_conversations(
+            @Header("Authorization") String authHeader,
+            @Url String url
+    );
+
+    @GET
+    public Call<MessageResponse> user_messages(
+            @Header("Authorization") String authHeader,
+            @Url String url
+    );
+
 //
 //     @GET
 //    public Call<StockTransferIssueSinglaDataResponse> getSingleDataStockTransferIssue(@Url String url);

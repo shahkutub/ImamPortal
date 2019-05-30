@@ -4,13 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#fff"
+    android:id="@+id/relDetail"
     >
 
 
 
     <LinearLayout
-        android:background="#00000000"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
@@ -24,13 +23,17 @@
             android:visibility="gone"
             android:layout_height="match_parent"></WebView>
 
+
+
+
         <com.imamportal.utils.ZoomTextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/tvDetails"
-            android:textColor="#000"
             android:padding="@dimen/_10sdp"
             android:scrollbars="vertical"
+            android:text="dduhuyu"
+            android:textColor="#000"
             />
 
         <ImageView
@@ -99,25 +102,25 @@
         android:orientation="horizontal"
         >
 
-        <ImageView
-            android:id="@+id/imgMode"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"
-            app:srcCompat="@drawable/night"
-            android:visibility="gone"
-            />
+        <com.mahfa.dnswitch.DayNightSwitch
+            android:id="@+id/day_night_switch"
+            android:layout_width="@dimen/_46sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_margin="@dimen/_5sdp"
+            android:layout_gravity="center"/>
 
         <ImageView
             android:id="@+id/imgBookmark"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginRight="@dimen/_5sdp"
             app:srcCompat="@drawable/ic_bookmark_border_black_24dp"
             />
 
         <ImageView
             android:id="@+id/imgShare"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
             app:srcCompat="@drawable/ic_share"
             />
 
@@ -129,12 +132,28 @@
         android:id="@+id/bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/_5sdp"
         android:layout_alignParentBottom="true"
         android:orientation="vertical"
+        android:paddingRight="@dimen/_3sdp"
+        android:paddingLeft="@dimen/_3sdp"
         >
 
 
+        <LinearLayout
+            android:id="@+id/linUpDown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+
+            >
+            <ImageView
+                android:id="@+id/imgUpDown"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_25sdp"
+                app:srcCompat="@drawable/ic_expand_less_black_24dp"
+                />
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -270,6 +289,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:textColor="#92288F"
+                android:background="@drawable/reple_effect"
                 android:layout_marginLeft="@dimen/_5sdp"
                 android:text="Post"
                 />

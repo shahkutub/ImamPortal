@@ -2,7 +2,9 @@ package com.imamportal;
 
 import android.animation.Animator;
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.Dialog;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -58,9 +60,11 @@ import com.imamportal.fragments.FragmentQuizBizoyee;
 import com.imamportal.fragments.FragmentSeraContent;
 import com.imamportal.model.KitabInfo;
 import com.imamportal.model.NoticeResponse;
+import com.imamportal.model.NotificationResponse;
 import com.imamportal.utils.AlertMessage;
 import com.imamportal.utils.Api;
 import com.imamportal.utils.AppConstant;
+import com.imamportal.utils.MyService;
 import com.imamportal.utils.NetInfo;
 import com.imamportal.utils.PersistData;
 import com.imamportal.utils.PersistentUser;
@@ -132,7 +136,7 @@ public class MainActivityDemo extends AppCompatActivity {
     //IsFundamentalsAdapter isFundamentalsAdapter;
     private List<KitabInfo> data = new ArrayList<>();
     //private List<KitabInfo> data2 = new ArrayList<>();
-    String pryname, banglaDate;
+    String pryname,pryname_select, banglaDate;
 
     TextView tvTabDescription, tvSompadokioDes, tvDate, MarqueeText,tvUser;
     private CircleImageView imgUser;
@@ -152,6 +156,9 @@ public class MainActivityDemo extends AppCompatActivity {
     ImageView imgNavMenu;
     Boolean buttonStateOpen = false;
     private ImageView imgImamReg;
+    int notificationCount = 0;
+    private TextView tvCount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -168,6 +175,8 @@ public class MainActivityDemo extends AppCompatActivity {
         initUi();
         fabinitUi();
         slideshow();
+
+
 
     }
 
@@ -321,6 +330,79 @@ public class MainActivityDemo extends AppCompatActivity {
             linAmarPata.setVisibility(View.VISIBLE);
             linUpload.setVisibility(View.VISIBLE);
         }
+
+        if(PersistentUser.isLogged(context)){
+            getALlnotification();
+
+        }
+
+
+//        Calendar cal = Calendar.getInstance();
+//        Intent intent = new Intent(this, MyService.class);
+//        PendingIntent pintent = PendingIntent
+//                .getService(this, 0, intent, 0);
+//
+//
+//        AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//        // Start service every hour
+//        alarm.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
+//                180000, pintent);
+
+
+
+
+    }
+
+
+    private void getALlnotification() {
+
+        if(!NetInfo.isOnline(context)){
+            AlertMessage.showMessage(context,"Alert!","No internet connection!");
+        }
+
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Api api = retrofit.create(Api.class);
+        Call<NotificationResponse> userCall = api.getNotification("Bearer "+PersistData.getStringData(context,
+                AppConstant.loginToken));
+        userCall.enqueue(new Callback<NotificationResponse>() {
+            @Override
+            public void onResponse(Call<NotificationResponse> call, Response<NotificationResponse> response) {
+
+
+                NotificationResponse notificationResponse = new NotificationResponse();
+                notificationResponse = response.body();
+
+                if(notificationResponse!=null){
+
+                    AppConstant.notificationResponse = notificationResponse;
+                    Log.e("notificationResponse",""+notificationResponse.getComment_notification_count());
+                    if(AppConstant.notificationResponse!=null){
+                        notificationCount = Integer.parseInt(""+AppConstant.notificationResponse.getComment_notification_count())+
+                                AppConstant.notificationResponse.getMessage_contents().size()
+                                +Integer.parseInt(""+AppConstant.notificationResponse.getGroup_message_number());
+                    }
+
+                    tvCount.setText(""+notificationCount);
+
+
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<NotificationResponse> call, Throwable t) {
+
+            }
+        });
+
+
     }
 
     private void showFABMenu() {
@@ -638,23 +720,25 @@ public class MainActivityDemo extends AppCompatActivity {
             if (prayerTimesDate.get(i).getTime() < now.getTime()) {
                 nextPreyerTime = prayerTimesDate.get(i + 1);
                 pryname=prayerNames.get(i + 1);
+                pryname_select=prayerNames.get(i);
 
             } else {
                 nextPreyerTime = prayerTimesDate.get(i);
                 pryname=prayerNames.get(i);
+                pryname_select=prayerNames.get(i-1);
                 break;
             }
         }
 
-        if (pryname.equalsIgnoreCase("ফজর")) {
+        if (pryname_select.equalsIgnoreCase("ফজর")) {
             linFojor.setBackgroundColor(Color.parseColor("#EBBF2B"));
-        } else if (pryname.equalsIgnoreCase("জোহর")) {
+        } else if (pryname_select.equalsIgnoreCase("জোহর")) {
             linJohor.setBackgroundColor(Color.parseColor("#EBBF2B"));
-        } else if (pryname.equalsIgnoreCase("আসর")) {
+        } else if (pryname_select.equalsIgnoreCase("আসর")) {
             linAsor.setBackgroundColor(Color.parseColor("#EBBF2B"));
-        } else if (pryname.equalsIgnoreCase("মাগরিব")) {
+        } else if (pryname_select.equalsIgnoreCase("মাগরিব")) {
             linMagrib.setBackgroundColor(Color.parseColor("#EBBF2B"));
-        } else if (pryname.equalsIgnoreCase("ইশা")) {
+        } else if (pryname_select.equalsIgnoreCase("ইশা")) {
             linIsha.setBackgroundColor(Color.parseColor("#EBBF2B"));
         }
 
@@ -704,7 +788,36 @@ public class MainActivityDemo extends AppCompatActivity {
 
     private void initUi() {
 
+//        Calendar cal = Calendar.getInstance();
+//        Intent intent = new Intent(this, MyService.class);
+//        PendingIntent pintent = PendingIntent
+//                .getService(this, 0, intent, 0);
+//
+//
+//        AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//        // Start service every hour
+//        alarm.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
+//                180000, pintent);
+
+        if(PersistentUser.isLogged(context)){
+            Intent serviceIntent = new Intent(this, MyService.class);
+            startService(serviceIntent);
+
+            if(AppConstant.notificationResponse!=null){
+                notificationCount = Integer.parseInt(""+AppConstant.notificationResponse.getComment_notification_count())+
+                        AppConstant.notificationResponse.getMessage_contents().size()
+                        +Integer.parseInt(""+AppConstant.notificationResponse.getGroup_message_number());
+            }
+        }
+
+
+
+
+
         tvUser = (TextView) findViewById(R.id.tvUser);
+        tvCount = (TextView) findViewById(R.id.tvCount);
+        tvCount.setText(""+notificationCount);
+
         imgUser = (CircleImageView) findViewById(R.id.imgUser);
         imgImamReg = (ImageView) findViewById(R.id.imgImamReg);
         tvLogin = (TextView) findViewById(R.id.tvLogin);
@@ -814,6 +927,7 @@ public class MainActivityDemo extends AppCompatActivity {
         tvLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AppConstant.notificationResponse = null;
                 PersistentUser.logOut(context);
                 PersistData.setStringData(context,AppConstant.loginToken,"");
                 PersistData.setStringData(context,AppConstant.loginUserid,"");
@@ -838,7 +952,6 @@ public class MainActivityDemo extends AppCompatActivity {
             linAmarPata.setVisibility(View.VISIBLE);
             linUpload.setVisibility(View.VISIBLE);
         }
-
         fabBGLayout = findViewById(R.id.fabBGLayout);
         fabBGLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -850,13 +963,15 @@ public class MainActivityDemo extends AppCompatActivity {
         relNotification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (linMsgFloating.getVisibility() == View.GONE) {
-                    fabBGLayout.setVisibility(View.VISIBLE);
-                    linMsgFloating.setVisibility(View.VISIBLE);
-                } else if (linMsgFloating.getVisibility() == View.VISIBLE) {
-                    linMsgFloating.setVisibility(View.GONE);
-                    fabBGLayout.setVisibility(View.GONE);
-                }
+//                if (linMsgFloating.getVisibility() == View.GONE) {
+//                    fabBGLayout.setVisibility(View.VISIBLE);
+//                    //linMsgFloating.setVisibility(View.VISIBLE);
+//                } else if (linMsgFloating.getVisibility() == View.VISIBLE) {
+//                    linMsgFloating.setVisibility(View.GONE);
+//                   // fabBGLayout.setVisibility(View.GONE);
+//                }
+
+                startActivity(new Intent(context,NotificationActivity.class));
 
             }
         });

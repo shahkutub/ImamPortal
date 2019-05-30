@@ -3,25 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:gravity="center"
     android:id="@+id/linMsgFloating"
     android:layout_gravity="top|right"
-    android:layout_marginRight="@dimen/_12sdp"
+    android:layout_marginRight="@dimen/_45sdp"
     app:layout_anchorGravity="top|right"
-    android:layout_marginTop="@dimen/_75sdp"
+    android:layout_marginTop="@dimen/_62sdp"
     android:visibility="gone"
     >
 
 
     <LinearLayout
-        android:layout_width="@dimen/_30sdp"
-        android:layout_height="@dimen/_30sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/msg_round_bg"
         android:orientation="vertical"
         android:layout_gravity="center"
         android:gravity="center"
-        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginRight="@dimen/_5sdp"
         >
 
     <TextView
@@ -36,21 +36,21 @@
         />
 
     <ImageView
-        android:layout_width="@dimen/_20sdp"
-        android:layout_height="@dimen/_20sdp"
-        app:srcCompat="@drawable/ic_chat_icon"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        app:srcCompat="@drawable/ic_single_chat"
         />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="@dimen/_30sdp"
-        android:layout_height="@dimen/_30sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/msg_round_bg"
         android:orientation="vertical"
         android:layout_gravity="center"
         android:gravity="center"
-        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginRight="@dimen/_5sdp"
         >
 
         <TextView
@@ -65,21 +65,21 @@
             />
 
         <ImageView
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            app:srcCompat="@drawable/ic_chat_icon"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            app:srcCompat="@drawable/ic_single_chat"
             />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="@dimen/_30sdp"
-        android:layout_height="@dimen/_30sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/msg_round_bg"
         android:orientation="vertical"
         android:layout_gravity="center"
         android:gravity="center"
-        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginRight="@dimen/_5sdp"
         >
 
         <TextView
@@ -94,9 +94,9 @@
             />
 
         <ImageView
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            app:srcCompat="@drawable/ic_chat_icon"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            app:srcCompat="@drawable/ic_single_chat"
             />
 
     </LinearLayout>

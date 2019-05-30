@@ -16,6 +16,7 @@ import com.imamportal.ChatAppActivity;
 import com.imamportal.R;
 import com.imamportal.model.ChatUserModel;
 import com.imamportal.model.QuestionAnsInfo;
+import com.imamportal.utils.AppConstant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,15 +64,16 @@ public class ChatUsetListAdapter extends RecyclerView.Adapter<ChatUsetListAdapte
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
         final ChatUserModel contact = contactListFiltered.get(position);
-        holder.tvChatMsg.setText(contact.getContent());
-        holder.tvNameChat.setText(contact.getUsername());
-        holder.tvChatDate.setText(contact.getDate());
+        holder.tvChatMsg.setText(contact.getMessage());
+        holder.tvNameChat.setText(contact.getName());
+        holder.tvChatDate.setText(contact.getCreated_at());
 
         holder.linFullItem.setOnClickListener(new View.OnClickListener() {
             @Override
 
             public void onClick(View v) {
                 context.startActivity(new Intent(context,ChatAppActivity.class));
+                AppConstant.otheruserId =contact.getUser_id();
             }
 
         });

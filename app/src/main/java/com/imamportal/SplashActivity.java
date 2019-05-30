@@ -1,6 +1,7 @@
 package com.imamportal;
 
 import android.annotation.SuppressLint;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -29,11 +30,13 @@ import com.imamportal.utils.AlertMessage;
 import com.imamportal.utils.Api;
 import com.imamportal.utils.AppConstant;
 import com.imamportal.utils.LocationMgr;
+import com.imamportal.utils.MyService;
 import com.imamportal.utils.NetInfo;
 import com.imamportal.utils.PersistData;
 import com.imamportal.utils.PersistentUser;
 
 import java.util.List;
+import java.util.Timer;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -57,6 +60,7 @@ public class SplashActivity extends AppCompatActivity {
     LocationMgr mgr;
     RelativeLayout relSplash;
     private TextView tvWeb;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,9 +70,8 @@ public class SplashActivity extends AppCompatActivity {
         //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO);
         getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
-        Log.e("token", PersistData.getStringData(context, AppConstant.fcm_token));
 
-       // linBg = (LinearLayout)findViewById(R.id.linBg);
+        // linBg = (LinearLayout)findViewById(R.id.linBg);
 
 //        ImageView imgNext = (ImageView)findViewById(R.id.imgNext);
 //        ImageView imgA2i = (ImageView)findViewById(R.id.imgA2i);
@@ -138,7 +141,10 @@ public class SplashActivity extends AppCompatActivity {
 //            }
 //        };
 //        timer.start();
-
+        if(PersistentUser.isLogged(context)){
+            Intent serviceIntent = new Intent(this, MyService.class);
+            startService(serviceIntent);
+        }
 
         if(!checkPermission()){
             requestPermission();

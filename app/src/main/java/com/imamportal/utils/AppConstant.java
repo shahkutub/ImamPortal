@@ -32,6 +32,7 @@ import com.imamportal.model.AllDataResponse;
 import com.imamportal.model.AlquranAlhadits;
 import com.imamportal.model.AudioModel;
 import com.imamportal.model.Catagories;
+import com.imamportal.model.NotificationResponse;
 import com.imamportal.model.SignUpResponse;
 import com.imamportal.model.VideoModel;
 
@@ -91,6 +92,8 @@ public class AppConstant {
     public static String loginToken = "loginToken";
     public static String loginUserid = "loginUserid";
     public static AllBlogpostModel detaisData = new AllBlogpostModel();
+    public static NotificationResponse notificationResponse = null;
+    public static String otheruserId = "";
 
     public static String BitMapToString(Bitmap bitmap){
         ByteArrayOutputStream baos=new ByteArrayOutputStream();

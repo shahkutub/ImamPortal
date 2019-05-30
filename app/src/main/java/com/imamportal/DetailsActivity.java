@@ -1,9 +1,12 @@
 package com.imamportal;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import android.support.v4.app.ShareCompat;
@@ -36,6 +39,9 @@ import com.imamportal.utils.AppConstant;
 import com.imamportal.utils.NetInfo;
 import com.imamportal.utils.PersistData;
 import com.imamportal.utils.ZoomTextView;
+import com.mahfa.dnswitch.DayNightSwitch;
+import com.mahfa.dnswitch.DayNightSwitchAnimListener;
+import com.mahfa.dnswitch.DayNightSwitchListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -57,18 +63,21 @@ public class DetailsActivity extends AppCompatActivity{
     Context context;
     ///String title, content, publisher, publishDate, viewcount,  likecount, commentcount;
 
-    private ImageView imgLike;
+    private ImageView imgLike,imgUpDown;
     TextView tvCommentCount,tvCountView,tvLikeCount;
     private RecyclerView recyclerViewComment;
     private boolean liked = false;
     private String comment;
-    LinearLayout linLike,linComment,linComClick;
+    LinearLayout linLike,linComment,linComClick,linUpDown;
     private AppCompatButton btnPost;
     private EditText etAsk;
     ZoomTextView tvDetails;
     ImageView imgBookmark;
     Realm mRealm = null;
-
+    private DayNightSwitch day_night_switch;
+    public static final String TAG = "MainActivity";
+    public static final String KEY_DAY_NIGHT_SWITCH_STATE = "day_night_switch_state";
+    private RelativeLayout relDetail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,11 +102,30 @@ public class DetailsActivity extends AppCompatActivity{
         tvCommentCount = (TextView)findViewById(R.id.tvCommentCount);
         ImageView imgShare = (ImageView)findViewById(R.id.imgShare);
         imgLike = (ImageView)findViewById(R.id.imgLike);
+        imgUpDown = (ImageView)findViewById(R.id.imgUpDown);
         linLike = (LinearLayout) findViewById(R.id.linLike);
         btnPost = (AppCompatButton) findViewById(R.id.btnPost);
         etAsk = (EditText) findViewById(R.id.etAsk);
         linComment = (LinearLayout) findViewById(R.id.linComment);
         linComClick = (LinearLayout) findViewById(R.id.linComClick);
+        linUpDown = (LinearLayout) findViewById(R.id.linUpDown);
+
+        linUpDown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(linComment.getVisibility() == View.GONE){
+                    imgUpDown.setImageResource(R.drawable.ic_expand_more_black_24dp);
+                                    linComment.setVisibility(View.VISIBLE);
+
+                }else {
+                    imgUpDown.setImageResource(R.drawable.ic_expand_less_black_24dp);
+
+                                    linComment.setVisibility(View.GONE);
+                                }
+
+
+            }
+        });
 
         linComClick.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -246,7 +274,50 @@ public class DetailsActivity extends AppCompatActivity{
             }
         });
 
+
+        day_night_switch = (DayNightSwitch) findViewById(R.id.day_night_switch);
+        day_night_switch.setDuration(450);
+
+        relDetail = (RelativeLayout)findViewById(R.id.relDetail);
+
+        day_night_switch.setListener(new DayNightSwitchListener() {
+            @Override
+            public void onSwitch(boolean is_night) {
+                //Log.d(TAG, "onSwitch() called with: is_night = [" + is_night + "]");
+                if (is_night){
+                    relDetail.setBackgroundColor(Color.parseColor("#000000"));
+                    tvDetails.setTextColor(Color.parseColor("#ffffff"));
+                }else {
+                    relDetail.setBackgroundColor(Color.parseColor("#ffffff"));
+                    tvDetails.setTextColor(Color.parseColor("#000000"));
+                }
+
+
+
+            }
+        });
+
+        day_night_switch.setAnimListener(new DayNightSwitchAnimListener() {
+            @Override
+            public void onAnimStart() {
+               // Log.d(TAG, "onAnimStart() called");
+            }
+
+            @Override
+            public void onAnimEnd() {
+               // Log.d(TAG, "onAnimEnd() called");
+            }
+
+            @Override
+            public void onAnimValueChanged(float value) {
+//                tvDetails.setAlpha(value);
+//                tvDetails.setTextColor(Color.parseColor("#000"));
+                // Log.d(TAG, "onAnimValueChanged() called with: value = [" + value + "]");
+            }
+        });
+
     }
+
 
 
     private void addBookMark() {
@@ -320,7 +391,7 @@ public class DetailsActivity extends AppCompatActivity{
                 .build();
 
         Api api = retrofit.create(Api.class);
-        Call<String> userCall = api.likepost(PersistData.getStringData(context,AppConstant.loginUserid));
+        Call<String> userCall = api.likepost(PersistData.getStringData(context,AppConstant.loginUserid),AppConstant.detaisData.getId());
         userCall.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

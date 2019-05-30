@@ -1,5 +1,6 @@
 package com.imamportal.Adapter;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -15,14 +16,25 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.imamportal.ChatAppActivity;
 import com.imamportal.R;
 import com.imamportal.model.ChatUserModel;
+import com.imamportal.model.SignUpResponse;
+import com.imamportal.utils.AlertMessage;
+import com.imamportal.utils.Api;
 import com.imamportal.utils.AppConstant;
+import com.imamportal.utils.NetInfo;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ChatCreatAdapter extends RecyclerView.Adapter<ChatCreatAdapter.MyViewHolder> implements Filterable {
 
@@ -31,6 +43,7 @@ public class ChatCreatAdapter extends RecyclerView.Adapter<ChatCreatAdapter.MyVi
     List<ChatUserModel> contactListFiltered = new ArrayList<>();
     Context context;
     FrameLayout frmFloatingOk;
+    String groopname;
 
 
     public ChatCreatAdapter(List<ChatUserModel> userModelList, FrameLayout frmFloatingOk, Context context) {
@@ -40,6 +53,13 @@ public class ChatCreatAdapter extends RecyclerView.Adapter<ChatCreatAdapter.MyVi
         this.context = context;
     }
 
+    public ChatCreatAdapter(List<ChatUserModel> userModelList, String groopname, FrameLayout frmFloatingOk, Context context) {
+        this.contactList = userModelList;
+        this.contactListFiltered = userModelList;
+        this.groopname = groopname;
+        this.frmFloatingOk = frmFloatingOk;
+        this.context = context;
+    }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -96,6 +116,8 @@ public class ChatCreatAdapter extends RecyclerView.Adapter<ChatCreatAdapter.MyVi
             public void onClick(View v) {
 
                 if(AppConstant.chatActivityName.equalsIgnoreCase("newchat")){
+
+                    AppConstant.otheruserId = contact.getId();
                     context.startActivity(new Intent(context,ChatAppActivity.class));
                 }
 
@@ -147,6 +169,9 @@ public class ChatCreatAdapter extends RecyclerView.Adapter<ChatCreatAdapter.MyVi
             }
         };
     }
+
+
+
 
 }
 
