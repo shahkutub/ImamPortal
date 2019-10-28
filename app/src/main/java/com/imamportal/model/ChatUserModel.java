@@ -7,8 +7,25 @@ public class ChatUserModel {
 //            "email": "mehedi12345@gmail.com",
 //            "name": "00000000",
 //            "mobile_no": "657656544"
+    boolean selected;
 
-    String id,username,date,userpic,content,message,from_user,to_user,name,created_at,user_id;
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+    String id,username,group_name,date,userpic,content,message,from_user,to_user,name,created_at,user_id;
+
+    public String getGroup_name() {
+        return group_name;
+    }
+
+    public void setGroup_name(String group_name) {
+        this.group_name = group_name;
+    }
 
     public String getUser_id() {
         return user_id;
@@ -97,6 +114,8 @@ public class ChatUserModel {
     public void setContent(String content) {
         this.content = content;
     }
+
+
 }
 
 

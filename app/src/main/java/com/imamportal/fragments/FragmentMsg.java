@@ -137,6 +137,8 @@ public class FragmentMsg extends Fragment {
                 public void onClick(View v) {
                     AppConstant.otheruserId = data.getUser_id();
                     startActivity(new Intent(context, ChatAppActivity.class));
+                    AppConstant.chatType = "singlechat";
+                    AppConstant.otheruserName = data.getUser_name();
 
                 }
             });

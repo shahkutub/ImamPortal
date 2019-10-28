@@ -6,13 +6,17 @@ import com.imamportal.model.AllDataResponse;
 import com.imamportal.model.AlquranAlhadits;
 import com.imamportal.model.AmarpataContentResponse;
 import com.imamportal.model.AudioModel;
+import com.imamportal.model.BlogPostSearchDetails;
+import com.imamportal.model.BlogPostSearchResponse;
 import com.imamportal.model.Catagories;
 import com.imamportal.model.ChatUserResponse;
-import com.imamportal.model.JobPortalModel;
+import com.imamportal.model.CommentResponse;
+import com.imamportal.model.CreateMessageGroupResponse;
+import com.imamportal.model.GroupMessageResponse;
 import com.imamportal.model.MessageResponse;
+import com.imamportal.model.MyPageContentResponse;
 import com.imamportal.model.NoticeResponse;
 import com.imamportal.model.NotificationResponse;
-import com.imamportal.model.PhotoModel;
 import com.imamportal.model.QuestionAnswerModel;
 import com.imamportal.model.CommonPostResponse;
 import com.imamportal.model.QuizeQuistionResponse;
@@ -42,16 +46,20 @@ import retrofit2.http.Url;
 
 public interface Api {
 
+
     //String BASE_URL = "http://192.168.0.119/wasa_inventory/";
     //String BASE_URL = "http://192.168.0.22/wasa_inventory/";
 
+
     //Local
-    //String BASE_URL = "http://192.168.0.119/imamportal/";
+    String BASE_URL = "http://192.168.0.119/imamportal/";
     //String BASE_URL = "http://192.168.0.109/imamportal/";
+
 
     //Live
     //String BASE_URL = "http://nanosoftbd.com/imamportal/";
-    String BASE_URL = "http://training.imam.gov.bd/";
+    //String BASE_URL = "http://training.imam.gov.bd/";
+    //String BASE_URL = "http://imam.gov.bd/";
 
 
 
@@ -65,8 +73,20 @@ public interface Api {
     );
 
     @FormUrlEncoded
+    @POST("api/create_message_group")
+    Call<CreateMessageGroupResponse> create_message_group(
+            @Header("Authorization") String authHeader,
+            @Field("group_name") String group_name,
+            @Field("select_members") String select_members
+    );
+
+
+
+
+    @FormUrlEncoded
     @POST("api/singlepost/comment")
-    Call<String> commentepost(
+    Call<CommentResponse> commentepost(
+            @Header("Authorization") String authHeader,
             @Field("user_id") String user_id,
             @Field("blog_post_id") String blog_post_id,
             @Field("comment") String comment
@@ -107,11 +127,21 @@ public interface Api {
     @GET("api/blog_post")
     public Call<List<AllBlogpostModel>> blog_post();
 
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @GET("api/mypage/content")
-        public Call<AmarpataContentResponse> mypage_content();
+        public Call<MyPageContentResponse> mypage_content(
+            @Header("Authorization") String auth
+    );
 
     @GET("api/mypage/audio")
             public Call<AmarpataContentResponse> mypage_Audio();
+
+   @GET("api/blog_post_id")
+            public Call<List<BlogPostSearchResponse>> blog_post_id();
+
+    @GET("api/blog_post_description")
+    public Call<BlogPostSearchDetails> blog_post_description();
 
 
     @GET("api/mypage/video")
@@ -145,11 +175,11 @@ public interface Api {
     @GET("api/get_all_data")
     public Call<AllDataResponse> get_all_data();
 
-
-    @FormUrlEncoded
+    @Multipart
     @POST("api/signup/store")
     public Call<SignUpResponse> signup(
-            @Field("data") String jsondata
+            @Part MultipartBody.Part image,
+            @Part("data") RequestBody jsondata
             );
 
 
@@ -168,6 +198,14 @@ public interface Api {
             @Field("message") String message
             );
 
+    @FormUrlEncoded
+    @POST("api/send_group_message")
+    public Call<SendMsgResponse> send_group_message(
+            @Header("Authorization") String authHeader,
+            @Field("message_group_id") String message_group_id,
+            @Field("message") String message
+    );
+
 
 
     @FormUrlEncoded
@@ -184,7 +222,6 @@ public interface Api {
             @Header("Authorization") String authHeader,
             @Field("start_quiz") String start_quiz
     );
-
 
 
 
@@ -237,8 +274,8 @@ public interface Api {
 
 
     @Multipart
-    @POST("api/add-technical-training")
-    Call<ResponseBody> addtechnicaltraining(@Part MultipartBody.Part image, @Query("data") String description);
+    @POST("api/training_registration_form/add")
+    Call<SignUpResponse> addtechnicaltraining(@Part MultipartBody.Part image, @Query("data") String description);
 
     @Multipart
     @POST("api/skill/training/store")
@@ -276,6 +313,14 @@ public interface Api {
             @Url String url
     );
 
+     @GET
+    public Call<ChatUserResponse> get_message_groups(
+            @Header("Authorization") String authHeader,
+            @Url String url
+    );
+
+
+
     @GET
     public Call<ChatUserResponse> message_conversations(
             @Header("Authorization") String authHeader,
@@ -284,6 +329,13 @@ public interface Api {
 
     @GET
     public Call<MessageResponse> user_messages(
+            @Header("Authorization") String authHeader,
+            @Url String url
+    );
+
+
+    @GET
+    public Call<GroupMessageResponse> group_messages(
             @Header("Authorization") String authHeader,
             @Url String url
     );

@@ -1,14 +1,10 @@
 package com.imamportal;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ValueAnimator;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-
 import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
@@ -18,7 +14,6 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.EditText;
@@ -29,9 +24,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.imamportal.Adapter.AllCommonPostAdapter;
 import com.imamportal.Adapter.CommentAdapter;
-import com.imamportal.model.AudioModel;
+import com.imamportal.model.BlogPostSearchDetails;
 import com.imamportal.model.CommentModel;
 import com.imamportal.model.CommentResponse;
 import com.imamportal.realm.BookmarkContent;
@@ -47,9 +41,7 @@ import com.mahfa.dnswitch.DayNightSwitchListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -61,7 +53,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class DetailsActivity extends AppCompatActivity{
+public class DetailsSearchActivity extends AppCompatActivity{
 
     Context context;
     ///String title, content, publisher, publishDate, viewcount,  likecount, commentcount;
@@ -81,6 +73,8 @@ public class DetailsActivity extends AppCompatActivity{
     public static final String TAG = "MainActivity";
     public static final String KEY_DAY_NIGHT_SWITCH_STATE = "day_night_switch_state";
     private RelativeLayout relDetail;
+    private BlogPostSearchDetails blogPostSearchDetails;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -189,7 +183,7 @@ public class DetailsActivity extends AppCompatActivity{
 
                 String text = AppConstant.detaisData.getTitle()+"\n"+""+AppConstant.detaisData.getDescription().toString();
                 Log.e("text",""+text);
-                ShareCompat.IntentBuilder.from(DetailsActivity.this)
+                ShareCompat.IntentBuilder.from(DetailsSearchActivity.this)
                         .setType("text/plain")
                         .setChooserTitle("Share")
                         .setText(Html.fromHtml(text).toString())
@@ -217,17 +211,6 @@ public class DetailsActivity extends AppCompatActivity{
 //            tvDetails.setText(Html.fromHtml(htmlString).toString());
 //        }
 
-        if(AppConstant.detaisData.getQuestion()!=null||AppConstant.detaisData.getAnswer()!=null){
-            String htmlString = "<div style=\"color:#000000\"><b>"+"প্রশ্ন: "+  ""+AppConstant.detaisData.getQuestion()+"</b></div\n" + "<p style=\"margin-bottom:50px\">"+""+AppConstant.detaisData.getAnswer()+"</p>";
-            webView.loadData(htmlString, "text/html; charset=utf-8", "UTF-8");
-
-            tvDetails.setText(Html.fromHtml(htmlString).toString());
-
-        }else {
-            String htmlString = "<div style=\"color:#000000\"><b>"+"প্রশ্ন: "+ AppConstant.detaisData.getTitle()+""+"</b></div\n" + "<p style=\"margin-bottom:50px\">"+""+AppConstant.detaisData.getDescription()+"</p>";
-            webView.loadData(htmlString, "text/html; charset=utf-8", "UTF-8");
-            tvDetails.setText(Html.fromHtml(htmlString).toString());
-        }
 
 
         String pattern = "yyyy-MM-dd";
@@ -362,19 +345,19 @@ public class DetailsActivity extends AppCompatActivity{
     }
 
 
-    private void readBookMark() {
-        mRealm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                RealmResults<BookmarkContent> results = realm.where(BookmarkContent.class).findAll();
-                Toast.makeText(context, ""+results.size(), Toast.LENGTH_SHORT).show();
-                tvDetails.setText("");
-                for (BookmarkContent employee : results) {
-                    tvDetails.append(BookmarkContent.PROPERTY_CONTENT);
-                }
-            }
-        });
-    }
+//    private void readBookMark() {
+//        mRealm.executeTransaction(new Realm.Transaction() {
+//            @Override
+//            public void execute(Realm realm) {
+//                RealmResults<BookmarkContent> results = realm.where(BookmarkContent.class).findAll();
+//                Toast.makeText(context, ""+results.size(), Toast.LENGTH_SHORT).show();
+//                tvDetails.setText("");
+//                for (BookmarkContent employee : results) {
+//                    tvDetails.append(BookmarkContent.PROPERTY_CONTENT);
+//                }
+//            }
+//        });
+//    }
 
 
 
@@ -464,5 +447,54 @@ public class DetailsActivity extends AppCompatActivity{
     }
 
 
+
+    private void getSearchDetails() {
+
+        if(!NetInfo.isOnline(context)){
+            AlertMessage.showMessage(context,"Alert!","No internet connection!");
+        }
+        final ProgressDialog pd = new ProgressDialog(context);
+        pd.setMessage("Loading data....");
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.show();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.BASE_URL+"/"+AppConstant.searchId)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Api api = retrofit.create(Api.class);
+        Call<BlogPostSearchDetails> userCall = api.blog_post_description();
+        userCall.enqueue(new Callback<BlogPostSearchDetails>() {
+            @Override
+            public void onResponse(Call<BlogPostSearchDetails> call, Response<BlogPostSearchDetails> response) {
+
+                pd.dismiss();
+                if(response.body()!=null){
+
+                    blogPostSearchDetails = response.body();
+                    if(blogPostSearchDetails.getDescription()!=null){
+                        String htmlString = "<div style=\"color:#000000\"><b>"+""+  ""+blogPostSearchDetails.getTitle()+"</b></div\n" + "<p style=\"margin-bottom:50px\">"+""+blogPostSearchDetails.getDescription()+"</p>";
+
+                        tvDetails.setText(Html.fromHtml(htmlString).toString());
+
+                    }else {
+//                        String htmlString = "<div style=\"color:#000000\"><b>"+""+ AppConstant.detaisData.getTitle()+""+"</b></div\n" + "<p style=\"margin-bottom:50px\">"+""+AppConstant.detaisData.getDescription()+"</p>";
+//                        tvDetails.setText(Html.fromHtml(htmlString).toString());
+                    }
+
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<BlogPostSearchDetails> call, Throwable t) {
+                pd.dismiss();
+            }
+        });
+
+
+    }
 
 }

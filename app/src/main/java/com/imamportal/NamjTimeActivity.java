@@ -61,9 +61,9 @@ public class NamjTimeActivity extends AppCompatActivity {
         azan();
     }
 
-    public static void main(String[] args) {
-        //azan();
-    }
+//    public static void main(String[] args) {
+//        //azan();
+//    }
     public void azan() {
         GregorianCalendar date = new GregorianCalendar();
         System.out.println(date.getTimeInMillis());

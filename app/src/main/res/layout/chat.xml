@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="#DEDEDE"
     android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"
         android:background="#268632"
-        android:visibility="gone"
         >
 
         <ImageView
@@ -28,7 +28,7 @@
             android:layout_centerVertical="true"
             android:orientation="horizontal"
             android:layout_toRightOf="@+id/imgBack"
-            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_15sdp"
             android:gravity="center"
             >
             <de.hdodenhof.circleimageview.CircleImageView
@@ -53,6 +53,7 @@
                 android:text="Sadi"
                 android:textColor="#fff"
                 android:textSize="@dimen/_12sdp"
+                android:layout_marginLeft="@dimen/_3sdp"
                 />
 
                 <TextView

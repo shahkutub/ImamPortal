@@ -1119,69 +1119,69 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
     }
 
 
-    private void signUp(String data) {
-
-        if(!NetInfo.isOnline(context)){
-            AlertMessage.showMessage(context,"Alert!","No internet connection!");
-        }
-
-        final ProgressDialog pd = new ProgressDialog(context);
-        pd.setMessage("Loading....");
-        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pd.setCancelable(false);
-        pd.show();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Api.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        Api api = retrofit.create(Api.class);
-        Call<SignUpResponse> userCall = api.signup(data);
-        userCall.enqueue(new Callback<SignUpResponse>() {
-            @Override
-            public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
-                pd.dismiss();
-
-                SignUpResponse responsData = response.body();
-
-                if(responsData!=null){
-                    if(responsData.getStatus().equalsIgnoreCase("success")){
-                        Toast.makeText(context, ""+responsData.getData().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-                if(responsData!=null){
-                    if(responsData.getStatus().equalsIgnoreCase("error")){
-
-                        if(responsData.getData().getEmail()!=null){
-                            for (int i = 0; i <responsData.getData().getEmail().size() ; i++) {
-                                Toast.makeText(context, ""+responsData.getData().getEmail().get(i), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-
-//                        if(responsData.getData().getPassword()!=null){
-//                            for (int i = 0; i <responsData.getData().getPassword().size() ; i++) {
-//                                Toast.makeText(context, ""+responsData.getData().getPassword().get(i), Toast.LENGTH_SHORT).show();
+//    private void signUp(String data) {
+//
+//        if(!NetInfo.isOnline(context)){
+//            AlertMessage.showMessage(context,"Alert!","No internet connection!");
+//        }
+//
+//        final ProgressDialog pd = new ProgressDialog(context);
+//        pd.setMessage("Loading....");
+//        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//        pd.setCancelable(false);
+//        pd.show();
+//
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl(Api.BASE_URL)
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//
+//        Api api = retrofit.create(Api.class);
+//        Call<SignUpResponse> userCall = api.signup(data);
+//        userCall.enqueue(new Callback<SignUpResponse>() {
+//            @Override
+//            public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
+//                pd.dismiss();
+//
+//                SignUpResponse responsData = response.body();
+//
+//                if(responsData!=null){
+//                    if(responsData.getStatus().equalsIgnoreCase("success")){
+//                        Toast.makeText(context, ""+responsData.getData().getMessage(), Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//
+//                if(responsData!=null){
+//                    if(responsData.getStatus().equalsIgnoreCase("error")){
+//
+//                        if(responsData.getData().getEmail()!=null){
+//                            for (int i = 0; i <responsData.getData().getEmail().size() ; i++) {
+//                                Toast.makeText(context, ""+responsData.getData().getEmail().get(i), Toast.LENGTH_SHORT).show();
 //                            }
 //                        }
-
-                    }
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<SignUpResponse> call, Throwable t) {
-
-
-                pd.dismiss();
-            }
-        });
-
-
-    }
+//
+//
+////                        if(responsData.getData().getPassword()!=null){
+////                            for (int i = 0; i <responsData.getData().getPassword().size() ; i++) {
+////                                Toast.makeText(context, ""+responsData.getData().getPassword().get(i), Toast.LENGTH_SHORT).show();
+////                            }
+////                        }
+//
+//                    }
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<SignUpResponse> call, Throwable t) {
+//
+//
+//                pd.dismiss();
+//            }
+//        });
+//
+//
+//    }
 
 
 

@@ -50,6 +50,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.imamportal.model.AllDataResponse;
 import com.imamportal.model.NameInfo;
 import com.imamportal.model.SignUpResponse;
@@ -59,6 +60,9 @@ import com.imamportal.utils.AppConstant;
 import com.imamportal.utils.BitmapUtils;
 import com.imamportal.utils.NetInfo;
 import com.imamportal.utils.PersistData;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -74,8 +78,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import cz.msebera.android.httpclient.Header;
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -95,6 +105,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private ImageView imgcam;
     private CircleImageView imgPic;
     private File file;
+    String filePath;
     String picture = "";
     Bitmap userBmp;
     private static File dir = null;
@@ -420,6 +431,9 @@ public class RegistrationActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+
                 name=input_name.getText().toString();
                 email=input_email.getText().toString();
                 username=input_UserName.getText().toString();
@@ -624,8 +638,9 @@ public class RegistrationActivity extends AppCompatActivity {
                     String img = "";
                     if(userBmp!=null){
                         img = getBase64String(userBmp);
+                        Log.e("",""+img);
                     }
-                    
+
 
                     JSONObject jsonObject = new JSONObject();
                     try {
@@ -647,14 +662,21 @@ public class RegistrationActivity extends AppCompatActivity {
                         jsonObject.put("upazila_id",upojilaId);
                         jsonObject.put("union_id",unionId);
                         jsonObject.put("village",village);
-                        jsonObject.put("image",img);
+                        //jsonObject.put("image",img);
+                        jsonObject.put("image","");
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
-                    signUp(jsonObject.toString());
-                    Log.e("jsonObject",""+jsonObject.toString());
 
+                    if(TextUtils.isEmpty(filePath)){
+                        AlertMessage.showMessage(context,"Alert!","প্রোফাইল ফটো নির্বাচন করুন");
+                    }else {
+                        registration(jsonObject.toString());
+                    }
+
+                    //signUp(jsonObject.toString());
+                    Log.e("jsonObject",""+jsonObject.toString());
 
                 }
 
@@ -947,10 +969,11 @@ public class RegistrationActivity extends AppCompatActivity {
 
             if (requestCode == IMAGE_RESULT) {
 
-                String filePath = getImageFilePath(data);
+                filePath = getImageFilePath(data);
+                Log.e("filePath",""+filePath);
                 if (filePath != null) {
                     Bitmap selectedImage = BitmapFactory.decodeFile(filePath);
-                    selectedImage =  getResizedBitmap(selectedImage,300,300);
+                    selectedImage =  getResizedBitmap(selectedImage,150,150);
                     userBmp = selectedImage;
                     imgPic.setImageBitmap(selectedImage);
 
@@ -1101,7 +1124,17 @@ public class RegistrationActivity extends AppCompatActivity {
         }
     }
 
-
+    private MultipartBody.Part multipartBody(String filpath) {
+        MultipartBody.Part multipartBody = null;
+        if(!TextUtils.isEmpty(filpath)){
+            File file = new File(filpath);
+            RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), filpath);
+            multipartBody = MultipartBody.Part.createFormData("image",file.getName(),requestFile);
+        }else {
+            Toast.makeText(context, "File not taken", Toast.LENGTH_SHORT).show();
+        }
+        return multipartBody;
+    }
 
     private void signUp(String data) {
 
@@ -1115,27 +1148,41 @@ public class RegistrationActivity extends AppCompatActivity {
         pd.setCancelable(false);
         pd.show();
 
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .readTimeout(120, TimeUnit.SECONDS)
+                .connectTimeout(120, TimeUnit.SECONDS).build();
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Api.BASE_URL)
+                .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
+
+        RequestBody dataStr =
+                RequestBody.create(
+                        okhttp3.MultipartBody.FORM, data);
+
         Api api = retrofit.create(Api.class);
-        Call<SignUpResponse> userCall = api.signup(data);
+        Call<SignUpResponse> userCall = api.signup(multipartBody(filePath),dataStr);
         userCall.enqueue(new Callback<SignUpResponse>() {
             @Override
             public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
                 pd.dismiss();
 
                 SignUpResponse responsData = response.body();
-
+//                Log.e("regResponse",""+responsData.toString());
                 if(responsData!=null){
+
+                    Log.e("regResponse",""+responsData.toString());
                     if(responsData.getStatus().equalsIgnoreCase("success")){
                         Toast.makeText(context, ""+responsData.getData().getMessage(), Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                 }
 
                 if(responsData!=null){
+                    Log.e("regResponse",""+responsData.toString());
                     if(responsData.getStatus().equalsIgnoreCase("error")){
 
                         if(responsData.getData().getEmail()!=null){
@@ -1144,7 +1191,11 @@ public class RegistrationActivity extends AppCompatActivity {
                             }
                         }
 
-
+                        if(responsData.getData().getUsername()!=null){
+                            for (int i = 0; i <responsData.getData().getUsername().size() ; i++) {
+                                Toast.makeText(context, ""+responsData.getData().getUsername().get(i), Toast.LENGTH_SHORT).show();
+                            }
+                        }
 //                        if(responsData.getData().getPassword()!=null){
 //                            for (int i = 0; i <responsData.getData().getPassword().size() ; i++) {
 //                                Toast.makeText(context, ""+responsData.getData().getPassword().get(i), Toast.LENGTH_SHORT).show();
@@ -1164,6 +1215,118 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+
+    protected void registration(String data) {
+        String url = Api.BASE_URL+"api/signup/store";
+
+        if (!NetInfo.isOnline(context)) {
+            AlertMessage.showMessage(context, "Alert",
+                    "Check Internet");
+            return;
+        }
+
+        final ProgressDialog pd = new ProgressDialog(context);
+        pd.setCancelable(false);
+        pd.setCancelable(false);
+        pd.setMessage("Data uploading...");
+        pd.show();
+
+        final AsyncHttpClient client = new AsyncHttpClient();
+
+        // String credentials = Username + ":" + Password;
+        // String base64EncodedCredentials =
+        // Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
+        // client.addHeader("Authorization", "Basic " +
+        // base64EncodedCredentials);
+
+        final RequestParams param = new RequestParams();
+
+        try {
+
+            //String path = PersistData.getStringData(con, AppConstant.path);
+            param.put("data",data);
+            param.put("image",new File(filePath));
+
+
+        } catch (final Exception e1) {
+            e1.printStackTrace();
+        }
+
+        client.post(url, param, new AsyncHttpResponseHandler() {
+
+            @Override
+            public void onStart() {
+                // called before request is started
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers,
+                                  byte[] response) {
+                // called when response HTTP status is "200 OK"
+
+                pd.dismiss();
+
+//                Toast.makeText(context, "Prescription Uploaded",
+//                        Toast.LENGTH_LONG).show();
+
+                Log.e("resposne ", ">>" + new String(response));
+
+                Gson g = new Gson();
+                SignUpResponse responsData = g.fromJson(new String(response), SignUpResponse.class);
+
+                if(responsData!=null){
+
+                    Log.e("regResponse",""+responsData.toString());
+                    if(responsData.getStatus().equalsIgnoreCase("success")){
+                        Toast.makeText(context, ""+responsData.getData().getMessage(), Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                }
+
+                if(responsData!=null){
+                    Log.e("regResponse",""+responsData.toString());
+                    if(responsData.getStatus().equalsIgnoreCase("error")){
+
+                        if(responsData.getData().getEmail()!=null){
+                            for (int i = 0; i <responsData.getData().getEmail().size() ; i++) {
+                                Toast.makeText(context, ""+responsData.getData().getEmail().get(i), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        if(responsData.getData().getUsername()!=null){
+                            for (int i = 0; i <responsData.getData().getUsername().size() ; i++) {
+                                Toast.makeText(context, ""+responsData.getData().getUsername().get(i), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+//                        if(responsData.getData().getPassword()!=null){
+//                            for (int i = 0; i <responsData.getData().getPassword().size() ; i++) {
+//                                Toast.makeText(context, ""+responsData.getData().getPassword().get(i), Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers,
+                                  byte[] errorResponse, Throwable e) {
+                // called when response HTTP status is "4XX" (eg. 401, 403, 404)
+
+                // Log.e("errorResponse", new String(errorResponse));
+
+                pd.dismiss();
+            }
+
+            @Override
+            public void onRetry(int retryNo) {
+                // called when request is retried
+
+            }
+        });
 
     }
 
@@ -1198,6 +1361,9 @@ public class RegistrationActivity extends AppCompatActivity {
                     AppConstant.allData = allData;
                     Log.e("allData",""+allData.getResult().size());
                     innitUi();
+                    if(allData.getResult().size()==0){
+                        Toast.makeText(context, "No data found!", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
             }

@@ -61,17 +61,6 @@ public class AppConstant {
     public static String alarmInOnOff="alarmInOnOff";
     public static boolean isGallery=false;
     public static boolean isHq=false;
-    public static int CAMERA_RUNTIME_PERMISSION=2,WRITEEXTERNAL_PERMISSION_RUNTIME=3,LOCATION_PERMISSION=4;
-    public static String quickAttandance = "quickAttandance";
-    public static String alarmClockIn = "alarmClockIn";
-    public static String alarmClockout = "alarmClockout";
-
-    public static String alarmClockOutHour = "alarmClockOutHour";
-    public static String alarmClockOutMin = "alarmClockOutMin";
-
-    public static String alarmClockInHour = "alarmClockInHour";
-    public static String alarmClockInMin = "alarmClockInMin";
-    public static String checkInOrOut = "checkInOrOut";
 
     //public static List<LocationInfo> locationInfoList = new ArrayList<>();
     public static String path ="path";
@@ -94,6 +83,10 @@ public class AppConstant {
     public static AllBlogpostModel detaisData = new AllBlogpostModel();
     public static NotificationResponse notificationResponse = null;
     public static String otheruserId = "";
+    public static String chatType;
+    public static String otheruserName;
+    public static List<Catagories> mypageContentCatagory = new ArrayList<>();
+    public static String searchId;
 
     public static String BitMapToString(Bitmap bitmap){
         ByteArrayOutputStream baos=new ByteArrayOutputStream();

@@ -1,21 +1,12 @@
 package com.imamportal.utils;
 
-import android.app.ProgressDialog;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
-import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
-
 import com.imamportal.model.NotificationResponse;
-import com.imamportal.model.QuizeQuistionResponse;
-
-import java.util.ArrayList;
-
-import javax.security.auth.login.LoginException;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -61,7 +52,7 @@ public class MyService extends Service {
     private void getALlnotification() {
 
         if(!NetInfo.isOnline(context)){
-            AlertMessage.showMessage(context,"Alert!","No internet connection!");
+            Toast.makeText(context, "No internet connection", Toast.LENGTH_SHORT).show();;
         }
 
 

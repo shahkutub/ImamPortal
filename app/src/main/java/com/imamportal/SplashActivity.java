@@ -150,7 +150,11 @@ public class SplashActivity extends AppCompatActivity {
             requestPermission();
         }
 
-        statusCheck();
+        //else {
+            statusCheck();
+       // }
+
+
     }
 
     public void statusCheck() {
@@ -167,7 +171,7 @@ public class SplashActivity extends AppCompatActivity {
             }
         } else {
 
-            requestPermission();
+            //requestPermission();
 //            if (mgr.mGoogleApiClient == null) {
 //                mgr.buildGoogleApiClient();
 //            }
@@ -215,7 +219,7 @@ public class SplashActivity extends AppCompatActivity {
 
                     //  Toast.makeText(con, ""+imei, Toast.LENGTH_SHORT).show();
 
-                    if (locationAccepted && cameraAccepted && readPhoneAccepted) {
+                    if (locationAccepted) {
                         // Snackbar.make(view, "Permission Granted, Now you can access location data and camera.", Snackbar.LENGTH_LONG).show();
                         if (mgr.mGoogleApiClient == null) {
                             mgr.buildGoogleApiClient();

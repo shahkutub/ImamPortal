@@ -731,6 +731,11 @@ public class QuizeActivity extends AppCompatActivity {
 
     private void submitQuize(String question,String answer) {
 
+        Log.e("loginToken",""+PersistData.getStringData(context,
+                AppConstant.loginToken));
+         Log.e("question",""+question);
+        Log.e("answer",""+answer);
+
         if(!NetInfo.isOnline(context)){
             AlertMessage.showMessage(context,"Alert!","No internet connection!");
         }
@@ -763,6 +768,7 @@ public class QuizeActivity extends AppCompatActivity {
                         tvRongAns.setText("ভুল উত্তর - "+submitResponse.getWrong_answer());
                         tvRightAns.setText("সঠিক উত্তর - "+submitResponse.getRight_answer());
                         tvTotalNumber.setText("মোট নাম্বার - "+Integer.parseInt(submitResponse.getRight_answer())*20+"");
+                        Toast.makeText(context, "Answer submitted ", Toast.LENGTH_SHORT).show();
                     }
 
                 }else {

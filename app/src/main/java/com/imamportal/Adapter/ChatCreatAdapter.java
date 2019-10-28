@@ -30,6 +30,7 @@ import com.imamportal.utils.NetInfo;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -63,7 +64,7 @@ public class ChatCreatAdapter extends RecyclerView.Adapter<ChatCreatAdapter.MyVi
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView imgPicChat;
+        CircleImageView imgPicChat;
         TextView tvNameChat,tvChatDate,tvChatMsg;
         RelativeLayout relFullItem;
         CheckBox checkbox;
@@ -72,7 +73,7 @@ public class ChatCreatAdapter extends RecyclerView.Adapter<ChatCreatAdapter.MyVi
             tvNameChat=(TextView) view.findViewById(R.id.tvNameChat);
             tvChatDate=(TextView) view.findViewById(R.id.tvChatDate);
             tvChatMsg=(TextView) view.findViewById(R.id.tvChatMsg);
-            imgPicChat=(ImageView) view.findViewById(R.id.imgPicChat);
+            imgPicChat=(CircleImageView) view.findViewById(R.id.imgPicChat);
             relFullItem=(RelativeLayout) view.findViewById(R.id.relFullItem);
             checkbox=(CheckBox) view.findViewById(R.id.checkbox);
         }
@@ -92,7 +93,15 @@ public class ChatCreatAdapter extends RecyclerView.Adapter<ChatCreatAdapter.MyVi
 
         final ChatUserModel contact = contactListFiltered.get(position);
         holder.tvChatMsg.setText(contact.getContent());
-        holder.tvNameChat.setText(contact.getUsername());
+
+        if(contact.getUsername()!=null){
+            holder.tvNameChat.setText(contact.getUsername());
+            holder.imgPicChat.setImageResource(R.drawable.imam);
+        }else {
+            holder.tvNameChat.setText(contact.getGroup_name());
+            holder.imgPicChat.setImageResource(R.drawable.ic_create_group);
+        }
+
         holder.tvChatDate.setText(contact.getDate());
 
         if(AppConstant.chatActivityName.equalsIgnoreCase("newchat")){
@@ -117,8 +126,19 @@ public class ChatCreatAdapter extends RecyclerView.Adapter<ChatCreatAdapter.MyVi
 
                 if(AppConstant.chatActivityName.equalsIgnoreCase("newchat")){
 
-                    AppConstant.otheruserId = contact.getId();
-                    context.startActivity(new Intent(context,ChatAppActivity.class));
+                    if(contact.getUsername()!=null){
+                        AppConstant.otheruserId = contact.getId();
+                        AppConstant.otheruserName = contact.getUsername();
+
+                        context.startActivity(new Intent(context,ChatAppActivity.class));
+                        AppConstant.chatType = "singlechat";
+                    }else {
+                        AppConstant.otheruserId = contact.getId();
+                        AppConstant.otheruserName = contact.getGroup_name();
+                        context.startActivity(new Intent(context,ChatAppActivity.class));
+                        AppConstant.chatType = "groupchat";
+                    }
+
                 }
 
             }
@@ -149,9 +169,17 @@ public class ChatCreatAdapter extends RecyclerView.Adapter<ChatCreatAdapter.MyVi
 
                         // name match condition. this might differ depending on your requirement
                         // here we are looking for name or phone number match
-                        if (row.getUsername().toLowerCase().contains(charString.toLowerCase())) {
-                            filteredList.add(row);
+
+                        if(row.getUsername()!=null){
+                            if (row.getUsername().toLowerCase().contains(charString.toLowerCase())) {
+                                filteredList.add(row);
+                            }
+                        }else {
+                            if (row.getGroup_name().toLowerCase().contains(charString.toLowerCase())) {
+                                filteredList.add(row);
+                            }
                         }
+
                     }
 
                     contactListFiltered = filteredList;

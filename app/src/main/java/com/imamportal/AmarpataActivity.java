@@ -25,15 +25,22 @@ import com.imamportal.fragments.FragmentOnnoDhara;
 import com.imamportal.fragments.FragmentShishu;
 import com.imamportal.model.AllBlogpostModel;
 import com.imamportal.model.AlquranAlhadits;
+import com.imamportal.model.AmarpataContentResponse;
 import com.imamportal.model.Catagories;
+import com.imamportal.model.MyPageContentResponse;
 import com.imamportal.utils.AlertMessage;
 import com.imamportal.utils.Api;
 import com.imamportal.utils.AppConstant;
 import com.imamportal.utils.NetInfo;
+import com.imamportal.utils.PersistData;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,14 +54,15 @@ public class AmarpataActivity extends AppCompatActivity {
     public ViewPager viewPager;
     private ImageView imgBack;
     List<AlquranAlhadits>  listAlquranAlhadit = new ArrayList<>();
+    private MyPageContentResponse amarpataContentResponse = new MyPageContentResponse();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_amarpata);
         context=this;
         overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
-
-       initUi();
+        //getContents();
+        initUi();
 
     }
 
@@ -76,7 +84,74 @@ public class AmarpataActivity extends AppCompatActivity {
         //tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
         //createTabIcons();
+
+
     }
+
+
+//    private void getContents() {
+//
+//        if(!NetInfo.isOnline(context)){
+//            AlertMessage.showMessage(context,"Alert!","No internet connection!");
+//        }
+//
+//        final ProgressDialog pd = new ProgressDialog(context);
+//        pd.setMessage("Loading....");
+//        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//        pd.show();
+//
+//        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+//            @Override
+//            public okhttp3.Response intercept(Chain chain) throws IOException {
+//                Request newRequest  = chain.request().newBuilder()
+//                        .addHeader("Authorization", "Bearer " + PersistData.getStringData(context,AppConstant.loginToken))
+//                        .build();
+//                return chain.proceed(newRequest);
+//            }
+//        }).build();
+//
+//        Retrofit retrofit = new Retrofit.Builder()
+//
+//                .baseUrl(Api.BASE_URL)
+//               // .client(client)
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//
+//        Api api = retrofit.create(Api.class);
+//        Call<MyPageContentResponse> userCall = api.mypage_content("Bearer " + PersistData.getStringData(context,AppConstant.loginToken));
+//        userCall.enqueue(new Callback<MyPageContentResponse>() {
+//            @Override
+//            public void onResponse(Call<MyPageContentResponse> call, Response<MyPageContentResponse> response) {
+//                pd.dismiss();
+//
+//                amarpataContentResponse = response.body();
+//
+//                if(amarpataContentResponse!=null){
+//                    Log.e("catagories",""+amarpataContentResponse.getContent_categories().size());
+//                    Catagories catagories = new Catagories();
+//                    catagories.setName_bn("নির্বাচন করুন");
+//                    amarpataContentResponse.getContent_categories().add(0,catagories);
+//
+//
+//                    for (Catagories data :amarpataContentResponse.getContent_categories()) {
+//                        if(data.getName_bn()!=null){
+//                            AppConstant.mypageContentCatagory.add(data);
+//                        }
+//
+//                    }
+//                    Log.e("catagories",""+AppConstant.mypageContentCatagory.size());
+//                    //initUi();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<MyPageContentResponse> call, Throwable t) {
+//                pd.dismiss();
+//            }
+//        });
+//
+//
+//    }
 
     private void createTabIcons() {
 

@@ -74,6 +74,8 @@ public class ChatUsetListAdapter extends RecyclerView.Adapter<ChatUsetListAdapte
             public void onClick(View v) {
                 context.startActivity(new Intent(context,ChatAppActivity.class));
                 AppConstant.otheruserId =contact.getUser_id();
+                AppConstant.otheruserName =contact.getName();
+                AppConstant.chatType = "singlechat";
             }
 
         });

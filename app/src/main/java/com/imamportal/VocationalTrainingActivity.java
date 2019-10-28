@@ -37,6 +37,7 @@ import android.widget.Toast;
 
 import com.imamportal.model.AllDataResponse;
 import com.imamportal.model.NameInfo;
+import com.imamportal.model.SignUpResponse;
 import com.imamportal.utils.AlertMessage;
 import com.imamportal.utils.Api;
 import com.imamportal.utils.AppConstant;
@@ -1256,19 +1257,43 @@ public class VocationalTrainingActivity extends AppCompatActivity {
         MultipartBody.Part multipartBody =MultipartBody.Part.createFormData("file",file.getName(),requestFile);
 
 
-        Call<ResponseBody> userCall = api.addtechnicaltraining( multipartBody,""+data);
-        userCall.enqueue(new Callback<ResponseBody>() {
+        Call<SignUpResponse> userCall = api.addtechnicaltraining( multipartBody,""+data);
+        userCall.enqueue(new Callback<SignUpResponse>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
                 pd.dismiss();
+                SignUpResponse responsData = response.body();
 
-                //String  reData = response.body();
-                Toast.makeText(context, "Send Successful", Toast.LENGTH_SHORT).show();
+                if(responsData!=null){
+                    if(responsData.getStatus().equalsIgnoreCase("success")){
+                        Toast.makeText(context, ""+responsData.getData().getMessage(), Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                }
+
+                if(responsData!=null){
+                    if(responsData.getStatus().equalsIgnoreCase("error")){
+
+                        if(responsData.getData().getEmail()!=null){
+                            for (int i = 0; i <responsData.getData().getEmail().size() ; i++) {
+                                Toast.makeText(context, ""+responsData.getData().getEmail().get(i), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+
+//                        if(responsData.getData().getPassword()!=null){
+//                            for (int i = 0; i <responsData.getData().getPassword().size() ; i++) {
+//                                Toast.makeText(context, ""+responsData.getData().getPassword().get(i), Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+
+                    }
+                }
 
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<SignUpResponse> call, Throwable t) {
                 pd.dismiss();
             }
         });

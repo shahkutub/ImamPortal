@@ -238,7 +238,7 @@ public class ChatNewChatActivity extends AppCompatActivity implements SwipyRefre
     }
 
 
-    private void search_chat_member(String page) {
+    private void search_chat_member(final String page) {
 
         if(!NetInfo.isOnline(context)){
             AlertMessage.showMessage(context,"Alert!","No internet connection!");
@@ -257,6 +257,79 @@ public class ChatNewChatActivity extends AppCompatActivity implements SwipyRefre
 
         Api api = retrofit.create(Api.class);
         Call<ChatUserResponse> userCall = api.search_chat_member("Bearer "+ PersistData.getStringData(context, AppConstant.loginToken),"api/search_chat_member?page="+page);
+        userCall.enqueue(new Callback<ChatUserResponse>() {
+            @Override
+            public void onResponse(Call<ChatUserResponse> call, Response<ChatUserResponse> response) {
+                pd.dismiss();
+                swiperefresh.setRefreshing(false);
+                responsData = response.body();
+
+                if(responsData!=null){
+                    currentPage = responsData.getCurrent_page();
+                    if(responsData.getData()!=null){
+                        Log.e("datasize",""+responsData.getData().size());
+
+                        for (ChatUserModel chatUserModel:responsData.getData()) {
+
+                            chatuserlist.add(chatUserModel);
+
+                        }
+
+                        mAdapter = new ChatCreatAdapter(chatuserlist,frmFloatingOk,context);
+
+                        // white background notification bar
+                        whiteNotificationBar(recyclerView);
+
+                        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                        recyclerView.setLayoutManager(mLayoutManager);
+                        recyclerView.setItemAnimator(new DefaultItemAnimator());
+                        // recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+                        recyclerView.setAdapter(mAdapter);
+                        mAdapter.notifyDataSetChanged();
+
+                        get_message_groups(page);
+
+                    }
+
+                }else {
+                    Toast.makeText(context, "Login token expired, Please login again ", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(context,LoginActivity.class));
+                    finish();
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ChatUserResponse> call, Throwable t) {
+
+                pd.dismiss();
+            }
+        });
+
+
+    }
+
+
+    private void get_message_groups(String page) {
+
+        if(!NetInfo.isOnline(context)){
+            AlertMessage.showMessage(context,"Alert!","No internet connection!");
+        }
+
+        final ProgressDialog pd = new ProgressDialog(context);
+        pd.setMessage("Loading....");
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.setCancelable(false);
+        pd.show();
+        swiperefresh.setRefreshing(true);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Api api = retrofit.create(Api.class);
+        Call<ChatUserResponse> userCall = api.get_message_groups("Bearer "+ PersistData.getStringData(context, AppConstant.loginToken),"api/get_message_groups?page="+page);
         userCall.enqueue(new Callback<ChatUserResponse>() {
             @Override
             public void onResponse(Call<ChatUserResponse> call, Response<ChatUserResponse> response) {

@@ -32,6 +32,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,6 +42,7 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -55,9 +57,13 @@ import com.imamportal.Adapter.AdapteDate;
 import com.imamportal.Adapter.KitabAdapter;
 import com.imamportal.Adapter.SlidingViewPagerAdapter;
 import com.imamportal.converter.BanglaDateUtils;
+import com.imamportal.fragments.FragmentAmarPataAudio;
 import com.imamportal.fragments.FragmentPhoto;
 import com.imamportal.fragments.FragmentQuizBizoyee;
 import com.imamportal.fragments.FragmentSeraContent;
+import com.imamportal.model.AmarpataContentResponse;
+import com.imamportal.model.BlogPostSearchResponse;
+import com.imamportal.model.Catagories;
 import com.imamportal.model.KitabInfo;
 import com.imamportal.model.NoticeResponse;
 import com.imamportal.model.NotificationResponse;
@@ -77,6 +83,7 @@ import net.time4j.engine.StartOfDay;
 import net.time4j.format.expert.ChronoFormatter;
 import net.time4j.format.expert.PatternType;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -88,6 +95,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -105,13 +115,14 @@ public class MainActivityDemo extends AppCompatActivity {
     private ViewPager viewPager;
     private NavigationView navigationView;
     private DrawerLayout drawer;
-
+    List<BlogPostSearchResponse> blogPostSearchResponse = new ArrayList<>();
     //private SearchView searchView;
     private ImageView imgSearch, imgCancel, imgGoSearch;
     private LinearLayout linSearch;
     //private MaterialSearchView search_view;
     AutoCompleteTextView autocoEditView;
-
+    String[] ProgLanguages;
+    private List<String> blogIdlist = new ArrayList<>();
     LinearLayout linNoticeview, linFojor, linJohor, linAsor, linMagrib, linIsha, linMsgFloating, linKitabsomuho,
             linDokhotaSomuho, linIslamMenus,
             linMasalaMenus, linAskQues, linBlog, linMasael, linQuesAns, linJobCirculer, linQuize,
@@ -1209,15 +1220,6 @@ public class MainActivityDemo extends AppCompatActivity {
         });
 
         linSearch = (LinearLayout) findViewById(R.id.linSearch);
-        String[] ProgLanguages = {getString(R.string.imanakida), getString(R.string.character), getString(R.string.dawah),
-                getString(R.string.islam), getString(R.string.familysocity), getString(R.string.imanakida), "Objective-c", "Small-Talk", "C#", "Ruby", "ASP", "ASP .NET"};
-
-
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.select_dialog_item, ProgLanguages);
-
-        autocoEditView.setThreshold(1);
-        autocoEditView.setAdapter(arrayAdapter);
 
 
         linSearch.setOnClickListener(new View.OnClickListener() {
@@ -1270,8 +1272,88 @@ public class MainActivityDemo extends AppCompatActivity {
         //tabSompadokio();
         //alochitocontant();
         //importantLink();
-
+        getblog_post_id();
     }
+
+
+    private class CustomerAdapter extends ArrayAdapter<BlogPostSearchResponse> {
+        private LayoutInflater layoutInflater;
+        List<BlogPostSearchResponse> mCustomers = new ArrayList<>();
+
+        private Filter mFilter = new Filter() {
+            @Override
+            public String convertResultToString(Object resultValue) {
+                return ((BlogPostSearchResponse)resultValue).getTitle();
+            }
+
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                FilterResults results = new FilterResults();
+
+                if (constraint != null) {
+                    ArrayList<BlogPostSearchResponse> suggestions = new ArrayList<BlogPostSearchResponse>();
+                    for (BlogPostSearchResponse customer : mCustomers) {
+                        // Note: change the "contains" to "startsWith" if you only want starting matches
+                        if (customer.getTitle().toLowerCase().contains(constraint.toString().toLowerCase())) {
+                            suggestions.add(customer);
+                        }
+                    }
+
+                    results.values = suggestions;
+                    results.count = suggestions.size();
+                }
+
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                clear();
+                if (results != null && results.count > 0) {
+                    // we have filtered results
+                    addAll((ArrayList<BlogPostSearchResponse>) results.values);
+                } else {
+                    // no filter, add entire original list back in
+                    addAll(mCustomers);
+                }
+                notifyDataSetChanged();
+            }
+        };
+
+        public CustomerAdapter(Context context, int textViewResourceId, List<BlogPostSearchResponse> customers) {
+            super(context, textViewResourceId, customers);
+            // copy all the customers into a master list
+            mCustomers = new ArrayList<BlogPostSearchResponse>(customers.size());
+            mCustomers.addAll(customers);
+            layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view = convertView;
+
+            if (view == null) {
+                view = layoutInflater.inflate(R.layout.list_item, null);
+            }
+
+            final BlogPostSearchResponse customer = getItem(position);
+            TextView name = (TextView) view.findViewById(R.id.txtLabel);
+            name.setText(customer.getTitle());
+            name.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AppConstant.searchId = customer.getId();
+                }
+            });
+            return view;
+        }
+
+        @Override
+        public Filter getFilter() {
+            return mFilter;
+        }
+    }
+
 
 //    public void setLocale(String lang) {
 //
@@ -1826,6 +1908,62 @@ public class MainActivityDemo extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<NoticeResponse>> call, Throwable t) {
+                pd.dismiss();
+            }
+        });
+
+
+    }
+
+    private void getblog_post_id() {
+
+        if(!NetInfo.isOnline(context)){
+            AlertMessage.showMessage(context,"Alert!","No internet connection!");
+        }
+
+        final ProgressDialog pd = new ProgressDialog(context);
+        pd.setMessage("Loading data....");
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.show();
+
+        Retrofit retrofit = new Retrofit.Builder()
+               // .client(client)
+                .baseUrl(Api.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Api api = retrofit.create(Api.class);
+        Call<List<BlogPostSearchResponse>> userCall = api.blog_post_id();
+        userCall.enqueue(new Callback<List<BlogPostSearchResponse>>() {
+            @Override
+            public void onResponse(Call<List<BlogPostSearchResponse>> call, Response<List<BlogPostSearchResponse>> response) {
+                pd.dismiss();
+
+                blogPostSearchResponse = response.body();
+
+                if(blogPostSearchResponse!=null){
+
+                    Log.e("blogPostSearchResponse",""+blogPostSearchResponse.size());
+                    ProgLanguages = new String[]{getString(R.string.imanakida), getString(R.string.character), getString(R.string.dawah),
+                            getString(R.string.islam), getString(R.string.familysocity), getString(R.string.imanakida), "Objective-c", "Small-Talk", "C#", "Ruby", "ASP", "ASP .NET"};
+
+                    for (int i = 0; i <blogPostSearchResponse.size() ; i++) {
+                        blogIdlist.add(blogPostSearchResponse.get(i).getTitle());
+                    }
+
+                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, android.R.layout.select_dialog_item, blogIdlist);
+
+                   CustomerAdapter customerAdapter = new CustomerAdapter(context,R.layout.list_item,blogPostSearchResponse);
+                    autocoEditView.setThreshold(1);
+                    autocoEditView.setAdapter(customerAdapter);
+
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<BlogPostSearchResponse>> call, Throwable t) {
                 pd.dismiss();
             }
         });

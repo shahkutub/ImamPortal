@@ -80,7 +80,7 @@
             android:padding="@dimen/_5sdp"
             android:textColor="#519605"
             android:textSize="@dimen/_15sdp"
-            android:text="http://training.imam.gov.bd/"
+            android:text="http://imam.gov.bd/"
             />
         </LinearLayout>
 

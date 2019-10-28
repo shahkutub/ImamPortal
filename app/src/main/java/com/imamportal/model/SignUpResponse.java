@@ -16,7 +16,9 @@ public class SignUpResponse {
     String token;
     UserDetails user_data = new UserDetails();
 
+    String status;
 
+    DataMsg data = new DataMsg();
 
 
     public UserDetails getUser_data() {
@@ -35,9 +37,7 @@ public class SignUpResponse {
         this.token = token;
     }
 
-    String status;
 
-    DataMsg data = new DataMsg();
 
 
     public String getStatus() {
@@ -60,10 +60,19 @@ public class SignUpResponse {
         String message;
 
         List<String> email = new ArrayList<>();
+        List<String> username = new ArrayList<>();
         List<String> password = new ArrayList<>();
 
         public List<String> getEmail() {
             return email;
+        }
+
+        public List<String> getUsername() {
+            return username;
+        }
+
+        public void setUsername(List<String> username) {
+            this.username = username;
         }
 
         public void setEmail(List<String> email) {

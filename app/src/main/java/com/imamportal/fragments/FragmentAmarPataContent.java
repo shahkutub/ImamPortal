@@ -2,6 +2,7 @@ package com.imamportal.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -23,11 +24,14 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.imamportal.LoginActivity;
 import com.imamportal.R;
 import com.imamportal.model.AmarpataContentResponse;
 import com.imamportal.model.Catagories;
 import com.imamportal.model.ContentData;
+import com.imamportal.model.MyPageContentResponse;
 import com.imamportal.utils.AlertMessage;
 import com.imamportal.utils.Api;
 import com.imamportal.utils.AppConstant;
@@ -53,7 +57,7 @@ public class FragmentAmarPataContent extends Fragment {
     Context context;
     private Spinner spinnerCatagoryAmamrPata,spinnerObosta;
     private String category_id;
-    private AmarpataContentResponse amarpataContentResponse = new AmarpataContentResponse();
+    private MyPageContentResponse amarpataContentResponse = new MyPageContentResponse();
     private LinearLayout linBivag;
     private RecyclerView recycler_viewAmarpata;
     private ContactsAdapter mAdapter;
@@ -266,21 +270,22 @@ public class FragmentAmarPataContent extends Fragment {
         }).build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .client(client)
+                //.client(client)
                 .baseUrl(Api.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         Api api = retrofit.create(Api.class);
-        Call<AmarpataContentResponse> userCall = api.mypage_content();
-        userCall.enqueue(new Callback<AmarpataContentResponse>() {
+        Call<MyPageContentResponse> userCall = api.mypage_content("Bearer " + PersistData.getStringData(context,AppConstant.loginToken));
+        userCall.enqueue(new Callback<MyPageContentResponse>() {
             @Override
-            public void onResponse(Call<AmarpataContentResponse> call, Response<AmarpataContentResponse> response) {
+            public void onResponse(Call<MyPageContentResponse> call, Response<MyPageContentResponse> response) {
                 pd.dismiss();
 
                 amarpataContentResponse = response.body();
 
                 if(amarpataContentResponse!=null){
+                    Log.e("catagories",""+amarpataContentResponse.getContent_categories().size());
 
                     Catagories catagories = new Catagories();
                     catagories.setName_bn("নির্বাচন করুন");
@@ -291,7 +296,7 @@ public class FragmentAmarPataContent extends Fragment {
 
                     //contactList = amarpataContentResponse.getAudios().getData();
 
-                    mainInfoList = amarpataContentResponse.getContents().getData();
+                   // mainInfoList = amarpataContentResponse.getContents().getData();
                     contactList.clear();
                     contactList.addAll(mainInfoList);
 
@@ -301,12 +306,19 @@ public class FragmentAmarPataContent extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<AmarpataContentResponse> call, Throwable t) {
+            public void onFailure(Call<MyPageContentResponse> call, Throwable t) {
                 pd.dismiss();
+
+                
             }
         });
 
 
+        if(amarpataContentResponse.getContent_categories().size()==0){
+            Toast.makeText(context, "token_expired. Please login", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(context,LoginActivity.class));
+            getActivity().finish();
+        }
     }
 
 

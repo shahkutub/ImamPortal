@@ -20,11 +20,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.imamportal.Adapter.ChatAppMsgAdapter;
 import com.imamportal.Adapter.ChatUsetListAdapter;
+import com.imamportal.Adapter.GroupChatAppMsgAdapter;
 import com.imamportal.model.ChatAppMsgDTO;
 import com.imamportal.model.ChatUserModel;
 import com.imamportal.model.ChatUserResponse;
+import com.imamportal.model.GroupMessageResponse;
 import com.imamportal.model.MessageResponse;
 import com.imamportal.model.SendMsgResponse;
 import com.imamportal.model.SignUpResponse;
@@ -60,8 +65,10 @@ public class ChatAppActivity extends AppCompatActivity{
     private String id;
     String currentPage;
     private MessageResponse responsData;
+    private GroupMessageResponse groupMsgresponsData;
     private RecyclerView msgRecyclerView;
     private ChatAppMsgAdapter chatAppMsgAdapter;
+    private GroupChatAppMsgAdapter groupChatAppMsgAdapter;
 
     private EditText msgInputText;
 
@@ -80,6 +87,13 @@ public class ChatAppActivity extends AppCompatActivity{
         timer.scheduleAtFixedRate(new RemindTask(), 0, 3000);
 
         imgBack = (ImageView) findViewById(R.id.imgBack);
+        imgPicChatUser = (ImageView) findViewById(R.id.imgPicChatUser);
+
+
+
+        tvChatUserName = (TextView) findViewById(R.id.tvChatUserName);
+        tvChatUserName.setText(""+AppConstant.otheruserName);
+
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,7 +116,13 @@ public class ChatAppActivity extends AppCompatActivity{
                 String msgContent = msgInputText.getText().toString();
                 if(!TextUtils.isEmpty(msgContent))
                 {
-                   sendMsg(AppConstant.otheruserId,msgContent);
+
+                    if(AppConstant.chatType.equalsIgnoreCase("singlechat")){
+                        sendMsg(AppConstant.otheruserId,msgContent);
+                    }else if(AppConstant.chatType.equalsIgnoreCase("groupchat")){
+                        sendGroupMsg(AppConstant.otheruserId,msgContent);
+                    }
+
                 }else {
                     Toast.makeText(context, "বার্তা লিখুন", Toast.LENGTH_SHORT).show();
                 }
@@ -120,13 +140,25 @@ public class ChatAppActivity extends AppCompatActivity{
             runOnUiThread(new Runnable() {
                 public void run() {
                     //if(!isExpired){
+                    if(AppConstant.chatType.equalsIgnoreCase("singlechat")){
                         message_conversations("1");
+                    }else if(AppConstant.chatType.equalsIgnoreCase("groupchat")){
+                        groupMessage_conversations("1");
+                    }
+
                     //}
 
                 }
             });
 
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
     }
 
     private String currentDate() {
@@ -188,7 +220,17 @@ public class ChatAppActivity extends AppCompatActivity{
 
                         // Scroll RecyclerView to the last message.
                         msgRecyclerView.scrollToPosition(newMsgPosition);
-
+                        Glide.with(context)
+                                .asBitmap()
+                                .load(Api.BASE_URL+"public/upload/user/"+responsData.getFrom_user().getUser_details().getImage())
+                                .into(new SimpleTarget<Bitmap>() {
+                                    @Override
+                                    public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                                        if(resource!=null){
+                                            imgPicChatUser.setImageBitmap(resource);
+                                        }
+                                    }
+                                });
                     }
 
                 }else {
@@ -207,6 +249,80 @@ public class ChatAppActivity extends AppCompatActivity{
 
             @Override
             public void onFailure(Call<MessageResponse> call, Throwable t) {
+                //swiperefresh.setRefreshing(false);
+                timer.cancel();
+            }
+        });
+        timer.cancel();
+
+    }
+
+    private void groupMessage_conversations(String page) {
+
+        if(!NetInfo.isOnline(context)){
+            AlertMessage.showMessage(context,"Alert!","No internet connection!");
+        }
+        //swiperefresh.setRefreshing(true);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Api api = retrofit.create(Api.class);
+        Call<GroupMessageResponse> userCall = api.group_messages("Bearer "+ PersistData.getStringData(context, AppConstant.loginToken),"api/group_messages/"+AppConstant.otheruserId+"?current_page="+page);
+        userCall.enqueue(new Callback<GroupMessageResponse>() {
+            @Override
+            public void onResponse(Call<GroupMessageResponse> call, Response<GroupMessageResponse> response) {
+                //swiperefresh.setRefreshing(false);
+                groupMsgresponsData = response.body();
+
+                if(groupMsgresponsData!=null){
+                    currentPage = groupMsgresponsData.getCurrent_page();
+                    if(groupMsgresponsData.getData()!=null){
+
+                        if(currentPage.equalsIgnoreCase("1")){
+                            msgDtoList.clear();
+                        }
+                        for (ChatAppMsgDTO data: groupMsgresponsData.getData()) {
+                            msgDtoList.add(data);
+                        }
+                        Collections.reverse(msgDtoList);
+// Create the data adapter with above data list.
+                        groupChatAppMsgAdapter = new GroupChatAppMsgAdapter(msgDtoList,context);
+// Set RecyclerView layout manager.
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+                        msgRecyclerView.setLayoutManager(linearLayoutManager);
+                        // Set data adapter to RecyclerView.
+                        msgRecyclerView.setAdapter(groupChatAppMsgAdapter);
+
+
+                        int newMsgPosition = msgDtoList.size() - 1;
+
+                        // Notify recycler view insert one new data.
+                        groupChatAppMsgAdapter.notifyItemInserted(newMsgPosition);
+
+                        // Scroll RecyclerView to the last message.
+                        msgRecyclerView.scrollToPosition(newMsgPosition);
+
+                    }
+
+                }else {
+                    //if(!isExpired){
+                    timer.cancel();
+                    // isExpired = true;
+                    //Toast.makeText(context, "Login token expired, Please login again ", Toast.LENGTH_SHORT).show();
+//                        startActivity(new Intent(context,LoginActivity.class));
+//                        finish();
+                    //}
+
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<GroupMessageResponse> call, Throwable t) {
                 //swiperefresh.setRefreshing(false);
                 timer.cancel();
             }
@@ -253,6 +369,65 @@ public class ChatAppActivity extends AppCompatActivity{
 
                         // Notify recycler view insert one new data.
                         chatAppMsgAdapter.notifyItemInserted(newMsgPosition);
+
+                        // Scroll RecyclerView to the last message.
+                        msgRecyclerView.scrollToPosition(newMsgPosition);
+
+                        // Empty the input edit text box.
+                        msgInputText.setText("");
+                    }
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<SendMsgResponse> call, Throwable t) {
+
+                pd.dismiss();
+            }
+        });
+
+
+    }
+
+    private void sendGroupMsg(final String touser, final String msg) {
+
+        if(!NetInfo.isOnline(context)){
+            AlertMessage.showMessage(context,"Alert!","No internet connection!");
+        }
+
+        final ProgressDialog pd = new ProgressDialog(context);
+        pd.setMessage("Loading....");
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.setCancelable(false);
+        pd.show();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Api api = retrofit.create(Api.class);
+        Call<SendMsgResponse> userCall = api.send_group_message("Bearer "+ PersistData.getStringData(context, AppConstant.loginToken),touser,msg);
+        userCall.enqueue(new Callback<SendMsgResponse>() {
+            @Override
+            public void onResponse(Call<SendMsgResponse> call, Response<SendMsgResponse> response) {
+                pd.dismiss();
+
+                SendMsgResponse responsData = response.body();
+
+                if(responsData!=null){
+                    if(responsData.getStatus().equalsIgnoreCase("success")){
+                        // Add a new sent message to the list.
+                        ChatAppMsgDTO msgDto = new ChatAppMsgDTO(PersistData.getStringData(context,AppConstant.loginUserid),msg);
+                        msgDtoList.add(msgDto);
+
+                        int newMsgPosition = msgDtoList.size() - 1;
+
+                        // Notify recycler view insert one new data.
+                        groupChatAppMsgAdapter.notifyItemInserted(newMsgPosition);
 
                         // Scroll RecyclerView to the last message.
                         msgRecyclerView.scrollToPosition(newMsgPosition);

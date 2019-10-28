@@ -35,6 +35,7 @@ import android.widget.Toast;
 
 import com.imamportal.model.ChatUserModel;
 import com.imamportal.model.ChatUserResponse;
+import com.imamportal.model.CreateMessageGroupResponse;
 import com.imamportal.utils.AlertMessage;
 import com.imamportal.utils.Api;
 import com.imamportal.utils.AppConstant;
@@ -44,6 +45,7 @@ import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout;
 import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;
@@ -68,7 +70,8 @@ public class ChatCreateGroupActivity extends AppCompatActivity implements SwipyR
     SwipyRefreshLayout swiperefresh;
     String currentPage;
     List <ChatUserModel>  chatuserlist = new ArrayList<>();
-    private List<Integer> select_members = new ArrayList<>();
+    private List<String> listmembers = new ArrayList<>();
+    private int[] memberArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,18 +106,25 @@ public class ChatCreateGroupActivity extends AppCompatActivity implements SwipyR
         frmFloatingOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 String groupname = input_group_name.getText().toString();
 
                 if(TextUtils.isEmpty(groupname)){
                     AlertMessage.showMessage(context,"Alert","গ্রুপের নাম লিখুন");
-                }else if(select_members.size()<2){
+                }else if(listmembers.size()<2){
                     AlertMessage.showMessage(context,"Alert","গ্রুপ সদস্য নির্বাচন করুন");
                 }else {
+//                    memberArray = new int[listmembers.size()];
+//                    for (int i = 0; i <listmembers.size() ; i++) {
+//                        Log.e("array",""+ listmembers.get(i));
+//
+//                        memberArray[i] = Integer.parseInt(listmembers.get(i));
+//                    }
 
-                    Integer[] array = select_members.toArray(new Integer[select_members.size()]);
+                    String[] stringArray = listmembers.toArray(new String[listmembers.size()]);
 
-                    Log.e("array",""+array.length);
+                    Log.e("stringArray",""+ Arrays.toString(stringArray));
+                    createGroup(groupname,Arrays.toString(stringArray));
+
                 }
 
                 //startActivity(new Intent(context,ChatAppActivity.class));
@@ -131,6 +141,47 @@ public class ChatCreateGroupActivity extends AppCompatActivity implements SwipyR
 
 
     }
+
+
+    private void createGroup(String groupname, String select_members) {
+
+        if(!NetInfo.isOnline(context)){
+            AlertMessage.showMessage(context,"Alert!","No internet connection!");
+        }
+        final ProgressDialog pd = new ProgressDialog(context);
+        pd.setMessage("Loading....");
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.setCancelable(false);
+        pd.show();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Api api = retrofit.create(Api.class);
+        Call<CreateMessageGroupResponse> userCall = api.create_message_group("Bearer "+ PersistData.getStringData(context, AppConstant.loginToken),groupname,select_members);
+        userCall.enqueue(new Callback<CreateMessageGroupResponse>() {
+            @Override
+            public void onResponse(Call<CreateMessageGroupResponse> call, Response<CreateMessageGroupResponse> response) {
+                pd.dismiss();
+                CreateMessageGroupResponse createMessageGroupResponse = response.body();
+
+                if(createMessageGroupResponse!=null){
+                    Toast.makeText(context, ""+createMessageGroupResponse.getGroup_name(), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<CreateMessageGroupResponse> call, Throwable t) {
+                pd.dismiss();
+            }
+        });
+
+
+    }
+
 
 
     private void search_chat_member(String page) {
@@ -269,24 +320,30 @@ public class ChatCreateGroupActivity extends AppCompatActivity implements SwipyR
                 holder.checkbox.setVisibility(View.VISIBLE);
             }
 
+            //in some cases, it will prevent unwanted situations
+            holder.checkbox.setOnCheckedChangeListener(null);
+
+            //if true, your checkbox will be selected, else unselected
+            holder.checkbox.setChecked(contact.isSelected());
+
             holder.checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
+                    contact.setSelected(b);
                     if(b){
-                        select_members.add(Integer.parseInt(contact.getId()));
 
-                        Integer[] array = select_members.toArray(new Integer[select_members.size()]);
-
-                        Log.e("array",""+array);
-
+                        listmembers.add(contact.getId());
+                        Log.e("array",""+ contact.getId());
                         frmFloatingOk.setVisibility(View.VISIBLE);
+                    }else {
+                        for (int i = 0; i <listmembers.size() ; i++) {
+                            if(contact.getId().equalsIgnoreCase(listmembers.get(i))){
+                                listmembers.remove(i);
+                            }
+                        }
                     }
                 }
             });
-
-
-
 
         }
 
