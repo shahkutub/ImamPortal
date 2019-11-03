@@ -26,9 +26,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.util.Patterns;
@@ -36,7 +34,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -49,9 +46,8 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
-import com.imamportal.model.AllDataResponse;
+import com.imamportal.model.AllLocationResponse;
 import com.imamportal.model.NameInfo;
 import com.imamportal.model.SignUpResponse;
 import com.imamportal.utils.AlertMessage;
@@ -59,12 +55,10 @@ import com.imamportal.utils.Api;
 import com.imamportal.utils.AppConstant;
 import com.imamportal.utils.BitmapUtils;
 import com.imamportal.utils.NetInfo;
-import com.imamportal.utils.PersistData;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -1348,13 +1342,13 @@ public class RegistrationActivity extends AppCompatActivity {
                 .build();
 
         Api api = retrofit.create(Api.class);
-        Call<AllDataResponse> userCall = api.get_all_data();
-        userCall.enqueue(new Callback<AllDataResponse>() {
+        Call<AllLocationResponse> userCall = api.get_all_location_data();
+        userCall.enqueue(new Callback<AllLocationResponse>() {
             @Override
-            public void onResponse(Call<AllDataResponse> call, Response<AllDataResponse> response) {
+            public void onResponse(Call<AllLocationResponse> call, Response<AllLocationResponse> response) {
                 pd.dismiss();
 
-                AllDataResponse  allData = response.body();
+                AllLocationResponse allData = response.body();
 
                 if(allData!=null){
 
@@ -1362,14 +1356,15 @@ public class RegistrationActivity extends AppCompatActivity {
                     Log.e("allData",""+allData.getResult().size());
                     innitUi();
                     if(allData.getResult().size()==0){
-                        Toast.makeText(context, "No data found!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Location not data found!", Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                 }
 
             }
 
             @Override
-            public void onFailure(Call<AllDataResponse> call, Throwable t) {
+            public void onFailure(Call<AllLocationResponse> call, Throwable t) {
 
 
                 pd.dismiss();

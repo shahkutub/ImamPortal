@@ -1,6 +1,6 @@
 package com.imamportal.model;
 
-public class DataInfo {
+public class LocationInfo {
 
 //    "id": 1,
 //                    "division_name_eng": "Barisal",

@@ -1,19 +1,12 @@
 package com.imamportal;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -23,15 +16,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.imamportal.model.AllDataResponse;
-import com.imamportal.model.Catagories;
+import com.imamportal.model.AllLocationResponse;
 import com.imamportal.utils.AlertMessage;
 import com.imamportal.utils.Api;
 import com.imamportal.utils.AppConstant;
-import com.imamportal.utils.LocationMgr;
 import com.imamportal.utils.NetInfo;
 
-import java.util.List;
 import java.util.Locale;
 
 import retrofit2.Call;
@@ -39,13 +29,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
-import static android.Manifest.permission.ACCESS_FINE_LOCATION;
-import static android.Manifest.permission.CAMERA;
-import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
-import static android.Manifest.permission.READ_PHONE_STATE;
-import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class LanguageActivity extends AppCompatActivity {
     private TextView btnBangla,btnEng,btnAr;
@@ -156,13 +139,13 @@ public class LanguageActivity extends AppCompatActivity {
                 .build();
 
         Api api = retrofit.create(Api.class);
-        Call<AllDataResponse> userCall = api.get_all_data();
-        userCall.enqueue(new Callback<AllDataResponse>() {
+        Call<AllLocationResponse> userCall = api.get_all_location_data();
+        userCall.enqueue(new Callback<AllLocationResponse>() {
             @Override
-            public void onResponse(Call<AllDataResponse> call, Response<AllDataResponse> response) {
+            public void onResponse(Call<AllLocationResponse> call, Response<AllLocationResponse> response) {
                 pd.dismiss();
 
-                AllDataResponse  allData = response.body();
+                AllLocationResponse allData = response.body();
 
                 if(allData!=null){
 
@@ -174,7 +157,7 @@ public class LanguageActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<AllDataResponse> call, Throwable t) {
+            public void onFailure(Call<AllLocationResponse> call, Throwable t) {
 
 
                 pd.dismiss();

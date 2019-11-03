@@ -302,6 +302,12 @@ public class FragmentAmarPataContent extends Fragment {
 
                     // refreshing recycler view
                     mAdapter.notifyDataSetChanged();
+                }else {
+                    if(amarpataContentResponse.getContent_categories().size()==0){
+                        Toast.makeText(context, "token_expired. Please login", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(context,LoginActivity.class));
+                        getActivity().finish();
+                    }
                 }
             }
 
@@ -314,11 +320,7 @@ public class FragmentAmarPataContent extends Fragment {
         });
 
 
-        if(amarpataContentResponse.getContent_categories().size()==0){
-            Toast.makeText(context, "token_expired. Please login", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(context,LoginActivity.class));
-            getActivity().finish();
-        }
+
     }
 
 

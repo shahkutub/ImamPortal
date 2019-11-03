@@ -217,7 +217,7 @@ public class BookMarkListActivity extends AppCompatActivity{
 //                    }
 
                     AppConstant.detaisData = data;
-                    context.startActivity(new Intent(context, DetailsActivity.class));
+                    context.startActivity(new Intent(context, DetailsActivityBookmark.class));
 
                 }
             });

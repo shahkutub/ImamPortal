@@ -39,6 +39,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -168,7 +169,7 @@ public class MainActivityDemo extends AppCompatActivity {
     Boolean buttonStateOpen = false;
     private ImageView imgImamReg;
     int notificationCount = 0;
-    private TextView tvCount;
+    private TextView tvCount,tvMember;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -347,6 +348,7 @@ public class MainActivityDemo extends AppCompatActivity {
 
         }
 
+        getMember();
 
 //        Calendar cal = Calendar.getInstance();
 //        Intent intent = new Intent(this, MyService.class);
@@ -827,6 +829,7 @@ public class MainActivityDemo extends AppCompatActivity {
 
         tvUser = (TextView) findViewById(R.id.tvUser);
         tvCount = (TextView) findViewById(R.id.tvCount);
+        tvMember = (TextView) findViewById(R.id.tvMember);
         tvCount.setText(""+notificationCount);
 
         imgUser = (CircleImageView) findViewById(R.id.imgUser);
@@ -1339,10 +1342,17 @@ public class MainActivityDemo extends AppCompatActivity {
             final BlogPostSearchResponse customer = getItem(position);
             TextView name = (TextView) view.findViewById(R.id.txtLabel);
             name.setText(customer.getTitle());
+            final View finalView = view;
             name.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (finalView != null) {
+                        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(finalView.getWindowToken(), 0);
+                    }
                     AppConstant.searchId = customer.getId();
+                    startActivity(new Intent(context,DetailsSearchActivity.class));
+
                 }
             });
             return view;
@@ -1861,7 +1871,47 @@ public class MainActivityDemo extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
+    private void getMember() {
 
+
+        if (!NetInfo.isOnline(context)) {
+            AlertMessage.showMessage(context, "Alert!", "No internet connection!");
+        }
+
+//        final ProgressDialog pd = new ProgressDialog(context);
+//        pd.setMessage("Loading....");
+//        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//        pd.show();
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Api api = retrofit.create(Api.class);
+        Call<String> userCall = api.member();
+        userCall.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+              //  pd.dismiss();
+
+                String  res = response.body();
+                Log.e("resMember",""+res);
+                tvMember.setText(""+res);
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+               // pd.dismiss();
+            }
+        });
+
+
+    }
     private void updateworkdone() {
 
 

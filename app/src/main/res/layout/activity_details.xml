@@ -26,16 +26,6 @@
 
 
 
-        <com.imamportal.utils.ZoomTextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/tvDetails"
-            android:padding="@dimen/_10sdp"
-            android:scrollbars="vertical"
-            android:text="dduhuyu"
-            android:textColor="#000"
-            />
-
         <ImageView
             android:id="@+id/imgPublisher"
             android:layout_width="@dimen/_60sdp"
@@ -94,26 +84,28 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/linMark"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_margin="@dimen/_5sdp"
+        android:layout_margin="@dimen/_2sdp"
         android:orientation="horizontal"
+        android:gravity="right"
         >
 
         <com.mahfa.dnswitch.DayNightSwitch
             android:id="@+id/day_night_switch"
-            android:layout_width="@dimen/_46sdp"
+            android:layout_width="@dimen/_45sdp"
             android:layout_height="@dimen/_25sdp"
-            android:layout_margin="@dimen/_5sdp"
+            android:layout_marginRight="@dimen/_8sdp"
             android:layout_gravity="center"/>
 
         <ImageView
             android:id="@+id/imgBookmark"
             android:layout_width="@dimen/_30sdp"
             android:layout_height="@dimen/_30sdp"
-            android:layout_marginRight="@dimen/_5sdp"
+            android:layout_marginRight="@dimen/_4sdp"
             app:srcCompat="@drawable/ic_bookmark_border_black_24dp"
             />
 
@@ -122,11 +114,21 @@
             android:layout_width="@dimen/_30sdp"
             android:layout_height="@dimen/_30sdp"
             app:srcCompat="@drawable/ic_share"
+            android:layout_marginRight="@dimen/_10sdp"
             />
 
     </LinearLayout>
 
-
+    <com.imamportal.utils.ZoomTextView
+        android:id="@+id/tvDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_5sdp"
+        android:scrollbars="vertical"
+        android:text=""
+        android:layout_below="@+id/linMark"
+        android:layout_above="@+id/bottom"
+        android:textColor="#000" />
 
     <LinearLayout
         android:id="@+id/bottom"
@@ -136,6 +138,7 @@
         android:orientation="vertical"
         android:paddingRight="@dimen/_3sdp"
         android:paddingLeft="@dimen/_3sdp"
+
         >
 
 
@@ -155,10 +158,12 @@
                 />
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/linLikeViw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal"
+            android:visibility="gone"
             >
 
         <ImageView

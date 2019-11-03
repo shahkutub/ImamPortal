@@ -71,7 +71,7 @@ public class DetailsActivity extends AppCompatActivity{
     private RecyclerView recyclerViewComment;
     private boolean liked = false;
     private String comment;
-    LinearLayout linLike,linComment,linComClick,linUpDown;
+    LinearLayout linLike,linComment,linComClick,linUpDown,linLikeViw;
     private AppCompatButton btnPost;
     private EditText etAsk;
     ZoomTextView tvDetails;
@@ -110,6 +110,7 @@ public class DetailsActivity extends AppCompatActivity{
         btnPost = (AppCompatButton) findViewById(R.id.btnPost);
         etAsk = (EditText) findViewById(R.id.etAsk);
         linComment = (LinearLayout) findViewById(R.id.linComment);
+        linLikeViw = (LinearLayout) findViewById(R.id.linLikeViw);
         linComClick = (LinearLayout) findViewById(R.id.linComClick);
         linUpDown = (LinearLayout) findViewById(R.id.linUpDown);
 
@@ -118,12 +119,14 @@ public class DetailsActivity extends AppCompatActivity{
             public void onClick(View v) {
                 if(linComment.getVisibility() == View.GONE){
                     imgUpDown.setImageResource(R.drawable.ic_expand_more_black_24dp);
-                                    linComment.setVisibility(View.VISIBLE);
+                    linComment.setVisibility(View.VISIBLE);
+                    linLikeViw.setVisibility(View.VISIBLE);
 
                 }else {
                     imgUpDown.setImageResource(R.drawable.ic_expand_less_black_24dp);
 
-                                    linComment.setVisibility(View.GONE);
+                    linComment.setVisibility(View.GONE);
+                    linLikeViw.setVisibility(View.GONE);
                                 }
 
 
@@ -134,6 +137,7 @@ public class DetailsActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 linComment.setVisibility(View.VISIBLE);
+                linLikeViw.setVisibility(View.VISIBLE);
             }
         });
 
@@ -396,7 +400,7 @@ public class DetailsActivity extends AppCompatActivity{
                 .build();
 
         Api api = retrofit.create(Api.class);
-        Call<String> userCall = api.likepost(PersistData.getStringData(context,AppConstant.loginUserid),AppConstant.detaisData.getId());
+        Call<String> userCall = api.likepost("Bearer "+ PersistData.getStringData(context, AppConstant.loginToken),AppConstant.detaisData.getId());
         userCall.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

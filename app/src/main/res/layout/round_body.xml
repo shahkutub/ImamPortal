@@ -924,9 +924,10 @@
                     android:textColor="#fff"
                     />
                 <TextView
+                    android:id="@+id/tvMember"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="১১৯২০৬"
+                    android:text=""
                     android:layout_centerVertical="true"
                     android:padding="@dimen/_1sdp"
                     android:textColor="#fff"

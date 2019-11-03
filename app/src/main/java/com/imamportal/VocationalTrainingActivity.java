@@ -15,11 +15,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
@@ -35,7 +32,7 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.imamportal.model.AllDataResponse;
+import com.imamportal.model.AllLocationResponse;
 import com.imamportal.model.NameInfo;
 import com.imamportal.model.SignUpResponse;
 import com.imamportal.utils.AlertMessage;
@@ -56,7 +53,6 @@ import java.util.List;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -145,13 +141,13 @@ public class VocationalTrainingActivity extends AppCompatActivity {
                 .build();
 
         Api api = retrofit.create(Api.class);
-        Call<AllDataResponse> userCall = api.get_all_data();
-        userCall.enqueue(new Callback<AllDataResponse>() {
+        Call<AllLocationResponse> userCall = api.get_all_location_data();
+        userCall.enqueue(new Callback<AllLocationResponse>() {
             @Override
-            public void onResponse(Call<AllDataResponse> call, Response<AllDataResponse> response) {
+            public void onResponse(Call<AllLocationResponse> call, Response<AllLocationResponse> response) {
                 pd.dismiss();
 
-                AllDataResponse  allData = response.body();
+                AllLocationResponse allData = response.body();
 
                 if(allData!=null){
 
@@ -163,7 +159,7 @@ public class VocationalTrainingActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<AllDataResponse> call, Throwable t) {
+            public void onFailure(Call<AllLocationResponse> call, Throwable t) {
 
 
                 pd.dismiss();

@@ -1,20 +1,10 @@
 package com.imamportal.utils;
 
-import android.app.AlarmManager;
 import android.app.Dialog;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Point;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
-import android.graphics.RectF;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Base64;
 import android.util.TypedValue;
@@ -28,7 +18,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.imamportal.R;
 import com.imamportal.model.AllBlogpostModel;
-import com.imamportal.model.AllDataResponse;
+import com.imamportal.model.AllLocationResponse;
 import com.imamportal.model.AlquranAlhadits;
 import com.imamportal.model.AudioModel;
 import com.imamportal.model.Catagories;
@@ -77,7 +67,7 @@ public class AppConstant {
     public static List<AllBlogpostModel> listAllBlogPost = new ArrayList<>();
     public static List<Catagories> listAllCatagory = new ArrayList<>();
     public static String masalaFragmentName = "";
-    public static AllDataResponse allData = new AllDataResponse();
+    public static AllLocationResponse allData = new AllLocationResponse();
     public static String loginToken = "loginToken";
     public static String loginUserid = "loginUserid";
     public static AllBlogpostModel detaisData = new AllBlogpostModel();
@@ -86,7 +76,7 @@ public class AppConstant {
     public static String chatType;
     public static String otheruserName;
     public static List<Catagories> mypageContentCatagory = new ArrayList<>();
-    public static String searchId;
+    public static String searchId = "";
 
     public static String BitMapToString(Bitmap bitmap){
         ByteArrayOutputStream baos=new ByteArrayOutputStream();
@@ -224,7 +214,7 @@ public class AppConstant {
 
 
 
-    public static void saveAllData(Context con, AllDataResponse allDataResponse) {
+    public static void saveAllData(Context con, AllLocationResponse allDataResponse) {
         SharedPreferences mPrefs = con.getSharedPreferences("allDataResponse",MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
@@ -235,12 +225,12 @@ public class AppConstant {
     }
 
 
-        public static AllDataResponse getAllData(Context con){
+        public static AllLocationResponse getAllData(Context con){
         SharedPreferences mPrefs = con.getSharedPreferences("allDataResponse",MODE_PRIVATE);
-        AllDataResponse allDataResponse = new AllDataResponse();
+        AllLocationResponse allDataResponse = new AllLocationResponse();
         Gson gson = new Gson();
         String json = mPrefs.getString("allDataResponse", "");
-        allDataResponse = gson.fromJson(json, AllDataResponse.class);
+        allDataResponse = gson.fromJson(json, AllLocationResponse.class);
         return allDataResponse;
     }
 

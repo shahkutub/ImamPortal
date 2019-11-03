@@ -15,35 +15,13 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
-import android.util.Log;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.imamportal.model.Catagories;
-import com.imamportal.model.SeraContentData;
-import com.imamportal.utils.AlertMessage;
-import com.imamportal.utils.Api;
-import com.imamportal.utils.AppConstant;
 import com.imamportal.utils.LocationMgr;
 import com.imamportal.utils.MyService;
-import com.imamportal.utils.NetInfo;
-import com.imamportal.utils.PersistData;
 import com.imamportal.utils.PersistentUser;
-
-import java.util.List;
-import java.util.Timer;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.CALL_PHONE;
@@ -171,7 +149,7 @@ public class SplashActivity extends AppCompatActivity {
             }
         } else {
 
-            //requestPermission();
+            requestPermission();
 //            if (mgr.mGoogleApiClient == null) {
 //                mgr.buildGoogleApiClient();
 //            }
@@ -180,27 +158,25 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private boolean checkPermission() {
-        int result = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_FINE_LOCATION);
-        int result1 = ContextCompat.checkSelfPermission(getApplicationContext(), CAMERA);
-        int result2 = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_COARSE_LOCATION);
+        int result0 = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_FINE_LOCATION);
+        int result1 = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_COARSE_LOCATION);
+        int result2 = ContextCompat.checkSelfPermission(getApplicationContext(), CAMERA);
         int result3 = ContextCompat.checkSelfPermission(getApplicationContext(), READ_EXTERNAL_STORAGE);
         int result4 = ContextCompat.checkSelfPermission(getApplicationContext(), WRITE_EXTERNAL_STORAGE);
         int result5 = ContextCompat.checkSelfPermission(getApplicationContext(), CALL_PHONE);
 
-        return result == PackageManager.PERMISSION_GRANTED
+        return     result0 == PackageManager.PERMISSION_GRANTED
                 && result1 == PackageManager.PERMISSION_GRANTED
                 && result2 == PackageManager.PERMISSION_GRANTED
                 && result3 == PackageManager.PERMISSION_GRANTED
                 && result4 == PackageManager.PERMISSION_GRANTED
                 && result5 == PackageManager.PERMISSION_GRANTED;
-
     }
 
 
     private void requestPermission() {
 
-        ActivityCompat.requestPermissions(this, new String[]{ACCESS_FINE_LOCATION, CAMERA,
-                        ACCESS_COARSE_LOCATION,READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE,CALL_PHONE},
+        ActivityCompat.requestPermissions(this, new String[]{ACCESS_FINE_LOCATION,ACCESS_COARSE_LOCATION,CAMERA,READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE,CALL_PHONE},
                 PERMISSION_REQUEST_CODE);
 
     }
@@ -219,7 +195,7 @@ public class SplashActivity extends AppCompatActivity {
 
                     //  Toast.makeText(con, ""+imei, Toast.LENGTH_SHORT).show();
 
-                    if (locationAccepted) {
+                    if (locationAccepted && cameraAccepted && readPhoneAccepted) {
                         // Snackbar.make(view, "Permission Granted, Now you can access location data and camera.", Snackbar.LENGTH_LONG).show();
                         if (mgr.mGoogleApiClient == null) {
                             mgr.buildGoogleApiClient();
@@ -229,13 +205,13 @@ public class SplashActivity extends AppCompatActivity {
                         //Snackbar.make(view, "Permission Denied, You cannot access location data and camera.", Snackbar.LENGTH_LONG).show();
 
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            if (shouldShowRequestPermissionRationale(CAMERA)) {
+                            if (shouldShowRequestPermissionRationale(ACCESS_FINE_LOCATION)) {
                                 showMessageOKCancel("You need to allow access to both the permissions",
                                         new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                                    requestPermissions(new String[]{ACCESS_FINE_LOCATION, CAMERA, READ_PHONE_STATE},
+                                                    requestPermissions(new String[]{ACCESS_FINE_LOCATION,ACCESS_COARSE_LOCATION,CAMERA,READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE,CALL_PHONE},
                                                             PERMISSION_REQUEST_CODE);
                                                 }
                                             }

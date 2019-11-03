@@ -41,6 +41,18 @@
             android:theme="@style/MyMaterialTheme" />
 
         <activity
+            android:name=".DetailsSearchActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyMaterialTheme" />
+
+         <activity
+            android:name=".DetailsActivityBookmark"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyMaterialTheme" />
+
+
+
+        <activity
             android:name=".NotificationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyMaterialTheme" />

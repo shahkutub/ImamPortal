@@ -1,6 +1,5 @@
 package com.imamportal;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -25,10 +24,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.imamportal.Adapter.CommentAdapter;
-import com.imamportal.model.BlogPostSearchDetails;
 import com.imamportal.model.CommentModel;
 import com.imamportal.model.CommentResponse;
-import com.imamportal.model.SignUpResponse;
 import com.imamportal.realm.BookmarkContent;
 import com.imamportal.utils.AlertMessage;
 import com.imamportal.utils.Api;
@@ -36,21 +33,14 @@ import com.imamportal.utils.AppConstant;
 import com.imamportal.utils.NetInfo;
 import com.imamportal.utils.PersistData;
 import com.imamportal.utils.ZoomTextView;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
 import com.mahfa.dnswitch.DayNightSwitch;
 import com.mahfa.dnswitch.DayNightSwitchAnimListener;
 import com.mahfa.dnswitch.DayNightSwitchListener;
 
-import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import cz.msebera.android.httpclient.Header;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
@@ -61,7 +51,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class DetailsSearchActivity extends AppCompatActivity{
+public class DetailsActivityBookmark extends AppCompatActivity{
 
     Context context;
     ///String title, content, publisher, publishDate, viewcount,  likecount, commentcount;
@@ -71,7 +61,7 @@ public class DetailsSearchActivity extends AppCompatActivity{
     private RecyclerView recyclerViewComment;
     private boolean liked = false;
     private String comment;
-    LinearLayout linLike,linComment,linLikeViw,linComClick,linUpDown;
+    LinearLayout linLike,linComment,linComClick,linUpDown;
     private AppCompatButton btnPost;
     private EditText etAsk;
     ZoomTextView tvDetails;
@@ -81,8 +71,6 @@ public class DetailsSearchActivity extends AppCompatActivity{
     public static final String TAG = "MainActivity";
     public static final String KEY_DAY_NIGHT_SWITCH_STATE = "day_night_switch_state";
     private RelativeLayout relDetail;
-    private BlogPostSearchDetails blogPostSearchDetails = new BlogPostSearchDetails();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,7 +100,6 @@ public class DetailsSearchActivity extends AppCompatActivity{
         btnPost = (AppCompatButton) findViewById(R.id.btnPost);
         etAsk = (EditText) findViewById(R.id.etAsk);
         linComment = (LinearLayout) findViewById(R.id.linComment);
-        linLikeViw = (LinearLayout) findViewById(R.id.linLikeViw);
         linComClick = (LinearLayout) findViewById(R.id.linComClick);
         linUpDown = (LinearLayout) findViewById(R.id.linUpDown);
 
@@ -121,15 +108,12 @@ public class DetailsSearchActivity extends AppCompatActivity{
             public void onClick(View v) {
                 if(linComment.getVisibility() == View.GONE){
                     imgUpDown.setImageResource(R.drawable.ic_expand_more_black_24dp);
-                    linComment.setVisibility(View.VISIBLE);
-                    linLikeViw.setVisibility(View.VISIBLE);
-
+                                    linComment.setVisibility(View.VISIBLE);
 
                 }else {
                     imgUpDown.setImageResource(R.drawable.ic_expand_less_black_24dp);
 
-                    linComment.setVisibility(View.GONE);
-                    linLikeViw.setVisibility(View.GONE);
+                                    linComment.setVisibility(View.GONE);
                                 }
 
 
@@ -140,7 +124,6 @@ public class DetailsSearchActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 linComment.setVisibility(View.VISIBLE);
-                linLikeViw.setVisibility(View.VISIBLE);
             }
         });
 
@@ -194,9 +177,9 @@ public class DetailsSearchActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
 
-                String text = blogPostSearchDetails.getTitle()+"\n"+""+tvDetails.getText().toString();
+                String text = AppConstant.detaisData.getTitle()+"\n"+""+AppConstant.detaisData.getDescription().toString();
                 Log.e("text",""+text);
-                ShareCompat.IntentBuilder.from(DetailsSearchActivity.this)
+                ShareCompat.IntentBuilder.from(DetailsActivityBookmark.this)
                         .setType("text/plain")
                         .setChooserTitle("Share")
                         .setText(Html.fromHtml(text).toString())
@@ -224,6 +207,17 @@ public class DetailsSearchActivity extends AppCompatActivity{
 //            tvDetails.setText(Html.fromHtml(htmlString).toString());
 //        }
 
+        if(AppConstant.detaisData.getQuestion()!=null||AppConstant.detaisData.getAnswer()!=null){
+            String htmlString = "<div style=\"color:#000000\"><b>"+"প্রশ্ন: "+  ""+AppConstant.detaisData.getQuestion()+"</b></div\n" + "<p style=\"margin-bottom:50px\">"+""+AppConstant.detaisData.getAnswer()+"</p>";
+            webView.loadData(htmlString, "text/html; charset=utf-8", "UTF-8");
+
+            tvDetails.setText(Html.fromHtml(htmlString).toString());
+
+        }else {
+            String htmlString = "<div style=\"color:#000000\"><b>"+"প্রশ্ন: "+ AppConstant.detaisData.getTitle()+""+"</b></div\n" + "<p style=\"margin-bottom:50px\">"+""+AppConstant.detaisData.getDescription()+"</p>";
+            webView.loadData(htmlString, "text/html; charset=utf-8", "UTF-8");
+            tvDetails.setText(Html.fromHtml(htmlString).toString());
+        }
 
 
         String pattern = "yyyy-MM-dd";
@@ -258,12 +252,13 @@ public class DetailsSearchActivity extends AppCompatActivity{
         tvCommentCount.setText(AppConstant.detaisData.getComment().size()+"");
 
         imgBookmark = (ImageView)findViewById(R.id.imgBookmark);
+        imgBookmark.setVisibility(View.GONE);
         Gson gsonObj = new Gson();
         // converts object to json string
         String jsonStr = gsonObj.toJson(AppConstant.detaisData);
         BookmarkContent content = mRealm.where(BookmarkContent.class).equalTo(BookmarkContent.PROPERTY_CONTENT, jsonStr).findFirst();
         if(content!=null){
-            //imgBookmark.setVisibility(View.GONE);
+            imgBookmark.setVisibility(View.GONE);
         }
 
         imgBookmark.setOnClickListener(new View.OnClickListener() {
@@ -315,8 +310,6 @@ public class DetailsSearchActivity extends AppCompatActivity{
             }
         });
 
-
-        getSearchDetail();
     }
 
 
@@ -336,7 +329,7 @@ public class DetailsSearchActivity extends AppCompatActivity{
 
                             Gson gsonObj = new Gson();
                             // converts object to json string
-                            String jsonStr = gsonObj.toJson(blogPostSearchDetails);
+                            String jsonStr = gsonObj.toJson(AppConstant.detaisData);
                             bookmarkContent.content = ""+jsonStr;
                             //realm.copyToRealm(bookmarkContent);
                             realm.insert(bookmarkContent);
@@ -360,19 +353,19 @@ public class DetailsSearchActivity extends AppCompatActivity{
     }
 
 
-//    private void readBookMark() {
-//        mRealm.executeTransaction(new Realm.Transaction() {
-//            @Override
-//            public void execute(Realm realm) {
-//                RealmResults<BookmarkContent> results = realm.where(BookmarkContent.class).findAll();
-//                Toast.makeText(context, ""+results.size(), Toast.LENGTH_SHORT).show();
-//                tvDetails.setText("");
-//                for (BookmarkContent employee : results) {
-//                    tvDetails.append(BookmarkContent.PROPERTY_CONTENT);
-//                }
-//            }
-//        });
-//    }
+    private void readBookMark() {
+        mRealm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                RealmResults<BookmarkContent> results = realm.where(BookmarkContent.class).findAll();
+                Toast.makeText(context, ""+results.size(), Toast.LENGTH_SHORT).show();
+                tvDetails.setText("");
+                for (BookmarkContent employee : results) {
+                    tvDetails.append(BookmarkContent.PROPERTY_CONTENT);
+                }
+            }
+        });
+    }
 
 
 
@@ -394,18 +387,14 @@ public class DetailsSearchActivity extends AppCompatActivity{
                 .build();
 
         Api api = retrofit.create(Api.class);
-        Call<String> userCall = api.likepost("Bearer"+ PersistData.getStringData(context, AppConstant.loginToken),AppConstant.detaisData.getId());
+        Call<String> userCall = api.likepost("Bearer "+ PersistData.getStringData(context, AppConstant.loginToken),AppConstant.detaisData.getId());
         userCall.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-
-                if(response.body()!=null){
-                    liked = true;
-                    imgLike.setImageResource(R.drawable.ic_like_select);
-                    int like = AppConstant.detaisData.getLike_post().size();
-                    tvLikeCount.setText(like+1+"");
-                }
-
+                liked = true;
+                imgLike.setImageResource(R.drawable.ic_like_select);
+                int like = AppConstant.detaisData.getLike_post().size();
+                tvLikeCount.setText(like+1+"");
             }
 
             @Override
@@ -431,7 +420,7 @@ public class DetailsSearchActivity extends AppCompatActivity{
                 .build();
 
         Api api = retrofit.create(Api.class);
-        Call<CommentResponse> userCall = api.commentepost("Bearer "+ PersistData.getStringData(context, AppConstant.loginToken),PersistData.getStringData(context,AppConstant.loginUserid),AppConstant.searchId,comment);
+        Call<CommentResponse> userCall = api.commentepost("Bearer "+ PersistData.getStringData(context, AppConstant.loginToken),PersistData.getStringData(context,AppConstant.loginUserid),AppConstant.detaisData.getId(),comment);
         userCall.enqueue(new Callback<CommentResponse>() {
             @Override
             public void onResponse(Call<CommentResponse> call, Response<CommentResponse> response) {
@@ -466,155 +455,5 @@ public class DetailsSearchActivity extends AppCompatActivity{
     }
 
 
-
-//    private void getSearchDetails() {
-//
-//        if(!NetInfo.isOnline(context)){
-//            AlertMessage.showMessage(context,"Alert!","No internet connection!");
-//        }
-//        final ProgressDialog pd = new ProgressDialog(context);
-//        pd.setMessage("Loading data....");
-//        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//        pd.show();
-//
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl(Api.BASE_URL)
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-//
-//        Api api = retrofit.create(Api.class);
-//        Call<BlogPostSearchDetails> userCall = api.blog_post_description("api/blog_post_description/"+AppConstant.searchId);
-//        userCall.enqueue(new Callback<BlogPostSearchDetails>() {
-//            @Override
-//            public void onResponse(Call<BlogPostSearchDetails> call, Response<BlogPostSearchDetails> response) {
-//
-//                pd.dismiss();
-//                if(response.body()!=null){
-//
-//                    blogPostSearchDetails = response.body();
-//                    if(blogPostSearchDetails.getDescription()!=null){
-//                        String htmlString = "<div style=\"color:#000000\"><b>"+""+  ""+blogPostSearchDetails.getTitle()+"</b></div\n" + "<p style=\"margin-bottom:50px\">"+""+blogPostSearchDetails.getDescription()+"</p>";
-//
-//                        tvDetails.setText(Html.fromHtml(htmlString).toString());
-//
-//                    }else {
-////                        String htmlString = "<div style=\"color:#000000\"><b>"+""+ AppConstant.detaisData.getTitle()+""+"</b></div\n" + "<p style=\"margin-bottom:50px\">"+""+AppConstant.detaisData.getDescription()+"</p>";
-////                        tvDetails.setText(Html.fromHtml(htmlString).toString());
-//                    }
-//
-//
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<BlogPostSearchDetails> call, Throwable t) {
-//                pd.dismiss();
-//            }
-//        });
-//
-//
-//    }
-
-    protected void getSearchDetail() {
-        String url = Api.BASE_URL+"api/blog_post_description/"+AppConstant.searchId;
-
-        if (!NetInfo.isOnline(context)) {
-            AlertMessage.showMessage(context, "Alert",
-                    "Check Internet");
-            return;
-        }
-
-        final ProgressDialog pd = new ProgressDialog(context);
-        pd.setCancelable(false);
-        pd.setCancelable(false);
-        pd.setMessage("Data uploading...");
-        pd.show();
-
-        final AsyncHttpClient client = new AsyncHttpClient();
-
-        // String credentials = Username + ":" + Password;
-        // String base64EncodedCredentials =
-        // Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
-        // client.addHeader("Authorization", "Basic " +
-        // base64EncodedCredentials);
-
-//        final RequestParams param = new RequestParams();
-//
-//        try {
-//
-//            //String path = PersistData.getStringData(con, AppConstant.path);
-//            param.put("data",data);
-//            param.put("image",new File(filePath));
-//
-//
-//        } catch (final Exception e1) {
-//            e1.printStackTrace();
-//        }
-
-        client.get(url, new AsyncHttpResponseHandler() {
-
-            @Override
-            public void onStart() {
-                // called before request is started
-            }
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers,
-                                  byte[] response) {
-                // called when response HTTP status is "200 OK"
-
-                pd.dismiss();
-
-//                Toast.makeText(context, "Prescription Uploaded",
-//                        Toast.LENGTH_LONG).show();
-
-                Log.e("resposne ", ">>" + new String(response));
-
-
-                String dataRes = new String(response).substring(1,new String(response).length()-1);
-
-                Log.e("resposne ", ">>" + new String(dataRes));
-
-                Gson g = new Gson();
-                blogPostSearchDetails =  g.fromJson(new String(dataRes), BlogPostSearchDetails.class);
-
-                if(blogPostSearchDetails!=null){
-
-                        if(blogPostSearchDetails!=null){
-                            String htmlString = "<div style=\"color:#000000\"><b>"+""+  ""+blogPostSearchDetails.getTitle()+"</b></div\n" + "<p style=\"margin-bottom:50px\">"+""+blogPostSearchDetails.getDescription()+"</p>";
-
-                            tvDetails.setText(Html.fromHtml(htmlString).toString());
-
-                        }else {
-//                        String htmlString = "<div style=\"color:#000000\"><b>"+""+ AppConstant.detaisData.getTitle()+""+"</b></div\n" + "<p style=\"margin-bottom:50px\">"+""+AppConstant.detaisData.getDescription()+"</p>";
-//                        tvDetails.setText(Html.fromHtml(htmlString).toString());
-                        }
-
-
-                }
-
-
-
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers,
-                                  byte[] errorResponse, Throwable e) {
-                // called when response HTTP status is "4XX" (eg. 401, 403, 404)
-
-                // Log.e("errorResponse", new String(errorResponse));
-
-                pd.dismiss();
-            }
-
-            @Override
-            public void onRetry(int retryNo) {
-                // called when request is retried
-
-            }
-        });
-
-    }
 
 }

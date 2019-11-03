@@ -3,7 +3,7 @@ package com.imamportal.model;
 public class BlogPostSearchDetails {
 
 
-    String title,description,view_count;
+    String id,title,description,view_count;
 
     UserAllData user_detail = new UserAllData();
 

@@ -2,7 +2,7 @@ package com.imamportal.utils;
 
 
 import com.imamportal.model.AllBlogpostModel;
-import com.imamportal.model.AllDataResponse;
+import com.imamportal.model.AllLocationResponse;
 import com.imamportal.model.AlquranAlhadits;
 import com.imamportal.model.AmarpataContentResponse;
 import com.imamportal.model.AudioModel;
@@ -40,6 +40,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.Url;
 
@@ -63,12 +64,11 @@ public interface Api {
 
 
 
-
     @FormUrlEncoded
     @POST("api/likepost")
     Call<String> likepost(
-            @Field("user_id") String user_id,
-            @Field("id") String complain_application_id
+            @Header("Authorization") String authHeader,
+            @Field("bolg_post_id") String complain_application_id
 
     );
 
@@ -102,7 +102,7 @@ public interface Api {
 
 
     @GET("api/member")
-    public Call<ResponseBody> member();
+    public Call<String> member();
 
 
 
@@ -140,8 +140,11 @@ public interface Api {
    @GET("api/blog_post_id")
             public Call<List<BlogPostSearchResponse>> blog_post_id();
 
-    @GET("api/blog_post_description")
-    public Call<BlogPostSearchDetails> blog_post_description();
+    @GET("api/blog_post_description/{movie_id}")
+    public Call<BlogPostSearchDetails> blog_post_description(
+            @Path("id") String movieID
+
+    );
 
 
     @GET("api/mypage/video")
@@ -173,7 +176,7 @@ public interface Api {
 
 
     @GET("api/get_all_data")
-    public Call<AllDataResponse> get_all_data();
+    public Call<AllLocationResponse> get_all_location_data();
 
     @Multipart
     @POST("api/signup/store")

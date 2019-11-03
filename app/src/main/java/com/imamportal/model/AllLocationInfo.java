@@ -3,11 +3,11 @@ package com.imamportal.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AlllDataInfo {
+public class AllLocationInfo {
 
 
     String table_name;
-    List<DataInfo> values = new ArrayList<>();
+    List<LocationInfo> values = new ArrayList<>();
 
     public String getTable_name() {
         return table_name;
@@ -17,11 +17,11 @@ public class AlllDataInfo {
         this.table_name = table_name;
     }
 
-    public List<DataInfo> getValues() {
+    public List<LocationInfo> getValues() {
         return values;
     }
 
-    public void setValues(List<DataInfo> values) {
+    public void setValues(List<LocationInfo> values) {
         this.values = values;
     }
 }

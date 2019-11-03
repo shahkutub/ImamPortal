@@ -1,10 +1,8 @@
 package com.imamportal;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -15,11 +13,9 @@ import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
@@ -28,50 +24,37 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.text.TextUtils;
-import android.util.Base64;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.imamportal.model.AllDataResponse;
+import com.imamportal.model.AllLocationResponse;
 import com.imamportal.model.NameInfo;
-import com.imamportal.model.SignUpResponse;
 import com.imamportal.utils.AlertMessage;
 import com.imamportal.utils.Api;
 import com.imamportal.utils.AppConstant;
-import com.imamportal.utils.BitmapUtils;
 import com.imamportal.utils.NetInfo;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -167,13 +150,13 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
                 .build();
 
         Api api = retrofit.create(Api.class);
-        Call<AllDataResponse> userCall = api.get_all_data();
-        userCall.enqueue(new Callback<AllDataResponse>() {
+        Call<AllLocationResponse> userCall = api.get_all_location_data();
+        userCall.enqueue(new Callback<AllLocationResponse>() {
             @Override
-            public void onResponse(Call<AllDataResponse> call, Response<AllDataResponse> response) {
+            public void onResponse(Call<AllLocationResponse> call, Response<AllLocationResponse> response) {
                 pd.dismiss();
 
-                AllDataResponse  allData = response.body();
+                AllLocationResponse allData = response.body();
 
                 if(allData!=null){
 
@@ -185,7 +168,7 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<AllDataResponse> call, Throwable t) {
+            public void onFailure(Call<AllLocationResponse> call, Throwable t) {
 
 
                 pd.dismiss();
