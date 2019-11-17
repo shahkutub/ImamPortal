@@ -156,6 +156,7 @@ public class DetailsActivity extends AppCompatActivity{
             }
         });
 
+
         tvLikeCount.setText(AppConstant.detaisData.getLike_post().size()+"");
         for (int i = 0; i <AppConstant.detaisData.getLike_post().size() ; i++) {
             if(PersistData.getStringData(context,AppConstant.loginUserid).equalsIgnoreCase
@@ -169,13 +170,11 @@ public class DetailsActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 if(!liked){
-
                     if(TextUtils.isEmpty(PersistData.getStringData(context,AppConstant.loginUserid))){
                         startActivity(new Intent(context,LoginActivity.class));
                     }else {
                         likePost();
                     }
-
                 }
             }
         });
@@ -382,9 +381,6 @@ public class DetailsActivity extends AppCompatActivity{
 
 
 
-
-
-
     private void likePost() {
 
         Log.e("user_id",""+PersistData.getStringData(context,AppConstant.loginUserid));
@@ -400,7 +396,7 @@ public class DetailsActivity extends AppCompatActivity{
                 .build();
 
         Api api = retrofit.create(Api.class);
-        Call<String> userCall = api.likepost("Bearer "+ PersistData.getStringData(context, AppConstant.loginToken),AppConstant.detaisData.getId());
+        Call<String> userCall = api.likepost("Bearer "+ PersistData.getStringData(context, AppConstant.loginToken),PersistData.getStringData(context,AppConstant.loginUserid),AppConstant.detaisData.getId());
         userCall.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -444,9 +440,7 @@ public class DetailsActivity extends AppCompatActivity{
 
                     CommentModel commentModel = new CommentModel();
                     commentModel.setComment(comment);
-
                     AppConstant.detaisData.getComment().add(commentModel);
-
                     recyclerViewComment = (RecyclerView) findViewById(R.id.recyclerViewComment);
                     CommentAdapter questionAnsAdapter = new CommentAdapter(AppConstant.detaisData.getComment(),context);
                     LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(context,

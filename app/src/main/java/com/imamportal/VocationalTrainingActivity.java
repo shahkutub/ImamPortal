@@ -151,10 +151,19 @@ public class VocationalTrainingActivity extends AppCompatActivity {
 
                 if(allData!=null){
 
-                    AppConstant.allData = allData;
-                    Log.e("allData",""+allData.getResult().size());
-                    initUi();
+                    if(allData.getResult().size()>0){
+                        AppConstant.allData = allData;
+                        Log.e("allData",""+allData.getResult().size());
+                        initUi();
+                    }else {
+                        Toast.makeText(context, "No data found", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+
+
                 }
+
+
 
             }
 

@@ -540,7 +540,7 @@ public class ImamtrainingRegistrationActivity extends AppCompatActivity {
 
 
         input_birtdate = (EditText) findViewById(R.id.input_birtdate);
-        input_birtdate.setText(new SimpleDateFormat("dd-MM-yyy").format(new Date()));
+        //input_birtdate.setText(new SimpleDateFormat("dd-MM-yyy").format(new Date()));
 
         Calendar newCalendar = Calendar.getInstance();
         final DatePickerDialog startTime = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {

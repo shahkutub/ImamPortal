@@ -26,12 +26,14 @@ public class ChatAppMsgAdapter extends RecyclerView.Adapter<ChatAppMsgViewHolder
     Context context;
     String otherUseName;
     private String imageOtherUser;
+    Bitmap bitmap = null;
 
-    public ChatAppMsgAdapter(List<ChatAppMsgDTO> msgDtoList, String otherUseName,String imageOtherUser,Context context) {
+    public ChatAppMsgAdapter(List<ChatAppMsgDTO> msgDtoList, String otherUseName,String imageOtherUser,Context context,Bitmap bitmap) {
         this.msgDtoList = msgDtoList;
         this.otherUseName = otherUseName;
         this.imageOtherUser = imageOtherUser;
         this.context = context;
+        this.bitmap = bitmap;
     }
 
     @Override
@@ -57,17 +59,21 @@ public class ChatAppMsgAdapter extends RecyclerView.Adapter<ChatAppMsgViewHolder
 
            // if(position==0){
 
-                Glide.with(context)
-                        .asBitmap()
-                        .load(Api.BASE_URL+"public/upload/user/"+imageOtherUser)
-                        .into(new SimpleTarget<Bitmap>() {
-                            @Override
-                            public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
-                                if(resource!=null){
-                                    holder.image_message_profile.setImageBitmap(resource);
-                                }
-                            }
-                        });
+            if(bitmap!=null){
+                holder.image_message_profile.setImageBitmap(bitmap);
+            }
+
+//                Glide.with(context)
+//                        .asBitmap()
+//                        .load(Api.BASE_URL+"public/upload/user/"+imageOtherUser)
+//                        .into(new SimpleTarget<Bitmap>() {
+//                            @Override
+//                            public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+//                                if(resource!=null){
+//                                    holder.image_message_profile.setImageBitmap(resource);
+//                                }
+//                            }
+//                        });
 
             //}
 

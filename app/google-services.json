@@ -1,83 +1,45 @@
 {
   "project_info": {
-    "project_number": "684719610199",
-    "firebase_url": "https://fir-realtime-chat-3007e.firebaseio.com",
-    "project_id": "fir-realtime-chat-3007e",
-    "storage_bucket": "fir-realtime-chat-3007e.appspot.com"
+    "project_number": "12353942815",
+    "firebase_url": "https://imam-portal-app.firebaseio.com",
+    "project_id": "imam-portal-app",
+    "storage_bucket": "imam-portal-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:684719610199:android:b6108e41ac5c6039",
-        "android_client_info": {
-          "package_name": "azhar.testlayoutvisibility.nanosoft.usemyappashomescreenandroid"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "684719610199-romf0c1m5p1ifr9apml5bdtsor0srun8.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "azhar.testlayoutvisibility.nanosoft.usemyappashomescreenandroid",
-            "certificate_hash": "8620b9ab45c374a3e6c208aad843bd32c9adaf0c"
-          }
-        },
-        {
-          "client_id": "684719610199-u8jgka25ptfgqk4tlr847m9cf20e4ale.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBWcH6O_pekcPVs4GswxQDfnxmyzSsAIdw"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "684719610199-u8jgka25ptfgqk4tlr847m9cf20e4ale.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:684719610199:android:be7375cfeb05faab",
+        "mobilesdk_app_id": "1:12353942815:android:972a733048a998f3f22c2a",
         "android_client_info": {
           "package_name": "com.imamportal"
         }
       },
       "oauth_client": [
         {
-          "client_id": "684719610199-u8jgka25ptfgqk4tlr847m9cf20e4ale.apps.googleusercontent.com",
+          "client_id": "12353942815-7sav3covl2mbhmrd2hepm4h27pm9pu39.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.imamportal",
+            "certificate_hash": "1d1af6233c126f78895e759dc020a4dfbc533fd1"
+          }
+        },
+        {
+          "client_id": "12353942815-ji9kbjgbblio93l9oqhgpmuratcq4nhd.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBWcH6O_pekcPVs4GswxQDfnxmyzSsAIdw"
+          "current_key": "AIzaSyArcnxATkkhEqiArqpJvJWPzuxxPzCvQBo"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
+          "other_platform_oauth_client": [
+            {
+              "client_id": "12353942815-ji9kbjgbblio93l9oqhgpmuratcq4nhd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

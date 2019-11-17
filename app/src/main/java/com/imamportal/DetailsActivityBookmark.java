@@ -387,7 +387,7 @@ public class DetailsActivityBookmark extends AppCompatActivity{
                 .build();
 
         Api api = retrofit.create(Api.class);
-        Call<String> userCall = api.likepost("Bearer "+ PersistData.getStringData(context, AppConstant.loginToken),AppConstant.detaisData.getId());
+        Call<String> userCall = api.likepost("Bearer "+ PersistData.getStringData(context, AppConstant.loginToken),PersistData.getStringData(context,AppConstant.loginUserid),AppConstant.detaisData.getId());
         userCall.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

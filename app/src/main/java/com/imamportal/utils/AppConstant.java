@@ -77,6 +77,7 @@ public class AppConstant {
     public static String otheruserName;
     public static List<Catagories> mypageContentCatagory = new ArrayList<>();
     public static String searchId = "";
+    public static String webUrl;
 
     public static String BitMapToString(Bitmap bitmap){
         ByteArrayOutputStream baos=new ByteArrayOutputStream();

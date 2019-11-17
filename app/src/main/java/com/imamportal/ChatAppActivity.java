@@ -1,10 +1,12 @@
 package com.imamportal;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -21,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.imamportal.Adapter.ChatAppMsgAdapter;
@@ -73,18 +76,47 @@ public class ChatAppActivity extends AppCompatActivity{
     private EditText msgInputText;
 
 
-    Timer timer;
+   // Timer timer;
     private boolean isExpired = false;
     private Bitmap bm;
+    private Timer swipeTimer;
+    boolean isTimerRunning;
+    Runnable Update;
+    Handler handler;
+    private Bitmap bitmap = null;
+    private Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat);
         context= this;
+        activity = this;
+//        timer = new Timer();
+//        timer.scheduleAtFixedRate(new RemindTask(), 0, 3000);
 
-        timer = new Timer();
-        timer.scheduleAtFixedRate(new RemindTask(), 0, 3000);
+        handler = new Handler();
+        createSwipeTimer();
+
+        Update = new Runnable() {
+            @Override
+            public void run() {
+
+                Log.e("chat","chat");
+                //if(!isExpired){
+                if(AppConstant.chatType.equalsIgnoreCase("singlechat")){
+                    message_conversations("1");
+                }else if(AppConstant.chatType.equalsIgnoreCase("groupchat")){
+                    groupMessage_conversations("1");
+                }
+
+                /*
+                 * if (currentPage == AllMenuImgInfo.getAllMenuImgInfo().size())
+                 * { currentPage = 0; }
+                 * MainViewPager.setCurrentItem(currentPage++, true);
+                 */
+            }
+        };
 
         imgBack = (ImageView) findViewById(R.id.imgBack);
         imgPicChatUser = (ImageView) findViewById(R.id.imgPicChatUser);
@@ -132,6 +164,17 @@ public class ChatAppActivity extends AppCompatActivity{
 
 
     }
+
+    private void createSwipeTimer() {
+        swipeTimer = new Timer();
+        swipeTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(Update);
+            }
+        }, 3000, 3000);
+    }
+
     private class RemindTask extends TimerTask {
 
 
@@ -139,6 +182,8 @@ public class ChatAppActivity extends AppCompatActivity{
         public void run() {
             runOnUiThread(new Runnable() {
                 public void run() {
+
+                    Log.e("chat","chat");
                     //if(!isExpired){
                     if(AppConstant.chatType.equalsIgnoreCase("singlechat")){
                         message_conversations("1");
@@ -174,7 +219,7 @@ public class ChatAppActivity extends AppCompatActivity{
     }
 
     private void message_conversations(String page) {
-
+        Log.e("singleChat","singleChat");
         if(!NetInfo.isOnline(context)){
             AlertMessage.showMessage(context,"Alert!","No internet connection!");
         }
@@ -204,8 +249,26 @@ public class ChatAppActivity extends AppCompatActivity{
                             msgDtoList.add(data);
                         }
                         Collections.reverse(msgDtoList);
+
+                        if(!activity.isFinishing()){
+                            Glide.with(context)
+                                    .asBitmap()
+                                    .load(Api.BASE_URL+"public/upload/user/"+responsData.getFrom_user().getUser_details().getImage())
+                                    .into(new SimpleTarget<Bitmap>() {
+                                        @Override
+                                        public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                                            bitmap = resource;
+
+                                            if(bitmap!=null){
+                                                imgPicChatUser.setImageBitmap(bitmap);
+                                            }
+                                        }
+                                    });
+
+                        }
+
 // Create the data adapter with above data list.
-                        chatAppMsgAdapter = new ChatAppMsgAdapter(msgDtoList,responsData.getFrom_user().getUsername(),responsData.getFrom_user().getUser_details().getImage(),context);
+                        chatAppMsgAdapter = new ChatAppMsgAdapter(msgDtoList,responsData.getFrom_user().getUsername(),responsData.getFrom_user().getUser_details().getImage(),context,bitmap);
 // Set RecyclerView layout manager.
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
                         msgRecyclerView.setLayoutManager(linearLayoutManager);
@@ -220,22 +283,21 @@ public class ChatAppActivity extends AppCompatActivity{
 
                         // Scroll RecyclerView to the last message.
                         msgRecyclerView.scrollToPosition(newMsgPosition);
-                        Glide.with(context)
-                                .asBitmap()
-                                .load(Api.BASE_URL+"public/upload/user/"+responsData.getFrom_user().getUser_details().getImage())
-                                .into(new SimpleTarget<Bitmap>() {
-                                    @Override
-                                    public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
-                                        if(resource!=null){
-                                            imgPicChatUser.setImageBitmap(resource);
-                                        }
-                                    }
-                                });
+
+//                        if (!activity.isFinishing()) {
+//                            Glide.with(context)
+//                                    .load(Api.BASE_URL+"public/upload/user/"+responsData.getFrom_user().getUser_details().getImage())
+//                                    .apply(new RequestOptions().override(55, 55))
+//                                    .into(imgPicChatUser);
+//
+//                        }
+
+
                     }
 
                 }else {
                     //if(!isExpired){
-                        timer.cancel();
+                      //  timer.cancel();
                        // isExpired = true;
                         //Toast.makeText(context, "Login token expired, Please login again ", Toast.LENGTH_SHORT).show();
 //                        startActivity(new Intent(context,LoginActivity.class));
@@ -250,10 +312,10 @@ public class ChatAppActivity extends AppCompatActivity{
             @Override
             public void onFailure(Call<MessageResponse> call, Throwable t) {
                 //swiperefresh.setRefreshing(false);
-                timer.cancel();
+               // timer.cancel();
             }
         });
-        timer.cancel();
+        //timer.cancel();
 
     }
 
@@ -309,7 +371,7 @@ public class ChatAppActivity extends AppCompatActivity{
 
                 }else {
                     //if(!isExpired){
-                    timer.cancel();
+                    //timer.cancel();
                     // isExpired = true;
                     //Toast.makeText(context, "Login token expired, Please login again ", Toast.LENGTH_SHORT).show();
 //                        startActivity(new Intent(context,LoginActivity.class));
@@ -324,10 +386,10 @@ public class ChatAppActivity extends AppCompatActivity{
             @Override
             public void onFailure(Call<GroupMessageResponse> call, Throwable t) {
                 //swiperefresh.setRefreshing(false);
-                timer.cancel();
+               // timer.cancel();
             }
         });
-        timer.cancel();
+        //timer.cancel();
 
     }
 

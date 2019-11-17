@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.imamportal.R;
+import com.imamportal.WebActivity;
 import com.imamportal.model.AllBlogpostModel;
 import com.imamportal.model.AudioModel;
 import com.imamportal.model.VideoModel;
@@ -84,6 +86,10 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.MyViewHolder
             @Override
             public void onClick(View v) {
                 context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Api.BASE_URL+"public/video/"+data.getVideo())));
+
+//                AppConstant.webUrl = Api.BASE_URL+"public/video/"+data.getVideo();
+//                Log.e("webUrl",""+AppConstant.webUrl);
+//                context.startActivity(new Intent(context,WebActivity.class));
             }
         });
 

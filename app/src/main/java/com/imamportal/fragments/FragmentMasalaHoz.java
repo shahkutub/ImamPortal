@@ -79,6 +79,9 @@ public class FragmentMasalaHoz extends Fragment implements SwipyRefreshLayout.On
     @Override
     public void onResume() {
         super.onResume();
+//        currentPage = null;
+//        api="api/hajjOmra";
+//        getblog_post(api);
     }
 
     @Override
@@ -184,5 +187,7 @@ public class FragmentMasalaHoz extends Fragment implements SwipyRefreshLayout.On
             getblog_post(api+"?page="+pageNo);
         }
     }
+
+
 
 }

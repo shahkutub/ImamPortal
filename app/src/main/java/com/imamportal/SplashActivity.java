@@ -1,8 +1,6 @@
 package com.imamportal;
 
 import android.annotation.SuppressLint;
-import android.app.PendingIntent;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,9 +14,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.imamportal.utils.AppConstant;
 import com.imamportal.utils.LocationMgr;
 import com.imamportal.utils.MyService;
 import com.imamportal.utils.PersistentUser;
@@ -27,7 +31,6 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.CALL_PHONE;
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
-import static android.Manifest.permission.READ_PHONE_STATE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class SplashActivity extends AppCompatActivity {
@@ -38,6 +41,7 @@ public class SplashActivity extends AppCompatActivity {
     LocationMgr mgr;
     RelativeLayout relSplash;
     private TextView tvWeb;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +49,24 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         context=this;
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(context);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "1");
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "name");
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
+        bundle.putString(FirebaseAnalytics.Param.LOCATION, "image");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+
+
         //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO);
         getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
 
         // linBg = (LinearLayout)findViewById(R.id.linBg);
 
-//        ImageView imgNext = (ImageView)findViewById(R.id.imgNext);
+        ImageView imgNext = (ImageView)findViewById(R.id.imgNext);
 //        ImageView imgA2i = (ImageView)findViewById(R.id.imgA2i);
         relSplash = (RelativeLayout) findViewById(R.id.relSplash);
         tvWeb = (TextView) findViewById(R.id.tvWeb);
@@ -67,7 +82,10 @@ public class SplashActivity extends AppCompatActivity {
         tvWeb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://nanosoftbd.com/imamportal/")));
+                //startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://imam.gov.bd/")));
+
+                AppConstant.webUrl = "http://imam.gov.bd/";
+                startActivity(new Intent(context,WebActivity.class));
             }
         });
 //
@@ -77,27 +95,27 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(getApplicationContext(),MainActivityDemo.class));
+                startActivity(new Intent(getApplicationContext(),HomePageActivity.class));
                 finish();
 
 
             }
         });
-//
-//        Animation anim = new AlphaAnimation(0.0f, 1.0f);
-//        anim.setDuration(100); //You can manage the blinking time with this parameter
-//        anim.setStartOffset(40);
-//        anim.setRepeatMode(Animation.REVERSE);
-//        anim.setRepeatCount(Animation.INFINITE);
-//        //imgNext.startAnimation(anim);
-//
-//        imgNext.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(getApplicationContext(),LanguageActivity.class));
-//                        finish();
-//            }
-//        });
+
+        Animation anim = new AlphaAnimation(0.0f, 1.0f);
+        anim.setDuration(100); //You can manage the blinking time with this parameter
+        anim.setStartOffset(40);
+        anim.setRepeatMode(Animation.REVERSE);
+        anim.setRepeatCount(Animation.INFINITE);
+        imgNext.startAnimation(anim);
+
+        imgNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),HomePageActivity.class));
+                        finish();
+            }
+        });
 
 
 

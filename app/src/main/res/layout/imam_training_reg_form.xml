@@ -58,14 +58,13 @@
         <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:gravity="center"
         android:layout_marginTop="@dimen/_3sdp"
         >
         <android.support.design.widget.TextInputLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:textColorHint="#F15A24"
             android:layout_margin="@dimen/_3sdp">
             <EditText android:id="@+id/input_name"
@@ -79,9 +78,8 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:textColorHint="#F15A24"
             android:layout_margin="@dimen/_3sdp">
             <EditText android:id="@+id/input_name_father"
@@ -97,16 +95,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:gravity="center"
             android:layout_marginTop="@dimen/_3sdp"
             >
 
 
             <android.support.design.widget.TextInputLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:textColorHint="#F15A24"
                 android:layout_margin="@dimen/_3sdp">
                 <EditText android:id="@+id/input_name_mother"
@@ -120,9 +117,8 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:textColorHint="#F15A24"
                 android:layout_margin="@dimen/_3sdp">
                 <EditText android:id="@+id/input_name_mosq"
@@ -172,6 +168,7 @@
                     android:layout_height="@dimen/_40sdp"
                     android:padding="@dimen/_5sdp"
                     android:inputType="phone"
+                    android:focusable="false"
                     android:background="@drawable/edit_bg"
                     android:textColor="#000"
                     android:hint="জন্ম তারিখঃ"

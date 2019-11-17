@@ -53,14 +53,14 @@ public interface Api {
 
 
     //Local
-    String BASE_URL = "http://192.168.0.119/imamportal/";
+    //String BASE_URL = "http://192.168.0.119/imamportal/";
     //String BASE_URL = "http://192.168.0.109/imamportal/";
 
 
     //Live
     //String BASE_URL = "http://nanosoftbd.com/imamportal/";
     //String BASE_URL = "http://training.imam.gov.bd/";
-    //String BASE_URL = "http://imam.gov.bd/";
+    String BASE_URL = "http://imam.gov.bd/";
 
 
 
@@ -68,7 +68,8 @@ public interface Api {
     @POST("api/likepost")
     Call<String> likepost(
             @Header("Authorization") String authHeader,
-            @Field("bolg_post_id") String complain_application_id
+            @Field("user_id") String user_id,
+            @Field("blog_post_id") String blog_post_id
 
     );
 

@@ -2,9 +2,7 @@ package com.imamportal;
 
 import android.animation.Animator;
 import android.app.Activity;
-import android.app.AlarmManager;
 import android.app.Dialog;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +13,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.PersistableBundle;
 import android.speech.RecognizerIntent;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -23,10 +20,8 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.ShareCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -54,17 +49,16 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.imamportal.Adapter.AdapteDate;
+import com.imamportal.Adapter.ContactsAdapter;
 import com.imamportal.Adapter.KitabAdapter;
 import com.imamportal.Adapter.SlidingViewPagerAdapter;
 import com.imamportal.converter.BanglaDateUtils;
-import com.imamportal.fragments.FragmentAmarPataAudio;
 import com.imamportal.fragments.FragmentPhoto;
 import com.imamportal.fragments.FragmentQuizBizoyee;
 import com.imamportal.fragments.FragmentSeraContent;
-import com.imamportal.model.AmarpataContentResponse;
 import com.imamportal.model.BlogPostSearchResponse;
-import com.imamportal.model.Catagories;
 import com.imamportal.model.KitabInfo;
 import com.imamportal.model.NoticeResponse;
 import com.imamportal.model.NotificationResponse;
@@ -84,7 +78,6 @@ import net.time4j.engine.StartOfDay;
 import net.time4j.format.expert.ChronoFormatter;
 import net.time4j.format.expert.PatternType;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -96,9 +89,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -106,7 +96,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class MainActivityDemo extends AppCompatActivity {
+public class HomePageActivity extends AppCompatActivity implements ContactsAdapter.ContactsAdapterListener{
 
    // private Toolbar toolbar;
     private TabLayout tabMoulikBisoy, tabSopmadokio;
@@ -159,7 +149,7 @@ public class MainActivityDemo extends AppCompatActivity {
     boolean isFABOpen = false;
     boolean isFABmsgOpen = false;
     private String searchStr;
-    private LinearLayout linAmarPata, linRegistration,linImamtrainingReg,linVocationalTrainReg,linUpload;
+    private LinearLayout linAmarPata, linRegistration,linImamtrainingReg,linVocationalTrainReg,linUpload,linBody;
     private TextView tvLogin, tvLogOut;
 
     List<NoticeResponse> listNotice = new ArrayList<>();
@@ -170,7 +160,9 @@ public class MainActivityDemo extends AppCompatActivity {
     private ImageView imgImamReg;
     int notificationCount = 0;
     private TextView tvCount,tvMember;
-
+    private RecyclerView recycler_view_search_list;
+    private ContactsAdapter mAdapter;
+    private FirebaseAnalytics mFirebaseAnalytics;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -188,13 +180,21 @@ public class MainActivityDemo extends AppCompatActivity {
         fabinitUi();
         slideshow();
 
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(context);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "1");
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "name");
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
+        bundle.putString(FirebaseAnalytics.Param.LOCATION, ""+AppConstant.lat+" , "+AppConstant.lng);
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
 
 
     }
 
 
     public void shareApp(View v) {
-        ShareCompat.IntentBuilder.from(MainActivityDemo.this)
+        ShareCompat.IntentBuilder.from(HomePageActivity.this)
                 .setType("text/plain")
                 .setChooserTitle("Share App")
                 .setText("https://www.nanosoftbd.com/imamportal/")
@@ -228,28 +228,34 @@ public class MainActivityDemo extends AppCompatActivity {
 
 
     public void onClickFb(View v) {
-        String url = "https://www.facebook.com/groups/imamportal";
-        Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setData(Uri.parse(url));
-        startActivity(i);
+//        String url = "https://www.facebook.com/groups/imamportal";
+//        Intent i = new Intent(Intent.ACTION_VIEW);
+//        i.setData(Uri.parse(url));
+//        startActivity(i);
+        AppConstant.webUrl = "https://www.facebook.com/groups/imamportal";
+        startActivity(new Intent(context,WebActivity.class));
 
     }
 
 
     public void onClickGplus(View v) {
-        String url = "https://www.facebook.com/groups/imamportal";
-        Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setData(Uri.parse(url));
-        startActivity(i);
-
+//        String url = "https://www.facebook.com/groups/imamportal";
+//        Intent i = new Intent(Intent.ACTION_VIEW);
+//        i.setData(Uri.parse(url));
+//        startActivity(i);
+        AppConstant.webUrl = "https://www.google.com/";
+        startActivity(new Intent(context,WebActivity.class));
     }
 
 
     public void onClickYoutube(View v) {
-        String url = "https://www.youtube.com/channel/UCGQ-E4UPPcMmHYXfnjoUxyQ";
-        Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setData(Uri.parse(url));
-        startActivity(i);
+//        String url = "https://www.youtube.com/channel/UCGQ-E4UPPcMmHYXfnjoUxyQ";
+//        Intent i = new Intent(Intent.ACTION_VIEW);
+//        i.setData(Uri.parse(url));
+//        startActivity(i);
+
+        AppConstant.webUrl = "https://www.youtube.com/channel/UCGQ-E4UPPcMmHYXfnjoUxyQ";
+        startActivity(new Intent(context,WebActivity.class));
 
     }
 
@@ -361,7 +367,22 @@ public class MainActivityDemo extends AppCompatActivity {
 //        alarm.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
 //                180000, pintent);
 
-
+        if(PersistentUser.isLogged(context)){
+            if(AppConstant.getUserdata(context)!=null){
+                tvUser.setText(AppConstant.getUserdata(context).getUser_data().getUser_details().getName());
+                Glide.with(context)
+                        .asBitmap()
+                        .load(Api.BASE_URL+"public/upload/user/"+AppConstant.getUserdata(context).getUser_data().getUser_details().getImage())
+                        .into(new SimpleTarget<Bitmap>() {
+                            @Override
+                            public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                                if(resource!=null){
+                                    imgUser.setImageBitmap(resource);
+                                }
+                            }
+                        });
+            }
+        }
 
 
     }
@@ -838,6 +859,14 @@ public class MainActivityDemo extends AppCompatActivity {
         tvLogOut = (TextView) findViewById(R.id.tvLogOut);
         linAmarPata = (LinearLayout) findViewById(R.id.linAmarPata);
         linUpload = (LinearLayout) findViewById(R.id.linUpload);
+        linBody = (LinearLayout) findViewById(R.id.linBody);
+        linBody.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKeyBoard();
+            }
+        });
+
         linMsgFloating = (LinearLayout) findViewById(R.id.linMsgFloating);
         relNotification = (RelativeLayout) findViewById(R.id.relNotification);
         linRegistration = (LinearLayout) findViewById(R.id.linRegistration);
@@ -945,6 +974,8 @@ public class MainActivityDemo extends AppCompatActivity {
                 PersistentUser.logOut(context);
                 PersistData.setStringData(context,AppConstant.loginToken,"");
                 PersistData.setStringData(context,AppConstant.loginUserid,"");
+                tvUser.setText("");
+                imgUser.setImageResource(R.drawable.imam);
                 startActivity(new Intent(context,LoginActivity.class));
                 drawer.closeDrawers();
             }
@@ -1219,6 +1250,7 @@ public class MainActivityDemo extends AppCompatActivity {
             public void onClick(View view) {
 
                 linAutoserch.setVisibility(View.GONE);
+                hideKeyBoard();
             }
         });
 
@@ -1248,6 +1280,8 @@ public class MainActivityDemo extends AppCompatActivity {
                 } else if (str.length() > 0) {
                     imgCancel.setVisibility(View.GONE);
                 }
+
+               // mAdapter.getFilter().filter(str);
             }
 
             @Override
@@ -1276,6 +1310,25 @@ public class MainActivityDemo extends AppCompatActivity {
         //alochitocontant();
         //importantLink();
         getblog_post_id();
+
+//        recycler_view_search_list = (RecyclerView)findViewById(R.id.recycler_view_search_list);
+//        mAdapter = new ContactsAdapter(context, blogPostSearchResponse, (ContactsAdapter.ContactsAdapterListener) context);
+//        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+//        recycler_view_search_list.setLayoutManager(mLayoutManager);
+//        recycler_view_search_list.setItemAnimator(new DefaultItemAnimator());
+//        recycler_view_search_list.addItemDecoration(new MyDividerItemDecoration(context, DividerItemDecoration.VERTICAL, 36));
+//        recycler_view_search_list.setAdapter(mAdapter);
+        
+    }
+
+    private void hideKeyBoard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(autocoEditView.getWindowToken(), 0);
+    }
+
+    @Override
+    public void onContactSelected(BlogPostSearchResponse contact) {
+
     }
 
 
