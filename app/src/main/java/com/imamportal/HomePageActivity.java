@@ -21,6 +21,9 @@ import android.support.v4.app.ShareCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -39,6 +42,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -65,6 +69,7 @@ import com.imamportal.model.NotificationResponse;
 import com.imamportal.utils.AlertMessage;
 import com.imamportal.utils.Api;
 import com.imamportal.utils.AppConstant;
+import com.imamportal.utils.MyDividerItemDecoration;
 import com.imamportal.utils.MyService;
 import com.imamportal.utils.NetInfo;
 import com.imamportal.utils.PersistData;
@@ -163,6 +168,11 @@ public class HomePageActivity extends AppCompatActivity implements ContactsAdapt
     private RecyclerView recycler_view_search_list;
     private ContactsAdapter mAdapter;
     private FirebaseAnalytics mFirebaseAnalytics;
+
+    private SearchAdapter recyclerAdapter;
+    List<BlogPostSearchResponse> country = new ArrayList<>();
+    List<BlogPostSearchResponse> listcountry = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -846,7 +856,7 @@ public class HomePageActivity extends AppCompatActivity implements ContactsAdapt
 
 
 
-
+        recycler_view_search_list = (RecyclerView)findViewById(R.id.recycler_view_search_list);
 
         tvUser = (TextView) findViewById(R.id.tvUser);
         tvCount = (TextView) findViewById(R.id.tvCount);
@@ -1230,12 +1240,14 @@ public class HomePageActivity extends AppCompatActivity implements ContactsAdapt
 
         imgSearch = (ImageView) findViewById(R.id.imgSearch);
 
+
         autocoEditView = (AutoCompleteTextView) findViewById(R.id.autocoEditView);
         imgCancel = (ImageView) findViewById(R.id.imgCancel);
         imgGoSearch = (ImageView) findViewById(R.id.imgGoSearch);
         imgGoSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                recycler_view_search_list.setVisibility(View.VISIBLE);
                 searchStr = autocoEditView.getText().toString();
                 if (searchStr.length() > 0) {
                     linAutoserch.setVisibility(View.GONE);
@@ -1249,6 +1261,8 @@ public class HomePageActivity extends AppCompatActivity implements ContactsAdapt
             @Override
             public void onClick(View view) {
 
+                linBody.setVisibility(View.VISIBLE);
+                recycler_view_search_list.setVisibility(View.GONE);
                 linAutoserch.setVisibility(View.GONE);
                 hideKeyBoard();
             }
@@ -1260,6 +1274,7 @@ public class HomePageActivity extends AppCompatActivity implements ContactsAdapt
         linSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                recycler_view_search_list.setVisibility(View.VISIBLE);
                 linAutoserch.setVisibility(View.VISIBLE);
                 autocoEditView.requestFocus();
                 //startActivity(new Intent(context, ToolbarSearchActivity.class));
@@ -1275,18 +1290,27 @@ public class HomePageActivity extends AppCompatActivity implements ContactsAdapt
             @Override
             public void onTextChanged(CharSequence str, int i, int i1, int i2) {
 
+                recycler_view_search_list.setVisibility(View.VISIBLE);
+
                 if (str.length() == 0) {
                     imgCancel.setVisibility(View.VISIBLE);
                 } else if (str.length() > 0) {
                     imgCancel.setVisibility(View.GONE);
                 }
 
-               // mAdapter.getFilter().filter(str);
+                //if(str.length()>0){
+                   // mAdapter.getFilter().filter(str.toString());
+
+                    recyclerAdapter.getFilter().filter(str.toString());
+                //}
+
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+//                if(editable.length()>0){
+//                    mAdapter.getFilter().filter(editable.toString());
+//                }
             }
         });
 
@@ -1311,13 +1335,7 @@ public class HomePageActivity extends AppCompatActivity implements ContactsAdapt
         //importantLink();
         getblog_post_id();
 
-//        recycler_view_search_list = (RecyclerView)findViewById(R.id.recycler_view_search_list);
-//        mAdapter = new ContactsAdapter(context, blogPostSearchResponse, (ContactsAdapter.ContactsAdapterListener) context);
-//        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-//        recycler_view_search_list.setLayoutManager(mLayoutManager);
-//        recycler_view_search_list.setItemAnimator(new DefaultItemAnimator());
-//        recycler_view_search_list.addItemDecoration(new MyDividerItemDecoration(context, DividerItemDecoration.VERTICAL, 36));
-//        recycler_view_search_list.setAdapter(mAdapter);
+
         
     }
 
@@ -2054,11 +2072,32 @@ public class HomePageActivity extends AppCompatActivity implements ContactsAdapt
                         blogIdlist.add(blogPostSearchResponse.get(i).getTitle());
                     }
 
-                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, android.R.layout.select_dialog_item, blogIdlist);
+//                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, android.R.layout.select_dialog_item, blogIdlist);
+//
+//                   CustomerAdapter customerAdapter = new CustomerAdapter(context,R.layout.list_item,blogPostSearchResponse);
+//                    autocoEditView.setThreshold(1);
+//                    autocoEditView.setAdapter(customerAdapter);
 
-                   CustomerAdapter customerAdapter = new CustomerAdapter(context,R.layout.list_item,blogPostSearchResponse);
-                    autocoEditView.setThreshold(1);
-                    autocoEditView.setAdapter(customerAdapter);
+
+
+//                    mAdapter = new ContactsAdapter(context, blogPostSearchResponse, (ContactsAdapter.ContactsAdapterListener) context);
+//                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+//                    recycler_view_search_list.setLayoutManager(mLayoutManager);
+//                    recycler_view_search_list.setItemAnimator(new DefaultItemAnimator());
+//                    recycler_view_search_list.addItemDecoration(new MyDividerItemDecoration(context, DividerItemDecoration.VERTICAL, 36));
+//                    recycler_view_search_list.setAdapter(mAdapter);
+
+
+
+                    listcountry = blogPostSearchResponse;
+                    country = new ArrayList<>();
+                    country.addAll(listcountry);
+
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+                    recycler_view_search_list.setLayoutManager(layoutManager);
+                    recyclerAdapter = new SearchAdapter(context, country);
+                    recycler_view_search_list.addItemDecoration(new DividerItemDecoration(context, layoutManager.getOrientation()));
+                    recycler_view_search_list.setAdapter(recyclerAdapter);
 
 
                 }
@@ -2073,6 +2112,92 @@ public class HomePageActivity extends AppCompatActivity implements ContactsAdapt
 
 
     }
+
+
+  private class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.myViewHolder> implements Filterable {
+        Context context;
+        List<BlogPostSearchResponse> mData;
+        NewFilter mfilter;
+
+        public SearchAdapter(Context context, List<BlogPostSearchResponse> data) {
+            this.context = context;
+            this.mData = data;
+            mfilter = new NewFilter(SearchAdapter.this);
+        }
+
+        @Override
+        public SearchAdapter.myViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(context).inflate(R.layout.list_item, parent, false);
+            return new SearchAdapter.myViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(SearchAdapter.myViewHolder holder, final int position) {
+            holder.country.setText(mData.get(position).getTitle());
+
+            holder.country.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AppConstant.searchId = mData.get(position).getId();
+                    startActivity(new Intent(context,DetailsSearchActivity.class));
+                }
+            });
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return mData.size();
+        }
+
+
+      @Override
+      public Filter getFilter(){
+          return mfilter;
+      }
+
+
+        public class myViewHolder extends RecyclerView.ViewHolder {
+            TextView country;
+            public myViewHolder(View itemView) {
+                super(itemView);
+                country = (TextView) itemView.findViewById(R.id.txtLabel);
+            }
+        }
+        public class NewFilter extends Filter {
+            public SearchAdapter mAdapter;
+            public NewFilter(SearchAdapter mAdapter){
+                super();
+                this.mAdapter = mAdapter;
+            }
+
+
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                country.clear();
+                final FilterResults results = new FilterResults();
+                if(charSequence.length() == 0){
+                    country.addAll(listcountry);
+                }else{
+                    final String filterPattern =charSequence.toString().toLowerCase().trim();
+                    for(BlogPostSearchResponse listcountry : listcountry){
+                        if(listcountry.getTitle().toLowerCase().startsWith(filterPattern)){
+                            country.add(listcountry);
+                        }
+                    }
+                }
+                results.values = country;
+                results.count = country.size();
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                this.mAdapter.notifyDataSetChanged();
+            }
+        }
+    }
+
 
 
 }

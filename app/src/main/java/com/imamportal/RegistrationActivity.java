@@ -745,95 +745,7 @@ public class RegistrationActivity extends AppCompatActivity {
         return base64String;
     }
     
-    private void imageCaptureDialogue() {
-        final Dialog dialog = new Dialog(context);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.chang_photo_dialogue);
 
-        dialog.getWindow().setBackgroundDrawable(
-                new ColorDrawable(android.graphics.Color.TRANSPARENT));
-
-        LinearLayout tvUseCam = (LinearLayout) dialog
-                .findViewById(R.id.tvUseCam);
-        LinearLayout tvRoll = (LinearLayout) dialog
-                .findViewById(R.id.tvRoll);
-        LinearLayout tvCance = (LinearLayout) dialog
-                .findViewById(R.id.tvCance);
-
-
-        tvRoll.setOnClickListener(new View.OnClickListener() {
-
-            @TargetApi(Build.VERSION_CODES.M)
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-
-
-                AppConstant.isGallery = true;
-//                if (ActivityCompat.checkSelfPermission(con, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-//                        != PackageManager.PERMISSION_GRANTED) {
-//                    ActivityCompat.requestPermissions((Activity) ProfileSettingsActivity.this,
-//                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, AppConstant.WRITEEXTERNAL_PERMISSION_RUNTIME);
-//                    dialog.dismiss();
-//                } else {
-                final Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), galarytakid);
-                dialog.dismiss();
-                // }
-            }
-
-
-
-
-        });
-
-        tvUseCam.setOnClickListener(new View.OnClickListener() {
-
-            @TargetApi(Build.VERSION_CODES.M)
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-
-                AppConstant.isGallery = false;
-                final Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(i, imagecaptureid);
-                dialog.dismiss();
-                // }
-                //}
-            }
-
-
-//                if (ContextCompat.checkSelfPermission(con,Manifest.permission.CAMERA)
-//                        != PackageManager.PERMISSION_GRANTED) {
-//
-//                    requestPermissions(new String[]{Manifest.permission.CAMERA},
-//                            1);
-//
-//                }else if(ContextCompat.checkSelfPermission(con,Manifest.permission.CAMERA)
-//                        == PackageManager.PERMISSION_GRANTED){
-//                    final Intent i = new Intent(
-//                            "android.media.action.IMAGE_CAPTURE");
-//                    startActivityForResult(i, imagecaptureid);
-//                    dialog.dismiss();
-//                }
-
-
-        });
-
-        tvCance.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
-
-
-    }
 
     public String getCurrentTimeStamp() {
         return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
@@ -960,7 +872,6 @@ public class RegistrationActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
 
-
             if (requestCode == IMAGE_RESULT) {
 
                 filePath = getImageFilePath(data);
@@ -998,76 +909,7 @@ public class RegistrationActivity extends AppCompatActivity {
         return cursor.getString(column_index);
     }
 
-    private String setToImageView(Bitmap bitmap) {
 
-        try {
-
-            // if (isImage) {
-            final Bitmap bit = BitmapUtils.getResizedBitmap(bitmap, 100);
-            final double time = System.currentTimeMillis();
-
-            imageLocal = saveBitmapIntoSdcard(bit, "3ss" + time + ".png");
-
-            Log.e("camera saved URL :  ", " " + imageLocal);
-
-
-        } catch (final IOException e) {
-            e.printStackTrace();
-
-            imageLocal = "";
-            Log.e("camera saved URL :  ", e.toString());
-
-        }
-
-        return imageLocal;
-
-    }
-
-    private String saveBitmapIntoSdcard(Bitmap bitmap22, String filename)
-            throws IOException {
-        /*
-         *
-         * check the path and create if needed
-         */
-        createBaseDirctory();
-
-        try {
-
-            new Date();
-
-            OutputStream out = null;
-            file = new File(this.dir, "/" + filename);
-
-            if (file.exists()) {
-                file.delete();
-            }
-
-            out = new FileOutputStream(file);
-
-            bitmap22.compress(Bitmap.CompressFormat.PNG, 50, out);
-
-            out.flush();
-            out.close();
-            // Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
-            return file.getAbsolutePath();
-        } catch (final Exception e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
-    public void createBaseDirctory() {
-        final String extStorageDirectory = Environment
-                .getExternalStorageDirectory().toString();
-        dir = new File(extStorageDirectory + "/3ss");
-
-        if (this.dir.mkdir()) {
-            System.out.println("Directory created");
-        } else {
-            System.out.println("Directory is not created or exists");
-        }
-    }
 
 
     public class CustomAdapter  extends BaseAdapter implements SpinnerAdapter {

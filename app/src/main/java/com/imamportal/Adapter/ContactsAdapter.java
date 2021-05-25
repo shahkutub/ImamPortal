@@ -22,8 +22,8 @@ import java.util.List;
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyViewHolder>
         implements Filterable {
     private Context context;
-    private List<BlogPostSearchResponse> contactList;
-    private List<BlogPostSearchResponse> contactListFiltered;
+    private List<BlogPostSearchResponse> contactList = new ArrayList<>();
+    private List<BlogPostSearchResponse> contactListFiltered = new ArrayList<>();
     private ContactsAdapterListener listener;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

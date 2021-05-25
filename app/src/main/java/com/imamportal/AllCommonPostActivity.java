@@ -40,7 +40,6 @@ public class AllCommonPostActivity extends AppCompatActivity implements SwipyRef
     SwipyRefreshLayout swiperefresh;
     String currentPage;
     private ProgressBar progressbar;
-    public static final int DISMISS_TIMEOUT = 2000;
     String api;
 
     @Override
@@ -148,11 +147,9 @@ public class AllCommonPostActivity extends AppCompatActivity implements SwipyRef
         if(!NetInfo.isOnline(context)){
             AlertMessage.showMessage(context,"Alert!","No internet connection!");
         }
-
         if(listSantirbani.size()==0){
             progressbar.setVisibility(View.VISIBLE);
         }
-
         swiperefresh.setRefreshing(true);
 
         Retrofit retrofit = new Retrofit.Builder()
